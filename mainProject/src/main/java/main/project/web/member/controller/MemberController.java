@@ -68,7 +68,7 @@ public class MemberController {
 		session.invalidate();
 		return "main/main";
 	}
-	
+
 	@RequestMapping(value="/mypage.do", method = RequestMethod.GET)
 	public String memberMyPage() {
 		return "member/mypage.page";
@@ -88,8 +88,14 @@ public class MemberController {
 		memberService.rankupdate(sessionId);
 		return "main/main";
 	}
-	
+
+
 	@RequestMapping(value="/withdrawal.do", method= RequestMethod.GET)
+	public String Withdrawal() {
+		return "member/withdrawal.page";
+	}
+
+	@RequestMapping(value="/withdrawal.do", method= RequestMethod.POST)
 	public String Withdrawal(String password ,Model model, HttpSession session) {
 		MemberVO  check = (MemberVO) session.getAttribute("member");
 		System.out.println("check : " + check);

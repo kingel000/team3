@@ -65,3 +65,8 @@ a, input, textarea, button, select {outline: none;}
 a:hover, h1:focus, h2:focus, h3:focus, h4:focus, h5:focus, h6:focus {text-decoration: none;}
 a:focus, button:focus, select:focus, input:focus, textarea:focus {outline: none;text-decoration: none;}
 ul, ol {list-style: none;padding: 0;margin: 0;}
+
+/* È¸¿ø Å»Åð */
+.withdrawal_Box1{width: 500px;margin:100px 130px;background: #f1f1f1}
+.withdrawal_Box2{padding: 20px; margin: 20px;text-align: center;}
+.withdrawal_Box2>form>p>input{width: 250px}
