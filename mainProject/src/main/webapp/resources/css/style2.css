@@ -1,0 +1,67 @@
+/*myPage.jsp*/
+#wrap {width: 100%;	height: auto;}
+.myPage_h2>h2 {text-align: center;margin: 0 25px;}
+.myPage_menu {margin: 20 auto;padding: 20px 10px;text-align: left;float: left;}
+#myPage_form {width: 550px;height: auto;padding: 20px 10px; margin: 0 auto; margin-right: 400px; text-align: center;border: solid 1px #e4e5ed;}
+.myPage_title>h4{margin: 0 30px;}
+.myPage {width: 90%;margin: 0 75px;}
+.myPage>form>p {margin: 20px 0;color: #333;text-align: left;}
+.myPage>form>p>input {width: 382px;height: 40px;border-radius: 4px;padding: 5px;margin-bottom: 10px;border: solid 1px #e4e5ed;}
+.join_c:hover>input{background-color:#2ac37d;}
+
+/* 전문가 전환 */
+#wrap{width:100%;height:auto;}
+.body{/* margin-top:100px; */ margin-bottom:100px;}
+#rankUp_form{width:550px;height:auto;padding:20px 10px;margin:0 auto; margin-right: 400px; text-align:center;border: solid 1px #e4e5ed;}
+.rankUp_Box1>h4{margin: 0 25px;}
+.rankUp_Box1>h4>img{width:9%; margin-right:8px;}
+.rankUp_Box2{width: 90%;margin: 0 75px;}
+.rankUp_Box2>form>p{margin: 20px 0;color:#333;text-align:left;}
+.rankUp_Box2>form>p>input{width:382px;height:40px;border-radius: 4px; padding: 5px; margin-bottom:10px;border: solid 1px #e4e5ed;}
+.join:hover>input{background-color:#2ac37d;}
+
+/* 회원가입 */
+.logoBox{width:100%;padding: 15px 10px;}
+.logoBox>div{text-align:center;}
+.logoBox>div>a>img{width:150px;}
+
+#wrap{width:100%;height:auto;}
+.body{margin-top:0px; margin-bottom:100px;}
+#regider_form{width:550px;height:auto;padding:20px 10px;margin:0 auto;text-align:center;border: solid 1px #e4e5ed;}
+.regider_Box1>h4{margin: 0 25px;}
+.regider_Box1>h4>img{width:9%; margin-right:8px;}
+.regider_Box2{width: 90%;margin: 0 75px;}
+.regider_Box2>form>p{margin: 20px 0;color:#333;text-align:left;}
+.regider_Box2>form>p>input{width:382px;height:40px;border-radius: 4px; padding: 5px; margin-bottom:10px;border: solid 1px #e4e5ed;}
+#email{width: 300px;}
+.email_Bt>a>img{width: 21px; margin : 0 0 2px 2px;}
+.join:hover>input{background-color:#2ac37d;}
+
+.footer_text>p{text-align:center; margin-right: 200px; margin-top: 20px;}
+
+.footer_text>div{text-align: center;}
+.footer_text>div>p{text-align:center; margin-top: 20px;}
+
+/* 로그인 */
+.join>div{background-color:#f1f1f1;width:370px;height:30px;border-radius: 4px; padding: 5px; margin-bottom:10px;border: solid 1px #e4e5ed;}
+.join>div>a{font-size: 13px;}
+.join:hover>div{background-color:#2ac37d;}
+.login:hover>input{background-color:#2ac37d;}
+.footer_text>p{text-align:center;margin-top: 20px;}
+.regider_Box2>form>p>input{width:382px;height:40px;border-radius: 4px; padding: 5px; margin-bottom:10px;border: solid 1px #e4e5ed;}
+.email_Bt>a>img{width: 21px; margin : 0 0 2px 2px;}
+
+/* 좌측 메뉴 */
+.mypage_title{border-bottom: 2px solid #1ab26c;;}
+.mypage_title>div{font-size: 20px;margin-bottom: 20px;font-weight: 600;color: #555;}
+h1, h2, h3, h4, h5, h6 {position: relative;margin-bottom: 0;}
+h3 {font-size: 22px;}
+h4 {font-size: 18px;}
+p {font-size: 14px;line-height: 1.5em;color: #999;}
+p span {font-family: inherit;color: inherit;font-size: inherit;}
+a {color: inherit;text-decoration: none;-webkit-transition: all 0.4s ease;-moz-transition: all 0.4s ease;transition: all 0.4s ease;}
+a:hover {color: #2AC37D;}
+a, input, textarea, button, select {outline: none;}
+a:hover, h1:focus, h2:focus, h3:focus, h4:focus, h5:focus, h6:focus {text-decoration: none;}
+a:focus, button:focus, select:focus, input:focus, textarea:focus {outline: none;text-decoration: none;}
+ul, ol {list-style: none;padding: 0;margin: 0;}
