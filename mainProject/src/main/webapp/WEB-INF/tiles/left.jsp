@@ -30,17 +30,17 @@
    href="<c:url value="/resources/plugins/bootstrap/dist/css/bootstrap.min.css" />">
 
 <!-- Custom-->
-<link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/style2.css"/>">
 </head>
 <body>
    <div class="myPage_menu">
       <ul>
          <div class="mypage_title">
-            <div>마이페이지</div>
+            <a href="mypage.do">MY PAGE</a>
          </div>
          <li class="group">
             <div class="box">
-               <a href="mypage.do">
+               <a href="editMember.do">
                   <h3>Edit Member</h3>
                   <p>회원 정보 수정</p>
                </a>
