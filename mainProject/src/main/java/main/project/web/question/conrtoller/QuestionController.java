@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 import main.project.web.question.service.IQuestionService;
-import main.project.web.question.service.QuestionService;
 
 @Controller("questionController")
 @RequestMapping(value="/question")
