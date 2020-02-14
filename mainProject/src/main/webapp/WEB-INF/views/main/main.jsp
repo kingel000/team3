@@ -75,14 +75,14 @@
 	  </div>
 	  <div class="navigation__column center">
 			<ul class="main-menu menu">
-			  <li class="menu-item menu-item-has-children dropdown"><a href="main.jsp">Home</a>
+			  <li class="menu-item menu-item-has-children dropdown"><a href="#">웹사이트개발</a>
 					<ul class="sub-menu">
-					  <li class="menu-item"><a href="main.jsp">Homepage #1</a></li>
+					  <li class="menu-item"><a href="">Homepage #1</a></li>
 					  <li class="menu-item"><a href="#">Homepage #2</a></li>
 					  <li class="menu-item"><a href="#">Homepage #3</a></li>
 					</ul>
 			  </li>
-			  <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">Men</a>
+			  <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">모바일웹</a>
 				<div class="mega-menu">
 				  <div class="mega-wrap">
 					<div class="mega-column">
@@ -144,9 +144,9 @@
 				  </div>
 				</div>
 			  </li>
-			  <li class="menu-item"><a href="#">Women</a></li>
-			  <li class="menu-item"><a href="#">Kids</a></li>
-			  <li class="menu-item menu-item-has-children dropdown"><a href="#">News</a>
+			  <li class="menu-item"><a href="#">게임</a></li>
+			  <li class="menu-item"><a href="#">응용프로그래밍</a></li>
+			  <li class="menu-item menu-item-has-children dropdown"><a href="#">기타</a>
 					<ul class="sub-menu">
 					  <li class="menu-item menu-item-has-children dropdown"><a href="#">Blog-grid</a>
 							<ul class="sub-menu">
@@ -157,10 +157,10 @@
 					  <li class="menu-item"><a href="#">Blog List</a></li>
 					</ul>
 			  </li>
-			  <li class="menu-item menu-item-has-children dropdown"><a href="#">Contact</a>
+			  <li class="menu-item menu-item-has-children dropdown"><a href="#">고객센터</a>
 					<ul class="sub-menu">
-					  <li class="menu-item"><a href="#">Contact Us #1</a></li>
-					  <li class="menu-item"><a href="#">Contact Us #2</a></li>
+					  <li class="menu-item"><a href="/web/memeber/notice.do">공지사항</a></li>
+					  <li class="menu-item"><a href="#">문의사항</a></li>
 					</ul>
 			  </li>
 			</ul>
