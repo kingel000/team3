@@ -74,6 +74,20 @@ public class MemberController {
 		return "member/mypage.page";
 	}
 
+	@RequestMapping(value="/editmember.do", method=RequestMethod.GET)
+	public String editMember(HttpSession session, Model model) {
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		model.addAttribute("member", memberVO);
+		return "member/editMember.page";
+	}
+	
+	@RequestMapping(value="/editmember.do", method=RequestMethod.POST)
+	public String editMember(MemberVO member,HttpSession session,Model model) {
+		memberService.updateMember(member);
+		session.setAttribute("member", member);
+		model.addAttribute("member",member);
+		return "member/mypage.page";
+	}
 	@RequestMapping(value="/rankUp.do", method = RequestMethod.GET)
 	public String rankUpPage() {
 		return "member/rankUp.page";
