@@ -78,6 +78,19 @@
                </a>
             </div>
          </li>
+         
+         <c:choose>
+            <c:when test="${member.rank == 'E'}">
+                <li class="group">
+               <div class="box">
+                    <a href="#">
+                     <h3>Product</h3>
+                     <p>상품등록</p>
+                  </a>
+                </div>
+            </li>
+            </c:when>
+         </c:choose>    
          <li class="group">
             <div class="box">
                <a href="#">

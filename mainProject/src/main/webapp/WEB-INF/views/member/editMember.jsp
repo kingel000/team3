@@ -12,24 +12,24 @@
 <script type="text/javascript">
 //필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
 function checkValue() {
-	if (!document.userInfo.n_name.value) {
+	if (!document.userInfo.nick_name.value) {
 		alert("닉네임을 입력해주세요.");
-		document.userInfo.n_name.focus();
+		document.userInfo.nick_name.focus();
 		return false;
 	}
-	if (!document.userInfo.password.value) {
+	if (!document.userInfo.pwd.value) {
 		alert("패스워드를 입력해주세요.");
-		document.userInfo.password.focus();
+		document.userInfo.pwd.focus();
 		return false;
 	}
-	if (!document.userInfo.password2.value) {
+	if (!document.userInfo.pwd2.value) {
 		alert("패스워드확인을 입력해주세요.");
-		document.userInfo.password2.focus();
+		document.userInfo.pwd2.focus();
 		return false;
 	}
-	if (document.userInfo.password.value != document.userInfo.password2.value) {
+	if (document.userInfo.pwd.value != document.userInfo.pwd2.value) {
 		alert("패스워드 동일하게 입력해주세요..");
-		document.userInfo.password.focus();
+		document.userInfo.pwd.focus();
 		return false;
 	}
 }
@@ -62,12 +62,12 @@ function inputIdCheck() {
 						type="text" name="nick_name" value="${member.nick_name }">
 				</p>
 				<p>
-					<label for="password">비밀번호 변경</label><br> 
-					<input id="password" type="password" name="pwd" placeholder="비밀번호를 입력해주세요" value="${member.pwd }">
+					<label for="pwd">비밀번호 변경</label><br> 
+					<input id="pwd" type="password" name="pwd" placeholder="비밀번호를 입력해주세요" value="${member.pwd }">
 				</p>
 				<p>
-					<label for="password">비밀번호 확인</label><br> 
-					<input id="password2" type="password" name="pwd2" placeholder="비밀번호 확인">
+					<label for="pwd">비밀번호 확인</label><br> 
+					<input id="pwd2" type="password" name="pwd2" placeholder="비밀번호 확인">
 				</p>
 				<p class="join_c">
 					<input type="submit" value="정보변경완료" />
