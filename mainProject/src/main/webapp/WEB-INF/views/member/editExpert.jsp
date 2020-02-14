@@ -20,20 +20,20 @@
 			</h4>
 		</div>
 		<div class="myPage">
-			<form action="/web/member/editMember.do" method="post">
+			<form action="/web/member/editExpert.do" method="post">
 				<p>
-					<label for="email">이메일</label>&nbsp;&nbsp;&nbsp; <label>${member.id}</label>
+					<label for="email">이메일</label>&nbsp;&nbsp;&nbsp; <label>${expert.id}</label>
 				</p>
 				<p>
-					<label for="email">이름</label>&nbsp;&nbsp;&nbsp; <label>${member.name}</label>
+					<label for="email">이름</label>&nbsp;&nbsp;&nbsp; <label>${expert.name}</label>
 				</p>
 				<p>
 					<label for="tel">전화번호</label><br> <input id="tel"
-						type="text" name="tel" value="${member.tel}">
+						type="text" name="tel" value="${expert.tel}">
 				</p>
 				<p>
 					<label for="career">경력을 수정해주세요</label><br>
-					<textarea id="career" name="career" rows="8" cols="51" value="${member.career}"></textarea>	 
+					<textarea id="career" name="career" rows="8" cols="51" value="${expert.career}"></textarea>	 
 				</p>
 				<p class="join_c">
 					<input type="submit" value="정보변경완료" />
