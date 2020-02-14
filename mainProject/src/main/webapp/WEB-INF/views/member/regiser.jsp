@@ -24,25 +24,25 @@
 			alert("이메일인증을 해주세요.");
 			return false;
 		}
-		if (!document.userInfo.n_name.value) {
+		if (!document.userInfo.nick_name.value) {
 			alert("닉네임을 입력해주세요.");
-			document.userInfo.n_name.focus();
+			document.userInfo.nick_name.focus();
 			return false;
 		}
 
-		if (!document.userInfo.password.value) {
+		if (!document.userInfo.pwd.value) {
 			alert("패스워드를 입력해주세요.");
-			document.userInfo.password.focus();
+			document.userInfo.pwd.focus();
 			return false;
 		}
-		if (!document.userInfo.password2.value) {
+		if (!document.userInfo.pwd2.value) {
 			alert("패스워드확인을 입력해주세요.");
-			document.userInfo.password.focus();
+			document.userInfo.pwd2.focus();
 			return false;
 		}
-		if (document.userInfo.password.value != document.userInfo.password2.value) {
+		if (document.userInfo.pwd.value != document.userInfo.pwd2.value) {
 			alert("패스워드 동일하게 입력해주세요..");
-			document.userInfo.password.focus();
+			document.userInfo.pwd.focus();
 			return false;
 		}
 	}
@@ -71,25 +71,27 @@
 			</h4>
 		</div>
 		<div class="regider_Box2">
-			<form action="/web/member/regiser.do" method="post">
+			<form action="/web/member/regiser.do" method="post" name="userInfo" onsubmit="return checkValue()">
 				<p class="email_Bt">
-					<label for="email">이메일</label><br> <input id="email"
-						type="email" name="id" placeholder="이메일을 입력해주세요"> <a
-						href="#"> <label>인증하기</label> <img
-						src="<c:url value="/resources/images2/email_icon.png" />" alt="">
+					<label for="email">이메일</label><br> 
+					<input id="email" type="email" name="id" placeholder="이메일을 입력해주세요" onkeydown="inputIdCheck()"> 
+					<a onclick="emailCheck()"> 
+						<label>인증하기</label> 
+						<img src="<c:url value="/resources/images2/email_icon.png" />" alt="">
+						<input type="hidden" name="idCheckResult" value="emailUnCheck"/>
 					</a>
 				</p>
 				<p>
-					<label for="name">닉네임</label><br> <input id="name" type="text"
-						name="n_name" placeholder="닉네임을 입력해주세요">
+					<label for="name">닉네임</label><br> <input id="nick_name" type="text"
+						name="nick_name" placeholder="닉네임을 입력해주세요">
 				</p>
 				<p>
-					<label for="password">비밀번호</label><br> <input id="password"
-						type="password" name="password" placeholder="비밀번호를 입력해주세요">
+					<label for="password">비밀번호</label><br> <input id="pwd"
+						type="password" name="pwd" placeholder="비밀번호를 입력해주세요">
 				</p>
 				<p>
-					<label for="password">비밀번호 확인</label><br> <input id="password2"
-						type="password" name="password2" placeholder="비밀번호 확인">
+					<label for="password">비밀번호 확인</label><br> <input id="pwd2"
+						type="password" name="pwd2" placeholder="비밀번호 확인">
 				</p>
 				<p class="join">
 					<input type="hidden" name="rank" value="N">
