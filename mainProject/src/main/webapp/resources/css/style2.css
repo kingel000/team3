@@ -53,7 +53,7 @@
 
 /* ÁÂÃø ¸Þ´º */
 .mypage_title{border-bottom: 2px solid #1ab26c;;}
-.mypage_title>div{font-size: 20px;margin-bottom: 20px;font-weight: 600;color: #555;}
+.mypage_title>a{font-size: 23px;margin-bottom: 20px;font-weight: 600;color: #555;}
 h1, h2, h3, h4, h5, h6 {position: relative;margin-bottom: 0;}
 h3 {font-size: 22px;}
 h4 {font-size: 18px;}

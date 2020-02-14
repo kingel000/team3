@@ -31,8 +31,8 @@ public class ExpertService implements IExpertService {
 	}
 
 	@Override
-	public void selectExpert(String id) {
-		expertDAO.selectExpert(id);
+	public ExpertVO selectExpert(String id) {
+		return expertDAO.selectExpert(id);
 	}
 
 }

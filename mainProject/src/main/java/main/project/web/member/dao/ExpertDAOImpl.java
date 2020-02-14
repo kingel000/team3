@@ -35,9 +35,9 @@ public class ExpertDAOImpl implements IExpertDAO {
 	}
 
 	@Override
-	public void selectExpert(String id) {
+	public ExpertVO selectExpert(String id) {
 		System.out.println("selectExpert()");
-		sqlsessiontemplate.update("main.project.web.member.dao.IExpertDAO.selectExpert",id);
+		return sqlsessiontemplate.selectOne("main.project.web.member.dao.IExpertDAO.selectExpert",id);
 
 	}
 
