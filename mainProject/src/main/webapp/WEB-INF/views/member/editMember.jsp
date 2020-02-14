@@ -56,6 +56,7 @@ function inputIdCheck() {
 			<form action="/web/member/editMember.do" method="post" name="userInfo" onsubmit="return checkValue()">
 				<p>
 					<label for="id">이메일</label>&nbsp;&nbsp;&nbsp; <label>${member.id}</label>
+					<input type="hidden" name="id" value="${member.id }">
 				</p>
 				<p>
 					<label for="nick_name">닉네임</label><br> <input id="nick_name"
@@ -70,6 +71,7 @@ function inputIdCheck() {
 					<input id="password2" type="password" name="pwd2" placeholder="비밀번호 확인">
 				</p>
 				<p class="join_c">
+					<input type="hidden" name="rank" value="${member.rank }" >
 					<input type="submit" value="정보변경완료" />
 				</p>
 			</form>
