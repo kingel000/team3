@@ -33,7 +33,7 @@
 				</p>
 				<p>
 					<label for="career">경력을 수정해주세요</label><br>
-					<textarea id="career" name="career" rows="8" cols="51" value="${expert.career}"></textarea>	 
+					<textarea id="career" name="career" rows="8" cols="51" >${expert.career}</textarea>	 
 				</p>
 				<p class="join_c">
 					<input type="submit" value="정보변경완료" />
