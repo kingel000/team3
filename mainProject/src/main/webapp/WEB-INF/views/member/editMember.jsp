@@ -55,11 +55,11 @@ function inputIdCheck() {
 		<div class="myPage">
 			<form action="/web/member/editMember.do" method="post" name="userInfo" onsubmit="return checkValue()">
 				<p>
-					<label for="email">이메일</label>&nbsp;&nbsp;&nbsp; <label>${member.id}</label>
+					<label for="id">이메일</label>&nbsp;&nbsp;&nbsp; <label>${member.id}</label>
 				</p>
 				<p>
-					<label for="nick_name">닉네임</label><br> <input id="n_name"
-						type="text" name="n_name" value="${member.nick_name }">
+					<label for="nick_name">닉네임</label><br> <input id="nick_name"
+						type="text" name="nick_name" value="${member.nick_name }">
 				</p>
 				<p>
 					<label for="password">비밀번호 변경</label><br> 
