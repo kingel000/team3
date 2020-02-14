@@ -9,5 +9,4 @@ public interface IQuestionService {
 	void deleteQuestion(QuestionVO question);
 	QuestionVO selectQuestion(QuestionVO question);
 	List<QuestionVO> selectListQuetion();
-
 }

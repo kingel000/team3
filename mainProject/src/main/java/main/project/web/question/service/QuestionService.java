@@ -2,17 +2,16 @@ package main.project.web.question.service;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import main.project.web.question.dao.IQuestionDAO;
 import main.project.web.question.vo.QuestionVO;
 
 @Service("questionService")
-public class QuestionService implements IQuestionDAO {
+public class QuestionService implements IQuestionService {
 	
-	@Inject
+	@Autowired
 	private IQuestionDAO questionDAO;
 
 	@Override
