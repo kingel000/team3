@@ -42,7 +42,6 @@
          </form>
       </div>
    </div>
-=======
 	<div id="myPage_form">
 		<div class="myPage_title">
 			<h4>
