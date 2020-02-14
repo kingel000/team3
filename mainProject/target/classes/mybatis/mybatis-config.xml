@@ -5,10 +5,12 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="main.project.web.member.vo.MemberVO" alias="memberVO"></typeAlias>
+		<typeAlias type="main.project.web.question.vo.QuestionVO" alias="questionVO"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mybatis/mappers/memberMapper.xml" />
 		<mapper resource="mybatis/mappers/expertMapper.xml" />
+		<mapper resource="mybatis/mappers/questionMapper.xml" />
 	</mappers>
 </configuration>

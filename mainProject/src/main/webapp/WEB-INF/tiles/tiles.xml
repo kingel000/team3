@@ -40,6 +40,23 @@
     
     <definition name="*/*/*.part" extends="baseEmpty">
         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
-    </definition>        
+    </definition>  
+          
+    <!-- 메인페이지 상단 하단 -->
+    <definition name="baseMain" template="/WEB-INF/tiles/template_main.jsp">
+    	<put-attribute name="main_header" value="/WEB-INF/tiles/main_header.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
+    </definition>
     
+    <definition name="*.part2" extends="baseMain">
+        <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+    </definition>
+ 
+     <definition name="*/*.part2" extends="baseMain">
+         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+     </definition>
+    
+    <definition name="*/*/*.part2" extends="baseMain">
+        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+    </definition>        
 </tiles-definitions>
