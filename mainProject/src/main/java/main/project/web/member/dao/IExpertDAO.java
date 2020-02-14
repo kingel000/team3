@@ -8,6 +8,6 @@ public interface IExpertDAO {
    void insertExpert(ExpertVO expert);
    void deleteExpert(@Param("expert_id")String id);
    void updateExpert(ExpertVO expert);
-   void selectExpert(@Param("expert_id")String id);
+   ExpertVO selectExpert(@Param("expert_id")String id);
    
 }
