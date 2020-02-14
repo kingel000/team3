@@ -12,6 +12,48 @@
 <!-- Custom-->
 <link rel="stylesheet" href="<c:url value="/resources/css/style2.css"/>">
 
+<script type="text/javascript">
+	// 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
+	function checkValue() {
+		if (!document.userInfo.id.value) {
+			alert("이메일 ID를 입력해주세요.");
+			document.userInfo.id.focus();
+			return false;
+		}
+		if (document.userInfo.idCheckResult.value != "idCheck") {
+			alert("이메일인증을 해주세요.");
+			return false;
+		}
+		if (!document.userInfo.n_name.value) {
+			alert("닉네임을 입력해주세요.");
+			document.userInfo.n_name.focus();
+			return false;
+		}
+
+		if (!document.userInfo.password.value) {
+			alert("패스워드를 입력해주세요.");
+			document.userInfo.password.focus();
+			return false;
+		}
+		if (!document.userInfo.password2.value) {
+			alert("패스워드확인을 입력해주세요.");
+			document.userInfo.password.focus();
+			return false;
+		}
+		if (document.userInfo.password.value != document.userInfo.password2.value) {
+			alert("패스워드 동일하게 입력해주세요..");
+			document.userInfo.password.focus();
+			return false;
+		}
+	}
+	function emailCheck(){
+		document.userInfo.idCheckResult.value ="idCheck";
+	}
+	function inputIdCheck(){
+		document.userInfo.idCheckResult.value ="idUnCheck";
+	}
+</script>
+
 </head>
 
 <body class="body">
@@ -39,11 +81,15 @@
 				</p>
 				<p>
 					<label for="name">닉네임</label><br> <input id="name" type="text"
-						name="nick_name" placeholder="닉네임을 입력해주세요">
+						name="n_name" placeholder="닉네임을 입력해주세요">
 				</p>
 				<p>
 					<label for="password">비밀번호</label><br> <input id="password"
-						type="password" name="pwd" placeholder="비밀번호를 입력해주세요">
+						type="password" name="password" placeholder="비밀번호를 입력해주세요">
+				</p>
+				<p>
+					<label for="password">비밀번호 확인</label><br> <input id="password2"
+						type="password" name="password2" placeholder="비밀번호 확인">
 				</p>
 				<p class="join">
 					<input type="hidden" name="rank" value="N">
