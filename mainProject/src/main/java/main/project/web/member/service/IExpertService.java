@@ -7,6 +7,6 @@ public interface IExpertService {
    void insertExpert(ExpertVO expert);
    void deleteExpert(String id);
    void updateExpert(ExpertVO expert);
-   void selectExpert(String id);
+   ExpertVO selectExpert(String id);
    
 }

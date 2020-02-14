@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -74,6 +73,20 @@ public class MemberController {
 		return "member/mypage.page";
 	}
 
+	@RequestMapping(value="/editMember.do", method=RequestMethod.GET)
+	public String editMember(HttpSession session, Model model) {
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		model.addAttribute("member", memberVO);
+		return "member/editMember.page";
+	}
+	
+	@RequestMapping(value="/editMember.do", method=RequestMethod.POST)
+	public String editMember(MemberVO member,HttpSession session,Model model) {
+		memberService.updateMember(member);
+		session.setAttribute("member", member);
+		model.addAttribute("member",member);
+		return "member/mypage.page";
+	}
 	@RequestMapping(value="/rankUp.do", method = RequestMethod.GET)
 	public String rankUpPage() {
 		return "member/rankUp.page";
@@ -88,7 +101,19 @@ public class MemberController {
 		memberService.rankupdate(sessionId);
 		return "main/main";
 	}
-
+	
+	@RequestMapping(value="/editExpert.do",method=RequestMethod.GET)
+	public String editExpert(MemberVO member,Model model) {
+		ExpertVO expert = expertService.selectExpert(member.getId());
+		model.addAttribute("expert", expert);
+		return "member/editExpert.page";
+	}
+	
+	@RequestMapping(value="/editExpert.do", method=RequestMethod.POST)
+	public String editExpert(ExpertVO expert, Model model) {
+		expertService.updateExpert(expert);
+		return "member/mypage.page";
+	}
 
 	@RequestMapping(value="/withdrawal.do", method= RequestMethod.GET)
 	public String Withdrawal() {

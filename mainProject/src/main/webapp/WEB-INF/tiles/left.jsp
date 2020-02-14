@@ -40,7 +40,7 @@
          </div>
          <li class="group">
             <div class="box">
-               <a href="editMember.do">
+               <a href="/web/member/editMember.do">
                   <h3>Edit Member</h3>
                   <p>회원 정보 수정</p>
                </a>
@@ -61,7 +61,7 @@
             <c:otherwise>
              <li class="group">
                <div class="box">
-                    <a href="#">
+                    <a href="/web/member/editExpert.do">
                      <h3>Expert</h3>
                      <p>전문가 정보</p>
                   </a>
