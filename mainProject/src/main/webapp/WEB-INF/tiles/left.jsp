@@ -61,7 +61,7 @@
             <c:otherwise>
              <li class="group">
                <div class="box">
-                    <a href="/web/member/expertSelect.do">
+                    <a href="/web/member/editExpert.do">
                      <h3>Expert</h3>
                      <p>전문가 정보</p>
                   </a>

@@ -102,15 +102,15 @@ public class MemberController {
 		return "main/main";
 	}
 	
-	@RequestMapping(value="/expertSelect.do",method=RequestMethod.GET)
-	public String expertSelect(MemberVO member,Model model) {
+	@RequestMapping(value="/editExpert.do",method=RequestMethod.GET)
+	public String editExpert(MemberVO member,Model model) {
 		ExpertVO expert = expertService.selectExpert(member.getId());
 		model.addAttribute("expert", expert);
-		return "member/expertSelect.page";
+		return "member/editExpert.page";
 	}
 	
-	@RequestMapping(value="/expertSelect.do", method=RequestMethod.POST)
-	public String expertSelect(ExpertVO expert, Model model) {
+	@RequestMapping(value="/editExpert.do", method=RequestMethod.POST)
+	public String editExpert(ExpertVO expert, Model model) {
 		expertService.updateExpert(expert);
 		return "member/mypage.page";
 	}
