@@ -17,7 +17,7 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		
 		
-		return "main/main";
+		return "main/main.part2";
 	}
 	
 }
