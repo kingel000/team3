@@ -17,32 +17,22 @@ public class QuestionDAOImpl implements IQuestionDAO {
 
 	@Override
 	public void insertQuestion(QuestionVO question) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void updateQuestion(QuestionVO question) {
-		// TODO Auto-generated method stub
-
+		sqlSessionTemplate.insert("main.project.web.question.dao.IQuestionDAO.insertQuestion", question);
 	}
 
 	@Override
 	public void deleteQuestion(QuestionVO question) {
-		// TODO Auto-generated method stub
-
+		sqlSessionTemplate.delete("main.project.web.question.dao.IQuestionDAO.deleteQuestion", question);
 	}
 
 	@Override
 	public QuestionVO selectQuestion(QuestionVO question) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSessionTemplate.selectOne("main.project.web.question.dao.IQuestionDAO.selectQuestion", question);
 	}
 
 	@Override
-	public List<QuestionVO> selectListQuetion(QuestionVO question) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<QuestionVO> selectListQuetion() {
+		return sqlSessionTemplate.selectList("main.project.web.question.dao.IQuestionDAO.selectiListQuestion");
 	}
 
 }

@@ -3,6 +3,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="main.project.web.question.dao.IQuestionDAO">
-		
+		<select id="insertQuestion" parameterType="QuestionVO" resultType="questionVO">
+			INSERT INTO BOARD_QUESTION VALUES 
+			(#{BOARD_QUESTION_NUM}, #{CATEGORY}, #{BOARD_QUESTION_TITLE},
+			 #{BOARD_QUESTION_INFO},#{BOARD_QUESTION_FILE},
+			 #{BOARD_QUESTION_DATE},#{BOARD_QUESTION_WRITER})
+		</select>
+		<select id="deleteQuestion" parameterType="QuestionVO" resultType="questionVO">
+			DELETE FROM BOARD_QUESTION WHERER 
+			BOARD_QUESTION_NUM=#{"BOARD_QUESTION_NUM"}
+		</select>
+		<select id="selectQuestion" parameterType="QuestionVO" resultType="questionVO">
+			SELECT * FROM BOARD_QUESTION WHERER 
+			BOARD_QUESTION_NUM=#{BOARD_QUESTION_NUM}
+		</select>
+		<select id="selectiListQuestion" resultType="questionVO">
+			SELECT * FROM BOARD_QUESTION
+		</select>
 	
 </mapper>
