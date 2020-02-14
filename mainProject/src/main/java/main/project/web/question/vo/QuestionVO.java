@@ -10,6 +10,7 @@ public class QuestionVO {
 	private String board_question_file;
 	private Date board_question_date;
 	private String board_question_writer;
+	
 	public String getBoard_question_num() {
 		return board_question_num;
 	}

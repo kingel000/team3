@@ -93,7 +93,7 @@
          </c:choose>    
          <li class="group">
             <div class="box">
-               <a href="#">
+               <a href="/web/member/boardManager.do">
                   <h3>Board</h3>
                   <p>게시물 관리</p>
                </a>

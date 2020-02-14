@@ -36,7 +36,7 @@ public class MemberController {
 			if(check.getPwd().equals(member.getPwd())) {
 				session.setAttribute("member", check);
 				model.addAttribute("member", check);
-				return "main/main";
+				return "main/main.part2";
 			}else {
 				String msg = "비밀번호 오류";
 				System.out.println(msg);
@@ -59,13 +59,13 @@ public class MemberController {
 	public String memberRegiser(MemberVO member, Model model) {
 		System.out.println(member.getRank());
 		memberService.insertMember(member);
-		return "main/main";
+		return "main/main.part2";
 	}
 
 	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
 	public String memberLogout(HttpSession session, Model model) {
 		session.invalidate();
-		return "main/main";
+		return "main/main.part2";
 	}
 
 	@RequestMapping(value="/mypage.do", method = RequestMethod.GET)
@@ -99,7 +99,7 @@ public class MemberController {
 		System.out.println(expert);
 		expertService.insertExpert(expert);
 		memberService.rankupdate(sessionId);
-		return "main/main";
+		return "main/main.part2";
 	}
 	
 	@RequestMapping(value="/editExpert.do",method=RequestMethod.GET)
@@ -132,7 +132,7 @@ public class MemberController {
 				if(check.getRank() == "E") {
 					expertService.deleteExpert(check.getId());
 				}
-				return "main/main";
+				return "main/main.part2";
 			}
 		}
 		String msg = "비밀번호 다시 확인";
@@ -140,5 +140,19 @@ public class MemberController {
 		model.addAttribute("msg",msg);
 		return "member/mypage.page";
 	}
+	
+	   @RequestMapping(value="/boardManager.do", method = RequestMethod.GET)
+	   public String editBoard(ExpertVO expert, HttpSession session , Model model) {
+	      String sessionId = ((MemberVO)session.getAttribute("member")).getId();
+	      expert.setId(sessionId);
+	      System.out.println(expert);
+	      session.setAttribute("expert",expert);
+	      return "member/boardManager.page";
+	   }
 
+	   @RequestMapping(value="/boardManager.do", method = RequestMethod.POST)
+	   public String editBoard(ExpertVO expert , Model model , HttpSession session) {
+
+	      return "main/main.part2";
+	   }
 }
