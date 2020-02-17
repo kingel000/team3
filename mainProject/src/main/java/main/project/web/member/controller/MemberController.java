@@ -123,13 +123,14 @@ public class MemberController {
 	@RequestMapping(value="/withdrawal.do", method= RequestMethod.POST)
 	public String Withdrawal(String password ,Model model, HttpSession session) {
 		MemberVO  check = (MemberVO) session.getAttribute("member");
+
 		System.out.println("check : " + check);
 		System.out.println("password : " + password);
 		if(password != null) {
 			if(check.getPwd().equals(password)) {
 				session.invalidate();
 				memberService.deleteMember(check);
-				if(check.getRank() == "E") {
+				if(check.getRank().equals("E")) {
 					expertService.deleteExpert(check.getId());
 				}
 				return "main/main.part2";
