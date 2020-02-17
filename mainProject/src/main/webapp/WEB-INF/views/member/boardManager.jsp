@@ -10,13 +10,18 @@
 <title>상품관리</title>
 
    <style>
+   .editBoard{
+   width : 1000px;
+   
+   margin:0 auto
+   }   
    table{
    width: 70%;
     border-top: 1px solid #444444;
     border-collapse: collapse;}
         th, td {
     border-bottom: 1px solid #444444;
-    padding: 10px;
+    padding: 10px;   
   }
     </style>
    
