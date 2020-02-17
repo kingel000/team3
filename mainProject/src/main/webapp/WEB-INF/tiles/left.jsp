@@ -83,7 +83,7 @@
             <c:when test="${member.rank == 'E'}">
                 <li class="group">
                <div class="box">
-                    <a href="#">
+                    <a href="/web/product/updateProduct.do">
                      <h3>Product</h3>
                      <p>상품등록</p>
                   </a>
