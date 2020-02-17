@@ -10,11 +10,21 @@
 
 <title>Edit Page</title>
 <script type="text/javascript">
+var message = '${msg}';
+if(message != ""){
+	alert(message);
+} 		
+
 //필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
 function checkValue() {
 	if (!document.userInfo.nick_name.value) {
 		alert("닉네임을 입력해주세요.");
 		document.userInfo.nick_name.focus();
+		return false;
+	}
+	if (!document.userInfo.password.value) {
+		alert("현재 패스워드를 입력해주세요.");
+		document.userInfo.password.focus();
 		return false;
 	}
 	if (!document.userInfo.pwd.value) {
@@ -32,12 +42,11 @@ function checkValue() {
 		document.userInfo.pwd.focus();
 		return false;
 	}
-}
-function emailCheck() {
-	document.userInfo.idCheckResult.value = "idCheck";
-}
-function inputIdCheck() {
-	document.userInfo.idCheckResult.value = "idUnCheck";
+	if (document.userInfo.pwd.value == document.userInfo.password.value) {
+		alert("현재 비밀번호와 변경할 비밀번호가 같습니다.");
+		document.userInfo.password.focus();
+		return false;
+	}
 }
 </script>
 
@@ -63,8 +72,12 @@ function inputIdCheck() {
 						type="text" name="nick_name" value="${member.nick_name }">
 				</p>
 				<p>
+					<label for="pwd">현재 비밀번호</label><br> 
+					<input id="password" type="password" name="password" placeholder="현재 비밀번호를 입력해주세요.">
+				</p>
+				<p>
 					<label for="pwd">비밀번호 변경</label><br> 
-					<input id="pwd" type="password" name="pwd" placeholder="비밀번호를 입력해주세요" value="${member.pwd }">
+					<input id="pwd" type="password" name="pwd" placeholder="비밀번호를 입력해주세요">
 				</p>
 				<p>
 					<label for="pwd">비밀번호 확인</label><br> 

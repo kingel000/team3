@@ -47,6 +47,8 @@ public class MemberController {
 			System.out.println("아이디 없음");
 			model.addAttribute("msg", msg);
 		}
+		String msg = "회원가입 되었습니다.";
+		model.addAttribute("msg",msg);
 		return "member/login";
 	}
 
@@ -59,7 +61,7 @@ public class MemberController {
 	public String memberRegiser(MemberVO member, Model model) {
 		System.out.println(member.getRank());
 		memberService.insertMember(member);
-		return "main/main.part2";
+		return "member/login";
 	}
 
 	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
@@ -81,11 +83,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/editMember.do", method=RequestMethod.POST)
-	public String editMember(MemberVO member,HttpSession session,Model model) {
-		memberService.updateMember(member);
-		session.setAttribute("member", member);
-		model.addAttribute("member",member);
-		return "member/mypage.page";
+	public String editMember(String password, MemberVO member,HttpSession session,Model model) {
+		MemberVO  check = (MemberVO) session.getAttribute("member");
+		if(check.getPwd().equals(password)) {
+			memberService.updateMember(member);
+			session.setAttribute("member", member);
+			model.addAttribute("member",member);
+			String msg = "회원정보 변경완료";
+			model.addAttribute("msg",msg);
+			return "member/editMember.page";
+		}
+		String msg = "비밀번호 다시 확인";
+		model.addAttribute("msg",msg);
+		return "member/editMember.page";
 	}
 	@RequestMapping(value="/rankUp.do", method = RequestMethod.GET)
 	public String rankUpPage() {
@@ -102,7 +112,7 @@ public class MemberController {
 		memberService.rankupdate(sessionId);
 		member.setRank("E");
 		session.setAttribute("member", member);
-		return "main/main.part2";
+		return "member/mypage.page";
 	}
 	
 	@RequestMapping(value="/editExpert.do",method=RequestMethod.GET)
@@ -136,11 +146,12 @@ public class MemberController {
 				if(check.getRank().equals("E")) {
 					expertService.deleteExpert(check.getId());
 				}
+				String msg = "회원탈퇴 되었습니다.";
+				model.addAttribute("msg",msg);
 				return "main/main.part2";
 			}
 		}
 		String msg = "비밀번호 다시 확인";
-		System.out.println(msg);
 		model.addAttribute("msg",msg);
 		return "member/mypage.page";
 	}
@@ -159,6 +170,4 @@ public class MemberController {
 
 	      return "main/main.part2";
 	   }
-	   
-	   
 }
