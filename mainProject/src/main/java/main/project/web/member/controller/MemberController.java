@@ -94,11 +94,14 @@ public class MemberController {
 
 	@RequestMapping(value="/rankUp.do", method = RequestMethod.POST)
 	public String rankUpPage(ExpertVO expert , Model model , HttpSession session) {
-		String sessionId = ((MemberVO)session.getAttribute("member")).getId();
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		String sessionId =member.getId();
 		expert.setId(sessionId);
 		System.out.println(expert);
 		expertService.insertExpert(expert);
 		memberService.rankupdate(sessionId);
+		member.setRank("E");
+		session.setAttribute("member", member);
 		return "main/main.part2";
 	}
 	

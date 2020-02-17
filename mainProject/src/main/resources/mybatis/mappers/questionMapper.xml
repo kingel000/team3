@@ -8,17 +8,18 @@
 			(#{BOARD_QUESTION_NUM}, #{BOARD_QUESTION_TITLE},
 			 #{BOARD_QUESTION_INFO},#{BOARD_QUESTION_FILE},
 			 #{BOARD_QUESTION_DATE},#{BOARD_QUESTION_WRITER})
+
 		</select>
-		<select id="deleteQuestion" parameterType="QuestionVO" resultType="questionVO">
-			DELETE FROM BOARD_QUESTION WHERER 
-			BOARD_QUESTION_NUM=#{"BOARD_QUESTION_NUM"}
+		<select id="deleteQuestion" parameterType="questionVO" >
+			DELETE FROM board_question WHERER 
+			board_question_num=#{board_question_num}
 		</select>
-		<select id="selectQuestion" parameterType="QuestionVO" resultType="questionVO">
-			SELECT * FROM BOARD_QUESTION WHERER 
-			BOARD_QUESTION_NUM=#{BOARD_QUESTION_NUM}
+		<select id="selectQuestion" parameterType="questionVO" resultType="questionVO">
+			SELECT * FROM board_question WHERER 
+			board_question_num=#{board_question_num}
 		</select>
 		<select id="selectiListQuestion" resultType="questionVO">
-			SELECT * FROM BOARD_QUESTION
+			SELECT * FROM board_question
 		</select>
 	
 </mapper>
