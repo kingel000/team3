@@ -156,4 +156,6 @@ public class MemberController {
 
 	      return "main/main.part2";
 	   }
+	   
+	   
 }

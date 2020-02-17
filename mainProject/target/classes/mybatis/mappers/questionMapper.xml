@@ -5,7 +5,7 @@
 <mapper namespace="main.project.web.question.dao.IQuestionDAO">
 		<select id="insertQuestion" parameterType="QuestionVO" resultType="questionVO">
 			INSERT INTO BOARD_QUESTION VALUES 
-			(#{BOARD_QUESTION_NUM}, #{CATEGORY}, #{BOARD_QUESTION_TITLE},
+			(#{BOARD_QUESTION_NUM}, #{BOARD_QUESTION_TITLE},
 			 #{BOARD_QUESTION_INFO},#{BOARD_QUESTION_FILE},
 			 #{BOARD_QUESTION_DATE},#{BOARD_QUESTION_WRITER})
 		</select>

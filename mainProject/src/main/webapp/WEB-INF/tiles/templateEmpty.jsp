@@ -17,6 +17,8 @@
 	float: left;
 	width: 100%;
 	margin-top: 20px;
+	min-height: 600px;
+	text-align: center;
 }
 
 #footer {
@@ -26,9 +28,7 @@
 	clear: both;
 }
 
-#main {
-	min-height: 600px;
-}
+
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
