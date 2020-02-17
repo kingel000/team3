@@ -159,8 +159,8 @@
 			  </li>
 			  <li class="menu-item menu-item-has-children dropdown"><a href="#">고객센터</a>
 					<ul class="sub-menu">
-					  <li class="menu-item"><a href="/web/memeber/notice.do">공지사항</a></li>
-					  <li class="menu-item"><a href="#">문의사항</a></li>
+					  <li class="menu-item"><a href="/web/board/notice.do">공지사항</a></li>
+					  <li class="menu-item"><a href="/web/board/question.do">문의사항</a></li>
 					</ul>
 			  </li>
 			</ul>

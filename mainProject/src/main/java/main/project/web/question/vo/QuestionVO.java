@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class QuestionVO {
 	private String board_question_num;
-	private String category;
 	private String board_question_title;
 	private String board_question_info;
 	private String board_question_file;
@@ -16,12 +15,6 @@ public class QuestionVO {
 	}
 	public void setBoard_question_num(String board_question_num) {
 		this.board_question_num = board_question_num;
-	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
 	}
 	public String getBoard_question_title() {
 		return board_question_title;
@@ -53,12 +46,13 @@ public class QuestionVO {
 	public void setBoard_question_writer(String board_question_writer) {
 		this.board_question_writer = board_question_writer;
 	}
-	
 	@Override
 	public String toString() {
-		return "QuestionVO [board_question_num=" + board_question_num + ", category=" + category
-				+ ", board_question_title=" + board_question_title + ", board_question_info=" + board_question_info
-				+ ", board_question_file=" + board_question_file + ", board_question_date=" + board_question_date
-				+ ", board_question_writer=" + board_question_writer + "]";
+		return "QuestionVO [board_question_num=" + board_question_num + ", board_question_title=" + board_question_title
+				+ ", board_question_info=" + board_question_info + ", board_question_file=" + board_question_file
+				+ ", board_question_date=" + board_question_date + ", board_question_writer=" + board_question_writer
+				+ "]";
 	}
+	
+	
 }
