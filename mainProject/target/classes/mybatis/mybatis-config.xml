@@ -6,11 +6,13 @@
 	<typeAliases>
 		<typeAlias type="main.project.web.member.vo.MemberVO" alias="memberVO"></typeAlias>
 		<typeAlias type="main.project.web.question.vo.QuestionVO" alias="questionVO"></typeAlias>
+		<typeAlias type="main.project.web.product.vo.ProductVO" alias="productVO"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mybatis/mappers/memberMapper.xml" />
 		<mapper resource="mybatis/mappers/expertMapper.xml" />
 		<mapper resource="mybatis/mappers/questionMapper.xml" />
+		<mapper resource="mybatis/mappers/productMapper.xml" />
 	</mappers>
 </configuration>
