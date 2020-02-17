@@ -16,8 +16,9 @@ public class ProductController {
 	@Autowired
 	private IProductService productService;
 
-	@RequestMapping(value="/product.do", method=RequestMethod.GET)
-	public String productMain(Model model, HttpSession session) {
-		return null;
+	@RequestMapping(value="/mainProduct.do", method=RequestMethod.GET)
+	public String mainProduct(Model model, HttpSession session) {
+		System.out.println("produdct GET »£√‚ ");
+		return "product/mainProduct.part2";
 	}
 }
