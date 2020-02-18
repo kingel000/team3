@@ -126,6 +126,7 @@ public class MemberController {
 	@RequestMapping(value="/authKey.do", method=RequestMethod.POST)
 	public String memberAuthKey(MemberVO member,String key, String authKey, Model model) {
 		if(authKey.equals(key)) {
+			model.addAttribute("member",member);
 			return "member/regiser_s";
 		}
 		return "member/regiser_f";
@@ -191,6 +192,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/editExpert.do", method=RequestMethod.POST)
 	public String editExpert(ExpertVO expert, Model model) {
+		System.out.println(expert);
 		expertService.updateExpert(expert);
 		return "member/mypage.page";
 	}
