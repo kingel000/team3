@@ -44,6 +44,8 @@
 					<textarea id="career" name="career" rows="8" cols="51" >${expert.career}</textarea>	 
 				</p>
 				<p class="join_c">
+					<input type="hidden" name="id" value="${expert.id }">
+					<input type="hidden" name="name" value="${expert.name }">
 					<input type="submit" value="정보변경완료" />
 				</p>
 			</form>
