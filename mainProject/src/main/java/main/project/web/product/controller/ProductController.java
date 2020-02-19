@@ -135,6 +135,7 @@ public class ProductController {
 	@RequestMapping(value="/updateProduct.do", method = RequestMethod.POST)
 	public String updateProduct(ProductVO product, Model model , HttpSession session) {
 		System.out.println("updateProduct.do POST ¹ÞÀ½ ");
+		System.out.println(product);
 		productService.updateProduct(product);
 		return "/product/boardManager.page";
 	}

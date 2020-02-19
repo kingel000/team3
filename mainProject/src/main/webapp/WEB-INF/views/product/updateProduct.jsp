@@ -27,7 +27,7 @@
             <h4>상품 등록</h4>
             <p>
                <select name="category">
-               <option value="" selected disabled hidden>${product.category}</option>
+               <option value="${product.category}" selected hidden>${product.category}</option>
                   <option value="웹 개발">웹 개발</option>
                   <option value="모바일앱·웹">모바일앱·웹</option>
                   <option value="게임">게임</option>
@@ -45,6 +45,8 @@
                 <input type="file" name = "product_info">
                </p>
             <p >
+               <input type="hidden" name="product_num" value="${product.product_num }">
+               <input type="hidden" name="expert_id" value="${product.expert_id}">
                <input type="submit" value="수정하기" />
             </p>
          </form>
