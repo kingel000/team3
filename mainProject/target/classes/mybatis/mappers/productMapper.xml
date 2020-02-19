@@ -20,10 +20,11 @@
 	</delete>
 	<select id="selectProduct" parameterType="ProductVO" resultType="ProductVO">
 		SELECT * FROM product
-		WHERE id=#{product_num}
+		WHERE product_num=#{product_num}
 	</select>
 	<select id="selectListProduct" resultType="ProductVO">
 		SELECT * FROM product
+		WHERE expert_id=#{id}
 	</select>
 	
 </mapper>

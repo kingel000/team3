@@ -37,7 +37,7 @@
       <ul>
          <div class="mypage_title">
             <a href="mypage.do">MY PAGE</a>
-         </div>
+         </div><br>
          <li class="group">
             <div class="box">
                <a href="/web/member/editMember.do">
@@ -93,7 +93,7 @@
          </c:choose>    
          <li class="group">
             <div class="box">
-               <a href="/web/member/boardManager.do">
+               <a href="/web/product/boardManager.do">
                   <h3>Board</h3>
                   <p>게시물 관리</p>
                </a>

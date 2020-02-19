@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import main.project.web.member.vo.MemberVO;
 import main.project.web.product.vo.ProductVO;
 
 @Repository("productDAO")
@@ -32,7 +33,7 @@ public class ProductDAOImpl implements IProductDAO {
 		return sqlSessiontemplate.selectOne("main.project.web.product.dao.IProductDAO.selectProduct",product_num);
 	}
 	@Override
-	public List<ProductVO> selectListProduct() {
-		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectiListProduct");
+	public List<ProductVO> selectListProduct(MemberVO sessionId) {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectListProduct", sessionId);
 	}
 }
