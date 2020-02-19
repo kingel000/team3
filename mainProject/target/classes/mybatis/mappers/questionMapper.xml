@@ -3,23 +3,36 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="main.project.web.question.dao.IQuestionDAO">
-		<select id="insertQuestion" parameterType="QuestionVO" resultType="questionVO">
-			INSERT INTO BOARD_QUESTION VALUES 
-			(#{BOARD_QUESTION_NUM}, #{BOARD_QUESTION_TITLE},
-			 #{BOARD_QUESTION_INFO},#{BOARD_QUESTION_FILE},
-			 #{BOARD_QUESTION_DATE},#{BOARD_QUESTION_WRITER})
-
-		</select>
-		<select id="deleteQuestion" parameterType="questionVO" >
+		<insert id="insertQuestion" parameterType="questionVO" >
+			INSERT INTO BOARD_QUESTION(
+				BOARD_QUESTION_NUM,
+				BOARD_QUESTION_TITLE,
+				BOARD_QUESTION_INFO,
+				BOARD_QUESTION_DATE,
+				BOARD_QUESTION_WRITER
+			)
+			VALUES 
+			(
+				#{BOARD_QUESTION_NUM}, 
+				#{BOARD_QUESTION_TITLE},
+				#{BOARD_QUESTION_INFO},
+				SYSDATE,
+				#{BOARD_QUESTION_WRITER}
+			)
+		</insert>
+		<delete id="deleteQuestion" parameterType="questionVO" >
 			DELETE FROM board_question WHERER 
 			board_question_num=#{board_question_num}
-		</select>
+		</delete>
 		<select id="selectQuestion" parameterType="questionVO" resultType="questionVO">
 			SELECT * FROM board_question WHERER 
 			board_question_num=#{board_question_num}
 		</select>
-		<select id="selectiListQuestion" resultType="questionVO">
-			SELECT * FROM board_question
+		<select id="selectListQuestion" resultType="questionVO">
+			SELECT * FROM board_question ORDER BY board_question_num DESC
+		</select>
+		<select id="selectNumQuestion" resultType="Integer">
+			SELECT MAX(BOARD_QUESTION_NUM)+1 FROM BOARD_QUESTION
 		</select>
 	
 </mapper>

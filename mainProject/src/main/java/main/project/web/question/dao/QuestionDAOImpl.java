@@ -31,8 +31,13 @@ public class QuestionDAOImpl implements IQuestionDAO {
 	}
 
 	@Override
-	public List<QuestionVO> selectListQuetion() {
-		return sqlSessionTemplate.selectList("main.project.web.question.dao.IQuestionDAO.selectiListQuestion");
+	public List<QuestionVO> selectListQuestion() {
+		return sqlSessionTemplate.selectList("main.project.web.question.dao.IQuestionDAO.selectListQuestion");
+	}
+
+	@Override
+	public Integer selectNumQuestion() {
+		return sqlSessionTemplate.selectOne("main.project.web.question.dao.IQuestionDAO.selectNumQuestion");
 	}
 
 }

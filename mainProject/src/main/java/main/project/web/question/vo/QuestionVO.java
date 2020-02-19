@@ -3,17 +3,17 @@ package main.project.web.question.vo;
 import java.util.Date;
 
 public class QuestionVO {
-	private String board_question_num;
+	private int board_question_num;
 	private String board_question_title;
 	private String board_question_info;
 	private String board_question_file;
 	private Date board_question_date;
 	private String board_question_writer;
 	
-	public String getBoard_question_num() {
+	public int getBoard_question_num() {
 		return board_question_num;
 	}
-	public void setBoard_question_num(String board_question_num) {
+	public void setBoard_question_num(int board_question_num) {
 		this.board_question_num = board_question_num;
 	}
 	public String getBoard_question_title() {
