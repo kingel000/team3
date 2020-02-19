@@ -9,7 +9,12 @@
 
 <!-- Custom-->
 <link rel="stylesheet" href="<c:url value="/resources/css/style2.css"/>">
-
+<script type="text/javascript">
+	var message = '${msg}';
+	if(message != ""){
+		alert(message);
+	} 		
+</script>
 </head>
 <body class="body">
 	<div class="withdrawal_Box1">

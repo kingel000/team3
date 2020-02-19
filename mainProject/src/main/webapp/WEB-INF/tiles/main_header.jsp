@@ -75,7 +75,7 @@
 	  </div>
 	  <div class="navigation__column center">
 			<ul class="main-menu menu">
-			  <li class="menu-item menu-item-has-children dropdown"><a href="#">웹 개발</a>
+			  <li class="menu-item menu-item-has-children dropdown"><a href="/web/product/mainProduct.do">웹 개발</a>
 					<ul class="sub-menu">
 					  <li class="menu-item"><a href="">Homepage #1</a></li>
 					  <li class="menu-item"><a href="#">Homepage #2</a></li>

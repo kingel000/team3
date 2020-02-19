@@ -1,13 +1,22 @@
 package main.project.web.member.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import main.project.web.mail.MailUtils;
+import main.project.web.mail.TempKey;
 import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
 import main.project.web.member.vo.ExpertVO;
@@ -20,7 +29,8 @@ public class MemberController {
 	private IMemberService memberService;
 	@Autowired
 	private IExpertService expertService;
-
+	@Autowired
+	private JavaMailSender mailSender;
 
 	@RequestMapping(value="/login.do", method = RequestMethod.GET)
 	public String memberLogin(Model model) {
@@ -47,21 +57,81 @@ public class MemberController {
 			System.out.println("아이디 없음");
 			model.addAttribute("msg", msg);
 		}
+		String msg = "회원가입 되었습니다.";
+		model.addAttribute("msg",msg);
 		return "member/login";
 	}
 
 	@RequestMapping(value="/regiser.do",method=RequestMethod.GET)
 	public String memberRegiser(Model model) {
-		return "member/regiser";
+		return "member/regiser_f";
 	}
 
 	@RequestMapping(value="/regiser.do",method=RequestMethod.POST)
 	public String memberRegiser(MemberVO member, Model model) {
 		System.out.println(member.getRank());
 		memberService.insertMember(member);
-		return "main/main.part2";
+		return "member/login";
 	}
 
+	@RequestMapping(value="/auth.do", method=RequestMethod.POST)
+	public String memberAuth(MemberVO member, Model model,HttpServletResponse response) {
+		MemberVO check = memberService.checkMemberId(member.getId());
+		if(check == null) {
+			String authKey = new TempKey().getKey(8, false);
+			try {
+				// mail 작성 관련기능
+				MailUtils sendMail = new MailUtils(mailSender);
+				StringBuffer stb = new StringBuffer();
+				stb.append("<h1>[이메일 인증]</h1>");
+				stb.append("<p>안녕하세요 회원님 저희 홈페이지를 찾아주셔서 감사합니다.</p>");
+				stb.append("인증번호는 ");
+				stb.append(authKey);
+				stb.append(" 입니다.");
+
+				sendMail.setSubject("회원가입 이메일 인증");
+				sendMail.setText(stb.toString());
+				sendMail.setFrom("item2881@gmail.com ", "Item");
+				sendMail.setTo(member.getId());
+				sendMail.send();
+			} catch (MessagingException e1) {
+				e1.printStackTrace();
+			}catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter  out_email = response.getWriter();
+				out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>");
+				out_email.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			model.addAttribute("authKey", authKey);
+			model.addAttribute("member", member);
+		}else {
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter  out_email = response.getWriter();
+				out_email.println("<script>alert('입력한 아이디가 중복됬습니다. 아이디를 다시 입력해주세요.');</script>");
+				out_email.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}finally {
+			}
+		}
+		return "member/regiser_f";
+	}
+	
+	@RequestMapping(value="/authKey.do", method=RequestMethod.POST)
+	public String memberAuthKey(MemberVO member,String key, String authKey, Model model) {
+		if(authKey.equals(key)) {
+			model.addAttribute("member",member);
+			return "member/regiser_s";
+		}
+		return "member/regiser_f";
+	}
+	
 	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
 	public String memberLogout(HttpSession session, Model model) {
 		session.invalidate();
@@ -81,11 +151,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/editMember.do", method=RequestMethod.POST)
-	public String editMember(MemberVO member,HttpSession session,Model model) {
-		memberService.updateMember(member);
-		session.setAttribute("member", member);
-		model.addAttribute("member",member);
-		return "member/mypage.page";
+	public String editMember(String password, MemberVO member,HttpSession session,Model model) {
+		MemberVO  check = (MemberVO) session.getAttribute("member");
+		if(check.getPwd().equals(password)) {
+			memberService.updateMember(member);
+			session.setAttribute("member", member);
+			model.addAttribute("member",member);
+			String msg = "회원정보 변경완료";
+			model.addAttribute("msg",msg);
+			return "member/editMember.page";
+		}
+		String msg = "비밀번호 다시 확인";
+		model.addAttribute("msg",msg);
+		return "member/editMember.page";
 	}
 	@RequestMapping(value="/rankUp.do", method = RequestMethod.GET)
 	public String rankUpPage() {
@@ -102,7 +180,7 @@ public class MemberController {
 		memberService.rankupdate(sessionId);
 		member.setRank("E");
 		session.setAttribute("member", member);
-		return "main/main.part2";
+		return "member/mypage.page";
 	}
 	
 	@RequestMapping(value="/editExpert.do",method=RequestMethod.GET)
@@ -114,6 +192,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/editExpert.do", method=RequestMethod.POST)
 	public String editExpert(ExpertVO expert, Model model) {
+		System.out.println(expert);
 		expertService.updateExpert(expert);
 		return "member/mypage.page";
 	}
@@ -136,11 +215,12 @@ public class MemberController {
 				if(check.getRank().equals("E")) {
 					expertService.deleteExpert(check.getId());
 				}
+				String msg = "회원탈퇴 되었습니다.";
+				model.addAttribute("msg",msg);
 				return "main/main.part2";
 			}
 		}
 		String msg = "비밀번호 다시 확인";
-		System.out.println(msg);
 		model.addAttribute("msg",msg);
 		return "member/mypage.page";
 	}
@@ -159,6 +239,4 @@ public class MemberController {
 
 	      return "main/main.part2";
 	   }
-	   
-	   
 }
