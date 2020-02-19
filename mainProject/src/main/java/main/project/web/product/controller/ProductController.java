@@ -33,75 +33,73 @@ public class ProductController {
 		System.out.println("produdct GET 호출 ");
 		return "product/mainProduct.part2";
 	}
+	
 	@RequestMapping(value="/updateProduct.do", method=RequestMethod.GET)
 	public String updateProduct(Model model) {
 		System.out.println("produdct update GET 호출 ");
 		return "product/updateProduct.page";
 	}
+	@RequestMapping(value="/updateProduct.do", method=RequestMethod.POST)
+	public String updateProduct(ProductVO product,HttpSession session ,Model model, MultipartFile uploadfile , MultipartHttpServletRequest request ) {
+		System.out.println("produdct update POST 호출 ");
+		MemberVO member = (MemberVO)(session.getAttribute("member"));
+		System.out.println(member.getId());
+
+		product.setExpert_id(member.getId());
+		System.out.println(product);
+
+		String rootUploadDir = "C:"+File.separator+"Upload"; // C:/Upload
+
+		File dir = new File(rootUploadDir + File.separator + "testfile"); 
+
+		if(!dir.exists()) { //업로드 디렉토리가 존재하지 않으면 생성
+			dir.mkdirs();
+		}
+
+		Iterator<String> iterator = request.getFileNames(); //업로드된 파일정보 수집(2개 - file1,file2)
+
+		int fileLoop = 0;
+		String uploadFileName;
+		MultipartFile mFile = null;
+		String orgFileName = ""; //진짜 파일명
+		String sysFileName = ""; //변환된 파일명
+
+		ArrayList<String> list = new ArrayList<String>();
+
+		while(iterator.hasNext()) {
+			fileLoop++;
+
+			uploadFileName = iterator.next();
+			mFile = request.getFile(uploadFileName);
+
+			orgFileName = mFile.getOriginalFilename();    
+			System.out.println(orgFileName);
+
+			if(orgFileName != null && orgFileName.length() != 0) { //sysFileName 생성
+				System.out.println("if문 진입");
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMDDHHmmss-" + fileLoop);
+				Calendar calendar = Calendar.getInstance();
+				sysFileName = simpleDateFormat.format(calendar.getTime()); //sysFileName: 날짜-fileLoop번호
 
 
-	   @RequestMapping(value="/updateProduct.do", method=RequestMethod.POST)
-	   public String updateProduct(ProductVO product,HttpSession session ,Model model, MultipartFile uploadfile , MultipartHttpServletRequest request ) {
-	      System.out.println("produdct update POST 호출 ");
-	      MemberVO member = (MemberVO)(session.getAttribute("member"));
-	      System.out.println(member.getId());
-	   
-	      product.setExpert_id(member.getId());
-	      System.out.println(product);
-	   
-	       String rootUploadDir = "C:"+File.separator+"Upload"; // C:/Upload
-	           
-	           File dir = new File(rootUploadDir + File.separator + "testfile"); 
-	           
-	           if(!dir.exists()) { //업로드 디렉토리가 존재하지 않으면 생성
-	               dir.mkdirs();
-	           }
-	           
-	           Iterator<String> iterator = request.getFileNames(); //업로드된 파일정보 수집(2개 - file1,file2)
-	           
-	           int fileLoop = 0;
-	           String uploadFileName;
-	           MultipartFile mFile = null;
-	           String orgFileName = ""; //진짜 파일명
-	           String sysFileName = ""; //변환된 파일명
-	           
-	           ArrayList<String> list = new ArrayList<String>();
-	           
-	           while(iterator.hasNext()) {
-	               fileLoop++;
-	               
-	               uploadFileName = iterator.next();
-	               mFile = request.getFile(uploadFileName);
-	               
-	               orgFileName = mFile.getOriginalFilename();    
-	               System.out.println(orgFileName);
-	               
-	               if(orgFileName != null && orgFileName.length() != 0) { //sysFileName 생성
-	                   System.out.println("if문 진입");
-	                   SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMDDHHmmss-" + fileLoop);
-	                   Calendar calendar = Calendar.getInstance();
-	                   sysFileName = simpleDateFormat.format(calendar.getTime()); //sysFileName: 날짜-fileLoop번호
-	                   
-	                   
-	                   try {
-	                       System.out.println("try 진입");
-	                       mFile.transferTo(new File(dir + File.separator + sysFileName)); // C:/Upload/testfile/sysFileName
-	                       list.add("원본파일명: " + orgFileName + ", 시스템파일명: " + sysFileName);
-	                       
-	                   }catch(Exception e){
-	                       list.add("파일 업로드 중 에러발생!!!");
-	                   }
-	               }//if
-	           }//while
-	           
-	           model.addAttribute("list", list);
-	           
+				try {
+					System.out.println("try 진입");
+					mFile.transferTo(new File(dir + File.separator + sysFileName)); // C:/Upload/testfile/sysFileName
+					list.add("원본파일명: " + orgFileName + ", 시스템파일명: " + sysFileName);
+
+				}catch(Exception e){
+					list.add("파일 업로드 중 에러발생!!!");
+				}
+			}//if
+		}//while
+
+		model.addAttribute("list", list);
 
 
-	      return "product/updateProduct.page";
-	   }
-	   
-	
+
+		return "product/updateProduct.page";
+	}
+
 	@RequestMapping(value="/boardManager.do", method = RequestMethod.GET)
 	public String editBoard(ExpertVO expert, HttpSession session , Model model) {
 		MemberVO sessionId = (MemberVO)session.getAttribute("member");

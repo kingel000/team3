@@ -19,7 +19,7 @@
 
 <div>
       <div class="update_Product">
-         <form action="/web/product/updateProduct.do" method="post">
+         <form action="/web/product/updateProduct.do" method="post" >
             <h4>상품 등록</h4>
             <p>
                <select name="category">
@@ -32,13 +32,13 @@
                </select>
             </p>
             <p>
-               <input id="update_Product_title" type="text" name="update_Product_title" placeholder="제목을 입력해주세요">
+               <input id="update_Product_title" type="text" name="product_title" placeholder="제목을 입력해주세요">
             </p>
             <p>
-               <textarea name="board_question_info" rows="10" cols="80" placeholder="상품 설명을 입력해주세요"></textarea>
+               <textarea name="product_info" rows="10" cols="80" placeholder="상품 설명을 입력해주세요"></textarea>
                </p>
                <p>
-                  <a href="#">파일 선택</a> : file 없음
+                <input type="file" name = "product_info">
                </p>
             <p >
                <input type="submit" value="등록하기" />
