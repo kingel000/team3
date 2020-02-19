@@ -28,7 +28,6 @@ public class QuestionController {
 		System.out.println("문의사항게시판 이동");
 		List<QuestionVO> questionList = questionService.selectListQuestion();
 		model.addAttribute("questionList", questionList);
-		session.setAttribute("questionList", questionList);
 		return "board/questionBoard.part2";
 	}
 	
