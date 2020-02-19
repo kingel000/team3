@@ -29,7 +29,7 @@ public class ProductDAOImpl implements IProductDAO {
 		sqlSessiontemplate.update("main.project.web.product.dao.IProductDAO.updateProduct",product);
 	}
 	@Override
-	public ProductVO selectProduct(ProductVO product_num) {
+	public ProductVO selectProduct(String product_num) {
 		return sqlSessiontemplate.selectOne("main.project.web.product.dao.IProductDAO.selectProduct",product_num);
 	}
 	@Override

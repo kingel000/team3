@@ -18,7 +18,7 @@
 		DELETE FROM product
 		WHERE product_num=#{product_num}
 	</delete>
-	<select id="selectProduct" parameterType="ProductVO" resultType="ProductVO">
+	<select id="selectProduct" parameterType="String" resultType="ProductVO">
 		SELECT * FROM product
 		WHERE product_num=#{product_num}
 	</select>

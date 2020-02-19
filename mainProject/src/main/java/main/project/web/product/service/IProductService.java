@@ -9,6 +9,6 @@ public interface IProductService {
 	void insertProduct(ProductVO product);
 	void deleteProduct(ProductVO product_num);
 	void updateProduct(ProductVO product);
-	ProductVO selectProduct(ProductVO product_num);
+	ProductVO selectProduct(String product_num);
 	List<ProductVO> selectListProduct(MemberVO sessionId);
 }

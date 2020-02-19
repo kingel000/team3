@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -34,18 +35,20 @@ public class ProductController {
 		return "product/mainProduct.part2";
 	}
 	
-	@RequestMapping(value="/updateProduct.do", method=RequestMethod.GET)
-	public String updateProduct(Model model) {
-		System.out.println("produdct update GET 호출 ");
-		return "product/updateProduct.page";
+	@RequestMapping(value="/insertProduct.do", method=RequestMethod.GET)
+	public String insertProduct(Model model) {
+		System.out.println("produdct insert GET 호출 ");
+		return "product/insertProduct.page";
 	}
-	@RequestMapping(value="/updateProduct.do", method=RequestMethod.POST)
-	public String updateProduct(ProductVO product,HttpSession session ,Model model, MultipartFile uploadfile , MultipartHttpServletRequest request ) {
-		System.out.println("produdct update POST 호출 ");
+	@RequestMapping(value="/insertProduct.do", method=RequestMethod.POST)
+	public String insertProduct(ProductVO product,HttpSession session ,Model model, MultipartFile uploadfile , MultipartHttpServletRequest request ) {
+		System.out.println("produdct insert POST 호출 ");
+		
 		MemberVO member = (MemberVO)(session.getAttribute("member"));
 		System.out.println(member.getId());
 
 		product.setExpert_id(member.getId());
+		session.setAttribute("product", product);
 		System.out.println(product);
 
 		String rootUploadDir = "C:"+File.separator+"Upload"; // C:/Upload
@@ -97,7 +100,7 @@ public class ProductController {
 
 
 
-		return "product/updateProduct.page";
+		return "product/insertProduct.page";
 	}
 
 	@RequestMapping(value="/boardManager.do", method = RequestMethod.GET)
@@ -110,12 +113,25 @@ public class ProductController {
 		for(ProductVO product : productList) {
 			System.out.println(product);
 		}
-		session.setAttribute("productList",productList);
+		model.addAttribute("productList",productList);
 		return "product/boardManager.page";
 	}
 
 	@RequestMapping(value="/boardManager.do", method = RequestMethod.POST)
 	public String editBoard(ExpertVO expert , Model model , HttpSession session) {
+
+		return "main/main.part2";
+	}
+	
+	@RequestMapping(value="/updateProduct.do", method = RequestMethod.GET)
+	public String updateProduct(@RequestParam String num, HttpSession session , Model model) {
+		ProductVO product = productService.selectProduct(num);
+		System.out.println("수정하는 게시물의 정보 : "+ product);
+		return "product/updateProduct.page";
+	}
+
+	@RequestMapping(value="/updateProduct.do", method = RequestMethod.POST)
+	public String updateProduct(ExpertVO expert , Model model , HttpSession session) {
 
 		return "main/main.part2";
 	}
