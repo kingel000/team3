@@ -27,21 +27,25 @@
             <h4>상품 등록</h4>
             <p>
                <select name="category">
-               <option value="${product.category}"></option>
-
+               <option value="" selected disabled hidden>${product.category}</option>
+                  <option value="웹 개발">웹 개발</option>
+                  <option value="모바일앱·웹">모바일앱·웹</option>
+                  <option value="게임">게임</option>
+                  <option value="응용프로그래밍">응용프로그래밍</option>
+                  <option value="기타">기타</option>
                </select>
             </p>
             <p>
                <input id="insert_Product_title" type="text" name="product_title" value="${product.product_title}">
             </p>
             <p>
-               <textarea name="product_info" rows="10" cols="80" placeholder="상품 설명을 입력해주세요"></textarea>
+               <textarea name="product_info" rows="10" cols="80" >${product.product_info}</textarea>
                </p>
                <p>
                 <input type="file" name = "product_info">
                </p>
             <p >
-               <input type="submit" value="등록하기" />
+               <input type="submit" value="수정하기" />
             </p>
          </form>
       </div>

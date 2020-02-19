@@ -11,7 +11,7 @@
 	<update id="updateProduct" parameterType="ProductVO">
 		UPDATE product SET
 		category=#{category},product_title=#{product_title},product_info=#{expert_info},
-		product_file=#{product_file},product_date=#{product_date}
+		product_file=#{product_file}
 		WHERE product_num=#{product_num}
 	</update>
 	<delete id="deleteProduct" parameterType="ProductVO">

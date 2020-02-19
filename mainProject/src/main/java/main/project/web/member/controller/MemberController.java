@@ -186,7 +186,8 @@ public class MemberController {
 	@RequestMapping(value="/editExpert.do",method=RequestMethod.GET)
 	public String editExpert(HttpSession session,Model model) {
 		ExpertVO expert = expertService.selectExpert(((MemberVO)session.getAttribute("member")).getId());
-		model.addAttribute("expert", expert);
+		System.out.println("수정하는 전문가 정보 : "  + expert);
+		model.addAttribute("expert", expert) ;
 		return "member/editExpert.page";
 	}
 	

@@ -127,12 +127,15 @@ public class ProductController {
 	public String updateProduct(@RequestParam String num, HttpSession session , Model model) {
 		ProductVO product = productService.selectProduct(num);
 		System.out.println("수정하는 게시물의 정보 : "+ product);
+	
+		model.addAttribute("product", product);
 		return "product/updateProduct.page";
 	}
 
 	@RequestMapping(value="/updateProduct.do", method = RequestMethod.POST)
-	public String updateProduct(ExpertVO expert , Model model , HttpSession session) {
-
-		return "main/main.part2";
+	public String updateProduct(ProductVO product, Model model , HttpSession session) {
+		System.out.println("updateProduct.do POST 받음 ");
+		productService.updateProduct(product);
+		return "/product/boardManager.page";
 	}
 }
