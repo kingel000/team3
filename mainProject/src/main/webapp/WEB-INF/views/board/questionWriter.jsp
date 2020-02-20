@@ -17,11 +17,28 @@
   		.question_W1>form>p>input{width: 595px;}
   		.question_W1>form>p>a{background-color: #dddddd; padding: 1px;}
     </style>
+    
+    <script type="text/javascript">
+	   function checkValue() {
+	      if (!document.questionInfo.board_question_title.value) {
+	         alert("제목을 입력해주세요");
+	         document.questionInfo.board_question_title.focus();
+	         return false;
+	      }
+	
+	      if (!document.questionInfo.board_question_info.value) {
+	         alert("내용을 입력해주세요");
+	         document.questionInfo.board_question_info.focus();
+	         return false;
+	      }
+	   }
+	</script>
+	
 </head>
 <body>
 	<div>
 		<div class="question_W1">
-			<form action="/web/board/question.do" method="post">
+			<form action="/web/board/question.do" method="post" name="questionInfo" onsubmit="return checkValue()">
 				<h4>문의 등록</h4>
 				<p>
 					<input id="board_question_title" type="text" name="board_question_title" placeholder="제목을 입력해주세요">
