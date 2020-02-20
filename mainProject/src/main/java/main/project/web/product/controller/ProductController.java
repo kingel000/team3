@@ -58,7 +58,6 @@ public class ProductController {
 		model.addAttribute("productList",productCategory);
 		model.addAttribute("nick",nick);
 		
-		//productService.selectAllListProduct();
 		return "product/mainProduct.part2";
 	}
 	
@@ -164,6 +163,24 @@ public class ProductController {
 		System.out.println("updateProduct.do POST 받음 ");
 		System.out.println(product);
 		productService.updateProduct(product);
+		return "/product/boardManager.page";
+	}
+	
+	@RequestMapping(value="/detailProduct.do", method = RequestMethod.GET)
+	public String detailProduct(@RequestParam String num,ProductVO product, Model model , HttpSession session) {
+		System.out.println("detailProduct GET 받음 ");
+		System.out.println("선택한 상품 넘버 : " + num);
+		ProductVO numProduct = productService.selectProduct(num);
+		System.out.println("선택한 상품 정보 " + numProduct);
+		model.addAttribute("numProduct",numProduct);
+		
+		
+		return "/product/detailProduct.part2";
+	}
+	
+	@RequestMapping(value="/detailProduct.do", method = RequestMethod.POST)
+	public String detailProduct(ProductVO product, Model model , HttpSession session) {
+
 		return "/product/boardManager.page";
 	}
 }

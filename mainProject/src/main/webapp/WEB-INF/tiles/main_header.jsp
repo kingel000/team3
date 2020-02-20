@@ -144,15 +144,10 @@
 				  </div>
 				</div>
 			  </li>
-<<<<<<< HEAD
-			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C3'">게임</a></li>
-			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C4'">응용프로그래밍</a></li>
-			  <li class="menu-item menu-item-has-children dropdown"><a href="/web/product/mainProduct.do?category='C5'">기타</a>
-=======
+
 			  <li class="menu-item"><a href="#">게임</a></li>
 			  <li class="menu-item"><a href="#">응용프로그래밍</a></li>
 			  <li class="menu-item menu-item-has-children dropdown"><a href="/web/board/chat.do">기타</a>
->>>>>>> branch 'master' of https://github.com/kingel000/team3
 					<ul class="sub-menu">
 					  <li class="menu-item menu-item-has-children dropdown"><a href="#">Blog-grid</a>
 							<ul class="sub-menu">

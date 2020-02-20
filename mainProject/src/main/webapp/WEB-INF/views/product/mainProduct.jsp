@@ -77,7 +77,7 @@
 							<div class="ps-shoe__content">
 								<div class="ps-shoe__variants"></div>
 								<div class="ps-shoe__detail">
-									<a class="ps-shoe__name" href="#"><c:out value="${product.product_title }"/></a>
+									<a class="ps-shoe__name" href="/web/product/detailProduct.do?num=${product.product_num}"><c:out value="${product.product_title }"/></a>
 									<p class="ps-shoe__categories">
 										<a href="#"><c:out value="${nick.get(status.count-1)}"/></a>
 									</p>
@@ -116,8 +116,7 @@
 						<ul class="ps-list--checked">
 							<li class="current"><a href="product-listing.html">상품명 순</a></li>
 							<li><a href="product-listing.html">최신등록 순</a></li>
-							<li><a href="product-listing.html">높은가격 순</a></li>
-							<li><a href="product-listing.html">낮은가격 순</a></li>
+
 						</ul>
 					</div>
 				</aside>
