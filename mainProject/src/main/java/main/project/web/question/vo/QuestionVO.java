@@ -3,17 +3,17 @@ package main.project.web.question.vo;
 import java.util.Date;
 
 public class QuestionVO {
-	private int board_question_num;
+	private Integer board_question_num;
 	private String board_question_title;
 	private String board_question_info;
 	private String board_question_file;
 	private Date board_question_date;
 	private String board_question_writer;
-	
-	public int getBoard_question_num() {
+	private String state;
+	public Integer getBoard_question_num() {
 		return board_question_num;
 	}
-	public void setBoard_question_num(int board_question_num) {
+	public void setBoard_question_num(Integer board_question_num) {
 		this.board_question_num = board_question_num;
 	}
 	public String getBoard_question_title() {
@@ -46,13 +46,20 @@ public class QuestionVO {
 	public void setBoard_question_writer(String board_question_writer) {
 		this.board_question_writer = board_question_writer;
 	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	@Override
 	public String toString() {
 		return "QuestionVO [board_question_num=" + board_question_num + ", board_question_title=" + board_question_title
 				+ ", board_question_info=" + board_question_info + ", board_question_file=" + board_question_file
 				+ ", board_question_date=" + board_question_date + ", board_question_writer=" + board_question_writer
-				+ "]";
+				+ ", state=" + state + "]";
 	}
+	
 	
 	
 }

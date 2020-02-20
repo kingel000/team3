@@ -29,9 +29,6 @@
 				<p>
                <textarea name="board_question_info" rows="10" cols="80" placeholder="문의사항을 입력해주세요"></textarea>
             	</p>
-            	<p>
-            		<a href="#">파일 선택</a> : file 없음
-            	</p>
 				<p >
 					<input type="submit" value="등록하기" />
 				</p>

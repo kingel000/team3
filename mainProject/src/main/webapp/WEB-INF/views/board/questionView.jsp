@@ -16,6 +16,8 @@
   		.question_W1>form>h4{text-align: center; margin-bottom:15px;}
   		.question_W1>form>p>input{width: 595px;}
   		.question_W1>form>p>a{background-color: #dddddd; padding: 1px;}
+  		.p_line{width: 610px;height: 1px; background-color: #2AC37D;}
+  		.writer{margin-left: 460px;}
     </style>
 </head>
 <body>
@@ -23,18 +25,26 @@
 		<div class="question_W1">
 			<form action="/web/board/question.do" method="post">
 				<p>
-					<input id="board_question_title" type="text" name="board_question_title">
+					<label>제목 : ${question.board_question_title}</label>
 				</p>
-				<p>
-               <textarea name="board_question_info" rows="10" cols="80" ></textarea>
+					<p class="p_line"></p>
+               		<label>${question.board_question_info}</label>
             	</p>
             	<p>
-            		<a href="#">파일 선택</a> : file 없음
+            		<p class="p_line"></p>
+            		<label class="writer">작성자</label>
+            		<label class="writer">${question.board_question_writer}</label>
             	</p>
-				<p >
-					<a href="/web/board/deleteQuestion.do">글삭제</a>
-					<a href="/web/board/updateQuestion.do">글수정</a>
-				</p>
+            	
+	            <c:choose>
+		            <c:when test="${member.id == question.board_question_writer}">
+						 <p >
+							<a href="/web/board/deleteQuestion.do?num=${question.board_question_num }">글삭제</a>
+						</p>
+		            </c:when>
+		            <c:otherwise></c:otherwise>
+	       		</c:choose>
+
 			</form>
 		</div>
 	</div>

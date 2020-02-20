@@ -146,7 +146,7 @@
 			  </li>
 			  <li class="menu-item"><a href="#">게임</a></li>
 			  <li class="menu-item"><a href="#">응용프로그래밍</a></li>
-			  <li class="menu-item menu-item-has-children dropdown"><a href="#">기타</a>
+			  <li class="menu-item menu-item-has-children dropdown"><a href="/web/board/chat.do">기타</a>
 					<ul class="sub-menu">
 					  <li class="menu-item menu-item-has-children dropdown"><a href="#">Blog-grid</a>
 							<ul class="sub-menu">

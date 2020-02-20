@@ -25,23 +25,24 @@
 			  	<tr>
 			      <th>번호</th>
 			      <th>제목</th>
+			      <th>진행상태</th>
 			      <th>날짜</th>
 			      <th>작성자</th>
 			   <tr>
 			  </thead>
 			  <tbody>
-			  
-			  
-			 	<tr>
-			      <td>${question.board_question_num}</td>
-			      <td>${question.board_question_title} </td>
-			      <td>${question.board_question_date}</td>
-			      <td>${question.board_question_writer}</td>
-			    <tr>
-			   
+				  <c:forEach var="question" items="${questionList}">
+				 	<tr>
+				      <td>${question.board_question_num}</td>
+				      <td><a href="questionView.do?num=${question.board_question_num }">${question.board_question_title}</a></td>
+				      <td>${question.state}</td>
+				      <td>${question.board_question_date}</td>
+				      <td>${question.board_question_writer}</td>
+				    <tr>
+				   </c:forEach>
 			  </tbody>
 			</table>
-			<c:choose>
+		<c:choose>
             <c:when test="${member.id == null}">
 				  <a href="/web/member/login.do" class="btn btn-primary pull-right">글쓰기</a>
             </c:when>

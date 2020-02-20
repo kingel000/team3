@@ -9,23 +9,25 @@
 				BOARD_QUESTION_TITLE,
 				BOARD_QUESTION_INFO,
 				BOARD_QUESTION_DATE,
-				BOARD_QUESTION_WRITER
+				BOARD_QUESTION_WRITER,
+				STATE
 			)
 			VALUES 
 			(
-				#{BOARD_QUESTION_NUM}, 
-				#{BOARD_QUESTION_TITLE},
-				#{BOARD_QUESTION_INFO},
-				SYSDATE,
-				#{BOARD_QUESTION_WRITER}
+				#{board_question_num}, 
+				#{board_question_title},
+				#{board_question_info},
+				sysdate,
+				#{board_question_writer},
+				#{state}
 			)
 		</insert>
 		<delete id="deleteQuestion" parameterType="questionVO" >
-			DELETE FROM board_question WHERER 
+			DELETE FROM board_question WHERE 
 			board_question_num=#{board_question_num}
 		</delete>
 		<select id="selectQuestion" parameterType="questionVO" resultType="questionVO">
-			SELECT * FROM board_question WHERER 
+			SELECT * FROM board_question WHERE 
 			board_question_num=#{board_question_num}
 		</select>
 		<select id="selectListQuestion" resultType="questionVO">
