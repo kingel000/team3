@@ -16,8 +16,8 @@ public class ChatController {
 	
 	@RequestMapping(value="/chat.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String chat (Model model,HttpSession session,HttpServletRequest req) throws Exception{
-		MemberVO member = (MemberVO)session.getAttribute("member");
-		System.out.println("memberId:"+member.getId());
+		//MemberVO member = (MemberVO)session.getAttribute("member");
+		//System.out.println("memberId:"+member.getId());
 		return "chat/chat";
 	}
 	

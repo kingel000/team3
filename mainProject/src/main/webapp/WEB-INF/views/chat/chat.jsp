@@ -9,7 +9,7 @@
 <script src="<c:url value="/resources/js/jquery-3.4.1.min.js"/>"></script>
 <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" id="bootstrap-css">
 <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-<link href="<c:url value="/resources/css/c.css"/>" rel="stylesheet">
+<link href="<c:url value="/resources/css/chat.css"/>" rel="stylesheet">
 </head>
 <script type="text/javascript">
 	var socket = null;
