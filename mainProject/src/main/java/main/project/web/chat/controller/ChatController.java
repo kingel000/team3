@@ -18,7 +18,7 @@ public class ChatController {
 	public String chat (Model model,HttpSession session,HttpServletRequest req) throws Exception{
 		//MemberVO member = (MemberVO)session.getAttribute("member");
 		//System.out.println("memberId:"+member.getId());
-		return "chat/chat";
+		return "chat/chat.part2";
 	}
 	
 }

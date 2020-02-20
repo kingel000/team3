@@ -25,20 +25,16 @@
 			//보내기 버튼 눌렀을때
 			$("#sendBtn").click(function() {
 				ws.send($('#message').val());
-				$('#data').append("<div class='incoming_msg'><div class='incoming_msg_img'>"+
-						"<img src='<c:url value='/resources/images2/user-profile.png' />'alt='sunil'></div>"+
-						"<div class='received_msg'><div class='received_withd_msg'><p>"+
-						$('#message').val() + "</p><span class='time_date'> 11:01 AM | June 9</span></div></div></div>");
+				$('#data').append("<div class='outgoing_msg'><div class='sent_msg'><p>"+
+						$('#message').val() + "</p><span class='time_date'> 11:01 AM | June 9</span></div></div>");
 				$('#message').val('');
 			});
 			//엔터 눌렀을때
 			$("#message").keydown(function(key) {
 				if (key.keyCode == 13) {// 엔터
 					ws.send($('#message').val());
-					$('#data').append("<div class='incoming_msg'><div class='incoming_msg_img'>"+
-							"<img src='<c:url value='/resources/images2/user-profile.png' />'alt='sunil'></div>"+
-							"<div class='received_msg'><div class='received_withd_msg'><p>"+
-							$('#message').val() + "</p><span class='time_date'> 11:01 AM | June 9</span></div></div></div>");
+					$('#data').append("<div class='outgoing_msg'><div class='sent_msg'><p>"+
+							$('#message').val() + "</p><span class='time_date'> 11:01 AM | June 9</span></div></div>");
 					$('#message').val('');
 				}
 			});
@@ -48,8 +44,10 @@
 		ws.onmessage = function(event) {
 			console.log("ReceiveMessage:", event.data + '\n');
 			var data = event.data;
-			$("#data").append("<div class='outgoing_msg'><div class='sent_msg'><p>"+
-					data + "</p><span class='time_date'> 11:01 AM | June 9</span></div></div>");
+			$("#data").append("<div class='incoming_msg'><div class='incoming_msg_img'>"+
+					"<img src='<c:url value='/resources/images2/user-profile.png' />'alt='sunil'></div>"+
+					"<div class='received_msg'><div class='received_withd_msg'><p>"+
+					data + "</p><span class='time_date'> 11:01 AM | June 9</span></div></div></div>");
 		};
 
 		//닫힐때
