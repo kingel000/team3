@@ -26,5 +26,12 @@
 		SELECT * FROM product
 		WHERE expert_id=#{id}
 	</select>
+		<!--  <select id="selectAllListProduct" resultType="productVO">
+		SELECT * FROM product
+	</select>-->
+		<select id="selectCategory" resultType="productVO">
+		SELECT * FROM product
+		WHERE category=#{category}
+	</select>
 	
 </mapper>

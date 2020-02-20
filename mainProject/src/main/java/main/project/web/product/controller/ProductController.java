@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import main.project.web.member.service.IMemberService;
 import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
@@ -28,10 +29,36 @@ import main.project.web.product.vo.ProductVO;
 public class ProductController {
 	@Autowired
 	private IProductService productService;
-
+	@Autowired
+	private IMemberService memberService;
+	
 	@RequestMapping(value="/mainProduct.do", method=RequestMethod.GET)
-	public String mainProduct(Model model, HttpSession session) {
+	public String mainProduct(@RequestParam String category,ProductVO product, Model model, HttpSession session) {
 		System.out.println("produdct GET 호출 ");
+
+		if(category.equals("'C1'")) {
+			category ="웹 개발";
+		}else if(category.equals("'C2'")) {
+			category = "모바일앱·웹";
+		}else if(category.equals("'C3'")) {
+			category = "게임";
+		}else if(category.equals("'C4'")) {
+			category = "응용프로그래밍";
+		}else if(category.equals("'C5'")) {
+			category =	"기타";
+		}
+		System.out.println("선택한 카테고리 : " + category);
+		List<ProductVO> productCategory = productService.selectCategory(category);
+		List<String> nick = new ArrayList<String>(); 
+		System.out.println("----");
+		for(ProductVO productVO : productCategory) {
+			System.out.println("DB 저장 카테고리별 상품 리스트 " + productVO);
+			nick.add(memberService.checkMemberId(productVO.getExpert_id()).getNick_name());
+		}
+		model.addAttribute("productList",productCategory);
+		model.addAttribute("nick",nick);
+		
+		//productService.selectAllListProduct();
 		return "product/mainProduct.part2";
 	}
 	
@@ -95,7 +122,7 @@ public class ProductController {
 				}
 			}//if
 		}//while
-
+		
 		model.addAttribute("list", list);
 
 
