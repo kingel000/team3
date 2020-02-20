@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import main.project.web.member.vo.MemberVO;
 import main.project.web.product.dao.ProductDAOImpl;
 import main.project.web.product.vo.ProductVO;
 
@@ -30,13 +31,13 @@ public class ProductService implements IProductService{
 	}
 
 	@Override
-	public ProductVO selectProduct(ProductVO product_num) {
+	public ProductVO selectProduct(String product_num) {
 		return productDAO.selectProduct(product_num);
 	}
 
 	@Override
-	public List<ProductVO> selectListProduct() {
-		return productDAO.selectListProduct();
+	public List<ProductVO> selectListProduct(MemberVO sessionId) {
+		return productDAO.selectListProduct(sessionId);
 	}
 
 }

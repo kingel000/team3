@@ -1,9 +1,7 @@
 /*myPage.jsp*/
 #wrap {width: 100%;	height: auto;}
 .myPage_h2>h2 {text-align: center;margin: 0 25px;}
-.myPage_menu {margin: 20 auto;padding: 20px 10px;text-align: left;float: left;}
-#myPage_form {width: 550px;height: auto;padding: 20px 10px; margin: 0 auto; margin-right: 400px; text-align: center;border: solid 1px #e4e5ed;}
-.myPage_title>h4{margin: 0 30px;}
+#myPage_form {width: 550px;height: auto;padding: 20px 10px; margin: 0 auto; text-align: center;border: solid 1px #e4e5ed;}
 .myPage {width: 90%;margin: 0 75px;}
 .myPage>form>p {margin: 20px 0;color: #333;text-align: left;}
 .myPage>form>p>input {width: 382px;height: 40px;border-radius: 4px;padding: 5px;margin-bottom: 10px;border: solid 1px #e4e5ed;}
@@ -12,7 +10,7 @@
 /* 전문가 전환 */
 #wrap{width:100%;height:auto;}
 .body{/* margin-top:100px; */ margin-bottom:100px;}
-#rankUp_form{width:550px;height:auto;padding:20px 10px;margin:0 auto; margin-right: 400px; text-align:center;border: solid 1px #e4e5ed;}
+#rankUp_form{width:550px;height:auto;padding:20px 10px;margin:0 auto; text-align:center;border: solid 1px #e4e5ed;}
 .rankUp_Box1>h4{margin: 0 25px;}
 .rankUp_Box1>h4>img{width:9%; margin-right:8px;}
 .rankUp_Box2{width: 90%;margin: 0 75px;}
@@ -52,8 +50,9 @@
 .email_Bt>a>img{width: 21px; margin : 0 0 2px 2px;}
 
 /* 좌측 메뉴 */
+.myPage_menu {margin: 0 auto;padding: 0px 10px;text-align: left;float: left;}
 .mypage_title{border-bottom: 2px solid #1ab26c;;}
-.mypage_title>a{font-size: 23px;margin-bottom: 20px;font-weight: 600;color: #555;}
+.mypage_title>a{font-size: 31px;margin-bottom: 20px;font-weight: 600;color: #555;}
 h1, h2, h3, h4, h5, h6 {position: relative;margin-bottom: 0;}
 h3 {font-size: 22px;}
 h4 {font-size: 18px;}

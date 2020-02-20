@@ -3,27 +3,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="main.project.web.product.dao.IProductDAO">
-	<insert id="insertProduct" parameterType="ProductVO">
+	<insert id="insertProduct" parameterType="productVO">
 		INSERT INTO product VALUES
 		(#{product_num},#{category},#{product_title},#{expert_id},
-		 #{expert_info},#{product_file},#{product_date})
+		 #{product_info},#{product_file,jdbcType=VARCHAR},sysdate)
 	</insert>
-	<update id="updateProduct" parameterType="ProductVO">
+	<update id="updateProduct" parameterType="productVO">
 		UPDATE product SET
-		category=#{category},product_title=#{product_title},product_info=#{expert_info},
-		product_file=#{product_file},product_date=#{product_date}
+		category=#{category},product_title=#{product_title},product_info=#{product_info},
+		product_file=#{product_file,jdbcType=VARCHAR}
 		WHERE product_num=#{product_num}
 	</update>
-	<delete id="deleteProduct" parameterType="ProductVO">
+	<delete id="deleteProduct" parameterType="productVO">
 		DELETE FROM product
 		WHERE product_num=#{product_num}
 	</delete>
-	<select id="selectProduct" parameterType="ProductVO" resultType="ProductVO">
+	<select id="selectProduct" parameterType="String" resultType="productVO">
 		SELECT * FROM product
-		WHERE id=#{product_num}
+		WHERE product_num=#{product_num}
 	</select>
-	<select id="selectListProduct" resultType="ProductVO">
+	<select id="selectListProduct" resultType="productVO">
 		SELECT * FROM product
+		WHERE expert_id=#{id}
 	</select>
 	
 </mapper>

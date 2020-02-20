@@ -36,8 +36,8 @@
    <div class="myPage_menu">
       <ul>
          <div class="mypage_title">
-            <a href="mypage.do">MY PAGE</a>
-         </div>
+            <a href="/web/member/mypage.do">MY PAGE</a>
+         </div><br>
          <li class="group">
             <div class="box">
                <a href="/web/member/editMember.do">
@@ -83,7 +83,7 @@
             <c:when test="${member.rank == 'E'}">
                 <li class="group">
                <div class="box">
-                    <a href="/web/product/updateProduct.do">
+                    <a href="/web/product/insertProduct.do">
                      <h3>Product</h3>
                      <p>상품등록</p>
                   </a>
@@ -93,7 +93,7 @@
          </c:choose>    
          <li class="group">
             <div class="box">
-               <a href="/web/member/boardManager.do">
+               <a href="/web/product/boardManager.do">
                   <h3>Board</h3>
                   <p>게시물 관리</p>
                </a>

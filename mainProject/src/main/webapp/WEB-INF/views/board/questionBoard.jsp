@@ -1,3 +1,4 @@
+<%@page import="main.project.web.question.vo.QuestionVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -13,7 +14,8 @@
   		.question_Board>table {text-align: center; boarder: 1px solid #ddd}
     	thead>tr>th{background-color: #eee; text-align: center;}
     </style>
-   
+    
+ 
 </head>
 <body>
 	<div>
@@ -28,15 +30,25 @@
 			   <tr>
 			  </thead>
 			  <tbody>
+			  
+			  
 			 	<tr>
-			      <td>1</td>
-			      <td>문의드립니다. </td>
-			      <td>2020-02-14</td>
-			      <td>홍길동</td>
+			      <td>${question.board_question_num}</td>
+			      <td>${question.board_question_title} </td>
+			      <td>${question.board_question_date}</td>
+			      <td>${question.board_question_writer}</td>
 			    <tr>
+			   
 			  </tbody>
 			</table>
-			<a href="/web/board/question_W.do" class="btn btn-primary pull-right">글쓰기</a>
+			<c:choose>
+            <c:when test="${member.id == null}">
+				  <a href="/web/member/login.do" class="btn btn-primary pull-right">글쓰기</a>
+            </c:when>
+            <c:otherwise>
+             	  <a href="/web/board/question_W.do" class="btn btn-primary pull-right">글쓰기</a>
+            </c:otherwise>
+         </c:choose>
 		</div>
 	</div>
 </body>

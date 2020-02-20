@@ -8,6 +8,7 @@ public interface IQuestionDAO {
 	void insertQuestion(QuestionVO question);
 	void deleteQuestion(QuestionVO question);
 	QuestionVO selectQuestion(QuestionVO question);
-	List<QuestionVO> selectListQuetion();
+	List<QuestionVO> selectListQuestion();
+	Integer selectNumQuestion(); //문의글 번호
 
 }

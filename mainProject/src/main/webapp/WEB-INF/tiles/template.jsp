@@ -15,14 +15,16 @@
 
 #left {
 	float: left;
+	margin-left: 5px;
 	width: 15%;
 }
 
 #main {
 	float: left;
-	width: 85%;
-	margin-top: 20px;
+	width: 70%;
+	margin-top: 50px;
 	margin-bottom: 50px;
+	padding-right: 80px;
 }
 
 #footer {
