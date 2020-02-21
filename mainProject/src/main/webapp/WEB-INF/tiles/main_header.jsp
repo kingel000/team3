@@ -71,7 +71,7 @@
   <nav class="navigation">
 	<div class="container-fluid">
 	  <div class="navigation__column left">
-		<div class="header__logo"><a class="ps-logo" href="index.html"><img src="<c:url value="/resources/images/logo.png" />" alt=""></a></div>
+		<div class="header__logo"><a class="ps-logo" href="/web/main/main.do"><img src="<c:url value="/resources/images2/itemLogo.jpg" />" alt=""></a></div>
 	  </div>
 	  <div class="navigation__column center">
 			<ul class="main-menu menu">

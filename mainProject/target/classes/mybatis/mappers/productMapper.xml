@@ -29,9 +29,12 @@
 		<!--  <select id="selectAllListProduct" resultType="productVO">
 		SELECT * FROM product
 	</select>-->
-		<select id="selectCategory" resultType="productVO">
+	<select id="selectCategory" resultType="productVO">
 		SELECT * FROM product
 		WHERE category=#{category}
+	</select>
+	<select id="select_NickName" parameterType="String" resultType="memberVO" >
+		SELECT * FROM MEMBER WHERE ID = #{expert_id}
 	</select>
 	
 </mapper>

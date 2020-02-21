@@ -87,14 +87,6 @@
 					</c:forEach>
 				</div>
 				<div class="ps-product-action">
-					<div class="ps-product__filter">
-						<select class="ps-select selectpicker">
-							<option value="1">상품명</option>
-							<option value="2">낮은 가격순</option>
-							<option value="3">높은 가격순</option>
-
-						</select>
-					</div>
 					<div class="ps-pagination">
 						<ul class="pagination">
 							<li><a href="#"><i class="fa fa-angle-left"></i></a></li>

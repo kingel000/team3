@@ -50,4 +50,9 @@ public class ProductService implements IProductService{
 		return productDAO.selectCategory(category);
 	}
 
+	@Override
+	public MemberVO select_NickName(String expert_id) {
+		return productDAO.select_NickName(expert_id);
+	}
+
 }

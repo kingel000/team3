@@ -167,12 +167,16 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="/detailProduct.do", method = RequestMethod.GET)
-	public String detailProduct(@RequestParam String num,ProductVO product, Model model , HttpSession session) {
+	public String detailProduct(@RequestParam String num,ProductVO product, Model model , HttpSession session, MemberVO member) {
 		System.out.println("detailProduct GET 받음 ");
 		System.out.println("선택한 상품 넘버 : " + num);
 		ProductVO numProduct = productService.selectProduct(num);
 		System.out.println("선택한 상품 정보 " + numProduct);
 		model.addAttribute("numProduct",numProduct);
+		
+		MemberVO nick_name = new MemberVO();
+		nick_name = productService.select_NickName(numProduct.getExpert_id());
+		model.addAttribute("nick_name",nick_name);
 		
 		
 		return "/product/detailProduct.part2";
