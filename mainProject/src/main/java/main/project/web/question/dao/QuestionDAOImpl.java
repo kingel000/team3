@@ -40,4 +40,6 @@ public class QuestionDAOImpl implements IQuestionDAO {
 		return sqlSessionTemplate.selectOne("main.project.web.question.dao.IQuestionDAO.selectNumQuestion");
 	}
 
+	
+
 }

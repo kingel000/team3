@@ -36,4 +36,19 @@ public class ProductDAOImpl implements IProductDAO {
 	public List<ProductVO> selectListProduct(MemberVO sessionId) {
 		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectListProduct", sessionId);
 	}
+	@Override
+	public List<ProductVO> selectAllListProduct(ProductVO category) {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectAllListProduct",category);
+
+	}
+	@Override
+	public List<ProductVO> selectCategory(String category) {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectCategory",category);
+
+	}
+	@Override
+	public MemberVO select_NickName(String expert_id) {
+		return sqlSessiontemplate.selectOne("main.project.web.product.dao.IProductDAO.select_NickName",expert_id);
+	}
+	
 }

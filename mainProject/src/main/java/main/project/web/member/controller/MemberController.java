@@ -68,9 +68,10 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="/regiser.do",method=RequestMethod.POST)
-	public String memberRegiser(MemberVO member, Model model) {
+	public String memberRegiser(MemberVO member, Model model, HttpSession session) {
 		System.out.println(member.getRank());
 		memberService.insertMember(member);
+		MemberVO member2 = memberService.selectMember(member);
 		return "member/login";
 	}
 
