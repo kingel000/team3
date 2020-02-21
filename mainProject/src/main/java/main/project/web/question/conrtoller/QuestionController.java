@@ -26,10 +26,11 @@ public class QuestionController {
 	
 	//문의사항 이동
 	@RequestMapping(value="/question.do", method= RequestMethod.GET)
-	public String questionMain(Model model, HttpSession session, QuestionVO question) {
+	public String questionMain( Model model, HttpSession session, QuestionVO question) {
 		System.out.println("문의사항게시판 이동");
 		List<QuestionVO> questionList = questionService.selectListQuestion();
 		model.addAttribute("questionList", questionList);
+
 		return "board/questionBoard.part2";
 	}
 	

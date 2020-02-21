@@ -11,4 +11,5 @@ public interface IQuestionDAO {
 	List<QuestionVO> selectListQuestion();
 	Integer selectNumQuestion(); //문의글 번호
 
+
 }

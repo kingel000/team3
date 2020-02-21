@@ -36,5 +36,6 @@
 		<select id="selectNumQuestion" resultType="Integer">
 			SELECT MAX(BOARD_QUESTION_NUM)+1 FROM BOARD_QUESTION
 		</select>
+		
 	
 </mapper>

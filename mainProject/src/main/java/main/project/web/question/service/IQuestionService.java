@@ -10,4 +10,5 @@ public interface IQuestionService {
 	QuestionVO selectQuestion(QuestionVO question);
 	List<QuestionVO> selectListQuestion();
 	Integer selectNumQuestion();
+
 }

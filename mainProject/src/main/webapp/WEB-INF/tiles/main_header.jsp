@@ -60,6 +60,7 @@
 							<c:otherwise>
 								<a href="#">${member.nick_name }</a>
 								<div class="btn-group ps-dropdown"><a href="/web/member/mypage.do">MyPage</a></div>
+								<div class="btn-group ps-dropdown"><a href="/web/chat/chat.do">Chatting</a></div>
 								<div class="btn-group ps-dropdown"><a href="/web/member/logout.do">LogOut</a></div>
 							</c:otherwise>
 						</c:choose>
@@ -71,7 +72,7 @@
   <nav class="navigation">
 	<div class="container-fluid">
 	  <div class="navigation__column left">
-		<div class="header__logo"><a class="ps-logo" href="index.html"><img src="<c:url value="/resources/images/logo.png" />" alt=""></a></div>
+		<div class="header__logo"><a class="ps-logo" href="/web/main/main.do"><img src="<c:url value="/resources/images2/itemLogo.jpg" />" alt=""></a></div>
 	  </div>
 	  <div class="navigation__column center">
 			<ul class="main-menu menu">

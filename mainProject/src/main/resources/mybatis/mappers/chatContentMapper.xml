@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="main.project.web.chat.dao.IChatContentDAO">
+	
+	<insert id="insertContent" parameterType="chatContentVO">
+		<selectKey keyProperty="chat_seq" resultType="int" order="BEFORE">
+    		SELECT chat_seq.nexyval FROM DUAL
+  		</selectKey>
+		INSERT INTO chat_content VALUES(#{chat_seq},#{room_id},#{send},#{receive},#{line},sysdate)
+	</insert>
+	
+	<select id="selectContentList" resultType="chatContentVO">
+		SELECT * FROM chat_content WHERE room_id = #{roomId}
+	</select>
+	
+</mapper>

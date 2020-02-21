@@ -25,7 +25,7 @@
 <!-- Custom-->
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
 
-<title>Insert title here</title>
+<title>상품 상세페이지</title>
 </head>
 <body>
 <main class="ps-main">
@@ -65,7 +65,7 @@
 		  <div class="ps-product__info">
 		
 			<h2>${numProduct.product_title}</h2>
-			<p class="ps-product__category"><a href="#">${numProduct.expert_id}</a></p>
+			<p class="ps-product__category"><a href="#">${nick_name.nick_name}</a></p>
 			<h3 class="ps-product__price">Price</h3>
 		
 			
