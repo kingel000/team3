@@ -60,6 +60,7 @@
 							<c:otherwise>
 								<a href="#">${member.nick_name }</a>
 								<div class="btn-group ps-dropdown"><a href="/web/member/mypage.do">MyPage</a></div>
+								<div class="btn-group ps-dropdown"><a href="/web/chat/chat.do">Chatting</a></div>
 								<div class="btn-group ps-dropdown"><a href="/web/member/logout.do">LogOut</a></div>
 							</c:otherwise>
 						</c:choose>

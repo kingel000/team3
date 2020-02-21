@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="main.project.web.chat.dao.IRoomListDAO">
+	<insert id="createChatRoom" parameterType="roomListVO">
+		INSERT INTO room_list VALUES(#{room_id},#{expert_id},#{member_id},sysdate)
+	</insert>
+	
+	<select id="getRoomList" resultType="roomListVO">
+		SELECT * FROM room_list WHERE member_id=#{memberId}
+	</select>
+	
+	<select id="getMemberList" resultType="roomListVO">
+		SELECT * FROM room_list WHERE expert_id = #{expertId}
+	</select>
+	
+	<select id="selectNumCount" resultType="Integer">
+			SELECT MAX(room_id)+1 FROM room_list
+	</select>
+</mapper>
