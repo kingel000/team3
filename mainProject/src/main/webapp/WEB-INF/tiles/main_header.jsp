@@ -75,14 +75,14 @@
 	  </div>
 	  <div class="navigation__column center">
 			<ul class="main-menu menu">
-			  <li class="menu-item menu-item-has-children dropdown"><a href="/web/product/mainProduct.do">웹 개발</a>
+			  <li class="menu-item menu-item-has-children dropdown"><a href="/web/product/mainProduct.do?category='C1'">웹 개발</a>
 					<ul class="sub-menu">
 					  <li class="menu-item"><a href="">Homepage #1</a></li>
 					  <li class="menu-item"><a href="#">Homepage #2</a></li>
 					  <li class="menu-item"><a href="#">Homepage #3</a></li>
 					</ul>
 			  </li>
-			  <li class="menu-item menu-item-has-children has-mega-menu"><a href="#">모바일앱·웹</a>
+			  <li class="menu-item menu-item-has-children has-mega-menu"><a href="/web/product/mainProduct.do?category='C2'">모바일앱·웹</a>
 				<div class="mega-menu">
 				  <div class="mega-wrap">
 					<div class="mega-column">
@@ -144,9 +144,10 @@
 				  </div>
 				</div>
 			  </li>
+
 			  <li class="menu-item"><a href="#">게임</a></li>
 			  <li class="menu-item"><a href="#">응용프로그래밍</a></li>
-			  <li class="menu-item menu-item-has-children dropdown"><a href="#">기타</a>
+			  <li class="menu-item menu-item-has-children dropdown"><a href="/web/board/chat.do">기타</a>
 					<ul class="sub-menu">
 					  <li class="menu-item menu-item-has-children dropdown"><a href="#">Blog-grid</a>
 							<ul class="sub-menu">

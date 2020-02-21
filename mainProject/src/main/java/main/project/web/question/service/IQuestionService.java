@@ -8,5 +8,6 @@ public interface IQuestionService {
 	void insertQuestion(QuestionVO question);
 	void deleteQuestion(QuestionVO question);
 	QuestionVO selectQuestion(QuestionVO question);
-	List<QuestionVO> selectListQuetion();
+	List<QuestionVO> selectListQuestion();
+	Integer selectNumQuestion();
 }

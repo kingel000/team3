@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import main.project.web.member.vo.MemberVO;
 import main.project.web.product.vo.ProductVO;
 
 @Repository("productDAO")
@@ -28,11 +29,21 @@ public class ProductDAOImpl implements IProductDAO {
 		sqlSessiontemplate.update("main.project.web.product.dao.IProductDAO.updateProduct",product);
 	}
 	@Override
-	public ProductVO selectProduct(ProductVO product_num) {
+	public ProductVO selectProduct(String product_num) {
 		return sqlSessiontemplate.selectOne("main.project.web.product.dao.IProductDAO.selectProduct",product_num);
 	}
 	@Override
-	public List<ProductVO> selectListProduct() {
-		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectiListProduct");
+	public List<ProductVO> selectListProduct(MemberVO sessionId) {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectListProduct", sessionId);
+	}
+	@Override
+	public List<ProductVO> selectAllListProduct(ProductVO category) {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectAllListProduct",category);
+
+	}
+	@Override
+	public List<ProductVO> selectCategory(String category) {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectCategory",category);
+
 	}
 }

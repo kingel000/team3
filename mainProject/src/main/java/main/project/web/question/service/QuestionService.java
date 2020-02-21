@@ -31,8 +31,14 @@ public class QuestionService implements IQuestionService {
 	}
 
 	@Override
-	public List<QuestionVO> selectListQuetion() {
-		return questionDAO.selectListQuetion();
+	public List<QuestionVO> selectListQuestion() {
+		return questionDAO.selectListQuestion();
 	}
+
+	@Override
+	public Integer selectNumQuestion() {
+		return questionDAO.selectNumQuestion();
+	}
+
 
 }
