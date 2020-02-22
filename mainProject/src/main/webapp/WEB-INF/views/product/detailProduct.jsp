@@ -83,7 +83,14 @@
 			  
 			</div>
 			<div class="ps-product__shopping">
-		<a class="ps-btn mb-10" href="cart.html">Expert Chat<i class="ps-icon-next"></i></a>
+			<form action="/web/chat/createChat.do" >
+				<input type="hidden" name="product_num" value="${numProduct.product_num }">
+				<input type="hidden" name="product_title" value="${numProduct.product_title}">
+				<input type="hidden" name="expert_id" value="${numProduct.expert_id }">
+				<input type="hidden" name="expertName" value="${nick_name.nick_name }">
+				<input class="ps-btn mb-10" type="submit" value="Expert Chat"><i class="ps-icon-next"></i></a>
+			</form>
+			
 			</div>
 		  </div>
 		  <div class="clearfix"></div>

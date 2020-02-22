@@ -4,8 +4,16 @@
 
 <mapper namespace="main.project.web.chat.dao.IRoomListDAO">
 	<insert id="createChatRoom" parameterType="roomListVO">
-		INSERT INTO room_list VALUES(#{room_id},#{expert_id},#{member_id},sysdate)
+		INSERT INTO room_list VALUES(#{room_id},#{room_title},#{expert_id},#{member_id},#{product_id},sysdate)
 	</insert>
+	
+	<select id="checkRoom" parameterType="roomListVO" resultType="roomListVO">
+		SELECT * FROM room_list WHERE member_id=#{member_id} AND product_id = #{product_id}
+	</select>
+	
+	<update id="updateRoom" parameterType="roomListVO">
+		UPDATE room_list SET room_date=sysdate WHERE room_id=#{room_id}
+	</update>
 	
 	<select id="getRoomList" resultType="roomListVO">
 		SELECT * FROM room_list WHERE member_id=#{memberId}
@@ -16,6 +24,6 @@
 	</select>
 	
 	<select id="selectNumCount" resultType="Integer">
-			SELECT MAX(room_id)+1 FROM room_list
+			SELECT COUNT(1) FROM room_list
 	</select>
 </mapper>

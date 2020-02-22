@@ -8,6 +8,10 @@
 		INSERT INTO room_location VALUES(#{member_id},#{room_id},sysdate)
 	</insert>
 
+	<select id="searchLocation" parameterType="String" resultType="roomLocationVO">
+		SELECT * FROM room_location WHERE member_id = #{memberId}
+	</select>
+	
 	<update id="moveRoom" parameterType="roomLocationVO">
 		UPDATE room_location SET room_id = #{room_id}, location_date = sysdate 
 		WHERE member_id = #{member_id}

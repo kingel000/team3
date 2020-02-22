@@ -1,6 +1,7 @@
 package main.project.web.chat.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -33,6 +34,16 @@ public class RoomListDAO implements IRoomListDAO {
 	@Override
 	public Integer selectNumCount() {
 		return sqlSessionTemplate.selectOne("main.project.web.chat.dao.IRoomListDAO.selectNumCount");
+	}
+
+	@Override
+	public RoomListVO checkRoom(RoomListVO roomList) {
+		return sqlSessionTemplate.selectOne("main.project.web.chat.dao.IRoomListDAO.checkRoom", roomList);
+	}
+
+	@Override
+	public void updateRoom(RoomListVO roomList) {
+		sqlSessionTemplate.update("main.project.web.chat.dao.IRoomListDAO.updateRoom", roomList);
 	}
 
 }

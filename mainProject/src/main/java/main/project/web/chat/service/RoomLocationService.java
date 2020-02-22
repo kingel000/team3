@@ -27,4 +27,9 @@ public class RoomLocationService implements IRoomLocationService {
 		roomLocationDAO.endRoom(id);
 	}
 
+	@Override
+	public RoomLocationVO searchLocation(String memberId) {
+		return roomLocationDAO.searchLocation(memberId);
+	}
+
 }

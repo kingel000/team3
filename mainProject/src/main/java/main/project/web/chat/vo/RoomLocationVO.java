@@ -4,6 +4,14 @@ public class RoomLocationVO {
 	private String member_id;
 	private String room_id;
 	private String location_date;
+	
+	public RoomLocationVO() {}
+	
+	public RoomLocationVO(String member_id, String room_id) {
+		this.member_id = member_id;
+		this.room_id = room_id;
+	}
+	
 	public String getMember_id() {
 		return member_id;
 	}

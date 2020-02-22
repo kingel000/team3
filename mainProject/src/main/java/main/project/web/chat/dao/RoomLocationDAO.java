@@ -27,4 +27,9 @@ public class RoomLocationDAO implements IRoomLocationDAO {
 		sqlSessionTemplate.delete("main.project.web.chat.dao.IRoomLocationDAO.endRoom", id);
 	}
 
+	@Override
+	public RoomLocationVO searchLocation(String memberId) {
+		return sqlSessionTemplate.selectOne("main.project.web.chat.dao.IRoomLocationDAO.searchLocation",memberId);
+	}
+
 }

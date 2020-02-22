@@ -70,7 +70,7 @@
 				<div class="inbox_people">
 					<div class="headind_srch">
 						<div class="recent_heading">
-							<h4>채팅 목록</h4>
+							<h4>채팅방 목록</h4>
 						</div>						
 					</div>
 					<!-- 채팅방 목록 -->
@@ -79,11 +79,11 @@
 						<div class="chat_list" id="chatList">
 							<div class="chat_people">
 								<div class="chat_img">
-									<img src="<c:url value="/resources/images2/user-profile.png" />"
-										alt="sunil">
+									<img src="<c:url value="/resources/images2/user-profile.png" />"alt="sunil">
+									<h4>&nbsp; ${expertName}</h4>
 								</div>
 								<div class="chat_ib">
-									<h5>${nickName}<span class="chat_date">${startDate}</span></h5>
+									<h5>${room.room_title}<span class="chat_date">${startDate}</span></h5>
 								</div>
 							</div>
 							<!-- 채팅방 추가 -->
