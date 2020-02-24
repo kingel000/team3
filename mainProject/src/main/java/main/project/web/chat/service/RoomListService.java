@@ -1,6 +1,7 @@
 package main.project.web.chat.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -25,12 +26,27 @@ public class RoomListService implements IRoomListService {
 
 	@Override
 	public List<RoomListVO> getMemberList(String expertId) {
-		return roomListDAO.getRoomList(expertId);
+		return roomListDAO.getMemberList(expertId);
 	}
 
 	@Override
 	public Integer selectNumCount() {
 		return roomListDAO.selectNumCount();
+	}
+
+	@Override
+	public RoomListVO checkRoom(RoomListVO roomList) {
+		return roomListDAO.checkRoom(roomList);
+	}
+
+	@Override
+	public void updateRoom(RoomListVO roomList) {
+		roomListDAO.updateRoom(roomList);
+	}
+
+	@Override
+	public RoomListVO getRoom(String roomId) {
+		return roomListDAO.getRoom(roomId);
 	}
 
 }

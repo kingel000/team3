@@ -15,32 +15,32 @@ public class MemberDAOImpl implements IMemberDAO {
 	@Override
 	public MemberVO checkMemberId(String id) {
 
-		return sqlSessionTemplate.selectOne("member.memberDAO.checkMemberId",id);
+		return sqlSessionTemplate.selectOne("main.project.web.member.dao.IMemberDAO.checkMemberId",id);
 	}
 
 	@Override
 	public MemberVO selectMember(MemberVO member) {
-		return sqlSessionTemplate.selectOne("member.memberDAO.selectMember", member);
+		return sqlSessionTemplate.selectOne("main.project.web.member.dao.IMemberDAO.selectMember", member);
 	}
 
 	@Override
 	public void insertMember(MemberVO member) {
-		sqlSessionTemplate.insert("member.memberDAO.insertMember", member);
+		sqlSessionTemplate.insert("main.project.web.member.dao.IMemberDAO.insertMember", member);
 	}
 
 	@Override
 	public void updateMember(MemberVO member) {
-		sqlSessionTemplate.update("member.memberDAO.updateMember", member);
+		sqlSessionTemplate.update("main.project.web.member.dao.IMemberDAO.updateMember", member);
 	}
 
 	@Override
 	public void rankupdate(String id) {
-		sqlSessionTemplate.update("member.memberDAO.rankupdate",id);
+		sqlSessionTemplate.update("main.project.web.member.dao.IMemberDAO.rankupdate",id);
 	}
 
 	@Override
 	public void deleteMember(MemberVO member) {
-		sqlSessionTemplate.delete("member.memberDAO.deleteMember", member);
+		sqlSessionTemplate.delete("main.project.web.member.dao.IMemberDAO.deleteMember", member);
 	}
 
 }

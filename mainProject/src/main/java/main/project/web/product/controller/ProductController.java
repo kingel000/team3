@@ -176,6 +176,7 @@ public class ProductController {
 		
 		MemberVO nick_name = new MemberVO();
 		nick_name = productService.select_NickName(numProduct.getExpert_id());
+		model.addAttribute("exper_id",numProduct.getExpert_id());
 		model.addAttribute("nick_name",nick_name);
 		
 		
