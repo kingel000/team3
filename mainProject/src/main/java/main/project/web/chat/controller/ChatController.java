@@ -92,22 +92,29 @@ public class ChatController {
 		System.out.println("roomListVO:"+roomListVO);
 		RoomListVO roomCheck = roomListService.checkRoom(roomListVO);
 		System.out.println("roomCheck:"+roomCheck);
+		String roomId = null;
 		if(roomCheck == null) {
 			Integer num = roomListService.selectNumCount()+1;
 			System.out.println("room"+num);
 			RoomListVO room = new RoomListVO("room"+num,product.getProduct_title(),product.getExpert_id(),member.getId(),product.getProduct_num());
 			roomListService.createChatRoom(room);
-
+			roomId = room.getRoom_id();
 			model.addAttribute("room",room);
 			session.setAttribute("room", room);
 			
 		}else {
 			roomListService.updateRoom(roomCheck);
+			roomId = roomCheck.getRoom_id();
 			model.addAttribute("room",roomCheck);
 			session.setAttribute("room", roomCheck);
 		}
 		List<RoomListVO> roomList = roomListService.getRoomList(member.getId());
 		model.addAttribute("roomList",roomList);
+		
+		List<ChatContentVO> chatContent = chatContentService.selectContentList(roomId);
+		if(chatContent != null) {
+			model.addAttribute("chatContents",chatContent);
+		}
 		return "chat/memberChat.part2";
 	}
 

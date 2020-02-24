@@ -113,7 +113,7 @@
             <c:when test="${member.rank == 'E'}">
                 <li class="group">
                <div class="box">
-                    <a href="#">
+                    <a href="/web/chat/expertChat.do">
                      <h3>Expert Chat</h3>
                      <p>전문가 채팅</p>
                   </a>

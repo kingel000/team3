@@ -23,12 +23,14 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import main.project.web.chat.service.IChatContentService;
 import main.project.web.chat.vo.ChatContentVO;
 import main.project.web.chat.vo.RoomListVO;
+import main.project.web.member.service.IMemberService;
 import main.project.web.member.vo.MemberVO;
 
 public class EchoHandler extends TextWebSocketHandler {
 	@Autowired
 	private IChatContentService chatContentService;
-
+	@Autowired
+	private IMemberService memberService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(EchoHandler.class);
 	//서버에 연결된 사용자들을 저장하기위해 선언
@@ -68,20 +70,30 @@ public class EchoHandler extends TextWebSocketHandler {
 		
 		String word= message.getPayload();
 		String[] words = word.split("!%/");
-		System.out.println(words[0]+":"+words[1]+":"+words[2]);
+		System.out.println(words[1]+":"+words[2]+":"+words[3]);
 		
 		if(room != null) {
 			Iterator<WebSocketSession> sessions = roomList.keySet().iterator();
 			while(sessions.hasNext()) {
 				WebSocketSession sess = sessions.next();
 				System.out.println(roomList.get(sess));
-				if(words[2].equals(roomList.get(sess).getRoom_id())) {
+				if(words[3].equals(roomList.get(sess).getRoom_id())) {
 					if(!sess.equals(session)) {
-						sess.sendMessage(new TextMessage(JsonData(words[0],words[1])));
-						Integer num = chatContentService.selectNumCount(words[2])+1;
-						chatContentService.insertContent(new ChatContentVO(num,words[2], words[0], mapList.get(sess).getNick_name(), words[1]));
+						sess.sendMessage(new TextMessage(JsonData(words[1],words[2])));
 					}
 				}
+			}
+			switch(words[0]) {
+			case "310":
+				Integer num1 = chatContentService.selectNumCount(words[3])+1;
+				MemberVO m1 = memberService.checkMemberId(room.getExpert_id());
+				chatContentService.insertContent(new ChatContentVO(num1,words[3], words[1], m1.getNick_name(), words[2]));
+				break;
+			case "320":
+				Integer num2 = chatContentService.selectNumCount(words[3])+1;
+				MemberVO m2 = memberService.checkMemberId(room.getMember_id());
+				chatContentService.insertContent(new ChatContentVO(num2,words[3], words[1], m2.getNick_name(), words[2]));
+				break;
 			}
 		}
 		//chatContentService ->채팅내용 저장

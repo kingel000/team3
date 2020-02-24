@@ -9,7 +9,7 @@
 	</insert>
 	
 	<select id="selectContentList" resultType="chatContentVO">
-		SELECT * FROM chat_content WHERE room_id = #{roomId}
+		SELECT * FROM chat_content WHERE room_id = #{roomId} ORDER BY chat_seq
 	</select>
 	
 	<select id="selectNumCount" parameterType="String" resultType="Integer">

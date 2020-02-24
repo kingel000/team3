@@ -18,7 +18,7 @@
 	$(document).ready(function() {
 		// 웹소켓을 지정한 url로 연결한다.
 		console.log("===========================================")
-		var ws = new WebSocket("ws://192.168.41.158:8080/web/echo.do");
+		var ws = new WebSocket("ws://192.168.0.42:8080/web/echo.do");
 		socket = ws;
 
 		//서버로 메세지 보낼때
@@ -26,7 +26,7 @@
 			//보내기 버튼 눌렀을때
 			$("#sendBtn").click(function() {
 				if($('#message').val() != ""){
-					ws.send(name +"!%/"+$('#message').val()+"!%/"+roomId);
+					ws.send("320"+"!%/"+name +"!%/"+$('#message').val()+"!%/"+roomId);
 					$('#output').append("<div class='outgoing_msg'><div class='sent_msg'><p>"+
 							$('#message').val() + "</p><span class='time_date'>"+ name +"</span></div></div>");
 					$('#message').val('');
@@ -36,7 +36,7 @@
 			$("#message").keydown(function(key) {
 				if (key.keyCode == 13) {// 엔터
 					if($('#message').val() != ""){
-						ws.send(name +"!%/"+$('#message').val()+"!%/"+roomId);
+						ws.send("320"+"!%/"+name +"!%/"+$('#message').val()+"!%/"+roomId);
 						$('#output').append("<div class='outgoing_msg'><div class='sent_msg'><p>"+
 								$('#message').val() + "</p><span class='time_date'>"+ name +"</span></div></div>");
 						$('#message').val('');
