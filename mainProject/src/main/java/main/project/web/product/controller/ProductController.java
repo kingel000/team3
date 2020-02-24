@@ -188,4 +188,13 @@ public class ProductController {
 
 		return "/product/boardManager.page";
 	}
+	
+	
+	//------------------------------장바구니-------------------------------------------
+	
+	@RequestMapping(value = "/cart.do", method = RequestMethod.GET)
+	public String cartPage() {
+		
+		return "/product/cart.page";
+	}
 }

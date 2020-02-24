@@ -110,27 +110,24 @@
 			  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
 				<div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="<c:url value="/resources/images/cart-preview/1.jpg" />" alt=""></div>
 				<div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">Amazin’ Glazin’</a>
-				  <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
+				 	<span>Price:<i>1000￦</i></span></p>
 				</div>
 			  </div>
-			  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-				<div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="<c:url value="/resources/images/cart-preview/2.jpg" />" alt=""></div>
-				<div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">The Crusty Croissant</a>
-				  <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-				</div>
-			  </div>
-			  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-				<div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="<c:url value="/resources/images/cart-preview/3.jpg" />"  alt=""></div>
-				<div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">The Rolling Pin</a>
-				  <p><span>Quantity:<i>12</i></span><span>Total:<i>£176</i></span></p>
-				</div>
-			  </div>
+			 
 			</div>
 			<div class="ps-cart__total">
-			  <p>Number of items:<span>36</span></p>
-			  <p>Item Total:<span>£528.00</span></p>
+			  <p>Number of items:<span>1</span></p>
+			  <p>Total Price:<span>1000￦</span></p>
 			</div>
-			<div class="ps-cart__footer"><a class="ps-btn" href="cart.html">Check out<i class="ps-icon-arrow-left"></i></a></div>
+			<c:choose>
+	           	 <c:when test="${member.id == null}">
+					 <div class="ps-cart__footer"><a class="ps-btn" href="/web/member/login.do">Check out<i class="ps-icon-arrow-left"></i></a></div>
+	           	 </c:when>
+	            <c:otherwise>
+	             	 <div class="ps-cart__footer"><a class="ps-btn" href="/web/product/cart.do">Check out<i class="ps-icon-arrow-left"></i></a></div>
+	           	 </c:otherwise>
+	        </c:choose>
+			
 		  </div>
 		</div>
 		<div class="menu-toggle"><span></span></div>
