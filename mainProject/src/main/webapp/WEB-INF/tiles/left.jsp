@@ -69,6 +69,15 @@
             </li>
             </c:otherwise>
          </c:choose>
+       
+       	 <li class="group">
+            <div class="box">
+               <a href="/web/product/cart.do">
+                  <h3>Cart</h3>
+                  <p>장바구니</p>
+               </a>
+            </div>
+         </li>
     
          <li class="group">
             <div class="box">
@@ -99,6 +108,21 @@
                </a>
             </div>
          </li>
+         
+         <c:choose>
+            <c:when test="${member.rank == 'E'}">
+                <li class="group">
+               <div class="box">
+                    <a href="#">
+                     <h3>Expert Chat</h3>
+                     <p>전문가 채팅</p>
+                  </a>
+                </div>
+            </li>
+            
+            </c:when>
+         </c:choose> 
+           
          <li class="group">
             <div class="box">
                <a href="/web/member/withdrawal.do">

@@ -23,6 +23,16 @@ public class RoomListVO {
 		this.member_id = member_id;
 		this.product_id = product_id;
 	}
+	
+	public void setRoomListVO(RoomListVO room) {
+		this.room_id = room.getRoom_id();
+		this.room_title = room.getRoom_title();
+		this.expert_id = room.getExpert_id();
+		this.member_id = room.getMember_id();
+		this.product_id = room.getProduct_id();
+		this.room_date = room.getRoom_date();
+	}
+	
 	public String getRoom_id() {
 		return room_id;
 	}

@@ -88,7 +88,15 @@
 				<input type="hidden" name="product_title" value="${numProduct.product_title}">
 				<input type="hidden" name="expert_id" value="${numProduct.expert_id }">
 				<input type="hidden" name="expertName" value="${nick_name.nick_name }">
-				<input class="ps-btn mb-10" type="submit" value="Expert Chat"><i class="ps-icon-next"></i></a>
+					 <a href="/web/product/cart.do" class="ps-btn mb-10">Cart</a>
+				<c:choose>
+	           	 	<c:when test="${member.id == null}">
+						  <a href="/web/member/login.do" class="ps-btn mb-10">Expert Chat</a>
+	           	 	</c:when>
+	            	<c:otherwise>
+	             	 	<input class="ps-btn mb-10" type="submit" value="Expert Chat"><i class="ps-icon-next"></i></a>
+	           		 </c:otherwise>
+	         	</c:choose>
 			</form>
 			
 			</div>

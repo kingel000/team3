@@ -3,6 +3,7 @@ package main.project.web.chat;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import main.project.web.chat.service.IChatContentService;
+import main.project.web.chat.vo.ChatContentVO;
 import main.project.web.chat.vo.RoomListVO;
 import main.project.web.member.vo.MemberVO;
 
@@ -45,7 +47,9 @@ public class EchoHandler extends TextWebSocketHandler {
 		if(room != null) {
 			roomList.put(session, room);
 			System.out.println("chat room: "+room);
-			for(WebSocketSession sess : sessionList) {
+			Iterator<WebSocketSession> sessions = roomList.keySet().iterator();
+			while(sessions.hasNext()) {
+				WebSocketSession sess = sessions.next();
 				if(room.getRoom_id().equals(roomList.get(sess).getRoom_id())) {
 					sess.sendMessage(new TextMessage(JsonDataOpen(member.getNick_name())));
 				}
@@ -60,15 +64,23 @@ public class EchoHandler extends TextWebSocketHandler {
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		System.out.println("handleTextMessage:" + session + " : " + message);
 		MemberVO member = (MemberVO) session.getAttributes().get("member");
+		RoomListVO room = (RoomListVO) session.getAttributes().get("room");
 		
 		String word= message.getPayload();
 		String[] words = word.split("!%/");
 		System.out.println(words[0]+":"+words[1]+":"+words[2]);
 		
-		for(WebSocketSession sess : sessionList) {
-			if(words[2].equals(roomList.get(sess).getRoom_id())) {
-				if(!sess.equals(session)) {
-					sess.sendMessage(new TextMessage(JsonData(words[0],words[1])));
+		if(room != null) {
+			Iterator<WebSocketSession> sessions = roomList.keySet().iterator();
+			while(sessions.hasNext()) {
+				WebSocketSession sess = sessions.next();
+				System.out.println(roomList.get(sess));
+				if(words[2].equals(roomList.get(sess).getRoom_id())) {
+					if(!sess.equals(session)) {
+						sess.sendMessage(new TextMessage(JsonData(words[0],words[1])));
+						Integer num = chatContentService.selectNumCount(words[2])+1;
+						chatContentService.insertContent(new ChatContentVO(num,words[2], words[0], mapList.get(sess).getNick_name(), words[1]));
+					}
 				}
 			}
 		}
@@ -85,13 +97,17 @@ public class EchoHandler extends TextWebSocketHandler {
 		mapList.remove(session);
 		sessionList.remove(session);
 		
-		roomList.remove(session);
-		for(WebSocketSession sess : sessionList) {
-			if(room.getRoom_id().equals(roomList.get(sess).getRoom_id())) {
-				sess.sendMessage(new TextMessage(JsonDataClose(member.getNick_name())));
-			}
-		}	
 		
+		if(room != null) {
+			roomList.remove(session);
+			Iterator<WebSocketSession> sessions = roomList.keySet().iterator();
+			while(sessions.hasNext()) {
+				WebSocketSession sess = sessions.next();
+				if(room.getRoom_id().equals(roomList.get(sess).getRoom_id())) {
+					sess.sendMessage(new TextMessage(JsonDataClose(member.getNick_name())));
+				}
+			}	
+		}
 	}
 	
 	public String JsonDataOpen(String name) {
@@ -113,6 +129,19 @@ public class EchoHandler extends TextWebSocketHandler {
 		job.add("protocol", "300");
 		job.add("message", "<p>" + 
 				msg + "</p><span class='time_date'>"+  name +"</span></div></div></div>");
+		JsonObject jsonObject = job.build();
+		StringWriter write = new StringWriter();
+		
+		try(JsonWriter jsonWriter = Json.createWriter(write)) {
+			jsonWriter.write(jsonObject);
+		};
+		return write.toString();
+	}
+	
+	public String JsonChatContent(String roomId) {
+		JsonObjectBuilder job = Json.createObjectBuilder();
+		job.add("protocol", "400");
+		job.add("message", "");
 		JsonObject jsonObject = job.build();
 		StringWriter write = new StringWriter();
 		

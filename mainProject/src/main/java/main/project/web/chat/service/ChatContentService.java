@@ -24,4 +24,9 @@ public class ChatContentService implements IChatContentService {
 		return chatContentDAO.selectContentList(roomId);
 	}
 
+	@Override
+	public Integer selectNumCount(String roomId) {
+		return chatContentDAO.selectNumCount(roomId);
+	}
+
 }
