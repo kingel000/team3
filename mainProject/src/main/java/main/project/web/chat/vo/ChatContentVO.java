@@ -8,8 +8,18 @@ public class ChatContentVO {
 	private String send;
 	private String receive;
 	private String content;
-	private Integer line;
 	private Date chat_date;
+	
+	public ChatContentVO(){}
+	
+	public ChatContentVO(Integer chat_seq,String room_id, String send, String receive, String content) {
+		this.chat_seq = chat_seq;
+		this.room_id = room_id;
+		this.send = send;
+		this.receive = receive;
+		this.content = content;
+	}
+	
 	public Integer getChat_seq() {
 		return chat_seq;
 	}
@@ -40,24 +50,19 @@ public class ChatContentVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Integer getLine() {
-		return line;
-	}
-	public void setLine(Integer line) {
-		this.line = line;
-	}
 	public Date getChat_date() {
 		return chat_date;
 	}
 	public void setChat_date(Date chat_date) {
 		this.chat_date = chat_date;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "ChatContentVO [chat_seq=" + chat_seq + ", room_id=" + room_id + ", send=" + send + ", receive="
-				+ receive + ", content=" + content + ", line=" + line + ", chat_date=" + chat_date + "]";
+				+ receive + ", content=" + content + ", chat_date=" + chat_date + "]";
 	}
+	
 	
 	
 }
