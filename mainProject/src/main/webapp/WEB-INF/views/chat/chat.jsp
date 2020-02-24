@@ -13,53 +13,64 @@
 </head>
 <script type="text/javascript">
 	var socket = null;
+	var name = '${memberName}';
+	var roomId = '${room.room_id}';
 	$(document).ready(function() {
 		// 웹소켓을 지정한 url로 연결한다.
 		console.log("===========================================")
-		var ws = new WebSocket("ws://localhost:8080/web/echo.do");
+		var ws = new WebSocket("ws://192.168.219.102:8080/web/echo.do");
 		socket = ws;
 
 		//서버로 메세지 보낼때
 		ws.onopen = function() {
-			console.log('Info: connection opened.');
 			//보내기 버튼 눌렀을때
 			$("#sendBtn").click(function() {
-				ws.send($('#message').val());
-				$('#data').append("<div class='outgoing_msg'><div class='sent_msg'><p>"+
-						$('#message').val() + "</p><span class='time_date'> 11:01 AM | June 9</span></div></div>");
+				ws.send(name +"!%/"+$('#message').val()+"!%/"+roomId);
+				$('#output').append("<div class='outgoing_msg'><div class='sent_msg'><p>"+
+						$('#message').val() + "</p><span class='time_date'>"+ name +"</span></div></div>");
 				$('#message').val('');
 			});
 			//엔터 눌렀을때
 			$("#message").keydown(function(key) {
 				if (key.keyCode == 13) {// 엔터
-					ws.send($('#message').val());
-					$('#data').append("<div class='outgoing_msg'><div class='sent_msg'><p>"+
-							$('#message').val() + "</p><span class='time_date'> 11:01 AM | June 9</span></div></div>");
+					ws.send(name +"!%/"+$('#message').val()+"!%/"+roomId);
+					$('#output').append("<div class='outgoing_msg'><div class='sent_msg'><p>"+
+							$('#message').val() + "</p><span class='time_date'>"+ name +"</span></div></div><br>");
 					$('#message').val('');
 				}
 			});
 		};
 
 		//서버로 부터 받은 메세지 보내주기
-		ws.onmessage = function(event) {
-			console.log("ReceiveMessage:", event.data + '\n');
-			var data = event.data;
-			$("#data").append("<div class='incoming_msg'><div class='incoming_msg_img'>"+
-					"<img src='<c:url value='/resources/images2/user-profile.png' />'alt='sunil'></div>"+
-					"<div class='received_msg'><div class='received_withd_msg'><p>"+
-					data + "</p><span class='time_date'> 11:01 AM | June 9</span></div></div></div>");
+		ws.onmessage = function(message) {
+			var jsonData = JSON.parse(message.data);
+			switch(jsonData.protocol){
+			case "100":
+			case "200":
+				$("#output").append("<div class='incoming_msg'>"+ 
+						"<div class='received_msg'><div class='received_withd_msg'>"+jsonData.message+"<br>");
+				break;
+			case "300":
+				$("#output").append("<div class='incoming_msg'><div class='incoming_msg_img'>" + 
+						"<img src='<c:url value='/resources/images2/user-profile.png' />' ></div>" + 
+						"<div class='received_msg'><div class='received_withd_msg'>"+jsonData.message+"<br>");
+				break;
+			}
+			
+			
+			
 		};
 
 		//닫힐때
 		ws.onclose = function(event) {
 			console.log('Info: connection closed.');
-			$("#data").append("Info: connection closed.<br/>");
+			$("#output").append("Info: connection closed.<br/>");
 		};
 
 		//에러일때
 		ws.onerror = function(err) {
 			console.log('Error:', err);
-			$("#data").append("Error:" + err + "<br/>");
+			$("#output").append("Error:" + err + "<br/>");
 		};
 	});
 </script>
@@ -76,8 +87,9 @@
 					<!-- 채팅방 목록 -->
 					<div class="inbox_chat">
 						
-						<div class="chat_list" id="chatList">
-							<div class="chat_people">
+						<div class="chat_list" id="chatRoomList">
+						<!-- 
+							<div class="chat_people" style=" cursor: pointer;" onclick="location.href='/web/chat/moveRoom.do';">
 								<div class="chat_img">
 									<img src="<c:url value="/resources/images2/user-profile.png" />"alt="sunil">
 									<h4>&nbsp; ${expertName}</h4>
@@ -86,6 +98,19 @@
 									<h5>${room.room_title}<span class="chat_date">${startDate}</span></h5>
 								</div>
 							</div>
+						 -->
+						 <c:if test="${roomList != null }">
+						 	<c:forEach var="memberRoom" items="${roomList }" varStatus="status">
+						 		<div class="chat_people" style=" cursor: pointer;" onclick="location.href='/web/chat/moveRoom.do?roomId=${memberRoom.room_id}';">
+									<div class="chat_img">
+										<img src="<c:url value="/resources/images2/user-profile.png" />"alt="sunil">
+									</div>
+									<div class="chat_ib">
+										<h5><c:out value="${ memberRoom.room_title}" /><span class="chat_date"><c:out value="${ memberRoom.room_date}" /></span></h5>
+									</div>
+								</div>
+						 	</c:forEach>
+						 </c:if>
 							<!-- 채팅방 추가 -->
 							
 						</div>
@@ -93,17 +118,24 @@
 				</div>
 				<!-- 채팅 내용 -->
 				<div class="mesgs">
-					<div class="msg_history" id="data">
-						<!-- 채팅 내용 입력 -->
-					</div>
-					<div class="type_msg">
-						<div class="input_msg_write">
-							<input type="text" class="write_msg" id="message" placeholder="Type a message" />
-							<button class="msg_send_btn" id="sendBtn" type="button">
-								☜
-							</button>
-						</div>
-					</div>
+					<c:choose>
+						<c:when test="${room == null }">
+						
+						</c:when>
+						<c:otherwise>
+							<div class="msg_history" id="output">
+							<!-- 채팅 내용 입력 -->
+							</div>
+							<div class="type_msg">
+								<div class="input_msg_write">
+									<input type="text" class="write_msg" id="message" placeholder="Type a message" />
+									<button class="msg_send_btn" id="sendBtn" type="button">
+										☜
+									</button>
+								</div>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>

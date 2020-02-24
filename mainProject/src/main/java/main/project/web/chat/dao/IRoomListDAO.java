@@ -14,4 +14,5 @@ public interface IRoomListDAO {
 	Integer selectNumCount();
 	RoomListVO checkRoom(RoomListVO roomList);
 	void updateRoom(RoomListVO roomList);
+	RoomListVO getRoom(@Param("roomId") String roomId);
 }

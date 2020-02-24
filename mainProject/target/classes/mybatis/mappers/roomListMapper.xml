@@ -11,6 +11,10 @@
 		SELECT * FROM room_list WHERE member_id=#{member_id} AND product_id = #{product_id}
 	</select>
 	
+	<select id="getRoom" parameterType="String" resultType="roomListVO">
+		SELECT * FROM room_list WHERE room_id = #{roomId}
+	</select>
+	
 	<update id="updateRoom" parameterType="roomListVO">
 		UPDATE room_list SET room_date=sysdate WHERE room_id=#{room_id}
 	</update>

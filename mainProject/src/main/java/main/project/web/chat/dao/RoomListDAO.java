@@ -46,4 +46,9 @@ public class RoomListDAO implements IRoomListDAO {
 		sqlSessionTemplate.update("main.project.web.chat.dao.IRoomListDAO.updateRoom", roomList);
 	}
 
+	@Override
+	public RoomListVO getRoom(String roomId) {
+		return sqlSessionTemplate.selectOne("main.project.web.chat.dao.IRoomListDAO.getRoom", roomId);
+	}
+
 }

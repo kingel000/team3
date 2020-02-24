@@ -1,8 +1,6 @@
 package main.project.web.chat.service;
 
 import java.util.List;
-import java.util.Map;
-
 import main.project.web.chat.vo.RoomListVO;
 
 public interface IRoomListService {
@@ -12,4 +10,5 @@ public interface IRoomListService {
 	Integer selectNumCount();
 	RoomListVO checkRoom(RoomListVO roomList);
 	void updateRoom(RoomListVO roomList);
+	RoomListVO getRoom(String roomId);
 }
