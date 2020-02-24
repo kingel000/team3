@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="member.memberDAO">
+<mapper namespace="main.project.web.member.dao.IMemberDAO">
 	<select id="checkMemberId" parameterType="String"
 		resultType="memberVO">
 		SELECT * FROM member WHERE id = #{member_id}

@@ -76,76 +76,8 @@
 	  </div>
 	  <div class="navigation__column center">
 			<ul class="main-menu menu">
-			  <li class="menu-item menu-item-has-children dropdown"><a href="/web/product/mainProduct.do?category='C1'">웹 개발</a>
-					<ul class="sub-menu">
-					  <li class="menu-item"><a href="">Homepage #1</a></li>
-					  <li class="menu-item"><a href="#">Homepage #2</a></li>
-					  <li class="menu-item"><a href="#">Homepage #3</a></li>
-					</ul>
-			  </li>
-			  <li class="menu-item menu-item-has-children has-mega-menu"><a href="/web/product/mainProduct.do?category='C2'">모바일앱·웹</a>
-				<div class="mega-menu">
-				  <div class="mega-wrap">
-					<div class="mega-column">
-					  <ul class="mega-item mega-features">
-						<li><a href="product-listing.html">NEW RELEASES</a></li>
-						<li><a href="product-listing.html">FEATURES SHOES</a></li>
-						<li><a href="product-listing.html">BEST SELLERS</a></li>
-						<li><a href="product-listing.html">NOW TRENDING</a></li>
-						<li><a href="product-listing.html">SUMMER ESSENTIALS</a></li>
-						<li><a href="product-listing.html">MOTHER'S DAY COLLECTION</a></li>
-						<li><a href="product-listing.html">FAN GEAR</a></li>
-					  </ul>
-					</div>
-					<div class="mega-column">
-					  <h4 class="mega-heading">Shoes</h4>
-					  <ul class="mega-item">
-						<li><a href="product-listing.html">All Shoes</a></li>
-						<li><a href="product-listing.html">Running</a></li>
-						<li><a href="product-listing.html">Training & Gym</a></li>
-						<li><a href="product-listing.html">Basketball</a></li>
-						<li><a href="product-listing.html">Football</a></li>
-						<li><a href="product-listing.html">Soccer</a></li>
-						<li><a href="product-listing.html">Baseball</a></li>
-					  </ul>
-					</div>
-					<div class="mega-column">
-					  <h4 class="mega-heading">CLOTHING</h4>
-					  <ul class="mega-item">
-						<li><a href="product-listing.html">Compression & Nike Pro</a></li>
-						<li><a href="product-listing.html">Tops & T-Shirts</a></li>
-						<li><a href="product-listing.html">Polos</a></li>
-						<li><a href="product-listing.html">Hoodies & Sweatshirts</a></li>
-						<li><a href="product-listing.html">Jackets & Vests</a></li>
-						<li><a href="product-listing.html">Pants & Tights</a></li>
-						<li><a href="product-listing.html">Shorts</a></li>
-					  </ul>
-					</div>
-					<div class="mega-column">
-					  <h4 class="mega-heading">Accessories</h4>
-					  <ul class="mega-item">
-						<li><a href="product-listing.html">Compression & Nike Pro</a></li>
-						<li><a href="product-listing.html">Tops & T-Shirts</a></li>
-						<li><a href="product-listing.html">Polos</a></li>
-						<li><a href="product-listing.html">Hoodies & Sweatshirts</a></li>
-						<li><a href="product-listing.html">Jackets & Vests</a></li>
-						<li><a href="product-listing.html">Pants & Tights</a></li>
-						<li><a href="product-listing.html">Shorts</a></li>
-					  </ul>
-					</div>
-					<div class="mega-column">
-					  <h4 class="mega-heading">BRAND</h4>
-					  <ul class="mega-item">
-						<li><a href="product-listing.html">NIKE</a></li>
-						<li><a href="product-listing.html">Adidas</a></li>
-						<li><a href="product-listing.html">Dior</a></li>
-						<li><a href="product-listing.html">B&G</a></li>
-					  </ul>
-					</div>
-				  </div>
-				</div>
-			  </li>
-
+			  <li class="menu-item menu-item-has-children dropdown"><a href="/web/product/mainProduct.do?category='C1'">웹 개발</a></li>
+			  <li class="menu-item menu-item-has-children has-mega-menu"><a href="/web/product/mainProduct.do?category='C2'">모바일앱·웹</a></li>
 			  <li class="menu-item"><a href="#">게임</a></li>
 			  <li class="menu-item"><a href="#">응용프로그래밍</a></li>
 			  <li class="menu-item menu-item-has-children dropdown"><a href="/web/board/chat.do">기타</a>

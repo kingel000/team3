@@ -9,7 +9,6 @@
 		<typeAlias type="main.project.web.product.vo.ProductVO" alias="productVO"></typeAlias>
 		<typeAlias type="main.project.web.chat.vo.ChatContentVO" alias="chatContentVO"></typeAlias>
 		<typeAlias type="main.project.web.chat.vo.RoomListVO" alias="roomListVO"></typeAlias>
-		<typeAlias type="main.project.web.chat.vo.RoomLocationVO" alias="roomLocationVO"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
@@ -19,6 +18,5 @@
 		<mapper resource="mybatis/mappers/productMapper.xml" />
 		<mapper resource="mybatis/mappers/chatContentMapper.xml" />
 		<mapper resource="mybatis/mappers/roomListMapper.xml" />
-		<mapper resource="mybatis/mappers/roomLocationMapper.xml" />
 	</mappers>
 </configuration>
