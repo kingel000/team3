@@ -36,6 +36,16 @@
 		<select id="selectNumQuestion" resultType="Integer">
 			SELECT MAX(BOARD_QUESTION_NUM)+1 FROM BOARD_QUESTION
 		</select>
-		
+		<select id="selectPage" parameterType="pagingVO" resultType="questionVO">
+			SELECT * FROM (
+					SELECT ROWNUM RN, A.*  FROM (
+						select * from board_question ORDER by board_question_num DESC 
+						) A
+				)
+			WHERE RN BETWEEN #{start} AND #{end}
+		</select>
+		<select id="selectTotal" resultType="Integer">
+			 SELECT COUNT(*) FROM board_question
+		</select>
 	
 </mapper>

@@ -6,6 +6,7 @@
 	<typeAliases>
 		<typeAlias type="main.project.web.member.vo.MemberVO" alias="memberVO"></typeAlias>
 		<typeAlias type="main.project.web.question.vo.QuestionVO" alias="questionVO"></typeAlias>
+		<typeAlias type="main.project.web.question.vo.PagingVO" alias="pagingVO"></typeAlias>
 		<typeAlias type="main.project.web.product.vo.ProductVO" alias="productVO"></typeAlias>
 		<typeAlias type="main.project.web.chat.vo.ChatContentVO" alias="chatContentVO"></typeAlias>
 		<typeAlias type="main.project.web.chat.vo.RoomListVO" alias="roomListVO"></typeAlias>
