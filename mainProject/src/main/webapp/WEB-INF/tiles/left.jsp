@@ -33,10 +33,10 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/style2.css"/>">
 </head>
 <body>
-   <div class="myPage_menu">
+   <div class="myPage_menu" >
       <ul>
          <div class="mypage_title">
-            <a href="/web/member/mypage.do">MY PAGE</a>
+            <a href="/web/member/masterPage.do">MY PAGE</a>
          </div><br>
          <li class="group">
             <div class="box">
