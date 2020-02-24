@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="http://cdn.ckeditor.com/4.13.1/standard-all/ckeditor.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
    <style>
         .insert_Product{width:690px; margin: 0 auto; border: solid 2px #2AC37D; padding: 35px;}
         .insert_Product>form>h4{text-align: center; margin-bottom:15px;}
@@ -11,9 +13,15 @@
         .insert_Product>form>p>a{background-color: #dddddd; padding: 1px;}
     </style>
 <!-- Custom-->
-<link rel="stylesheet" href="<c:url value="/resources/css/style2.css"/>">
 <meta charset="UTF-8">
 <title>상품 등록</title>
+<script type="text/javascript">
+$(function(){
+	CKEDITOR.replace('product_info',{
+		filebrowserUploadUrl: '${pageContext.request.contextPath }/product/fileupload.do'
+	});
+});
+</script>
 </head>
 <body>
 
@@ -36,9 +44,6 @@
             </p>
             <p>
                <textarea name="product_info" rows="10" cols="80" placeholder="상품 설명을 입력해주세요"></textarea>
-               </p>
-               <p>
-                <input type="file" name = "product_info">
                </p>
             <p >
                <input type="submit" value="등록하기" />
