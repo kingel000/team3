@@ -51,7 +51,7 @@
 									<li><a href="#">Coupon Code</a></li>
 									<li><a href="#">SignUp For Email</a></li>
 									<li><a href="#">Site Feedback</a></li>
-									<li><a href="#">Careers</a></li>
+									<li><a href="/web/member/masterPage.do">관리자 페이지</a></li>
 								</ul>
 							</footer>
 						</aside>
