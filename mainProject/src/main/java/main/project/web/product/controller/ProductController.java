@@ -23,6 +23,7 @@ import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
+import main.project.web.purchase.vo.PurchaseVO;
 
 @Controller("productController")
 @RequestMapping(value="/product")
@@ -178,7 +179,7 @@ public class ProductController {
 		nick_name = productService.select_NickName(numProduct.getExpert_id());
 		model.addAttribute("exper_id",numProduct.getExpert_id());
 		model.addAttribute("nick_name",nick_name);
-		
+	
 		
 		return "/product/detailProduct.part2";
 	}
@@ -189,12 +190,17 @@ public class ProductController {
 		return "/product/boardManager.page";
 	}
 	
-	
 	//------------------------------장바구니-------------------------------------------
 	
 	@RequestMapping(value = "/cart.do", method = RequestMethod.GET)
-	public String cartPage() {
+	public String cartPage(ProductVO product, Model model , HttpSession session) {
+		
+		String num = product.getProduct_num();
+		
+		System.out.println(num);
 		
 		return "/product/cart.page";
 	}
+	
+	
 }

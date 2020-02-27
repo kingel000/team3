@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="main.project.web.purchase.dao.IPurchaseDAO">
+	<insert id="insertPurchase" parameterType="purchaseVO">
+		INSERT INTO purchase VALUES 
+		(#{purchase_num},#{product_num},sysdate,#{purchase_state},#{member_id},#{purchase_price})
+	</insert>
+	<update id="updatePurchase" parameterType="purchaseVO">
+		UPDATE purchase SET purchase_state=#{purchase_state}
+		WHERE purchase_num=#{purchase_num}
+	</update>
+	<delete id="deletePurchase" parameterType="purchaseVO">
+		 DELETE FROM purchase WHERE purchase_num=#{purchase_num}
+	</delete>
+	<select id="selectPurchase" parameterType="purchaseVO" resultType="purchaseVO">
+		SELECT * FROM purchase WHERE purchase_num=#{purchase_num}
+	</select>
+	<select id="selectListPurchase" resultType="purchaseVO">
+		 SELECT * FROM purchase ORDER BY purchase_num DESC 
+	</select>
+</mapper>

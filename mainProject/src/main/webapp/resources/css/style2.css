@@ -70,3 +70,7 @@ ul, ol {list-style: none;padding: 0;margin: 0;}
 .withdrawal_Box2{padding: 20px; margin: 20px;text-align: center;}
 .withdrawal_Box2>form>p>input{width: 250px}
 
+/* 장바구니  */
+.cartBox1{width:900px; height: audo;}
+.cartBox2{width:800px; margin: 0 auto; border-color: #333;}
+
