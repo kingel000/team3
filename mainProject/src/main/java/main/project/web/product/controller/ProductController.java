@@ -28,7 +28,7 @@ public class ProductController {
 	
 	@RequestMapping(value="/mainProduct.do", method=RequestMethod.GET)
 	public String mainProduct(@RequestParam String category,ProductVO product, Model model, HttpSession session) {
-		System.out.println("produdct GET ȣ�� ");
+		System.out.println("produdct GET 호출 ");
 
 		if(category.equals("'C1'")) {
 			category ="웹 개발";
@@ -41,7 +41,7 @@ public class ProductController {
 		}else if(category.equals("'C5'")) {
 			category =	"기타";
 		}
-		System.out.println("������ ī�װ� : " + category);
+		System.out.println("선택한 카테고리 : " + category);
 		List<ProductVO> productCategory = productService.selectCategory(category);
 		List<String> nick = new ArrayList<String>(); 
 		System.out.println("----");
@@ -143,5 +143,13 @@ public class ProductController {
 	public String detailProduct(ProductVO product, Model model , HttpSession session) {
 
 		return "/product/boardManager.page";
+	}
+	
+	//------------------------------장바구니-------------------------------------------
+
+	@RequestMapping(value = "/cart.do", method = RequestMethod.GET)
+	public String cartPage() {
+
+		return "/product/cart.page";
 	}
 }
