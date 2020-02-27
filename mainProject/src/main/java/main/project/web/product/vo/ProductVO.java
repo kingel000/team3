@@ -8,7 +8,6 @@ public class ProductVO {
 	private String product_title;
 	private String expert_id;
 	private String product_info;
-	private String product_file;
 	private Date product_date;
 	public String getProduct_num() {
 		return product_num;
@@ -40,12 +39,7 @@ public class ProductVO {
 	public void setProduct_info(String product_info) {
 		this.product_info = product_info;
 	}
-	public String getProduct_file() {
-		return product_file;
-	}
-	public void setProduct_file(String product_file) {
-		this.product_file = product_file;
-	}
+
 	public Date getProduct_date() {
 		return product_date;
 	}
@@ -55,8 +49,7 @@ public class ProductVO {
 	@Override
 	public String toString() {
 		return "ProductVO [product_num=" + product_num + ", category=" + category + ", product_title=" + product_title
-				+ ", expert_id=" + expert_id + ", product_info=" + product_info + ", product_file=" + product_file
-				+ ", product_date=" + product_date + "]";
+				+ ", expert_id=" + expert_id + ", product_info=" + product_info + ", product_date=" + product_date + "]";
 	}
 
 }
