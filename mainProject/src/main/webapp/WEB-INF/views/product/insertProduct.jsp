@@ -18,16 +18,30 @@
 <script type="text/javascript">
 $(function(){
 	CKEDITOR.replace('product_info',{
+		width:'595px',
+		height:'400px',
 		filebrowserUploadUrl: '${pageContext.request.contextPath }/product/fileupload.do'
 	});
 });
+function checkValue() {
+	if (!document.product_value.category.value || document.product_value.category.value == "") {
+		alert("카테고리를 선택해주세요.");
+		document.product_value.category.focus();
+		return false;
+	}
+	if (!document.product_value.product_title.value) {
+		alert("제목을 입력 해주세요.");
+		document.product_value.product_title.focus();
+		return false;
+	}
+}
 </script>
 </head>
 <body>
 
 <div>
       <div class="insert_Product">
-         <form action="/web/product/insertProduct.do" method="post" >
+         <form action="/web/product/insertProduct.do" method="post" name="product_value" onsubmit="return checkValue()" >
             <h4>상품 등록</h4>
             <p>
                <select name="category">

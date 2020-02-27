@@ -6,12 +6,11 @@
 	<insert id="insertProduct" parameterType="productVO">
 		INSERT INTO product VALUES
 		(#{product_num},#{category},#{product_title},#{expert_id},
-		 #{product_info},#{product_file,jdbcType=VARCHAR},sysdate)
+		 #{product_info},sysdate)
 	</insert>
 	<update id="updateProduct" parameterType="productVO">
 		UPDATE product SET
-		category=#{category},product_title=#{product_title},product_info=#{product_info},
-		product_file=#{product_file,jdbcType=VARCHAR}
+		category=#{category},product_title=#{product_title},product_info=#{product_info}
 		WHERE product_num=#{product_num}
 	</update>
 	<delete id="deleteProduct" parameterType="productVO">

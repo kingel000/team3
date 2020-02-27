@@ -23,5 +23,14 @@ public class PurchaseController {
 		@Autowired
 		private IProductService productService;
 		
-	
+		@RequestMapping(value="/myCart.do", method=RequestMethod.GET)
+		public String basket() {
+			return "purchase/myCart";
+		}
+
+		@RequestMapping(value="/checkout.do", method=RequestMethod.GET)
+		public String checkout() {
+			return "purchase/checkout";
+		}
+		
 }
