@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ADMIN PAGE</title>
 </head>
 <body>
 	<div align="center">
@@ -15,7 +15,7 @@
 		</h4>
 	</div>
 	<div align="center">
-		<form action="/web/member/masterPage.do" method="post">
+		<form action="/web/admin/adminDetail.mdo" method="post">
 			<table border="1">
 
 				<tr>

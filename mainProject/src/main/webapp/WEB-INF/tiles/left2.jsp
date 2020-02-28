@@ -40,7 +40,7 @@
          </div><br>
          <li class="group">
             <div class="box">
-               <a href="#">
+               <a href="/web/admin/memberManager.mdo">
                   <h3>Member Manager</h3>
                   <p>회원 정보 관리</p>
                </a>
