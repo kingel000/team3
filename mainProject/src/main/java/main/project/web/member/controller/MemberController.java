@@ -42,9 +42,8 @@ public class MemberController {
 		System.out.println(member.getId());
 		System.out.println(member.getPwd());
 		MemberVO check = memberService.selectMember(member);
+		System.out.println(check);
 
-		
-		
 		
 		if(check != null) {
 			if(check.getPwd().equals(member.getPwd())) {

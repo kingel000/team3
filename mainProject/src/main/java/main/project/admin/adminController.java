@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import main.project.web.member.service.IMemberService;
+
+import main.project.web.member.service.MemberService;
+
 import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
@@ -28,7 +31,7 @@ public class adminController {
 	private IProductService productService;
 	@Autowired
 	private IMemberService memberService;
-	
+
 	
 	@RequestMapping({"/","/admin.mdo"})
 	public String home(Locale locale, Model model) {
@@ -37,9 +40,34 @@ public class adminController {
 	}
 	
 	@RequestMapping(value = "/adminDetail.mdo" , method = RequestMethod.POST )
-	public String adminDetail() {
+	public String adminDetail(MemberVO member,HttpSession session, Model model) {
 		System.out.println("ADMIN DETAIL MDO POST 호출");
-		return "admin/adminDetail.page2";
+		System.out.println(member.getId());
+		System.out.println(member.getPwd());
+		MemberVO check = memberService.selectMember(member);
+		System.out.println(check);
+		
+		if(check != null) {
+			if(check.getPwd().equals(member.getPwd())) {
+				if(check.getRank().equals("M")) {
+					session.setAttribute("member", check);
+					model.addAttribute("member", check);
+					return "admin/adminDetail.page2";
+				}else {
+					String msg = "관리자 아이디가 입니다. 위의 링크를 눌러 메인페이지로 이동하세요";
+					model.addAttribute("msg", msg);
+				}
+			}else {
+				String msg = "비밀번호 오류입니다.";
+				model.addAttribute("msg", msg);
+			}
+		}else {
+			String msg = "존재하지 않는 아이디 입니다.";
+			model.addAttribute("msg", msg);
+		}
+
+		
+		return "admin/adminMain";
 	}
 	
 	
