@@ -11,6 +11,7 @@
 	<style>
 		thead>tr>th{background-color: #eee; text-align: center;}
 		.title{color:#fff; text-align:center; background-color: #2ac37d;}
+		td{text-align: center;}
 	</style>
 </head>
 <body>
@@ -32,7 +33,7 @@
 				 	<tr>
 				      <td>${adminproduct.product_num}</td>
 				      <td>${adminproduct.category}</td>
-				      <td>${adminproduct.product_title}</td>
+				      <td><a href="adminDetailProduct.mdo?num=${adminproduct.product_num}">${adminproduct.product_title}</a></td>
 				      <td>${adminproduct.expert_id}</td>
 				      <td><a href="adminProductDelete.mdo?num=${adminproduct.product_num }">글 삭제</a></td>
 				    <tr>
