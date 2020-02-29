@@ -7,7 +7,9 @@ import javax.inject.Inject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import main.project.web.question.vo.PagingVO;
 import main.project.web.question.vo.QuestionVO;
+
 
 @Repository("questionDAO")
 public class QuestionDAOImpl implements IQuestionDAO {
@@ -38,6 +40,17 @@ public class QuestionDAOImpl implements IQuestionDAO {
 	@Override
 	public Integer selectNumQuestion() {
 		return sqlSessionTemplate.selectOne("main.project.web.question.dao.IQuestionDAO.selectNumQuestion");
+	}
+
+
+	@Override
+	public Integer selectTotal() {
+		return sqlSessionTemplate.selectOne("main.project.web.question.dao.IQuestionDAO.selectTotal");
+	}
+
+	@Override
+	public List<QuestionVO> selectPage(PagingVO vo) {
+		return sqlSessionTemplate.selectList("main.project.web.question.dao.IQuestionDAO.selectPage", vo);
 	}
 
 	

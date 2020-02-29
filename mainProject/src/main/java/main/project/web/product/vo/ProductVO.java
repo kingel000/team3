@@ -40,12 +40,14 @@ public class ProductVO {
 	public void setProduct_info(String product_info) {
 		this.product_info = product_info;
 	}
+	
 	public String getProduct_file() {
 		return product_file;
 	}
 	public void setProduct_file(String product_file) {
 		this.product_file = product_file;
 	}
+	
 	public Date getProduct_date() {
 		return product_date;
 	}
@@ -58,5 +60,7 @@ public class ProductVO {
 				+ ", expert_id=" + expert_id + ", product_info=" + product_info + ", product_file=" + product_file
 				+ ", product_date=" + product_date + "]";
 	}
+	
+	
 
 }

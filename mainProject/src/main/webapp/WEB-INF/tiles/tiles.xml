@@ -43,6 +43,8 @@
     <definition name="*/*/*.part" extends="baseEmpty">
         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
     </definition>  
+    
+
           
     <!-- 메인페이지 상단 하단 -->
     <definition name="baseMain" template="/WEB-INF/tiles/template_main.jsp">
@@ -60,5 +62,29 @@
     
     <definition name="*/*/*.part2" extends="baseMain">
         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
-    </definition>        
+    </definition>    
+    
+    
+    
+    <!-- 마스터 페이지 메뉴 미표시 -->
+    
+        <definition name="base_master" template="/WEB-INF/tiles/template_master.jsp">
+        <put-attribute name="left2"   value="/WEB-INF/tiles/left2.jsp" />
+
+    </definition>
+ 
+    <definition name="*.page2" extends="base_master">
+        <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+    </definition>
+ 
+     <definition name="*/*.page2" extends="base_master">
+         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+     </definition>
+    
+    <definition name="*/*/*.page2" extends="base_master">
+        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+    </definition>    
 </tiles-definitions>
+
+ 
+    

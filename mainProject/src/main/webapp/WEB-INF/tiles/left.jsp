@@ -33,10 +33,14 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/style2.css"/>">
 </head>
 <body>
-   <div class="myPage_menu">
+   <div class="myPage_menu" >
       <ul>
          <div class="mypage_title">
+<<<<<<< HEAD
             <a href="/web/member/mypage.do">MANAGER PAGE</a>
+=======
+            <a href="/web/member/masterPage.do">MY PAGE</a>
+>>>>>>> branch 'master' of https://github.com/kingel000/team3
          </div><br>
          <li class="group">
             <div class="box">
@@ -46,6 +50,41 @@
                </a>
             </div>
          </li>
+<<<<<<< HEAD
+=======
+         
+         <c:choose>
+            <c:when test="${member.rank == 'N'}">
+                <li class="group">
+               <div class="box">
+                    <a href="/web/member/rankUp.do">
+                     <h3>Expert</h3>
+                     <p>전문가 전환</p>
+                  </a>
+                </div>
+            </li>
+            </c:when>
+            <c:otherwise>
+             <li class="group">
+               <div class="box">
+                    <a href="/web/member/editExpert.do">
+                     <h3>Expert</h3>
+                     <p>전문가 정보</p>
+                  </a>
+                </div>
+            </li>
+            </c:otherwise>
+         </c:choose>
+       
+       	 <li class="group">
+            <div class="box">
+               <a href="/web/product/cart.do">
+                  <h3>Cart</h3>
+                  <p>장바구니</p>
+               </a>
+            </div>
+         </li>
+>>>>>>> branch 'master' of https://github.com/kingel000/team3
     
          <li class="group">
             <div class="box">
@@ -75,6 +114,31 @@
             </div>
          </li>
          
+<<<<<<< HEAD
+=======
+         <c:choose>
+            <c:when test="${member.rank == 'E'}">
+                <li class="group">
+               <div class="box">
+                    <a href="/web/chat/expertChat.do">
+                     <h3>Expert Chat</h3>
+                     <p>전문가 채팅</p>
+                  </a>
+                </div>
+            </li>
+            
+            </c:when>
+         </c:choose> 
+           
+         <li class="group">
+            <div class="box">
+               <a href="/web/member/withdrawal.do">
+                  <h3>Withdrawal</h3>
+                  <p>회원 탈퇴</p>
+               </a>
+            </div>
+         </li>
+>>>>>>> branch 'master' of https://github.com/kingel000/team3
       </ul>
    </div>
 </body>

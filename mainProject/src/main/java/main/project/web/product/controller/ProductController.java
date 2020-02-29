@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +22,7 @@ import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
+import main.project.web.purchase.vo.PurchaseVO;
 
 @Controller("productController")
 @RequestMapping(value="/product")
@@ -34,25 +34,25 @@ public class ProductController {
 	
 	@RequestMapping(value="/mainProduct.do", method=RequestMethod.GET)
 	public String mainProduct(@RequestParam String category,ProductVO product, Model model, HttpSession session) {
-		System.out.println("produdct GET È£Ãâ ");
+		System.out.println("produdct GET í˜¸ì¶œ ");
 
 		if(category.equals("'C1'")) {
-			category ="À¥ °³¹ß";
+			category ="ì›¹ ê°œë°œ";
 		}else if(category.equals("'C2'")) {
-			category = "¸ğ¹ÙÀÏ¾Û¡¤À¥";
+			category = "ëª¨ë°”ì¼ì•±Â·ì›¹";
 		}else if(category.equals("'C3'")) {
-			category = "°ÔÀÓ";
+			category = "ê²Œì„";
 		}else if(category.equals("'C4'")) {
-			category = "ÀÀ¿ëÇÁ·Î±×·¡¹Ö";
+			category = "ì‘ìš©í”„ë¡œê·¸ë˜ë°";
 		}else if(category.equals("'C5'")) {
-			category =	"±âÅ¸";
+			category =	"ê¸°íƒ€";
 		}
-		System.out.println("¼±ÅÃÇÑ Ä«Å×°í¸® : " + category);
+		System.out.println("ì„ íƒí•œ ì¹´í…Œê³ ë¦¬ : " + category);
 		List<ProductVO> productCategory = productService.selectCategory(category);
 		List<String> nick = new ArrayList<String>(); 
 		System.out.println("----");
 		for(ProductVO productVO : productCategory) {
-			System.out.println("DB ÀúÀå Ä«Å×°í¸®º° »óÇ° ¸®½ºÆ® " + productVO);
+			System.out.println("DB ì €ì¥ ì¹´í…Œê³ ë¦¬ë³„ ìƒí’ˆ ë¦¬ìŠ¤íŠ¸ " + productVO);
 			nick.add(memberService.checkMemberId(productVO.getExpert_id()).getNick_name());
 		}
 		model.addAttribute("productList",productCategory);
@@ -63,35 +63,39 @@ public class ProductController {
 	
 	@RequestMapping(value="/insertProduct.do", method=RequestMethod.GET)
 	public String insertProduct(Model model) {
-		System.out.println("produdct insert GET È£Ãâ ");
+		System.out.println("produdct insert GET í˜¸ì¶œ");
 		return "product/insertProduct.page";
 	}
 	@RequestMapping(value="/insertProduct.do", method=RequestMethod.POST)
 	public String insertProduct(ProductVO product,HttpSession session ,Model model, MultipartFile uploadfile , MultipartHttpServletRequest request ) {
-		System.out.println("produdct insert POST È£Ãâ ");
+		System.out.println("produdct insert POST í˜¸ì¶œ");
 		
 		MemberVO member = (MemberVO)(session.getAttribute("member"));
 		System.out.println(member.getId());
-
+		
 		product.setExpert_id(member.getId());
 		session.setAttribute("product", product);
+		
+		String sessionId = member.getId();
+		product.setExpert_id(sessionId);
+		product.setProduct_num("A012");
 		System.out.println(product);
-
+		
 		String rootUploadDir = "C:"+File.separator+"Upload"; // C:/Upload
 
 		File dir = new File(rootUploadDir + File.separator + "testfile"); 
 
-		if(!dir.exists()) { //¾÷·Îµå µğ·ºÅä¸®°¡ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é »ı¼º
+		if(!dir.exists()) { //ì—…ë¡œë“œ ë””ë ‰í† ë¦¬ê°€ ì¡´ì¬í•˜ì§€ ì•Šìœ¼ë©´ ìƒì„±
 			dir.mkdirs();
 		}
 
-		Iterator<String> iterator = request.getFileNames(); //¾÷·ÎµåµÈ ÆÄÀÏÁ¤º¸ ¼öÁı(2°³ - file1,file2)
+		Iterator<String> iterator = request.getFileNames(); //ì—…ë¡œë“œëœ íŒŒì¼ì •ë³´ ìˆ˜ì§‘(2ê°œ - file1,file2)
 
 		int fileLoop = 0;
 		String uploadFileName;
 		MultipartFile mFile = null;
-		String orgFileName = ""; //ÁøÂ¥ ÆÄÀÏ¸í
-		String sysFileName = ""; //º¯È¯µÈ ÆÄÀÏ¸í
+		String orgFileName = ""; //ì§„ì§œ íŒŒì¼ëª…
+		String sysFileName = ""; //ë³€í™˜ëœ íŒŒì¼ëª…
 
 		ArrayList<String> list = new ArrayList<String>();
 
@@ -104,28 +108,28 @@ public class ProductController {
 			orgFileName = mFile.getOriginalFilename();    
 			System.out.println(orgFileName);
 
-			if(orgFileName != null && orgFileName.length() != 0) { //sysFileName »ı¼º
-				System.out.println("if¹® ÁøÀÔ");
+			if(orgFileName != null && orgFileName.length() != 0) { //sysFileName ìƒì„±
+				System.out.println("ifë¬¸ ì§„ì…");
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMDDHHmmss-" + fileLoop);
 				Calendar calendar = Calendar.getInstance();
-				sysFileName = simpleDateFormat.format(calendar.getTime()); //sysFileName: ³¯Â¥-fileLoop¹øÈ£
+				sysFileName = simpleDateFormat.format(calendar.getTime()); //sysFileName: ë‚ ì§œ-fileLoopë²ˆí˜¸
 
 
 				try {
-					System.out.println("try ÁøÀÔ");
+					System.out.println("try ì§„ì…");
 					mFile.transferTo(new File(dir + File.separator + sysFileName)); // C:/Upload/testfile/sysFileName
-					list.add("¿øº»ÆÄÀÏ¸í: " + orgFileName + ", ½Ã½ºÅÛÆÄÀÏ¸í: " + sysFileName);
+					list.add("ì›ë³¸íŒŒì¼ëª…: " + orgFileName + ", ì‹œìŠ¤í…œíŒŒì¼ëª…: " + sysFileName);
 
 				}catch(Exception e){
-					list.add("ÆÄÀÏ ¾÷·Îµå Áß ¿¡·¯¹ß»ı!!!");
+					list.add("íŒŒì¼ ì—…ë¡œë“œ ì¤‘ ì—ëŸ¬ë°œìƒ!!!");
 				}
 			}//if
 		}//while
+		productService.insertProduct(product);
+//		session.setAttribute("member", member);
 		
 		model.addAttribute("list", list);
-
-
-
+		
 		return "product/insertProduct.page";
 	}
 
@@ -152,7 +156,7 @@ public class ProductController {
 	@RequestMapping(value="/updateProduct.do", method = RequestMethod.GET)
 	public String updateProduct(@RequestParam String num, HttpSession session , Model model) {
 		ProductVO product = productService.selectProduct(num);
-		System.out.println("¼öÁ¤ÇÏ´Â °Ô½Ã¹°ÀÇ Á¤º¸ : "+ product);
+		System.out.println("ìˆ˜ì •í•˜ëŠ” ê²Œì‹œë¬¼ì˜ ì •ë³´ : "+ product);
 	
 		model.addAttribute("product", product);
 		return "product/updateProduct.page";
@@ -160,25 +164,33 @@ public class ProductController {
 
 	@RequestMapping(value="/updateProduct.do", method = RequestMethod.POST)
 	public String updateProduct(ProductVO product, Model model , HttpSession session) {
-		System.out.println("updateProduct.do POST ¹ŞÀ½ ");
+		System.out.println("updateProduct.do POST ë°›ìŒ ");
 		System.out.println(product);
 		productService.updateProduct(product);
 		return "/product/boardManager.page";
 	}
 	
+	@RequestMapping(value="/deleteProduct.do", method = RequestMethod.GET)
+	public String deleteProduct(@RequestParam String num, HttpSession session , Model model) {
+		ProductVO product = productService.selectProduct(num);
+		System.out.println("product : "+ product);
+		productService.deleteProduct(product);
+		return "redirect:/product/boardManager.do";
+	}
+
 	@RequestMapping(value="/detailProduct.do", method = RequestMethod.GET)
 	public String detailProduct(@RequestParam String num,ProductVO product, Model model , HttpSession session, MemberVO member) {
-		System.out.println("detailProduct GET ¹ŞÀ½ ");
-		System.out.println("¼±ÅÃÇÑ »óÇ° ³Ñ¹ö : " + num);
+		System.out.println("detailProduct GET ë°›ìŒ ");
+		System.out.println("ì„ íƒí•œ ìƒí’ˆ ë„˜ë²„ : " + num);
 		ProductVO numProduct = productService.selectProduct(num);
-		System.out.println("¼±ÅÃÇÑ »óÇ° Á¤º¸ " + numProduct);
+		System.out.println("ì„ íƒí•œ ìƒí’ˆ ì •ë³´ " + numProduct);
 		model.addAttribute("numProduct",numProduct);
 		
 		MemberVO nick_name = new MemberVO();
 		nick_name = productService.select_NickName(numProduct.getExpert_id());
 		model.addAttribute("exper_id",numProduct.getExpert_id());
 		model.addAttribute("nick_name",nick_name);
-		
+	
 		
 		return "/product/detailProduct.part2";
 	}
@@ -188,4 +200,18 @@ public class ProductController {
 
 		return "/product/boardManager.page";
 	}
+	
+
+	// ì¥ë°”êµ¬ë‹ˆ
+	@RequestMapping(value = "/cart.do", method = RequestMethod.GET)
+	public String cartPage(ProductVO product, Model model , HttpSession session) {
+		
+		String num = product.getProduct_num();
+		
+		System.out.println(num);
+		
+		return "/product/cart.page";
+	}
+	
+	
 }

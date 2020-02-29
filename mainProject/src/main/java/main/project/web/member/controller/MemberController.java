@@ -42,6 +42,9 @@ public class MemberController {
 		System.out.println(member.getId());
 		System.out.println(member.getPwd());
 		MemberVO check = memberService.selectMember(member);
+		System.out.println(check);
+
+		
 		if(check != null) {
 			if(check.getPwd().equals(member.getPwd())) {
 				session.setAttribute("member", check);
@@ -141,6 +144,7 @@ public class MemberController {
 
 	@RequestMapping(value="/mypage.do", method = RequestMethod.GET)
 	public String memberMyPage() {
+		System.out.println("mypage GET 호출");
 		return "member/mypage.page";
 	}
 
@@ -240,5 +244,20 @@ public class MemberController {
 	   public String editBoard(ExpertVO expert , Model model , HttpSession session) {
 
 	      return "main/main.part2";
+	   }
+	   
+	   @RequestMapping(value="/masterPage.do", method = RequestMethod.GET)
+	   public String masterPage(Model model , HttpSession session) {
+		  System.out.println("masterPage GET 호출");
+	      return "member/masterPage";
+	   }
+
+	   @RequestMapping(value="/masterPage.do", method = RequestMethod.POST)
+	   public String masterPage(MemberVO member, Model model , HttpSession session) {
+		   System.out.println("masterPage POST 호출");
+		   return "member/masterDetail.page2";
+		
+		  
+	     
 	   }
 }

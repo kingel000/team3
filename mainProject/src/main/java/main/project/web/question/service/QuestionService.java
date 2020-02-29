@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import main.project.web.question.dao.IQuestionDAO;
+import main.project.web.question.vo.PagingVO;
 import main.project.web.question.vo.QuestionVO;
 
 @Service("questionService")
@@ -39,6 +40,17 @@ public class QuestionService implements IQuestionService {
 	public Integer selectNumQuestion() {
 		return questionDAO.selectNumQuestion();
 	}
+
+	@Override
+	public Integer selectTotal() {
+		return questionDAO.selectTotal();
+	}
+
+	@Override
+	public List<QuestionVO> selectPage(PagingVO vo) {
+		return questionDAO.selectPage(vo);
+	}
+
 
 
 }

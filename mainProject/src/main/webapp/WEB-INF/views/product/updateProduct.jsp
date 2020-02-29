@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<script src="http://cdn.ckeditor.com/4.13.1/standard-all/ckeditor.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
    <style>
         .update_Product{width:690px; margin: 0 auto; border: solid 2px #2AC37D; padding: 35px;}
         .update_Product>form>h4{text-align: center; margin-bottom:15px;}
@@ -13,10 +14,35 @@
         .update_Product>form>p>a{background-color: #dddddd; padding: 1px;}
     </style>
     <!-- Custom-->
-<link rel="stylesheet" href="<c:url value="/resources/css/style2.css"/>">
 <meta charset="UTF-8">
 
 <title>상품수정</title>
+<script type="text/javascript">
+$(function(){
+	CKEDITOR.replace('product_info',{
+		width:'595px',
+		height:'400px',
+		filebrowserUploadUrl: '${pageContext.request.contextPath }/product/fileupload.do'
+	});
+});
+function checkValue() {
+	if (!document.product_value.category.value || document.product_value.category.value == "") {
+		alert("카테고리를 선택해주세요.");
+		document.product_value.category.focus();
+		return false;
+	}
+	if (!document.product_value.product_title.value) {
+		alert("제목을 입력 해주세요.");
+		document.product_value.product_title.focus();
+		return false;
+	}
+	if (!document.product_value.product_info.value) {
+		alert("상세내용을 입력 해주세요.");
+		document.product_value.product_info.focus();
+		return false;
+	}
+}
+</script>
 </head>
 <body>
 

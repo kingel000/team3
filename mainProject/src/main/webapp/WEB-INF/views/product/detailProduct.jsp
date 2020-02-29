@@ -1,3 +1,4 @@
+<%@page import="javax.swing.text.Document"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -67,28 +68,34 @@
 			<h2>${numProduct.product_title}</h2>
 			<p class="ps-product__category"><a href="#">${nick_name.nick_name}</a></p>
 			<h3 class="ps-product__price">Price</h3>
-		
 			
-			<div class="ps-product__block ps-product__size">
-			
-			  
-				
-			  
+			<div class="ps-product__block ps-product__size">	
 			  <div class="form-group">
-			
-			  <input class="form-control" type="text" placeholder="가격 입력" />
-			  
-
-			  </div>
-			  
+			  </div>	  
 			</div>
+			
 			<div class="ps-product__shopping">
 			<form action="/web/chat/createChat.do" >
+				<div class="ps-product__block ps-product__size">
+			  		<div class="form-group">
+			  			<input class="form-control" type="text" placeholder="가격 입력" name="price" value=""/>
+			  		</div>
+				</div>
 				<input type="hidden" name="product_num" value="${numProduct.product_num }">
 				<input type="hidden" name="product_title" value="${numProduct.product_title}">
 				<input type="hidden" name="expert_id" value="${numProduct.expert_id }">
 				<input type="hidden" name="expertName" value="${nick_name.nick_name }">
-				<input class="ps-btn mb-10" type="submit" value="Expert Chat"><i class="ps-icon-next"></i></a>
+				
+				<c:choose>
+	           	 	<c:when test="${member.id == null}">
+	           	 		<a href="/web/member/login.do" class="ps-btn mb-10">Cart</a>  
+						<a href="/web/member/login.do" class="ps-btn mb-10">Expert Chat</a>
+	           	 	</c:when>
+	            	<c:otherwise>
+	            		<a href="cart.do?product_num=${numProduct.product_num }" class="ps-btn mb-10">Cart</a>
+	             	 	<input class="ps-btn mb-10" type="submit" value="Expert Chat"><i class="ps-icon-next"></i>
+	           		 </c:otherwise>
+	         	</c:choose>
 			</form>
 			
 			</div>
