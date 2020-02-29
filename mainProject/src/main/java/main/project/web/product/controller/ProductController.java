@@ -1,28 +1,22 @@
 package main.project.web.product.controller;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import main.project.web.member.service.IMemberService;
 import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
-import main.project.web.purchase.vo.PurchaseVO;
 
 @Controller("productController")
 @RequestMapping(value="/product")
@@ -63,7 +57,7 @@ public class ProductController {
 	
 	@RequestMapping(value="/insertProduct.do", method=RequestMethod.GET)
 	public String insertProduct(Model model) {
-		System.out.println("produdct insert GET 호출");
+		System.out.println("produdct insert GET 호출 ");
 		return "product/insertProduct.page";
 	}
 	@RequestMapping(value="/insertProduct.do", method=RequestMethod.POST)
@@ -75,7 +69,7 @@ public class ProductController {
 		
 		String sessionId = member.getId();
 		product.setExpert_id(sessionId);
-		product.setProduct_num("A011");
+//		product.setProduct_num("A012");
 		System.out.println(product);
 		productService.insertProduct(product);
 //		session.setAttribute("member", member);
@@ -140,7 +134,7 @@ public class ProductController {
 		nick_name = productService.select_NickName(numProduct.getExpert_id());
 		model.addAttribute("exper_id",numProduct.getExpert_id());
 		model.addAttribute("nick_name",nick_name);
-	
+		
 		
 		return "/product/detailProduct.part2";
 	}
@@ -151,17 +145,11 @@ public class ProductController {
 		return "/product/boardManager.page";
 	}
 	
+	//------------------------------장바구니-------------------------------------------
 
-	// 장바구니
 	@RequestMapping(value = "/cart.do", method = RequestMethod.GET)
-	public String cartPage(ProductVO product, Model model , HttpSession session) {
-		
-		String num = product.getProduct_num();
-		
-		System.out.println(num);
-		
+	public String cartPage() {
+
 		return "/product/cart.page";
 	}
-	
-	
 }
