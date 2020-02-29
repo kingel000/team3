@@ -36,61 +36,36 @@
    <div class="myPage_menu">
       <ul>
          <div class="mypage_title">
-            <a href="/web/member/mypage.do">MY PAGE</a>
+            <a href="/web/member/mypage.do">MANAGER PAGE</a>
          </div><br>
          <li class="group">
             <div class="box">
                <a href="/web/member/editMember.do">
                   <h3>Edit Member</h3>
-                  <p>회원 정보 수정</p>
+                  <p>회원 정보 관리</p>
                </a>
             </div>
          </li>
-         
-         <c:choose>
-            <c:when test="${member.rank == 'N'}">
-                <li class="group">
-               <div class="box">
-                    <a href="/web/member/rankUp.do">
-                     <h3>Expert</h3>
-                     <p>전문가 전환</p>
-                  </a>
-                </div>
-            </li>
-            </c:when>
-            <c:otherwise>
-             <li class="group">
-               <div class="box">
-                    <a href="/web/member/editExpert.do">
-                     <h3>Expert</h3>
-                     <p>전문가 정보</p>
-                  </a>
-                </div>
-            </li>
-            </c:otherwise>
-         </c:choose>
     
          <li class="group">
             <div class="box">
                <a href="#">
-                  <h3>Order List</h3>
-                  <p>구매 내역</p>
+                  <h3>Product List</h3>
+                  <p>거래 내역</p>
                </a>
             </div>
          </li>
          
-         <c:choose>
-            <c:when test="${member.rank == 'E'}">
-                <li class="group">
-               <div class="box">
-                    <a href="/web/product/insertProduct.do">
-                     <h3>Product</h3>
-                     <p>상품등록</p>
-                  </a>
-                </div>
-            </li>
-            </c:when>
-         </c:choose>    
+         <li class="group">
+            <div class="box">
+               <a href="#">
+                  <h3>Order List</h3>
+                  <p>거래 내역</p>
+               </a>
+            </div>
+         </li>
+         
+           
          <li class="group">
             <div class="box">
                <a href="/web/product/boardManager.do">
@@ -99,14 +74,7 @@
                </a>
             </div>
          </li>
-         <li class="group">
-            <div class="box">
-               <a href="/web/member/withdrawal.do">
-                  <h3>Withdrawal</h3>
-                  <p>회원 탈퇴</p>
-               </a>
-            </div>
-         </li>
+         
       </ul>
    </div>
 </body>
