@@ -67,68 +67,18 @@ public class ProductController {
 		return "product/insertProduct.page";
 	}
 	@RequestMapping(value="/insertProduct.do", method=RequestMethod.POST)
-	public String insertProduct(ProductVO product,HttpSession session ,Model model, MultipartFile uploadfile , MultipartHttpServletRequest request ) {
-		System.out.println("produdct insert POST 호출");
+	public String insertProduct(ProductVO product,HttpSession session ,Model model) {
+		System.out.println("produdct insert POST 호출 ");
 		
-		MemberVO member = (MemberVO)(session.getAttribute("member"));
+		MemberVO member = (MemberVO) session.getAttribute("member");
 		System.out.println(member.getId());
-		
-		product.setExpert_id(member.getId());
-		session.setAttribute("product", product);
 		
 		String sessionId = member.getId();
 		product.setExpert_id(sessionId);
-		product.setProduct_num("A012");
+		product.setProduct_num("A011");
 		System.out.println(product);
-		
-		String rootUploadDir = "C:"+File.separator+"Upload"; // C:/Upload
-
-		File dir = new File(rootUploadDir + File.separator + "testfile"); 
-
-		if(!dir.exists()) { //업로드 디렉토리가 존재하지 않으면 생성
-			dir.mkdirs();
-		}
-
-		Iterator<String> iterator = request.getFileNames(); //업로드된 파일정보 수집(2개 - file1,file2)
-
-		int fileLoop = 0;
-		String uploadFileName;
-		MultipartFile mFile = null;
-		String orgFileName = ""; //진짜 파일명
-		String sysFileName = ""; //변환된 파일명
-
-		ArrayList<String> list = new ArrayList<String>();
-
-		while(iterator.hasNext()) {
-			fileLoop++;
-
-			uploadFileName = iterator.next();
-			mFile = request.getFile(uploadFileName);
-
-			orgFileName = mFile.getOriginalFilename();    
-			System.out.println(orgFileName);
-
-			if(orgFileName != null && orgFileName.length() != 0) { //sysFileName 생성
-				System.out.println("if문 진입");
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMDDHHmmss-" + fileLoop);
-				Calendar calendar = Calendar.getInstance();
-				sysFileName = simpleDateFormat.format(calendar.getTime()); //sysFileName: 날짜-fileLoop번호
-
-
-				try {
-					System.out.println("try 진입");
-					mFile.transferTo(new File(dir + File.separator + sysFileName)); // C:/Upload/testfile/sysFileName
-					list.add("원본파일명: " + orgFileName + ", 시스템파일명: " + sysFileName);
-
-				}catch(Exception e){
-					list.add("파일 업로드 중 에러발생!!!");
-				}
-			}//if
-		}//while
 		productService.insertProduct(product);
 //		session.setAttribute("member", member);
-		
-		model.addAttribute("list", list);
 		
 		return "product/insertProduct.page";
 	}
