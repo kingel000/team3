@@ -36,5 +36,8 @@
 	<select id="select_NickName" parameterType="String" resultType="memberVO" >
 		SELECT * FROM MEMBER WHERE ID = #{expert_id}
 	</select>
+	<select id="selectA11ListProduct2" resultType="productVO">
+		SELECT * FROM product ORDER BY product_num DESC
+	</select>
 	
 </mapper>

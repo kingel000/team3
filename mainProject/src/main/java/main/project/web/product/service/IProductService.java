@@ -15,5 +15,6 @@ public interface IProductService {
 	List<ProductVO> selectCategory(String category);
 	List<ProductVO> selectListProduct(MemberVO sessionId);
 	List<ProductVO> selectAllListProduct(ProductVO category);
+	List<ProductVO> selectA11ListProduct2();
 	MemberVO select_NickName(String expert_id);
 }
