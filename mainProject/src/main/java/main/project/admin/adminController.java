@@ -31,6 +31,7 @@ public class adminController {
 	private IProductService productService;
 	@Autowired
 	private IMemberService memberService;
+	
 
 	
 	@RequestMapping({"/","/admin.mdo"})
@@ -39,6 +40,7 @@ public class adminController {
 		return "admin/adminMain";
 	}
 	
+	//-----------로그인 검증
 	@RequestMapping(value = "/adminDetail.mdo" , method = RequestMethod.POST )
 	public String adminDetail(MemberVO member,HttpSession session, Model model) {
 		System.out.println("ADMIN DETAIL MDO POST 호출");
@@ -106,6 +108,22 @@ public class adminController {
 		product.setProduct_num(num);
 		productService.deleteProduct(product);
 		return "redirect:/admin/adminProduct.mdo";
+	}
+	
+	@RequestMapping(value = "/adminDetailProduct.mdo", method= RequestMethod.GET)
+	public String adminDetailProduct(@RequestParam String num,ProductVO product, HttpSession session , Model model) {
+		System.out.println("선택한 상품 번호 : " + num);
+		product = productService.selectProduct(num);
+		model.addAttribute("product", product);
+		
+		MemberVO nick_name = new MemberVO();
+		nick_name = productService.select_NickName(product.getExpert_id());
+		model.addAttribute("nick_name",nick_name);
+		
+		System.out.println(nick_name);
+		System.out.println(product);
+		
+		return "admin/adminDetailProduct.page2";
 	}
 	
 	//-----------홈페이지 관리
