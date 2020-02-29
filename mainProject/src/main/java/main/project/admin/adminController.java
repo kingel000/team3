@@ -175,7 +175,7 @@ public class adminController {
 		return "admin/adminHomePage.page2";
 	}
 	
-<<<<<<< HEAD
+
 	 //<!-- *******20200229 -->
 	//-----------게시판(판매자) 관리
 	@RequestMapping(value = "/adminBoardNotice.mdo", method= RequestMethod.GET)
@@ -185,9 +185,7 @@ public class adminController {
 	}
 	
 	
-=======
 
->>>>>>> branch 'master' of https://github.com/kingel000/team3
 
 	
 	
