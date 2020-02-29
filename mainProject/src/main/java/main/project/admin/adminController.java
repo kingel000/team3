@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import main.project.web.member.service.IMemberService;
+
 import main.project.web.member.service.MemberService;
+
 import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
@@ -29,6 +31,7 @@ public class adminController {
 	private IProductService productService;
 	@Autowired
 	private IMemberService memberService;
+
 	
 	@RequestMapping({"/","/admin.mdo"})
 	public String home(Locale locale, Model model) {
@@ -66,6 +69,28 @@ public class adminController {
 		
 		return "admin/adminMain";
 	}
+	
+	
+	//-----------멤버관리
+	@RequestMapping(value="/memberManager.mdo",method = RequestMethod.GET)
+	public String memberManager(HttpSession session,Model model) {
+		System.out.println("memberManager mdo GET 호출 ");
+		List<MemberVO> adminmemberList = memberService.selectAllMember();
+		model.addAttribute("adminmemberList",adminmemberList);
+		return "admin/adminMember.page2";
+	}
+	
+	@RequestMapping(value = "/adminMemberDelete.mdo", method= RequestMethod.GET)
+	public String adminMemberDelete(@RequestParam String id,MemberVO member, HttpSession session , Model model) {
+		System.out.println("adminMemeberDelte.mdo GET 호출");
+		System.out.println("넘어온 아이디 : " + id);
+		member.setId(id);
+		System.out.println(member);
+		memberService.admindeleteMember(member);
+		return "redirect:/admin/memberManager.mdo";
+	}
+
+	
 	
 	//-----------상품관리
 	@RequestMapping(value = "/adminProduct.mdo", method= RequestMethod.GET )

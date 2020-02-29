@@ -1,5 +1,7 @@
 package main.project.web.member.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +41,18 @@ public class MemberService implements IMemberService{
 	@Override
 	public void deleteMember(MemberVO member) {
 		memberDAO.deleteMember(member);
+	}
+
+	@Override
+	public List<MemberVO> selectAllMember() {
+		return memberDAO.selectAllMember();
+	}
+
+	@Override
+	public void admindeleteMember(MemberVO member) {
+		memberDAO.admindeleteMember(member);
+
+		
 	}
 
 

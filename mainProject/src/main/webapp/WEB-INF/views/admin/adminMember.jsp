@@ -14,32 +14,35 @@
 
 
 thead>tr>th{background-color: #eee; text-align: center;}
+.title{color:#fff; text-align:center; background-color: #2ac37d;}
 </style>
 
 </head>
 <body>
    <div class="Board">
      
-
+	<h3 class="title">회원 관리</h3>
             <table class="table table-striped">
-
+			<thead>
                   <tr>
                      <th>이메일</th>
-                       <th>닉네임</th>
+                     <th>닉네임</th>
                      <th>등급</th>
-                     <th>관리</th>
+                     <th>관리</th>  
+   					<tr>
+   			</thead>
+   			<tbody>
+              <c:forEach var="adminmember" items="${adminmemberList}">
                   <tr>
-     
-             
+                     <td><c:out value="${adminmember.id }" /></td>
+                     <td><c:out value="${adminmember.nick_name }"/></td>
+            		 <td><c:out value="${adminmember.rank }"/></td>
+                     <td><a href="/web/product/updateProduct.do?num=${adminmember.id}">회원 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+                        href="adminMemberDelete.mdo?id=${adminmember.id}">회원 탈퇴</a></td>
                   <tr>
-                     <td><c:out value="gkdlch0812@naver.com" /></td>
-                     
-                     <td><c:out value="정민"/></td>
-            		<td><c:out value="E"/></td>
-                     <td><a href="/web/product/updateProduct.do?num=${product.product_num}">회원 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-                        href="/web/product/deleteProduct.do?num=${product.product_num}">회원 탈퇴</a></td>
-                  <tr>
-     
+      			
+      			</c:forEach>
+      </tbody>
             </table>
  
    
