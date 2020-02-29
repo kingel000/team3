@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
 
 import main.project.web.member.service.MemberService;
@@ -31,6 +32,8 @@ public class adminController {
 	private IProductService productService;
 	@Autowired
 	private IMemberService memberService;
+	@Autowired
+	private IExpertService expertService;
 
 	
 	@RequestMapping({"/","/admin.mdo"})
@@ -89,6 +92,44 @@ public class adminController {
 		memberService.admindeleteMember(member);
 		return "redirect:/admin/memberManager.mdo";
 	}
+	
+	@RequestMapping(value = "/adminmemberEdit.mdo", method= RequestMethod.GET)
+	public String adminmemberEdit(@RequestParam String id,MemberVO member, HttpSession session , Model model) {
+		
+		MemberVO memberVO = (MemberVO)memberService.selectMember(member);
+		ExpertVO expertVO = (ExpertVO)expertService.selectExpert(id);
+		System.out.println("수정하고자 하는 판매자 정보:" + expertVO);
+		System.out.println("수정하고자 하는 계정 정보 "  + memberVO);
+		model.addAttribute("expert",expertVO);
+		model.addAttribute("member",memberVO);
+		return "admin/adminMemberDetail.page2";
+	}
+	@RequestMapping(value = "/adminmemberEdit.mdo", method= RequestMethod.POST)
+	public String adminmemberEdit(ExpertVO expert,MemberVO member, Model model , HttpSession session) {
+		System.out.println("수정된 멤버 정보 : " + member);
+		System.out.println("수정된 판매자 정보 : " + expert);
+		if(member.getRank() == null || member.getRank() == "") {
+			System.out.println("if 문 들어왔음");
+			String rank = memberService.selectMember(member).getRank();
+			System.out.println(rank);
+			
+			member.setRank(rank);
+			
+		}
+		if(member.getPwd() == null || member.getPwd() == "") {
+			System.out.println("pwd if 문 들어옴");
+			String pwd = memberService.selectMember(member).getPwd();
+			System.out.println(pwd);
+			
+			member.setPwd(pwd);
+		}
+		System.out.println(member);
+		memberService.updateMember(member);
+		expertService.updateExpert(expert);
+		return "redirect:/admin/memberManager.mdo";
+	}
+	
+	
 
 	
 	
@@ -114,6 +155,8 @@ public class adminController {
 		
 		return "admin/adminHomePage.page2";
 	}
+	
+
 
 	
 	
