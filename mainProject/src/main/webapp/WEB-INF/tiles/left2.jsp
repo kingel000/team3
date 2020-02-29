@@ -84,7 +84,18 @@
                </a>
             </div>
          </li>
-        
+         
+        <!-- *******20200229 -->
+         <li class="group">
+            <div class="box">
+          	  <a href="/web/admin/adminBoardNotice.mdo">
+            
+                  <h3>Borad_Notice</h3>
+                  <p>공지사항 관리</p>
+               </a>
+            </div>
+         </li>
+         
       </ul>
    </div>
 </body>

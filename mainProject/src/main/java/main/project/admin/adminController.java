@@ -114,6 +114,16 @@ public class adminController {
 		
 		return "admin/adminHomePage.page2";
 	}
+	
+	 //<!-- *******20200229 -->
+	//-----------게시판(판매자) 관리
+	@RequestMapping(value = "/adminBoardNotice.mdo", method= RequestMethod.GET)
+	public String adminBoardNotice() {
+		System.out.println("GET adminBoardNotice 호출");
+		return "admin/adminBoard_Notice___.page2";	
+	}
+	
+	
 
 	
 	

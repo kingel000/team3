@@ -36,22 +36,16 @@
    <div class="myPage_menu" >
       <ul>
          <div class="mypage_title">
-<<<<<<< HEAD
-            <a href="/web/member/mypage.do">MANAGER PAGE</a>
-=======
             <a href="/web/member/masterPage.do">MY PAGE</a>
->>>>>>> branch 'master' of https://github.com/kingel000/team3
          </div><br>
          <li class="group">
             <div class="box">
                <a href="/web/member/editMember.do">
                   <h3>Edit Member</h3>
-                  <p>회원 정보 관리</p>
+                  <p>회원 정보 수정</p>
                </a>
             </div>
          </li>
-<<<<<<< HEAD
-=======
          
          <c:choose>
             <c:when test="${member.rank == 'N'}">
@@ -84,27 +78,28 @@
                </a>
             </div>
          </li>
->>>>>>> branch 'master' of https://github.com/kingel000/team3
     
          <li class="group">
             <div class="box">
                <a href="#">
-                  <h3>Product List</h3>
-                  <p>거래 내역</p>
-               </a>
-            </div>
-         </li>
-         
-         <li class="group">
-            <div class="box">
-               <a href="#">
                   <h3>Order List</h3>
-                  <p>거래 내역</p>
+                  <p>구매 내역</p>
                </a>
             </div>
          </li>
          
-           
+         <c:choose>
+            <c:when test="${member.rank == 'E'}">
+                <li class="group">
+               <div class="box">
+                    <a href="/web/product/insertProduct.do">
+                     <h3>Product</h3>
+                     <p>상품등록</p>
+                  </a>
+                </div>
+            </li>
+            </c:when>
+         </c:choose>    
          <li class="group">
             <div class="box">
                <a href="/web/product/boardManager.do">
@@ -114,8 +109,6 @@
             </div>
          </li>
          
-<<<<<<< HEAD
-=======
          <c:choose>
             <c:when test="${member.rank == 'E'}">
                 <li class="group">
@@ -138,7 +131,6 @@
                </a>
             </div>
          </li>
->>>>>>> branch 'master' of https://github.com/kingel000/team3
       </ul>
    </div>
 </body>
