@@ -38,4 +38,15 @@
 		member
 		WHERE id=#{id} AND pwd=#{pwd}
 	</delete>
+	
+	<select id="selectAllMember" resultType="memberVO">
+		SELECT * FROM member ORDER BY ID desc
+	</select>
+	
+	<delete id="admindeleteMember" parameterType="memberVO">
+		DELETE FROM
+		member
+		WHERE id=#{id}
+		
+	</delete>
 </mapper>

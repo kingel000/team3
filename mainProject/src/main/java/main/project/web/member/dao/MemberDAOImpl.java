@@ -1,5 +1,7 @@
 package main.project.web.member.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -41,6 +43,20 @@ public class MemberDAOImpl implements IMemberDAO {
 	@Override
 	public void deleteMember(MemberVO member) {
 		sqlSessionTemplate.delete("main.project.web.member.dao.IMemberDAO.deleteMember", member);
+	}
+
+	@Override
+	public List<MemberVO> selectAllMember() {
+		return sqlSessionTemplate.selectList("main.project.web.member.dao.IMemberDAO.selectAllMember");
+		
+	}
+
+	@Override
+	public void admindeleteMember(MemberVO member) {
+		
+		 sqlSessionTemplate.delete("main.project.web.member.dao.IMemberDAO.admindeleteMember",member);
+
+		
 	}
 
 }

@@ -40,21 +40,30 @@
          </div><br>
          <li class="group">
             <div class="box">
-               <a href="#">
+               <a href="/web/admin/memberManager.mdo">
                   <h3>Member Manager</h3>
                   <p>회원 정보 관리</p>
                </a>
             </div>
          </li>
 
-             <li class="group">
-               <div class="box">
-                    <a href="/#">
+         <li class="group">
+   		      <div class="box">
+                  <a href="/web/admin/adminProduct.mdo">
                      <h3>Product Manager</h3>
                      <p>상품 관리</p>
                   </a>
-                </div>
-            </li>
+              </div>
+          </li>
+          
+          <li class="group">
+   		      <div class="box">
+                  <a href="/web/admin/adminHomePage.mdo">
+                     <h3>HomePage Manager</h3>
+                     <p>홈페이지 관리</p>
+                  </a>
+              </div>
+          </li>
 
     
          <li class="group">

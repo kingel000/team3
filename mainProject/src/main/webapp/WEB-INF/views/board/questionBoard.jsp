@@ -36,7 +36,7 @@
 				  <c:forEach var="question" items="${questionList}">
 				 	<tr>
 				      <td>${question.board_question_num}</td>
-				      <td><a href="questionView.do?num=${question.board_question_num }">${question.board_question_title}</a></td>
+				      <td><a href="/detailProduct.do?num=${question.board_question_num }">${question.board_question_title}</a></td>
 				      <td>${question.state}</td>
 				      <td>${question.board_question_date}</td>
 				      <td>${question.board_question_writer}</td>

@@ -55,4 +55,9 @@ public class ProductService implements IProductService{
 		return productDAO.select_NickName(expert_id);
 	}
 
+	@Override
+	public List<ProductVO> selectA11ListProduct2() {
+		return productDAO.selectA11ListProduct2();
+	}
+
 }

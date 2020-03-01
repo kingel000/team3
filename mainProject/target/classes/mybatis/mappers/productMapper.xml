@@ -4,14 +4,33 @@
 
 <mapper namespace="main.project.web.product.dao.IProductDAO">
 	<insert id="insertProduct" parameterType="productVO">
-		INSERT INTO product VALUES
-		(#{product_num},#{category},#{product_title},#{expert_id},
-		 #{product_info},#{product_file,jdbcType=VARCHAR},sysdate)
+	INSERT INTO product VALUES
+		<choose>
+			<when test = "category == '웹 개발'">
+				(('A'||LPAD(product_num_seq_A.nextval,3,0)),#{category},#{product_title},#{expert_id},
+				#{product_info},sysdate)
+			</when>
+			 <when test = "category == '모바일앱·웹'">
+				(('B'||LPAD(product_num_seq_B.nextval,3,0)),#{category},#{product_title},#{expert_id},
+				#{product_info},sysdate)
+			</when>
+			<when test = "category == '게임'">
+				(('C'||LPAD(product_num_seq_C.nextval,3,0)),#{category},#{product_title},#{expert_id},
+				#{product_info},sysdate)
+			</when>
+			<when test = "category == '응용프로그래밍'">
+				(('D'||LPAD(product_num_seq_D.nextval,3,0)),#{category},#{product_title},#{expert_id},
+				#{product_info},sysdate)
+			</when>
+			<when test = "category == '기타'">
+				(('E'||LPAD(product_num_seq_E.nextval,3,0)),#{category},#{product_title},#{expert_id},
+				#{product_info},sysdate)
+			</when> 
+		</choose>
 	</insert>
 	<update id="updateProduct" parameterType="productVO">
 		UPDATE product SET
-		category=#{category},product_title=#{product_title},product_info=#{product_info},
-		product_file=#{product_file,jdbcType=VARCHAR}
+		category=#{category},product_title=#{product_title},product_info=#{product_info}
 		WHERE product_num=#{product_num}
 	</update>
 	<delete id="deleteProduct" parameterType="productVO">

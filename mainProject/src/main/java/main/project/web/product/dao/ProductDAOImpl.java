@@ -50,5 +50,9 @@ public class ProductDAOImpl implements IProductDAO {
 	public MemberVO select_NickName(String expert_id) {
 		return sqlSessiontemplate.selectOne("main.project.web.product.dao.IProductDAO.select_NickName",expert_id);
 	}
+	@Override
+	public List<ProductVO> selectA11ListProduct2() {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectA11ListProduct2");
+	}
 	
 }

@@ -8,6 +8,9 @@
 <title>Insert title here</title>
 
 
+ADMIN DETAIL PAGE
+
+
 </head>
 </body>
 
