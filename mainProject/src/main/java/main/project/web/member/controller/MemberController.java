@@ -51,16 +51,16 @@ public class MemberController {
 				model.addAttribute("member", check);
 				return "main/main.part2";
 			}else {
-				String msg = "ºñ¹Ğ¹øÈ£ ¿À·ù";
+				String msg = "ë¹„ë°€ë²ˆí˜¸ ì˜¤ë¥˜";
 				System.out.println(msg);
 				model.addAttribute("msg", msg);
 			}
 		}else {
-			String msg = "¾ÆÀÌµğ ¾øÀ½";
-			System.out.println("¾ÆÀÌµğ ¾øÀ½");
+			String msg = "ì•„ì´ë”” ì—†ìŒ";
+			System.out.println("ì•„ì´ë”” ì—†ìŒ");
 			model.addAttribute("msg", msg);
 		}
-		String msg = "È¸¿ø°¡ÀÔ µÇ¾ú½À´Ï´Ù.";
+		String msg = "íšŒì›ê°€ì… ë˜ì—ˆìŠµë‹ˆë‹¤.";
 		model.addAttribute("msg",msg);
 		return "member/login";
 	}
@@ -84,16 +84,16 @@ public class MemberController {
 		if(check == null) {
 			String authKey = new TempKey().getKey(8, false);
 			try {
-				// mail ÀÛ¼º °ü·Ã±â´É
+				// mail ì‘ì„± ê´€ë ¨ê¸°ëŠ¥
 				MailUtils sendMail = new MailUtils(mailSender);
 				StringBuffer stb = new StringBuffer();
-				stb.append("<h1>[ÀÌ¸ŞÀÏ ÀÎÁõ]</h1>");
-				stb.append("<p>¾È³çÇÏ¼¼¿ä È¸¿ø´Ô ÀúÈñ È¨ÆäÀÌÁö¸¦ Ã£¾ÆÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù.</p>");
-				stb.append("ÀÎÁõ¹øÈ£´Â ");
+				stb.append("<h1>[ì´ë©”ì¼ ì¸ì¦]</h1>");
+				stb.append("<p>ì•ˆë…•í•˜ì„¸ìš” íšŒì›ë‹˜ ì €í¬ í™ˆí˜ì´ì§€ë¥¼ ì°¾ì•„ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤.</p>");
+				stb.append("ì¸ì¦ë²ˆí˜¸ëŠ” ");
 				stb.append(authKey);
-				stb.append(" ÀÔ´Ï´Ù.");
+				stb.append(" ì…ë‹ˆë‹¤.");
 
-				sendMail.setSubject("È¸¿ø°¡ÀÔ ÀÌ¸ŞÀÏ ÀÎÁõ");
+				sendMail.setSubject("íšŒì›ê°€ì… ì´ë©”ì¼ ì¸ì¦");
 				sendMail.setText(stb.toString());
 				sendMail.setFrom("item2881@gmail.com ", "Item");
 				sendMail.setTo(member.getId());
@@ -106,7 +106,7 @@ public class MemberController {
 			try {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter  out_email = response.getWriter();
-				out_email.println("<script>alert('ÀÌ¸ŞÀÏÀÌ ¹ß¼ÛµÇ¾ú½À´Ï´Ù. ÀÎÁõ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.');</script>");
+				out_email.println("<script>alert('ì´ë©”ì¼ì´ ë°œì†¡ë˜ì—ˆìŠµë‹ˆë‹¤. ì¸ì¦ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.');</script>");
 				out_email.flush();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -117,7 +117,7 @@ public class MemberController {
 			try {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter  out_email = response.getWriter();
-				out_email.println("<script>alert('ÀÔ·ÂÇÑ ¾ÆÀÌµğ°¡ Áßº¹‰ç½À´Ï´Ù. ¾ÆÀÌµğ¸¦ ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.');</script>");
+				out_email.println("<script>alert('ì…ë ¥í•œ ì•„ì´ë””ê°€ ì¤‘ë³µì…ë‹ˆë‹¤. ì•„ì´ë””ë¥¼ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.');</script>");
 				out_email.flush();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -144,7 +144,7 @@ public class MemberController {
 
 	@RequestMapping(value="/mypage.do", method = RequestMethod.GET)
 	public String memberMyPage() {
-		System.out.println("mypage GET È£Ãâ");
+		System.out.println("mypage GET í˜¸ì¶œ");
 		return "member/mypage.page";
 	}
 
@@ -162,11 +162,11 @@ public class MemberController {
 			memberService.updateMember(member);
 			session.setAttribute("member", member);
 			model.addAttribute("member",member);
-			String msg = "È¸¿øÁ¤º¸ º¯°æ¿Ï·á";
+			String msg = "íšŒì›ì •ë³´ ë³€ê²½ì™„ë£Œ";
 			model.addAttribute("msg",msg);
 			return "member/editMember.page";
 		}
-		String msg = "ºñ¹Ğ¹øÈ£ ´Ù½Ã È®ÀÎ";
+		String msg = "ë¹„ë°€ë²ˆí˜¸ ë‹¤ì‹œ í™•ì¸";
 		model.addAttribute("msg",msg);
 		return "member/editMember.page";
 	}
@@ -191,7 +191,7 @@ public class MemberController {
 	@RequestMapping(value="/editExpert.do",method=RequestMethod.GET)
 	public String editExpert(HttpSession session,Model model) {
 		ExpertVO expert = expertService.selectExpert(((MemberVO)session.getAttribute("member")).getId());
-		System.out.println("¼öÁ¤ÇÏ´Â Àü¹®°¡ Á¤º¸ : "  + expert);
+		System.out.println("ìˆ˜ì •í•˜ëŠ” ì „ë¬¸ê°€ ì •ë³´ : "  + expert);
 		model.addAttribute("expert", expert) ;
 		return "member/editExpert.page";
 	}
@@ -221,12 +221,12 @@ public class MemberController {
 				if(check.getRank().equals("E")) {
 					expertService.deleteExpert(check.getId());
 				}
-				String msg = "È¸¿øÅ»Åğ µÇ¾ú½À´Ï´Ù.";
+				String msg = "íšŒì›íƒˆí‡´ ë˜ì—ˆìŠµë‹ˆë‹¤.";
 				model.addAttribute("msg",msg);
 				return "main/main.part2";
 			}
 		}
-		String msg = "ºñ¹Ğ¹øÈ£ ´Ù½Ã È®ÀÎ";
+		String msg = "ë¹„ë°€ë²ˆí˜¸ ë‹¤ì‹œ í™•ì¸";
 		model.addAttribute("msg",msg);
 		return "member/mypage.page";
 	}
@@ -248,13 +248,13 @@ public class MemberController {
 	   
 	   @RequestMapping(value="/masterPage.do", method = RequestMethod.GET)
 	   public String masterPage(Model model , HttpSession session) {
-		  System.out.println("masterPage GET È£Ãâ");
+		  System.out.println("masterPage GET í˜¸ì¶œ");
 	      return "member/masterPage";
 	   }
 
 	   @RequestMapping(value="/masterPage.do", method = RequestMethod.POST)
 	   public String masterPage(MemberVO member, Model model , HttpSession session) {
-		   System.out.println("masterPage POST È£Ãâ");
+		   System.out.println("masterPage POST í˜¸ì¶œ");
 		   return "member/masterDetail.page2";
 		
 		  
