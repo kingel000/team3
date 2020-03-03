@@ -18,6 +18,7 @@ import main.project.web.member.service.IMemberService;
 import main.project.web.member.service.MemberService;
 
 import main.project.web.member.vo.ExpertVO;
+import main.project.web.member.vo.MemberFindVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.notice.vo.NoticeVO;
 import main.project.web.product.service.IProductService;
@@ -34,7 +35,6 @@ public class adminController {
 	private IProductService productService;
 	@Autowired
 	private IMemberService memberService;
-
 	@Autowired
 	private IExpertService expertService;
 
@@ -133,6 +133,19 @@ public class adminController {
 		expertService.updateExpert(expert);
 		return "redirect:/admin/memberManager.mdo";
 	}
+	
+	
+	
+	@RequestMapping(value = "/memberfind.mdo", method= RequestMethod.POST)
+	public String memberfind(@RequestParam String category , @RequestParam String value , MemberFindVO find , MemberVO member) {
+		
+		find.setCategory(category);
+		find.setValue(value);
+		System.out.println("선택한 카테고리 및 값 " +  find );
+		
+		return "redirect:/admin/memberManager.mdo";
+	}
+	
 	
 	
 
