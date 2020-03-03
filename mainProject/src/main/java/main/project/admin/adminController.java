@@ -196,7 +196,7 @@ public class adminController {
 	@RequestMapping(value = "/adminBoardNotice.mdo", method= RequestMethod.GET)	//임의의주소값
 	public String adminBoardNotice() {
 		System.out.println("GET adminBoardNotice 호출");
-		return "admin/adminBoard_Notice___.page2";								//jsp 설정.
+		return "admin/adminBoard_Notice.page2";								//jsp 설정.
 	}
 	
 	 //<!-- *******20200229 -->
@@ -213,7 +213,7 @@ public class adminController {
 	public String adminBoardNotice_Update(NoticeVO notice) {
 		System.out.println("GET adminBoardNotice_Update POST 호출");
 		System.out.println(notice);
-		return "admin/adminBoard_Notice_Update.page2";								
+		return "admin/adminBoard_Notice.page2";								
 	}
 
 

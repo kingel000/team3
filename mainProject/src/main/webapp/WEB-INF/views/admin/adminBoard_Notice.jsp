@@ -23,6 +23,7 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
+							
 					<th>번호</th>
 					<th>제목</th>
 					<th>작성자</th>
@@ -31,6 +32,7 @@
 			</thead>
 		</table>
 
+		<!-- ****************현재 상품 판매 목록 출력 -->
 		<c:choose>
 			<c:when test="${productList != null }">
 				<c:set var="productList" value="${productList}" />
@@ -51,6 +53,7 @@
 		</c:choose>
 		<div align="right">
 		<button type="button" onclick="location.href='/web/admin/adminBoard_Notice_Update.mdo'" >글쓰기</button>
+		<button type="button" onclick="location.gref='/web/admin/adminBoard_Notice_Delete.mdo'" >글삭제</button>
 		<!-- 
 		<button type="button" onclick="location.href='/web/admin/adminBoard_Notice_Update.do?num${board_notice.board_notice_num}'" >글쓰기</button>
 		<button href="/web/admin/adminBoard_Notice_Update.do?num${board_notice.board_notice_num}">글쓰기</button>&nbsp;&nbsp;&nbsp;&nbsp;
