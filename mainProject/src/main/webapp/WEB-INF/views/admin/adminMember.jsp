@@ -45,6 +45,16 @@ td{text-align: center}
       			</c:forEach>
       </tbody>
             </table>
+            
+            <form action="/web/admin/memberfind.mdo" method="post">
+                  <select name="category">
+                     <option value="" selected disabled hidden>= 선택 =</option>
+                     <option value="email">이메일</option>
+                     <option value="nick_name">닉네임</option>
+                  </select>
+              <input type="text" name="value" placeholder="검색어를 입력해주세요">
+               <input type="submit" value="검색" />
+         </form>
  
    
       

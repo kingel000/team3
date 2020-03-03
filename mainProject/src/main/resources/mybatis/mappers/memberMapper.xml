@@ -40,7 +40,7 @@
 	</delete>
 	
 	<select id="selectAllMember" resultType="memberVO">
-		SELECT * FROM member ORDER BY ID desc
+		SELECT * FROM member ORDER BY ID asc
 	</select>
 	
 	<delete id="admindeleteMember" parameterType="memberVO">
@@ -49,4 +49,15 @@
 		WHERE id=#{id}
 		
 	</delete>
+	<!--  
+	<select id="selectMemberEmail" parameterType="MemberFindVO"
+		resultType="memberVO">
+		SELECT ID FROM member WHERE id = #{value}
+	</select>
+	
+	<select id="selectMembernick_name" parameterType="MemberFindVO"
+		resultType="memberVO">
+		SELECT nick FROM member WHERE nick_name = #{value}
+	</select>
+	-->
 </mapper>
