@@ -146,10 +146,5 @@ public class ProductController {
 	}
 	
 	//------------------------------장바구니-------------------------------------------
-
-	@RequestMapping(value = "/cart.do", method = RequestMethod.GET)
-	public String cartPage() {
-
-		return "/product/cart.page";
-	}
+	
 }

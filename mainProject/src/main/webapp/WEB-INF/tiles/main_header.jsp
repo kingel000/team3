@@ -107,24 +107,21 @@
 		<div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i class="ps-icon-shopping-cart"></i></a>
 		  <div class="ps-cart__listing">
 			<div class="ps-cart__content">
+			<!-- 장바구니 목록 -->
 			  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-				<div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="<c:url value="/resources/images/cart-preview/1.jpg" />" alt=""></div>
+				<div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="<c:url value="/resources/images/cart-preview/1.jpg" />" ></div>
 				<div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">Amazin’ Glazin’</a>
-				 	<span>Price:<i>1000￦</i></span></p>
+				 	<p><span>Price:<i>1000￦</i></span></p>
 				</div>
 			  </div>
 			 
-			</div>
-			<div class="ps-cart__total">
-			  <p>Number of items:<span>1</span></p>
-			  <p>Total Price:<span>1000￦</span></p>
 			</div>
 			<c:choose>
 	           	 <c:when test="${member.id == null}">
 					 <div class="ps-cart__footer"><a class="ps-btn" href="/web/member/login.do">Check out<i class="ps-icon-arrow-left"></i></a></div>
 	           	 </c:when>
 	            <c:otherwise>
-	             	 <div class="ps-cart__footer"><a class="ps-btn" href="/web/product/cart.do">Check out<i class="ps-icon-arrow-left"></i></a></div>
+	             	 <div class="ps-cart__footer"><a class="ps-btn" href="/web/purchase/myCart.do">Check out<i class="ps-icon-arrow-left"></i></a></div>
 	           	 </c:otherwise>
 	        </c:choose>
 			
