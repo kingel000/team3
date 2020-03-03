@@ -37,10 +37,10 @@ public class ProductDAOImpl implements IProductDAO {
 	public List<ProductVO> selectListProduct(MemberVO sessionId) {
 		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectListProduct", sessionId);
 	}
+	
 	@Override
-	public List<ProductVO> selectAllListProduct(ProductVO category) {
-		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectAllListProduct",category);
-
+	public List<ProductVO> selectAllListProduct() {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectAllListProduct");
 	}
 	@Override
 	public List<ProductVO> selectCategory(String category) {
@@ -51,14 +51,12 @@ public class ProductDAOImpl implements IProductDAO {
 	public MemberVO select_NickName(String expert_id) {
 		return sqlSessiontemplate.selectOne("main.project.web.product.dao.IProductDAO.select_NickName",expert_id);
 	}
-	@Override
-	public List<ProductVO> selectA11ListProduct2() {
-		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectA11ListProduct2");
-	}
+
 	@Override
 	public List<ProductVO> selectFindList(findVO find) {
 		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectFindList", find);
 	}
+
 	
 	
 }

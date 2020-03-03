@@ -2,6 +2,7 @@ package main.project.web.member.service;
 
 import java.util.List;
 
+import main.project.web.member.vo.MemberFindVO;
 import main.project.web.member.vo.MemberVO;
 
 public interface IMemberService {
@@ -13,4 +14,5 @@ public interface IMemberService {
 	void admindeleteMember(MemberVO member);
 	void rankupdate(String id);
 	List<MemberVO> selectAllMember();
+	//List<MemberVO> selectOneMember(MemberFindVO find);
 }

@@ -75,7 +75,30 @@
                </a>
             </div>
          </li>
-        
+         
+        <!-- *******20200229 -->
+         <li class="group">
+            <div class="box">
+          	  <a href="/web/admin/adminBoardNotice.mdo">	<!-- 임의의 주소값 설정. -->
+            
+                  <h3>Borad_Notice</h3>
+                  <p>공지사항 관리</p>
+               </a>
+            </div>
+         </li>
+         
+                 <!-- *******20200229 -->
+         <li class="group">
+            <div class="box">
+          	  <a href="/web/admin/adminBoardNotice.mdo">
+            
+                  <h3>Borad_Question</h3>
+                  <p>문의사항 관리</p>
+               </a>
+            </div>
+         </li>
+         
+         
       </ul>
    </div>
 </body>

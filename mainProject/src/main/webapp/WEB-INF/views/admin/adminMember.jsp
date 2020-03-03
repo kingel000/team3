@@ -15,6 +15,7 @@
 
 thead>tr>th{background-color: #eee; text-align: center;}
 .title{color:#fff; text-align:center; background-color: #2ac37d;}
+td{text-align: center}
 </style>
 
 </head>
@@ -37,13 +38,23 @@ thead>tr>th{background-color: #eee; text-align: center;}
                      <td><c:out value="${adminmember.id }" /></td>
                      <td><c:out value="${adminmember.nick_name }"/></td>
             		 <td><c:out value="${adminmember.rank }"/></td>
-                     <td><a href="/web/product/updateProduct.do?num=${adminmember.id}">회원 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
+                     <td><a href="adminmemberEdit.mdo?id=${adminmember.id}">회원 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
                         href="adminMemberDelete.mdo?id=${adminmember.id}">회원 탈퇴</a></td>
                   <tr>
       			
       			</c:forEach>
       </tbody>
             </table>
+            
+            <form action="/web/admin/memberfind.mdo" method="post">
+                  <select name="category">
+                     <option value="" selected disabled hidden>= 선택 =</option>
+                     <option value="email">이메일</option>
+                     <option value="nick_name">닉네임</option>
+                  </select>
+              <input type="text" name="value" placeholder="검색어를 입력해주세요">
+               <input type="submit" value="검색" />
+         </form>
  
    
       

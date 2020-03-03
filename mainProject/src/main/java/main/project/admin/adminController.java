@@ -12,93 +12,184 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
 
 import main.project.web.member.service.MemberService;
 
 import main.project.web.member.vo.ExpertVO;
+import main.project.web.member.vo.MemberFindVO;
 import main.project.web.member.vo.MemberVO;
+import main.project.web.notice.vo.NoticeVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
 import main.project.web.product.vo.findVO;
+import main.project.web.question.vo.QuestionVO;
+
 
 @Controller("adminController")
 @RequestMapping(value="/admin")
 public class adminController {
-	//* package  -> "main.project.admin
-	//localhost:8080/web/admin/*.mdo
+   //* package  -> "main.project.admin
+   //localhost:8080/web/admin/*.mdo
+   
+   @Autowired
+   private IProductService productService;
+   @Autowired
+   private IMemberService memberService;
+   @Autowired
+   private IExpertService expertService;
+
+
+   
+   @RequestMapping({"/","/admin.mdo"})
+   public String home(Locale locale, Model model) {
+      System.out.println("ADMIN MAIN MDO ï¿½ìƒ‡ç•°ï¿½");
+      return "admin/adminMain";
+   }
+   
+   //-----------æ¿¡ì’“ë ‡ï¿½ì”¤ å¯ƒï¿½ï§ï¿½
+   @RequestMapping(value = "/adminDetail.mdo" , method = RequestMethod.POST )
+   public String adminDetail(MemberVO member,HttpSession session, Model model) {
+      System.out.println("ADMIN DETAIL MDO POST ï¿½ìƒ‡ç•°ï¿½");
+      System.out.println(member.getId());
+      System.out.println(member.getPwd());
+      MemberVO check = memberService.selectMember(member);
+      System.out.println(check);
+      
+      if(check != null) {
+         if(check.getPwd().equals(member.getPwd())) {
+            if(check.getRank().equals("M")) {
+               session.setAttribute("member", check);
+               model.addAttribute("member", check);
+               return "admin/adminDetail.page2";
+            }else {
+               String msg = "æ„¿ï¿½ç”±ÑŠì˜„ ï¿½ë¸˜ï¿½ì” ï¿½ëµ’åª›ï¿½ ï¿½ì—¯ï¿½ë•²ï¿½ë–. ï¿½ìï¿½ì“½ ï§ê³¹ê²•ç‘œï¿½ ï¿½ë‹ƒï¿½ìœ­ ï§ë¶¿ì”¤ï¿½ëŸ¹ï¿½ì” ï§ï¿½æ¿¡ï¿½ ï¿½ì” ï¿½ë£ï¿½ë¸¯ï¿½ê½­ï¿½ìŠ‚";
+               model.addAttribute("msg", msg);
+            }
+         }else {
+            String msg = "é®ê¾¨ï¿½è¸°ëŠìƒ‡ ï¿½ì‚¤ç‘œì„ì—¯ï¿½ë•²ï¿½ë–.";
+            model.addAttribute("msg", msg);
+         }
+      }else {
+         String msg = "è­°ëŒì˜±ï¿½ë¸¯ï§ï¿½ ï¿½ë¸¡ï¿½ë’— ï¿½ë¸˜ï¿½ì” ï¿½ëµ’ ï¿½ì—¯ï¿½ë•²ï¿½ë–.";
+         model.addAttribute("msg", msg);
+      }
+
+      
+      return "admin/adminMain";
+   }
+   
+   
+   //-----------ï§ã…»ì¾­æ„¿ï¿½ç”±ï¿½
+   @RequestMapping(value="/memberManager.mdo",method = RequestMethod.GET)
+   public String memberManager(HttpSession session,Model model) {
+      System.out.println("memberManager mdo GET ï¿½ìƒ‡ç•°ï¿½ ");
+      List<MemberVO> adminmemberList = memberService.selectAllMember();
+      model.addAttribute("adminmemberList",adminmemberList);
+      return "admin/adminMember.page2";
+   }
+   
+   @RequestMapping(value = "/adminMemberDelete.mdo", method= RequestMethod.GET)
+   public String adminMemberDelete(@RequestParam String id,MemberVO member, HttpSession session , Model model) {
+      System.out.println("adminMemeberDelte.mdo GET ï¿½ìƒ‡ç•°ï¿½");
+      System.out.println("ï¿½ê½†ï¿½ë¼±ï¿½ì‚© ï¿½ë¸˜ï¿½ì” ï¿½ëµ’ : " + id);
+      member.setId(id);
+      System.out.println(member);
+      memberService.admindeleteMember(member);
+      return "redirect:/admin/memberManager.mdo";
+   }
+   
+   @RequestMapping(value = "/adminmemberEdit.mdo", method= RequestMethod.GET)
+   public String adminmemberEdit(@RequestParam String id,MemberVO member, HttpSession session , Model model) {
+      
+      MemberVO memberVO = (MemberVO)memberService.selectMember(member);
+      ExpertVO expertVO = (ExpertVO)expertService.selectExpert(id);
+      System.out.println("ï¿½ë‹”ï¿½ì ™ï¿½ë¸¯æ€¨ì¢ì˜„ ï¿½ë¸¯ï¿½ë’— ï¿½ë™‹ï§ã…¼ì˜„ ï¿½ì ™è¹‚ï¿½:" + expertVO);
+      System.out.println("ï¿½ë‹”ï¿½ì ™ï¿½ë¸¯æ€¨ì¢ì˜„ ï¿½ë¸¯ï¿½ë’— æ€¨ê¾©ì ™ ï¿½ì ™è¹‚ï¿½ "  + memberVO);
+      model.addAttribute("expert",expertVO);
+      model.addAttribute("member",memberVO);
+      return "admin/adminMemberDetail.page2";
+   }
+   @RequestMapping(value = "/adminmemberEdit.mdo", method= RequestMethod.POST)
+   public String adminmemberEdit(ExpertVO expert,MemberVO member, Model model , HttpSession session) {
+      System.out.println("ï¿½ë‹”ï¿½ì ™ï¿½ë§‚ ï§ã…»ì¾­ ï¿½ì ™è¹‚ï¿½ : " + member);
+      System.out.println("ï¿½ë‹”ï¿½ì ™ï¿½ë§‚ ï¿½ë™‹ï§ã…¼ì˜„ ï¿½ì ™è¹‚ï¿½ : " + expert);
+      if(member.getRank() == null || member.getRank() == "") {
+         System.out.println("if è‡¾ï¿½ ï¿½ë±¾ï¿½ë¼±ï¿½ì†•ï¿½ì“¬");
+         String rank = memberService.selectMember(member).getRank();
+         System.out.println(rank);
+         
+         member.setRank(rank);
+         
+      }
+      if(member.getPwd() == null || member.getPwd() == "") {
+         System.out.println("pwd if è‡¾ï¿½ ï¿½ë±¾ï¿½ë¼±ï¿½ìƒ‚");
+         String pwd = memberService.selectMember(member).getPwd();
+         System.out.println(pwd);
+         
+         member.setPwd(pwd);
+      }
+      System.out.println(member);
+      memberService.updateMember(member);
+      expertService.updateExpert(expert);
+      return "redirect:/admin/memberManager.mdo";
+   }
+   
+   
+   
+   @RequestMapping(value = "/memberfind.mdo", method= RequestMethod.POST)
+   public String memberfind(@RequestParam String category , @RequestParam String value , MemberFindVO find , MemberVO member) {
+      
+      find.setCategory(category);
+      find.setValue(value);
+      System.out.println("ï¿½ê½‘ï¿½ê¹®ï¿½ë¸³ ç§»ëŒ„ë€’æ€¨ì¢Šâ” è«›ï¿½ åª›ï¿½ " +  find );
+      
+      return "redirect:/admin/memberManager.mdo";
+   }
+   
+   
+   //-----------ï¿½ì†ƒï¿½ëŸ¹ï¿½ì” ï§ï¿½ æ„¿ï¿½ç”±ï¿½
+   @RequestMapping(value = "/adminHomePage.mdo", method= RequestMethod.GET)
+   public String adminHomePageManager() {
+      
+      return "admin/adminHomePage.page2";
+   }
+   
+
+	 //<!-- *******20200229 -->
+	//-----------ê²Œì‹œíŒ(ê³µì§€ì‚¬í•­) ê´€ë¦¬
+	@RequestMapping(value = "/adminBoardNotice.mdo", method= RequestMethod.GET)	//ì„ì˜ì˜ì£¼ì†Œê°’
+	public String adminBoardNotice() {
+		System.out.println("GET adminBoardNotice í˜¸ì¶œ");
+		return "admin/adminBoard_Notice.page2";								//jsp ì„¤ì •.
+	}
 	
-	@Autowired
-	private IProductService productService;
-	@Autowired
-	private IMemberService memberService;
+	 //<!-- *******20200229 -->
+	//-----------ê²Œì‹œíŒ(ê³µì§€ì‚¬í•­) ê¸€ë“±ë¡_GET
+	@RequestMapping(value = "/adminBoard_Notice_Update.mdo", method= RequestMethod.GET)	
+	public String adminBoardNotice_Update() {
+		System.out.println("GET adminBoardNotice_Update í˜¸ì¶œ");
+		return "admin/adminBoard_Notice_Update.page2";								
+	}
 	
+	 //<!-- *******20200229 -->
+		//-----------ê²Œì‹œíŒ(ê³µì§€ì‚¬í•­) ê¸€ë“±ë¡_POST
+	@RequestMapping(value = "/adminBoard_Notice_Update.mdo", method= RequestMethod.POST)	
+	public String adminBoardNotice_Update(NoticeVO notice) {
+		System.out.println("GET adminBoardNotice_Update POST í˜¸ì¶œ");
+		System.out.println(notice);
+		return "admin/adminBoard_Notice.page2";								
+	}
+
 
 	
-	@RequestMapping({"/","/admin.mdo"})
-	public String home(Locale locale, Model model) {
-		System.out.println("ADMIN MAIN MDO È£Ãâ");
-		return "admin/adminMain";
-	}
 	
-	//-----------·Î±×ÀÎ °ËÁõ
-	@RequestMapping(value = "/adminDetail.mdo" , method = RequestMethod.POST )
-	public String adminDetail(MemberVO member,HttpSession session, Model model) {
-		System.out.println("ADMIN DETAIL MDO POST È£Ãâ");
-		System.out.println(member.getId());
-		System.out.println(member.getPwd());
-		MemberVO check = memberService.selectMember(member);
-		System.out.println(check);
-		
-		if(check != null) {
-			if(check.getPwd().equals(member.getPwd())) {
-				if(check.getRank().equals("M")) {
-					session.setAttribute("member", check);
-					model.addAttribute("member", check);
-					return "admin/adminDetail.page2";
-				}else {
-					String msg = "°ü¸®ÀÚ ¾ÆÀÌµğ°¡ ÀÔ´Ï´Ù. À§ÀÇ ¸µÅ©¸¦ ´­·¯ ¸ŞÀÎÆäÀÌÁö·Î ÀÌµ¿ÇÏ¼¼¿ä";
-					model.addAttribute("msg", msg);
-				}
-			}else {
-				String msg = "ºñ¹Ğ¹øÈ£ ¿À·ùÀÔ´Ï´Ù.";
-				model.addAttribute("msg", msg);
-			}
-		}else {
-			String msg = "Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌµğ ÀÔ´Ï´Ù.";
-			model.addAttribute("msg", msg);
-		}
-
-		
-		return "admin/adminMain";
-	}
+	//-----------ìƒí’ˆê´€ë¦¬
 	
-	
-	//-----------¸â¹ö°ü¸®
-	@RequestMapping(value="/memberManager.mdo",method = RequestMethod.GET)
-	public String memberManager(HttpSession session,Model model) {
-		System.out.println("memberManager mdo GET È£Ãâ ");
-		List<MemberVO> adminmemberList = memberService.selectAllMember();
-		model.addAttribute("adminmemberList",adminmemberList);
-		return "admin/adminMember.page2";
-	}
-	
-	@RequestMapping(value = "/adminMemberDelete.mdo", method= RequestMethod.GET)
-	public String adminMemberDelete(@RequestParam String id,MemberVO member, HttpSession session , Model model) {
-		System.out.println("adminMemeberDelte.mdo GET È£Ãâ");
-		System.out.println("³Ñ¾î¿Â ¾ÆÀÌµğ : " + id);
-		member.setId(id);
-		System.out.println(member);
-		memberService.admindeleteMember(member);
-		return "redirect:/admin/memberManager.mdo";
-	}
-
-	
-	
-	//-----------»óÇ°°ü¸®
 	@RequestMapping(value = "/adminProduct.mdo", method= RequestMethod.GET )
 	public String ProductManager( HttpSession session , Model model) {
-		List<ProductVO> adminproductList = productService.selectA11ListProduct2();
+		List<ProductVO> adminproductList = productService.selectAllListProduct();
 		model.addAttribute("adminproductList", adminproductList);
 		
 		return "admin/adminProduct.page2";
@@ -113,7 +204,7 @@ public class adminController {
 	
 	@RequestMapping(value = "/adminDetailProduct.mdo", method= RequestMethod.GET)
 	public String adminDetailProduct(@RequestParam String num,ProductVO product, HttpSession session , Model model) {
-		System.out.println("¼±ÅÃÇÑ »óÇ° ¹øÈ£ : " + num);
+		System.out.println("ì„ íƒí•œ ìƒí’ˆ ë²ˆí˜¸ : " + num);
 		product = productService.selectProduct(num);
 		model.addAttribute("product", product);
 		
@@ -130,7 +221,7 @@ public class adminController {
 	@RequestMapping(value = "/find.mdo", method = RequestMethod.POST)
 	public String find(@RequestParam String category, @RequestParam String findText,
 						ProductVO product, findVO find,HttpSession session , Model model) {
-		if(category.equals("Ä«Å×°í¸®") || category == "Ä«Å×°í¸®") {
+		if(category.equals("ì¹´í…Œê³ ë¦¬") || category == "ì¹´í…Œê³ ë¦¬") {
 			find.setCategory("category");
 		}else {
 			find.setCategory("expert_id");
@@ -143,7 +234,4 @@ public class adminController {
 		return "admin/adminProduct.page2";
 	}
 
-
-	
-	
 }

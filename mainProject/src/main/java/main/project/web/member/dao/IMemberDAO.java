@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import main.project.web.member.vo.MemberFindVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.vo.ProductVO;
 
@@ -16,5 +17,6 @@ public interface IMemberDAO {
 	void admindeleteMember(MemberVO member);
 	void rankupdate(@Param("member_id") String id);
 	List<MemberVO> selectAllMember();
+	//List<MemberVO> selectOneMember(MemberFindVO find);
 }
 

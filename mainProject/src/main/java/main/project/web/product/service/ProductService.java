@@ -42,11 +42,6 @@ public class ProductService implements IProductService{
 	}
 
 	@Override
-	public List<ProductVO> selectAllListProduct(ProductVO category) {
-		return productDAO.selectAllListProduct(category);
-	}
-
-	@Override
 	public List<ProductVO> selectCategory(String category) {
 		return productDAO.selectCategory(category);
 	}
@@ -57,8 +52,8 @@ public class ProductService implements IProductService{
 	}
 
 	@Override
-	public List<ProductVO> selectA11ListProduct2() {
-		return productDAO.selectA11ListProduct2();
+	public List<ProductVO> selectAllListProduct() {
+		return productDAO.selectAllListProduct();
 	}
 
 	@Override
