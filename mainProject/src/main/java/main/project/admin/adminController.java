@@ -20,8 +20,10 @@ import main.project.web.member.service.MemberService;
 import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberFindVO;
 import main.project.web.member.vo.MemberVO;
+import main.project.web.notice.vo.NoticeVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
+import main.project.web.question.vo.QuestionVO;
 
 @Controller("adminController")
 @RequestMapping(value="/admin")
@@ -188,6 +190,31 @@ public class adminController {
       return "admin/adminHomePage.page2";
    }
    
+
+	 //<!-- *******20200229 -->
+	//-----------게시판(공지사항) 관리
+	@RequestMapping(value = "/adminBoardNotice.mdo", method= RequestMethod.GET)	//임의의주소값
+	public String adminBoardNotice() {
+		System.out.println("GET adminBoardNotice 호출");
+		return "admin/adminBoard_Notice.page2";								//jsp 설정.
+	}
+	
+	 //<!-- *******20200229 -->
+	//-----------게시판(공지사항) 글등록_GET
+	@RequestMapping(value = "/adminBoard_Notice_Update.mdo", method= RequestMethod.GET)	
+	public String adminBoardNotice_Update() {
+		System.out.println("GET adminBoardNotice_Update 호출");
+		return "admin/adminBoard_Notice_Update.page2";								
+	}
+	
+	 //<!-- *******20200229 -->
+		//-----------게시판(공지사항) 글등록_POST
+	@RequestMapping(value = "/adminBoard_Notice_Update.mdo", method= RequestMethod.POST)	
+	public String adminBoardNotice_Update(NoticeVO notice) {
+		System.out.println("GET adminBoardNotice_Update POST 호출");
+		System.out.println(notice);
+		return "admin/adminBoard_Notice.page2";								
+	}
 
 
    
