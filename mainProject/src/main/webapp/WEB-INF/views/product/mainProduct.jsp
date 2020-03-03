@@ -80,7 +80,9 @@
 									
 									</c:otherwise>
 							</c:choose>
-								<img src="<c:url value="/resources/images2/123.png"/>" alt="#">
+								<img src="<c:url value="/web/img/e5e26848-35c4-486c-83c5-dd901c5f493a"/>" alt="#">
+							
+								<!--  <img src="<c:url value="/resources/images2/123.png"/>" alt="#">-->
 								<a class="ps-shoe__overlay" href="product-detail.html"></a>
 							</div>
 							<div class="ps-shoe__content">

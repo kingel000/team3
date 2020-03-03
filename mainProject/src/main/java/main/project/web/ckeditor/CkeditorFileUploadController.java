@@ -41,6 +41,7 @@ public class CkeditorFileUploadController {
 						byte[] bytes = file.getBytes();
 						String uploadPath = req.getServletContext().getRealPath("/img");
 						File uploadFile = new File(uploadPath);
+						System.out.println("파일 실제경로 "  + uploadPath);
 						if(!uploadFile.exists()){
 							uploadFile.mkdirs();
 						}
@@ -52,10 +53,11 @@ public class CkeditorFileUploadController {
                         printWriter = resp.getWriter();
                         resp.setContentType("text/html");
                         String fileUrl = req.getContextPath() + "/img/" + fileName;
+                        System.out.println("AAA 파일 경로 " + fileUrl);
                         
-                        // json 데이터로 등록
+                        // json �뜲�씠�꽣濡� �벑濡�
                         // {"uploaded" : 1, "fileName" : "test.jpg", "url" : "/img/test.jpg"}
-                        // 이런 형태로 리턴이 나가야함.
+                        // �씠�윴 �삎�깭濡� 由ы꽩�씠 �굹媛��빞�븿.
                         json.addProperty("uploaded", 1);
                         json.addProperty("fileName", fileName);
                         json.addProperty("url", fileUrl);
