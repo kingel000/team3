@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import main.project.web.member.vo.MemberFindVO;
 import main.project.web.member.vo.MemberVO;
+import main.project.web.product.vo.findVO;
 
 @Repository("memberDAO")
 public class MemberDAOImpl implements IMemberDAO {
@@ -58,6 +59,11 @@ public class MemberDAOImpl implements IMemberDAO {
 		 sqlSessionTemplate.delete("main.project.web.member.dao.IMemberDAO.admindeleteMember",member);
 
 		
+	}
+
+	@Override
+	public List<MemberVO> selectFindList(findVO find) {
+		return sqlSessionTemplate.selectList("main.project.web.member.dao.IMemberDAO.selectFindList",find);
 	}
 
 	/**@Override

@@ -22,6 +22,7 @@ import main.project.web.member.vo.MemberFindVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
+import main.project.web.product.vo.findVO;
 
 @Controller("adminController")
 @RequestMapping(value="/admin")
@@ -140,14 +141,23 @@ public class adminController {
    
    
    @RequestMapping(value = "/memberfind.mdo", method= RequestMethod.POST)
-   public String memberfind(@RequestParam String category , @RequestParam String value , MemberFindVO find , MemberVO member) {
-      
-      find.setCategory(category);
-      find.setValue(value);
-      System.out.println("선택한 카테고리 및 값 " +  find );
-      
-      return "redirect:/admin/memberManager.mdo";
-   }
+	public String memberfind(@RequestParam String category, @RequestParam String findText,
+						MemberVO member, findVO find,HttpSession session , Model model) {
+		if(category.equals("이메일") || category == "이메일") {
+			find.setCategory("id");
+		}else {
+			find.setCategory("nick_name");
+		}
+		find.setFindText(findText);
+		System.out.println(find);
+		
+		List<MemberVO> adminmemberList = memberService.selectFindList(find);
+		System.out.println(adminmemberList);
+		
+		model.addAttribute("adminmemberList",adminmemberList);
+		return "admin/adminMember.page2";
+ }
+   
    
    
    
@@ -184,6 +194,21 @@ public class adminController {
       System.out.println(product);
       
       return "admin/adminDetailProduct.page2";
+   }
+   
+   @RequestMapping(value = "/find.mdo", method = RequestMethod.POST)
+	public String find(@RequestParam String category, @RequestParam String findText,
+						ProductVO product, findVO find,HttpSession session , Model model) {
+		if(category.equals("카테고리") || category == "카테고리") {
+			find.setCategory("category");
+		}else {
+			find.setCategory("expert_id");
+		}
+		find.setFindText(findText);
+		List<ProductVO> adminproductList = productService.selectFindList(find);
+
+		model.addAttribute("adminproductList",adminproductList);
+		return "admin/adminProduct.page2";
    }
    
    //-----------홈페이지 관리
