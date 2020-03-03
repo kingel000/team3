@@ -92,7 +92,7 @@
 						<a href="/web/member/login.do" class="ps-btn mb-10">Expert Chat</a>
 	           	 	</c:when>
 	            	<c:otherwise>
-	            		<a href="cart.do?product_num=${numProduct.product_num }" class="ps-btn mb-10">Cart</a>
+	            		<a href="/web/purchase/addCart.do?num=${numProduct.product_num }" class="ps-btn mb-10">Cart</a>
 	             	 	<input class="ps-btn mb-10" type="submit" value="Expert Chat"><i class="ps-icon-next"></i>
 	           		 </c:otherwise>
 	         	</c:choose>
