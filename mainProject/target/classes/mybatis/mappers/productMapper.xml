@@ -39,5 +39,14 @@
 	<select id="selectA11ListProduct2" resultType="productVO">
 		SELECT * FROM product ORDER BY product_num DESC
 	</select>
+	<select id="selectFindList" parameterType="findVO" resultType="productVO">
+		SELECT * FROM product WHERE 
+		<if test="category=='category'">
+			category like '%'||#{findText}||'%'
+		</if>
+		<if test="category=='expert_id'">
+			expert_id like '%'||#{findText}||'%'
+		</if>
+	</select>
 	
 </mapper>

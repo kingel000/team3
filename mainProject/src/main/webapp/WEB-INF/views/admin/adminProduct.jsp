@@ -14,6 +14,9 @@
 		td{text-align: center;}
 	</style>
 </head>
+
+<!-- Custom-->
+<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 <body>
 	<div>
 		<h3 class="title">상품 관리</h3>
@@ -40,7 +43,16 @@
 				   </c:forEach>
 			  </tbody>
 			</table>
-		
+			
+			<form action="/web/admin/find.mdo" method="post">
+              	 <select name="category">
+              		 <option value="" selected disabled hidden>= 선택 =</option>
+                 	 <option value="카테고리">카테고리</option>
+                 	 <option value="아이디">아이디</option>
+              	 </select>
+		 		 <input type="text" name="findText" placeholder="검색어를 입력해주세요">
+		 		 <input type="submit" value="검색" />
+			</form>
 	</div>
 </body>
 </html>

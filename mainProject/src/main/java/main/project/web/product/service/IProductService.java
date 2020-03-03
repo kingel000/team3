@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.vo.ProductVO;
+import main.project.web.product.vo.findVO;
 
 public interface IProductService {
 	void insertProduct(ProductVO product);
@@ -17,4 +18,5 @@ public interface IProductService {
 	List<ProductVO> selectAllListProduct(ProductVO category);
 	List<ProductVO> selectA11ListProduct2();
 	MemberVO select_NickName(String expert_id);
+	List<ProductVO> selectFindList(findVO find);
 }

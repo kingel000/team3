@@ -20,6 +20,7 @@ import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
+import main.project.web.product.vo.findVO;
 
 @Controller("adminController")
 @RequestMapping(value="/admin")
@@ -126,12 +127,22 @@ public class adminController {
 		return "admin/adminDetailProduct.page2";
 	}
 	
-	//-----------홈페이지 관리
-	@RequestMapping(value = "/adminHomePage.mdo", method= RequestMethod.GET)
-	public String adminHomePageManager() {
+	@RequestMapping(value = "/find.mdo", method = RequestMethod.POST)
+	public String find(@RequestParam String category, @RequestParam String findText,
+						ProductVO product, findVO find,HttpSession session , Model model) {
+		if(category.equals("카테고리") || category == "카테고리") {
+			find.setCategory("category");
+		}else {
+			find.setCategory("expert_id");
+		}
+		find.setFindText(findText);
+		List<ProductVO> adminproductList = productService.selectFindList(find);
+
+		model.addAttribute("adminproductList",adminproductList);
 		
-		return "admin/adminHomePage.page2";
+		return "admin/adminProduct.page2";
 	}
+
 
 	
 	
