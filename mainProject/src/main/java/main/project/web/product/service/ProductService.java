@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.dao.ProductDAOImpl;
 import main.project.web.product.vo.ProductVO;
+import main.project.web.product.vo.findVO;
 
 @Service("productService")
 public class ProductService implements IProductService{
@@ -53,6 +54,11 @@ public class ProductService implements IProductService{
 	@Override
 	public List<ProductVO> selectAllListProduct() {
 		return productDAO.selectAllListProduct();
+	}
+
+	@Override
+	public List<ProductVO> selectFindList(findVO find) {
+		return productDAO.selectFindList(find);
 	}
 
 }

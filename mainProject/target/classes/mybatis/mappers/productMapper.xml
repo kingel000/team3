@@ -56,4 +56,15 @@
 		SELECT * FROM MEMBER WHERE ID = #{expert_id}
 	</select>
 	
+	<select id="selectFindList" parameterType="findVO" resultType="productVO">
+		SELECT * FROM product WHERE 
+		<if test="category=='category'">
+			category like '%'||#{findText}||'%'
+		</if>
+		<if test="category=='expert_id'">
+			expert_id like '%'||#{findText}||'%'
+		</if>
+	</select>
+
+	
 </mapper>

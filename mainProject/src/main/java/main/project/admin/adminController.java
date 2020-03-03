@@ -20,10 +20,8 @@ import main.project.web.member.service.MemberService;
 import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberFindVO;
 import main.project.web.member.vo.MemberVO;
-import main.project.web.notice.vo.NoticeVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
-import main.project.web.question.vo.QuestionVO;
 
 @Controller("adminController")
 @RequestMapping(value="/admin")
@@ -131,6 +129,11 @@ public class adminController {
       System.out.println(member);
       memberService.updateMember(member);
       expertService.updateExpert(expert);
+      
+      if( member.getRank() == "N" || member.getRank().equals("N")) {
+          System.out.println("ë³€ê²½í•œ RANK = N ì§„ìž…");
+         expertService.deleteExpert(member.getId());
+       }
       return "redirect:/admin/memberManager.mdo";
    }
    
@@ -190,31 +193,6 @@ public class adminController {
       return "admin/adminHomePage.page2";
    }
    
-
-	 //<!-- *******20200229 -->
-	//-----------°Ô½ÃÆÇ(°øÁö»çÇ×) °ü¸®
-	@RequestMapping(value = "/adminBoardNotice.mdo", method= RequestMethod.GET)	//ÀÓÀÇÀÇÁÖ¼Ò°ª
-	public String adminBoardNotice() {
-		System.out.println("GET adminBoardNotice È£Ãâ");
-		return "admin/adminBoard_Notice.page2";								//jsp ¼³Á¤.
-	}
-	
-	 //<!-- *******20200229 -->
-	//-----------°Ô½ÃÆÇ(°øÁö»çÇ×) ±Ûµî·Ï_GET
-	@RequestMapping(value = "/adminBoard_Notice_Update.mdo", method= RequestMethod.GET)	
-	public String adminBoardNotice_Update() {
-		System.out.println("GET adminBoardNotice_Update È£Ãâ");
-		return "admin/adminBoard_Notice_Update.page2";								
-	}
-	
-	 //<!-- *******20200229 -->
-		//-----------°Ô½ÃÆÇ(°øÁö»çÇ×) ±Ûµî·Ï_POST
-	@RequestMapping(value = "/adminBoard_Notice_Update.mdo", method= RequestMethod.POST)	
-	public String adminBoardNotice_Update(NoticeVO notice) {
-		System.out.println("GET adminBoardNotice_Update POST È£Ãâ");
-		System.out.println(notice);
-		return "admin/adminBoard_Notice.page2";								
-	}
 
 
    

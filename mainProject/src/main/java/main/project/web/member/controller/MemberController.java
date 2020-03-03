@@ -25,239 +25,237 @@ import main.project.web.member.vo.MemberVO;
 @Controller("memberController")
 @RequestMapping(value="/member")
 public class MemberController {
-	@Autowired
-	private IMemberService memberService;
-	@Autowired
-	private IExpertService expertService;
-	@Autowired
-	private JavaMailSender mailSender;
+   @Autowired
+   private IMemberService memberService;
+   @Autowired
+   private IExpertService expertService;
+   @Autowired
+   private JavaMailSender mailSender;
 
-	@RequestMapping(value="/login.do", method = RequestMethod.GET)
-	public String memberLogin(Model model) {
-		return "member/login";
-	}
+   @RequestMapping(value="/login.do", method = RequestMethod.GET)
+   public String memberLogin(Model model) {
+      return "member/login";
+   }
 
-	@RequestMapping(value="/login.do", method = RequestMethod.POST)
-	public String memberLogin(MemberVO member,HttpSession session, Model model) {
-		System.out.println(member.getId());
-		System.out.println(member.getPwd());
-		MemberVO check = memberService.selectMember(member);
-		System.out.println(check);
+   @RequestMapping(value="/login.do", method = RequestMethod.POST)
+   public String memberLogin(MemberVO member,HttpSession session, Model model) {
+      System.out.println(member.getId());
+      System.out.println(member.getPwd());
+      MemberVO check = memberService.selectMember(member);
+      System.out.println(check);
 
-		
-		if(check != null) {
-			if(check.getPwd().equals(member.getPwd())) {
-				session.setAttribute("member", check);
-				model.addAttribute("member", check);
-				return "main/main.part2";
-			}else {
-				String msg = "ë¹„ë°€ë²ˆí˜¸ ì˜¤ë¥˜";
-				System.out.println(msg);
-				model.addAttribute("msg", msg);
-			}
-		}else {
-			String msg = "ì•„ì´ë”” ì—†ìŒ";
-			System.out.println("ì•„ì´ë”” ì—†ìŒ");
-			model.addAttribute("msg", msg);
-		}
-		String msg = "íšŒì›ê°€ì… ë˜ì—ˆìŠµë‹ˆë‹¤.";
-		model.addAttribute("msg",msg);
-		return "member/login";
-	}
+      
+      if(check != null) {
+         if(check.getPwd().equals(member.getPwd())) {
+            session.setAttribute("member", check);
+            model.addAttribute("member", check);
+            return "main/main.part2";
+         }else {
+            String msg = "ºñ¹Ğ¹øÈ£ ¿À·ù";
+            System.out.println(msg);
+            model.addAttribute("msg", msg);
+         }
+      }else {
+         String msg = "¾ÆÀÌµğ ¾øÀ½";
+         System.out.println("¾ÆÀÌµğ ¾øÀ½");
+         model.addAttribute("msg", msg);
+      }
+      return "member/login";
+   }
 
-	@RequestMapping(value="/regiser.do",method=RequestMethod.GET)
-	public String memberRegiser(Model model) {
-		return "member/regiser_f";
-	}
+   @RequestMapping(value="/regiser.do",method=RequestMethod.GET)
+   public String memberRegiser(Model model) {
+      return "member/regiser_f";
+   }
 
-	@RequestMapping(value="/regiser.do",method=RequestMethod.POST)
-	public String memberRegiser(MemberVO member, Model model, HttpSession session) {
-		System.out.println(member.getRank());
-		memberService.insertMember(member);
-		MemberVO member2 = memberService.selectMember(member);
-		return "member/login";
-	}
+   @RequestMapping(value="/regiser.do",method=RequestMethod.POST)
+   public String memberRegiser(MemberVO member, Model model, HttpSession session) {
+      System.out.println(member.getRank());
+      memberService.insertMember(member);
+      MemberVO member2 = memberService.selectMember(member);
+      return "member/login";
+   }
 
-	@RequestMapping(value="/auth.do", method=RequestMethod.POST)
-	public String memberAuth(MemberVO member, Model model,HttpServletResponse response) {
-		MemberVO check = memberService.checkMemberId(member.getId());
-		if(check == null) {
-			String authKey = new TempKey().getKey(8, false);
-			try {
-				// mail ì‘ì„± ê´€ë ¨ê¸°ëŠ¥
-				MailUtils sendMail = new MailUtils(mailSender);
-				StringBuffer stb = new StringBuffer();
-				stb.append("<h1>[ì´ë©”ì¼ ì¸ì¦]</h1>");
-				stb.append("<p>ì•ˆë…•í•˜ì„¸ìš” íšŒì›ë‹˜ ì €í¬ í™ˆí˜ì´ì§€ë¥¼ ì°¾ì•„ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤.</p>");
-				stb.append("ì¸ì¦ë²ˆí˜¸ëŠ” ");
-				stb.append(authKey);
-				stb.append(" ì…ë‹ˆë‹¤.");
+   @RequestMapping(value="/auth.do", method=RequestMethod.POST)
+   public String memberAuth(MemberVO member, Model model,HttpServletResponse response) {
+      MemberVO check = memberService.checkMemberId(member.getId());
+      if(check == null) {
+         String authKey = new TempKey().getKey(8, false);
+         try {
+            // mail ÀÛ¼º °ü·Ã±â´É
+            MailUtils sendMail = new MailUtils(mailSender);
+            StringBuffer stb = new StringBuffer();
+            stb.append("<h1>[ÀÌ¸ŞÀÏ ÀÎÁõ]</h1>");
+            stb.append("<p>¾È³çÇÏ¼¼¿ä È¸¿ø´Ô ÀúÈñ È¨ÆäÀÌÁö¸¦ Ã£¾ÆÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù.</p>");
+            stb.append("ÀÎÁõ¹øÈ£´Â ");
+            stb.append(authKey);
+            stb.append(" ÀÔ´Ï´Ù.");
 
-				sendMail.setSubject("íšŒì›ê°€ì… ì´ë©”ì¼ ì¸ì¦");
-				sendMail.setText(stb.toString());
-				sendMail.setFrom("item2881@gmail.com ", "Item");
-				sendMail.setTo(member.getId());
-				sendMail.send();
-			} catch (MessagingException e1) {
-				e1.printStackTrace();
-			}catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-			try {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter  out_email = response.getWriter();
-				out_email.println("<script>alert('ì´ë©”ì¼ì´ ë°œì†¡ë˜ì—ˆìŠµë‹ˆë‹¤. ì¸ì¦ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.');</script>");
-				out_email.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			model.addAttribute("authKey", authKey);
-			model.addAttribute("member", member);
-		}else {
-			try {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter  out_email = response.getWriter();
-				out_email.println("<script>alert('ì…ë ¥í•œ ì•„ì´ë””ê°€ ì¤‘ë³µì…ë‹ˆë‹¤. ì•„ì´ë””ë¥¼ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”.');</script>");
-				out_email.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}finally {
-			}
-		}
-		return "member/regiser_f";
-	}
-	
-	@RequestMapping(value="/authKey.do", method=RequestMethod.POST)
-	public String memberAuthKey(MemberVO member,String key, String authKey, Model model) {
-		if(authKey.equals(key)) {
-			model.addAttribute("member",member);
-			return "member/regiser_s";
-		}
-		return "member/regiser_f";
-	}
-	
-	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
-	public String memberLogout(HttpSession session, Model model) {
-		session.invalidate();
-		return "main/main.part2";
-	}
+            sendMail.setSubject("È¸¿ø°¡ÀÔ ÀÌ¸ŞÀÏ ÀÎÁõ");
+            sendMail.setText(stb.toString());
+            sendMail.setFrom("item2881@gmail.com ", "Item");
+            sendMail.setTo(member.getId());
+            sendMail.send();
+         } catch (MessagingException e1) {
+            e1.printStackTrace();
+         }catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+         }
+         try {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter  out_email = response.getWriter();
+            out_email.println("<script>alert('ÀÌ¸ŞÀÏÀÌ ¹ß¼ÛµÇ¾ú½À´Ï´Ù. ÀÎÁõ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.');</script>");
+            out_email.flush();
+         } catch (IOException e) {
+            e.printStackTrace();
+         }
+         model.addAttribute("authKey", authKey);
+         model.addAttribute("member", member);
+      }else {
+         try {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter  out_email = response.getWriter();
+            out_email.println("<script>alert('ÀÔ·ÂÇÑ ¾ÆÀÌµğ°¡ Áßº¹ÀÔ´Ï´Ù. ¾ÆÀÌµğ¸¦ ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä.');</script>");
+            out_email.flush();
+         } catch (IOException e) {
+            e.printStackTrace();
+         }finally {
+         }
+      }
+      return "member/regiser_f";
+   }
+   
+   @RequestMapping(value="/authKey.do", method=RequestMethod.POST)
+   public String memberAuthKey(MemberVO member,String key, String authKey, Model model) {
+      if(authKey.equals(key)) {
+         model.addAttribute("member",member);
+         return "member/regiser_s";
+      }
+      return "member/regiser_f";
+   }
+   
+   @RequestMapping(value="/logout.do", method=RequestMethod.GET)
+   public String memberLogout(HttpSession session, Model model) {
+      session.invalidate();
+      return "main/main.part2";
+   }
 
-	@RequestMapping(value="/mypage.do", method = RequestMethod.GET)
-	public String memberMyPage() {
-		System.out.println("mypage GET í˜¸ì¶œ");
-		return "member/mypage.page";
-	}
+   @RequestMapping(value="/mypage.do", method = RequestMethod.GET)
+   public String memberMyPage() {
+      System.out.println("mypage GET È£Ãâ");
+      return "member/mypage.page";
+   }
 
-	@RequestMapping(value="/editMember.do", method=RequestMethod.GET)
-	public String editMember(HttpSession session, Model model) {
-		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		model.addAttribute("member", memberVO);
-		return "member/editMember.page";
-	}
-	
-	@RequestMapping(value="/editMember.do", method=RequestMethod.POST)
-	public String editMember(String password, MemberVO member,HttpSession session,Model model) {
-		MemberVO  check = (MemberVO) session.getAttribute("member");
-		if(check.getPwd().equals(password)) {
-			memberService.updateMember(member);
-			session.setAttribute("member", member);
-			model.addAttribute("member",member);
-			String msg = "íšŒì›ì •ë³´ ë³€ê²½ì™„ë£Œ";
-			model.addAttribute("msg",msg);
-			return "member/editMember.page";
-		}
-		String msg = "ë¹„ë°€ë²ˆí˜¸ ë‹¤ì‹œ í™•ì¸";
-		model.addAttribute("msg",msg);
-		return "member/editMember.page";
-	}
-	@RequestMapping(value="/rankUp.do", method = RequestMethod.GET)
-	public String rankUpPage() {
-		return "member/rankUp.page";
-	}
+   @RequestMapping(value="/editMember.do", method=RequestMethod.GET)
+   public String editMember(HttpSession session, Model model) {
+      MemberVO memberVO = (MemberVO)session.getAttribute("member");
+      model.addAttribute("member", memberVO);
+      return "member/editMember.page";
+   }
+   
+   @RequestMapping(value="/editMember.do", method=RequestMethod.POST)
+   public String editMember(String password, MemberVO member,HttpSession session,Model model) {
+      MemberVO  check = (MemberVO) session.getAttribute("member");
+      if(check.getPwd().equals(password)) {
+         memberService.updateMember(member);
+         session.setAttribute("member", member);
+         model.addAttribute("member",member);
+         String msg = "È¸¿øÁ¤º¸ º¯°æ¿Ï·á";
+         model.addAttribute("msg",msg);
+         return "member/editMember.page";
+      }
+      String msg = "ºñ¹Ğ¹øÈ£ ´Ù½Ã È®ÀÎ";
+      model.addAttribute("msg",msg);
+      return "member/editMember.page";
+   }
+   @RequestMapping(value="/rankUp.do", method = RequestMethod.GET)
+   public String rankUpPage() {
+      return "member/rankUp.page";
+   }
 
-	@RequestMapping(value="/rankUp.do", method = RequestMethod.POST)
-	public String rankUpPage(ExpertVO expert , Model model , HttpSession session) {
-		MemberVO member = (MemberVO)session.getAttribute("member");
-		String sessionId =member.getId();
-		expert.setId(sessionId);
-		System.out.println(expert);
-		expertService.insertExpert(expert);
-		memberService.rankupdate(sessionId);
-		member.setRank("E");
-		session.setAttribute("member", member);
-		return "member/mypage.page";
-	}
-	
-	@RequestMapping(value="/editExpert.do",method=RequestMethod.GET)
-	public String editExpert(HttpSession session,Model model) {
-		ExpertVO expert = expertService.selectExpert(((MemberVO)session.getAttribute("member")).getId());
-		System.out.println("ìˆ˜ì •í•˜ëŠ” ì „ë¬¸ê°€ ì •ë³´ : "  + expert);
-		model.addAttribute("expert", expert) ;
-		return "member/editExpert.page";
-	}
-	
-	@RequestMapping(value="/editExpert.do", method=RequestMethod.POST)
-	public String editExpert(ExpertVO expert, Model model) {
-		System.out.println(expert);
-		expertService.updateExpert(expert);
-		return "member/mypage.page";
-	}
+   @RequestMapping(value="/rankUp.do", method = RequestMethod.POST)
+   public String rankUpPage(ExpertVO expert , Model model , HttpSession session) {
+      MemberVO member = (MemberVO)session.getAttribute("member");
+      String sessionId =member.getId();
+      expert.setId(sessionId);
+      System.out.println(expert);
+      expertService.insertExpert(expert);
+      memberService.rankupdate(sessionId);
+      member.setRank("E");
+      session.setAttribute("member", member);
+      return "member/mypage.page";
+   }
+   
+   @RequestMapping(value="/editExpert.do",method=RequestMethod.GET)
+   public String editExpert(HttpSession session,Model model) {
+      ExpertVO expert = expertService.selectExpert(((MemberVO)session.getAttribute("member")).getId());
+      System.out.println("¼öÁ¤ÇÏ´Â Àü¹®°¡ Á¤º¸ : "  + expert);
+      model.addAttribute("expert", expert) ;
+      return "member/editExpert.page";
+   }
+   
+   @RequestMapping(value="/editExpert.do", method=RequestMethod.POST)
+   public String editExpert(ExpertVO expert, Model model) {
+      System.out.println(expert);
+      expertService.updateExpert(expert);
+      return "member/mypage.page";
+   }
 
-	@RequestMapping(value="/withdrawal.do", method= RequestMethod.GET)
-	public String Withdrawal() {
-		return "member/withdrawal.page";
-	}
+   @RequestMapping(value="/withdrawal.do", method= RequestMethod.GET)
+   public String Withdrawal() {
+      return "member/withdrawal.page";
+   }
 
-	@RequestMapping(value="/withdrawal.do", method= RequestMethod.POST)
-	public String Withdrawal(String password ,Model model, HttpSession session) {
-		MemberVO  check = (MemberVO) session.getAttribute("member");
+   @RequestMapping(value="/withdrawal.do", method= RequestMethod.POST)
+   public String Withdrawal(String password ,Model model, HttpSession session) {
+      MemberVO  check = (MemberVO) session.getAttribute("member");
 
-		System.out.println("check : " + check);
-		System.out.println("password : " + password);
-		if(password != null) {
-			if(check.getPwd().equals(password)) {
-				session.invalidate();
-				memberService.deleteMember(check);
-				if(check.getRank().equals("E")) {
-					expertService.deleteExpert(check.getId());
-				}
-				String msg = "íšŒì›íƒˆí‡´ ë˜ì—ˆìŠµë‹ˆë‹¤.";
-				model.addAttribute("msg",msg);
-				return "main/main.part2";
-			}
-		}
-		String msg = "ë¹„ë°€ë²ˆí˜¸ ë‹¤ì‹œ í™•ì¸";
-		model.addAttribute("msg",msg);
-		return "member/mypage.page";
-	}
-	
-	   @RequestMapping(value="/boardManager.do", method = RequestMethod.GET)
-	   public String editBoard(ExpertVO expert, HttpSession session , Model model) {
-	      String sessionId = ((MemberVO)session.getAttribute("member")).getId();
-	      expert.setId(sessionId);
-	      System.out.println(expert);
-	      session.setAttribute("expert",expert);
-	      return "member/boardManager.page";
-	   }
+      System.out.println("check : " + check);
+      System.out.println("password : " + password);
+      if(password != null) {
+         if(check.getPwd().equals(password)) {
+            session.invalidate();
+            memberService.deleteMember(check);
+            if(check.getRank().equals("E")) {
+               expertService.deleteExpert(check.getId());
+            }
+            String msg = "È¸¿øÅ»Åğ µÇ¾ú½À´Ï´Ù.";
+            model.addAttribute("msg",msg);
+            return "main/main.part2";
+         }
+      }
+      String msg = "ºñ¹Ğ¹øÈ£ ´Ù½Ã È®ÀÎ";
+      model.addAttribute("msg",msg);
+      return "member/mypage.page";
+   }
+   
+      @RequestMapping(value="/boardManager.do", method = RequestMethod.GET)
+      public String editBoard(ExpertVO expert, HttpSession session , Model model) {
+         String sessionId = ((MemberVO)session.getAttribute("member")).getId();
+         expert.setId(sessionId);
+         System.out.println(expert);
+         session.setAttribute("expert",expert);
+         return "member/boardManager.page";
+      }
 
-	   @RequestMapping(value="/boardManager.do", method = RequestMethod.POST)
-	   public String editBoard(ExpertVO expert , Model model , HttpSession session) {
+      @RequestMapping(value="/boardManager.do", method = RequestMethod.POST)
+      public String editBoard(ExpertVO expert , Model model , HttpSession session) {
 
-	      return "main/main.part2";
-	   }
-	   
-	   @RequestMapping(value="/masterPage.do", method = RequestMethod.GET)
-	   public String masterPage(Model model , HttpSession session) {
-		  System.out.println("masterPage GET í˜¸ì¶œ");
-	      return "member/masterPage";
-	   }
+         return "main/main.part2";
+      }
+      
+      @RequestMapping(value="/masterPage.do", method = RequestMethod.GET)
+      public String masterPage(Model model , HttpSession session) {
+        System.out.println("masterPage GET È£Ãâ");
+         return "member/masterPage";
+      }
 
-	   @RequestMapping(value="/masterPage.do", method = RequestMethod.POST)
-	   public String masterPage(MemberVO member, Model model , HttpSession session) {
-		   System.out.println("masterPage POST í˜¸ì¶œ");
-		   return "member/masterDetail.page2";
-		
-		  
-	     
-	   }
+      @RequestMapping(value="/masterPage.do", method = RequestMethod.POST)
+      public String masterPage(MemberVO member, Model model , HttpSession session) {
+         System.out.println("masterPage POST È£Ãâ");
+         return "member/masterDetail.page2";
+      
+        
+        
+      }
 }
