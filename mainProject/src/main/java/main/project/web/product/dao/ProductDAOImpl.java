@@ -56,6 +56,10 @@ public class ProductDAOImpl implements IProductDAO {
 	public List<ProductVO> selectFindList(findVO find) {
 		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectFindList", find);
 	}
+	@Override
+	public List<ProductVO> mainFindList(String mainFindText) {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.mainFindList", mainFindText);
+	}
 
 	
 	

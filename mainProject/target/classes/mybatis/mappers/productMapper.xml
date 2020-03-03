@@ -65,6 +65,10 @@
 			expert_id like '%'||#{findText}||'%'
 		</if>
 	</select>
+	<select id="mainFindList" parameterType="String" resultType="productVO">
+		SELECT * FROM product WHERE product_title like '%'||#{mainFindText}||'%'
+	</select>
+	
 
 	
 </mapper>
