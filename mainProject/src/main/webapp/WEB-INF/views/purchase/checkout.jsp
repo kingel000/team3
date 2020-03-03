@@ -12,7 +12,7 @@
     <script>
     $(function(){
         var IMP = window.IMP; // 생략가능
-        IMP.init('imp51650971'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+        IMP.init('imp77454320'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
         var msg;
         
         IMP.request_pay({

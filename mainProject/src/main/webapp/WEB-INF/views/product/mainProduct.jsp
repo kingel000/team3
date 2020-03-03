@@ -71,6 +71,15 @@
 					<c:forEach var="product" items="${productList}" varStatus="status">
 						<div class="ps-product__column">
 							<div class="ps-shoe__thumbnail">
+							<c:choose>
+								<c:when test="">
+								
+								</c:when>
+								
+									<c:otherwise>
+									
+									</c:otherwise>
+							</c:choose>
 								<img src="<c:url value="/resources/images2/123.png"/>" alt="#">
 								<a class="ps-shoe__overlay" href="product-detail.html"></a>
 							</div>

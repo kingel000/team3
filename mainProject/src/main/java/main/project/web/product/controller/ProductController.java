@@ -85,7 +85,7 @@ public class ProductController {
 		session.setAttribute("expert",expert);
 		List<ProductVO> productList = productService.selectListProduct(sessionId);
 		for(ProductVO product : productList) {
-			System.out.println(product);
+			System.out.println("상품정보 " + product);
 		}
 		model.addAttribute("productList",productList);
 		return "product/boardManager.page";
