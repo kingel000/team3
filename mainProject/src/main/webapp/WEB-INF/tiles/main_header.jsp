@@ -80,17 +80,7 @@
 			  <li class="menu-item menu-item-has-children has-mega-menu"><a href="/web/product/mainProduct.do?category='C2'">모바일앱·웹</a></li>
 			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C3'">게임</a></li>
 			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C4'">응용프로그래밍</a></li>
-			  <li class="menu-item menu-item-has-children dropdown"><a href="/web/board/chat.do">기타</a>
-					<ul class="sub-menu">
-					  <li class="menu-item menu-item-has-children dropdown"><a href="#">Blog-grid</a>
-							<ul class="sub-menu">
-							  <li class="menu-item"><a href="#">Blog Grid 1</a></li>
-							  <li class="menu-item"><a href="#">Blog Grid 2</a></li>
-							</ul>
-					  </li>
-					  <li class="menu-item"><a href="#">Blog List</a></li>
-					</ul>
-			  </li>
+			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C5'">기타</a></li>
 			  <li class="menu-item menu-item-has-children dropdown"><a href="#">고객센터</a>
 					<ul class="sub-menu">
 					  <li class="menu-item"><a href="/web/board/notice.do">공지사항</a></li>
