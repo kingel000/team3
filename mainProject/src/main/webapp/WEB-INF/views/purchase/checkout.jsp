@@ -12,7 +12,7 @@
     <script>
     $(function(){
         var IMP = window.IMP; // 생략가능
-        IMP.init('imp51650971'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+        IMP.init('imp77454320'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
         var msg;
         
         IMP.request_pay({
@@ -22,7 +22,7 @@
             
             name : 'ITEM 상품', //주문명
             amount : 14000, //결제할 금액
-            buyer_email : 'item2881@gmail.com', //주문자 이메일
+            buyer_email : 'item999@gmail.com', //주문자 이메일
             buyer_name : '구매자이름',  //주문자명
             buyer_tel : '010-1234-5678', // 주문자 연락처 (필수항목) 누락되거나 blank일 때 일부 PG사에서 오류발생
         }, function(rsp) {
