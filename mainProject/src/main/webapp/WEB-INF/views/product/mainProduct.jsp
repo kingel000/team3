@@ -59,7 +59,7 @@
 
 </head>
 
-<body class="ps-loading">
+<body>
 	<div class="header--sidebar"></div>
 
 

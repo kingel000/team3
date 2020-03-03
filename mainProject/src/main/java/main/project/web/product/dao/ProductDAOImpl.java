@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.vo.ProductVO;
+import main.project.web.product.vo.findVO;
 
 @Repository("productDAO")
 public class ProductDAOImpl implements IProductDAO {
@@ -50,6 +51,12 @@ public class ProductDAOImpl implements IProductDAO {
 	public MemberVO select_NickName(String expert_id) {
 		return sqlSessiontemplate.selectOne("main.project.web.product.dao.IProductDAO.select_NickName",expert_id);
 	}
+
+	@Override
+	public List<ProductVO> selectFindList(findVO find) {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectFindList", find);
+	}
+
 	
 	
 }
