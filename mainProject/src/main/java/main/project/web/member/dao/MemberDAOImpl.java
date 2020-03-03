@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import main.project.web.member.vo.MemberFindVO;
 import main.project.web.member.vo.MemberVO;
 
 @Repository("memberDAO")
@@ -58,5 +59,12 @@ public class MemberDAOImpl implements IMemberDAO {
 
 		
 	}
+
+	/**@Override
+	public List<MemberVO> selectOneMember(MemberFindVO find) {
+		return sqlSessionTemplate.selectList("main.project.web.member.dao.IMemberDAO.selectOneMember",find);
+
+	}
+	**/
 
 }

@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import main.project.web.member.dao.IMemberDAO;
+import main.project.web.member.vo.MemberFindVO;
 import main.project.web.member.vo.MemberVO;
 
 @Service("memberService")
@@ -54,7 +55,13 @@ public class MemberService implements IMemberService{
 
 		
 	}
+/**
+	@Override
+	public List<MemberVO> selectOneMember(MemberFindVO find) {
+		return memberDAO.selectOneMember(find);
 
+	}
 
+**/
 
 }
