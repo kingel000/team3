@@ -258,6 +258,31 @@ public class adminController {
 
 		return "admin/adminPurchase.page2";
 
+<<<<<<< HEAD
 	}
+=======
+      return "admin/adminPurchase.page2";
+   
+   }
+   
+   @RequestMapping(value = "/purchase.mdo", method= RequestMethod.POST)
+  	public String purchasefind(@RequestParam String category, @RequestParam String findText,
+  						PurchaseVO purchase, findVO find,HttpSession session , Model model) {
+  		if(category.equals("상품번호") || category == "상품번호") {
+  			find.setCategory("product_num");
+  		}else {
+			find.setCategory("member_id");
+		}
+  		
+  		find.setFindText(findText);
+  		System.out.println("검색어====="+find);
+  		
+  		List<PurchaseVO> purchaseList = purchaseService.purchaseFindList(find);
+  		System.out.println(purchaseList);
+  		
+  		model.addAttribute("purchaseList",purchaseList);
+  		return "admin/adminPurchase.page2";
+   }
+>>>>>>> branch 'master' of https://github.com/kingel000/team3
 
 }

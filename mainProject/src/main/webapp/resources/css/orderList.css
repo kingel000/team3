@@ -1,0 +1,190 @@
+.mypage-area { min-width: 1200px; max-width: 1800px; padding: 0 0px; margin: 0 auto; }
+
+.mypage-cont { width: calc(100%); padding: 0; float: right; }
+.mypage-cont .n-order-cancel { padding-bottom: 0; border-bottom: none; }
+.mypage-cont .n-txt-primary { color: #0078ff; }
+.mypage-cont .btn-set.btn-parents .n-btn { width: 130px; }
+.mypage-cont .duedate { color: #777; font-weight: 600; }
+
+.n-section-title {
+    border-bottom: 3px solid #1ab26c;
+    padding-bottom: 14px;
+    font-family: 'Gulim','Apple SD Gothic',Auto,sans-serif;
+    line-height: 1.5;
+    font-size: 14px;
+    position: relative;
+}
+.mypage-cont .n-section-title .state { display: inline-block; padding: 12px 0 0 18px; }
+.mypage-cont .n-section-title .state li { display: inline-block; color: #777777; margin-right: 16px; }
+.mypage-cont .n-section-title .state li.is-active { font-weight: bold; }
+.mypage-cont .n-section-title .state a { display: block; }
+.mypage-cont .n-section-title .state a:hover { text-decoration: underline; }
+.mypage-cont .n-section-title .n-link { color: #000000; }
+.mypage-cont .n-prd-row .info { width: 100%; }
+.n-prd-row .info {
+    display: table-cell;
+    padding-left: 10px;
+    vertical-align: middle;
+}
+.n-prd-row .info a {
+    display: inline-block;
+}
+.n-prd-row .info .name {
+    max-height: 44px;
+    font-weight: 900;
+    overflow: hidden;
+    font-size: 18px;
+}
+.name {
+    color: #000;
+}
+.n-info-txt {
+    font-family: 'Gulim','Apple SD Gothic',Auto,sans-serif;
+    line-height: 1.5;
+    font-size: 14px;
+    padding-top: 20px;
+}
+.n-info-txt > li {
+    color: #777777;
+    padding-left: 14px;
+    position: relative;
+}
+.n-info-txt > li:before {
+    content: "-";
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.n-table {
+    width: 100%;
+	margin: 50px 0 16px 0;
+	font-family: 'Gulim','Apple SD Gothic',Auto,sans-serif;
+    line-height: 1.5;
+    font-size: 14px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    
+    border-top: 1px solid #444444;
+    border-bottom: 1px solid #444444;
+    border-collapse: collapse;
+}
+.n-table.table-col td {
+    height: 70px;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: middle;
+    word-break: break-all;
+    padding: 10px;
+    border-bottom: 1px solid rgb(245, 245, 245);
+}
+.btn-set { text-align: center; }
+.n-prd-row .info .brand {
+    font-weight: 300;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.n-prd-row .info li {
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.n-table.table-col .n-prd-row {
+    margin: 10px 0;
+}
+.n-prd-row {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    min-height: 96px;
+    font-family: 'Gulim','Apple SD Gothic',Auto,sans-serif;
+    line-height: 1.5;
+    font-size: 14px;
+    text-align: left;
+    position: relative;
+}
+.n-prd-row .img-block {
+    display: table-cell;
+    width: 80px;
+    hieght: 96px;
+    vertical-align: middle;
+}
+.img-block > img {
+    top: 50%;
+    width: 80px;
+    min-height: 96px;
+    /* position: absolute;
+    left: 0;
+    padding-top: 96px;
+  	transform: translateY(-50%); */
+}
+
+.n-paging {
+    text-align: center;
+    padding-top: 20px;
+    clear: both;
+}
+.n-paging .page.is-active {
+    font-weight: bold;
+    color: #000000;
+}
+.n-paging .page {
+    display: inline-block;
+    width: 28px;
+    line-height: 22px;
+    font-family: 'Gulim','Apple SD Gothic',Auto,sans-serif !important;
+    font-size: 16px;
+    color: #dadada;
+    vertical-align: top;
+    margin: 5px 0;
+    border: 0;
+    padding: 0;
+    background: none;
+}
+
+.my-order-state {
+    background: #f7f7f7;
+    padding: 30px 0;
+    margin-top: 65px;
+    overflow: hidden;
+}
+.my-order-state > dl {
+    width: 50%;
+    padding-left: 50px;
+    box-sizing: border-box;
+    float: left;
+    position: relative;
+}
+.n-hidden {
+    display: block;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    position: absolute;
+}
+.my-order-state > dl dt {
+    position: absolute;
+    left: 50px;
+    top: 0;
+}
+.my-order-state > dl.state1 dd {
+    margin-left: 87px;
+}
+table {
+}
+tr {
+    display: table-row;
+}
+th {
+	display: table-cell;
+	background-color: #eee;
+	text-align: center;
+	padding: 10px;
+}
+td {
+}
+ul, li {
+    list-style: none;
+}

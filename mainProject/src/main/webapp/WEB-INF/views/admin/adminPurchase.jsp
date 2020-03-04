@@ -48,11 +48,11 @@
 			  </tbody>
 			</table>
 			
-			<form action="/web/admin/find.mdo" method="post">
+			<form action="/web/admin//purchase.mdo" method="post">
               	 <select name="category">
-              		 <option value="" selected disabled hidden>= 선택 =</option>
-                 	 <option value="카테고리">카테고리</option>
-                 	 <option value="아이디">아이디</option>
+              		 <option value="" selected disabled hidden>= 선택  =</option>
+                 	 <option value="상품번호">상품번호</option>
+                 	 <option value="구매자">구매자</option>
               	 </select>
 		 		 <input type="text" name="findText" placeholder="검색어를 입력해주세요">
 		 		 <input type="submit" value="검색" />
