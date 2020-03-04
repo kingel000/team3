@@ -61,4 +61,11 @@ public class ProductService implements IProductService{
 		return productDAO.selectFindList(find);
 	}
 
+	@Override
+	public MemberVO select_Id(String product_num) {
+		return productDAO.select_Id(product_num);
+
+	}
+
+
 }

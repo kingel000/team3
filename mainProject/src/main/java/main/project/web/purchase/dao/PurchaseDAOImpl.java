@@ -38,7 +38,7 @@ public class PurchaseDAOImpl implements IPurchaseDAO {
 
 	@Override
 	public List<PurchaseVO> selectListPurchase() {
-		return sqlSessionTemplate.selectList("main.project.web.purchase.dao.IPurchaseDAO.insertPurchase");
+		return sqlSessionTemplate.selectList("main.project.web.purchase.dao.IPurchaseDAO.selectListPurchase");
 	}
 
 }

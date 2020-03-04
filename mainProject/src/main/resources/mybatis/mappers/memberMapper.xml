@@ -49,6 +49,7 @@
 		WHERE id=#{id}
 		
 	</delete>
+
 	<!--  
 	<select id="selectMemberEmail" parameterType="MemberFindVO"
 		resultType="memberVO">

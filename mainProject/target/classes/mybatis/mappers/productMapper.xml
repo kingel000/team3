@@ -65,6 +65,9 @@
 			expert_id like '%'||#{findText}||'%'
 		</if>
 	</select>
+		<select id="select_Id" parameterType="String" resultType="memberVO" >
+		SELECT * FROM PRODUCT WHERE product_num = #{product_num}
+	</select>
 
 	
 </mapper>

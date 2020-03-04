@@ -17,6 +17,8 @@ public interface IProductDAO {
 	List<ProductVO> selectListProduct(MemberVO sessionId);
 	List<ProductVO> selectAllListProduct();
 	MemberVO select_NickName(String expert_id);
+	MemberVO select_Id(@Param("product_num")String product_num);
 	List<ProductVO> selectFindList(findVO find);
+	
 	
 }

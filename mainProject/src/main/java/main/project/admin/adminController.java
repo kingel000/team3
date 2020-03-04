@@ -1,5 +1,6 @@
 package main.project.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +24,9 @@ import main.project.web.member.vo.MemberFindVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
+import main.project.web.purchase.Service.IPurchaseService;
+import main.project.web.purchase.dao.IPurchaseDAO;
+import main.project.web.purchase.vo.PurchaseVO;
 
 @Controller("adminController")
 @RequestMapping(value="/admin")
@@ -35,6 +40,8 @@ public class adminController {
    private IMemberService memberService;
    @Autowired
    private IExpertService expertService;
+   @Autowired
+   private IPurchaseService purchaseService;
 
 
    
@@ -193,7 +200,42 @@ public class adminController {
       return "admin/adminHomePage.page2";
    }
    
+   //---------- 거래 내역
+   
+   @RequestMapping(value = "/adminpurchase.mdo", method= RequestMethod.GET)
+   public String adminpurchase(PurchaseVO purchase , ProductVO product, Model model , HttpSession session) {
+	   System.out.println("admin Purchase GET 호출 ");
+	   ArrayList<String>ExpertidList = new ArrayList<>();
+	   ArrayList<String>ProducttitleList = new ArrayList<>();
+	   //ArrayList<ProductVO>ExpertidList = new ArrayList<>();
+	  
+	   try {
+	   List<PurchaseVO> purchaseList = purchaseService.selectListPurchase();
+	   System.out.println("거래내역 사이즈 : " + purchaseList.size());
+	   for(PurchaseVO purchaseVO : purchaseList) {
+			System.out.println("DB 저장된 거래 내역 리스트 !!! : " + purchaseVO);
+			String Expert_id =  productService.selectProduct(purchaseVO.getProduct_num()).getExpert_id();
+			String Product_title = productService.selectProduct(purchaseVO.getProduct_num()).getProduct_title();
+			System.out.println("리스트에 들어가는 판매자 아이디 : " + Expert_id);
+			ExpertidList.add(Expert_id);
+			ProducttitleList.add(Product_title);
 
+			
+		}
+	   
+
+	   model.addAttribute("purchaseList",purchaseList);
+	   model.addAttribute("expertidList",ExpertidList);
+	   model.addAttribute("producttitleList",ProducttitleList);
+	   }catch(Exception e) {
+		   e.printStackTrace();
+	   }
+
+      return "admin/adminPurchase.page2";
+   
+   
+   
+   }
 
    
    
