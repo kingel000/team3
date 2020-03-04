@@ -65,9 +65,18 @@
 			expert_id like '%'||#{findText}||'%'
 		</if>
 	</select>
+	
 	<select id="mainFindList" parameterType="String" resultType="productVO">
 		SELECT * FROM product WHERE product_title like '%'||#{mainFindText}||'%'
 	</select>
+	
+	<select id="newProductList" resultType="productVO">
+		SELECT * FROM 
+		(SELECT * FROM product ORDER BY product_date DESC) 
+		WHERE <![CDATA[ ROWNUM >= 1 AND ROWNUM <= 10 ]]>
+	</select>
+	
+
 	
 
 	

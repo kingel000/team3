@@ -26,8 +26,9 @@ public class HomeController {
 	   private IProductService productService;
 	
 	@RequestMapping({ "/","/main/main.do"} )
-	public String home(Locale locale, Model model) {
-		
+	public String home(Locale locale, Model model, HttpSession session, ProductVO product) {
+		List<ProductVO> newProductList = productService.newProductList();
+		model.addAttribute("newProductList",newProductList);
 		
 		return "main/main.part2";
 	}
@@ -42,5 +43,6 @@ public class HomeController {
 		model.addAttribute("mainFindList", mainFindList);
 		return "main/mainFind.part2";
 	}
+	
 	
 }
