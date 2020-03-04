@@ -18,19 +18,13 @@ import main.project.admin.board.service.adminIBoardNoticeService;
 import main.project.admin.board.vo.AdminBoardNoticeVO;
 import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
-<<<<<<< HEAD
-=======
 
-
-
->>>>>>> branch 'master' of https://github.com/kingel000/team3
 import main.project.web.member.vo.ExpertVO;
 
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
-<<<<<<< HEAD
-=======
+
 
 import main.project.web.purchase.Service.IPurchaseService;
 
@@ -38,23 +32,11 @@ import main.project.web.purchase.vo.PurchaseVO;
 
 import main.project.web.product.vo.findVO;
 
->>>>>>> branch 'master' of https://github.com/kingel000/team3
 
 @Controller("adminController")
 @RequestMapping(value="/admin")
 public class adminController {
-<<<<<<< HEAD
-	//* package  -> "main.project.admin
-	//localhost:8080/web/admin/*.mdo
 
-	@Autowired
-	private IProductService productService;
-	@Autowired
-	private IMemberService memberService;
-
-	@Autowired
-	private IExpertService expertService;
-=======
    //* package  -> "main.project.admin
    //localhost:8080/web/admin/*.mdo
    
@@ -66,7 +48,6 @@ public class adminController {
    private IExpertService expertService;
    @Autowired
    private IPurchaseService purchaseService;
->>>>>>> branch 'master' of https://github.com/kingel000/team3
 
 	@Autowired
 	private adminIBoardNoticeService adminBoardNoticeService;
@@ -255,7 +236,7 @@ public class adminController {
 	
 	@RequestMapping(value = "/adminDetailProduct.mdo", method= RequestMethod.GET)
 	public String adminDetailProduct(@RequestParam String num,ProductVO product, HttpSession session , Model model) {
-		System.out.println("¼±ÅÃÇÑ »óÇ° ¹øÈ£ : " + num);
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½È£ : " + num);
 		product = productService.selectProduct(num);
 		model.addAttribute("product", product);
 		
@@ -269,7 +250,7 @@ public class adminController {
 		return "admin/adminDetailProduct.page2";
 	}
 	
-	//-----------È¨ÆäÀÌÁö °ü¸®
+	//-----------È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	@RequestMapping(value = "/adminHomePage.mdo", method= RequestMethod.GET)
 	public String adminHomePageManager() {
 		
@@ -309,10 +290,10 @@ public class adminController {
 
 <<<<<<< HEAD
 	 //<!-- *******20200229 -->
-	//-----------°Ô½ÃÆÇ(°øÁö»çÇ×) ¸ñ·Ï
-	@RequestMapping(value = "/adminBoardNotice.mdo", method= RequestMethod.GET)	//ÀÓÀÇÀÇÁÖ¼Ò°ª
+	//-----------ï¿½Ô½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½
+	@RequestMapping(value = "/adminBoardNotice.mdo", method= RequestMethod.GET)	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼Ò°ï¿½
 	public String adminBoardNotice(HttpSession session, Model model) {
-		System.out.println("adminBoardNotice GET ¸ñ·Ï È£Ãâ");
+		System.out.println("adminBoardNotice GET ï¿½ï¿½ï¿½ È£ï¿½ï¿½");
 
 		List<AdminBoardNoticeVO> adminBoardNoticeList = adminBoardNoticeService.selectListAdminBoardNotice();
 		if(adminBoardNoticeList != null) {
@@ -322,23 +303,23 @@ public class adminController {
 			model.addAttribute("adminBoardNoticeList", adminBoardNoticeList);
 		}
 		
-		return "admin/adminBoard_Notice.page2";								//jsp ¼³Á¤.
+		return "admin/adminBoard_Notice.page2";								//jsp ï¿½ï¿½ï¿½ï¿½.
 	}
 	
 	
 	 //<!-- *******20200303 -->
-	//-----------°Ô½ÃÆÇ(°øÁö»çÇ×) ±Ûµî·Ï_GET
+	//-----------ï¿½Ô½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½Ûµï¿½ï¿½_GET
 	@RequestMapping(value = "/adminBoard_Notice_Insert.mdo", method= RequestMethod.GET)	
 	public String adminBoardNotice_Insert() {
-		System.out.println("adminBoardNotice_Insert GETÈ£Ãâ");
+		System.out.println("adminBoardNotice_Insert GETÈ£ï¿½ï¿½");
 
 		return "admin/adminBoard_Notice_Insert.page2";								
 	}
 	 //<!-- *******20200303 -->
-	//-----------°Ô½ÃÆÇ(°øÁö»çÇ×) ±Ûµî·Ï_Post
+	//-----------ï¿½Ô½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½Ûµï¿½ï¿½_Post
 	@RequestMapping(value = "/adminBoard_Notice_Insert.mdo", method= RequestMethod.POST)	
 	public String adminBoardNotice_Insert(AdminBoardNoticeVO abnVO, HttpSession session, Model model) {
-		System.out.println("adminBoardNotice_Insert POST È£Ãâ");
+		System.out.println("adminBoardNotice_Insert POST È£ï¿½ï¿½");
 
 //		MemberVO member = (MemberVO) session.getAttribute("member");
 //		System.out.println(member.getId());
@@ -349,13 +330,13 @@ public class adminController {
 		
 		
 		
-		//³»¿ëÀÌ ¾÷¼º¾ßÇÑ´Ù.
-		System.out.println("ÀÔ·ÂµÈ abnVO num : "+abnVO.getBoard_notice_num());
-		System.out.println("ÀÔ·ÂµÈ abnVO title : "+abnVO.getBoard_notice_title()); 
-		System.out.println("ÀÔ·ÂµÈ abnVO info : "+abnVO.getBoard_notice_info());
-		System.out.println("ÀÔ·ÂµÈ abnVO date : "+abnVO.getBoard_notice_date());
-		//ÀúÀåµÉ ¹øÈ£.
-		//ÀúÀåµÉ ³¯Â¥.
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+		System.out.println("ï¿½Ô·Âµï¿½ abnVO num : "+abnVO.getBoard_notice_num());
+		System.out.println("ï¿½Ô·Âµï¿½ abnVO title : "+abnVO.getBoard_notice_title()); 
+		System.out.println("ï¿½Ô·Âµï¿½ abnVO info : "+abnVO.getBoard_notice_info());
+		System.out.println("ï¿½Ô·Âµï¿½ abnVO date : "+abnVO.getBoard_notice_date());
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£.
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥.
 		
 		adminBoardNoticeService.insertBoardNotice(abnVO);
 		
@@ -369,18 +350,18 @@ public class adminController {
 	 
 	 
 	 //<!-- *******20200229 -->
-	//-----------°Ô½ÃÆÇ(°øÁö»çÇ×) ±Û¼öÁ¤_GET
+	//-----------ï¿½Ô½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½Û¼ï¿½ï¿½ï¿½_GET
 	@RequestMapping(value = "/adminBoard_Notice_Update.mdo", method= RequestMethod.GET)	
 	public String adminBoardNotice_Update() {
-		System.out.println("GET adminBoardNotice_Update È£Ãâ");
+		System.out.println("GET adminBoardNotice_Update È£ï¿½ï¿½");
 		return "admin/adminBoard_Notice_Update.page2";								
 	}
 	
 	 //<!-- *******20200229 -->
-		//-----------°Ô½ÃÆÇ(°øÁö»çÇ×) ±Û¼öÁ¤_POST
+		//-----------ï¿½Ô½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½Û¼ï¿½ï¿½ï¿½_POST
 	@RequestMapping(value = "/adminBoard_Notice_Update.mdo", method= RequestMethod.POST)	
 	public String adminBoardNotice_Update(NoticeVO notice) {
-		System.out.println("GET adminBoardNotice_Update POST È£Ãâ");
+		System.out.println("GET adminBoardNotice_Update POST È£ï¿½ï¿½");
 		System.out.println(notice);
 		return "admin/adminBoard_Notice.page2";								
 	}
