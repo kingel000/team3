@@ -1,13 +1,16 @@
-package main.project.admin.Board.vo;
+package main.project.admin.board.vo;
 
 import java.util.Date;
 
-public class adminBoardNoticeVO {
+public class AdminBoardNoticeVO {
 	private Integer board_notice_num;	//공지 번호
 	private String board_notice_title;	//공지 제목
 	private String board_notice_info;	//공지 내용
 	private String board_notice_file;	//공지 첨부파일
 	private Date board_notice_date;		//공지 등록날짜
+	
+	public AdminBoardNoticeVO() {}
+	
 	public Integer getBoard_notice_num() {
 		return board_notice_num;
 	}

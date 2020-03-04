@@ -8,16 +8,18 @@
 <script src="http://cdn.ckeditor.com/4.13.1/standard-all/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
    <style>
-        .update_Product{width:690px; margin: 0 auto; border: solid 2px #2AC37D; padding: 35px;}
-        .update_Product>form>h4{text-align: center; margin-bottom:15px;}
-        .update_Product>form>p>input{width: 595px;}
-        .update_Product>form>p>a{background-color: #dddddd; padding: 1px;}
+        .board_Notice_Update{width:690px; margin: 0 auto; border: solid 2px #2AC37D; padding: 35px;}
+        .board_Notice_Update>form>h4{text-align: center; margin-bottom:15px;}
+        .board_Notice_Update>form>p>input{width: 595px;}
+        .board_Notice_Update>form>p>a{background-color: #dddddd; padding: 1px;}
     </style>
     <!-- Custom-->
 <meta charset="UTF-8">
 
-<title>공지사항 글쓰기</title>
+<title>공지사항 글수정</title>
 <script type="text/javascript">
+
+//파일추가 경로 똑같이 쓰기.
 $(function(){
 	CKEDITOR.replace('board_notice_info',{
 		width:'595px',
@@ -25,16 +27,17 @@ $(function(){
 		filebrowserUploadUrl: '${pageContext.request.contextPath }/product/fileupload.do'
 	});
 });
+
 function checkValue() {
 
-	if (!document.product_value.product_title.value) {
+	if (!document.board_notice_value.board_notice_title.value) {
 		alert("제목을 입력 해주세요.");
-		document.product_value.product_title.focus();
+		document.board_notice_value.board_notice_title.focus();
 		return false;
 	}
-	if (!document.product_value.product_info.value) {
+	if (!document.board_notice_value.board_notice_info.value) {
 		alert("상세내용을 입력 해주세요.");
-		document.product_value.product_info.focus();
+		document.board_notice_value.board_notice_info.focus();
 		return false;
 	}
 }
@@ -44,20 +47,26 @@ function checkValue() {
 
 
 <div>
-      <div class="update_Product">
-         <form action="/web/admin/adminBoard_Notice_Update.mdo" method="post" >
-            <h4>공지 등록</h4>
+      <div class="board_Notice_Update">
+         <form action="/web/admin/adminBoard_Notice_Update.mdo" name="board_notice_value" method="post" onsubmit="return checkValue()" >
+            <h4>공지 수정</h4>
 
             <p>
-               <input id="insert_board_notice_title" type="text" name="board_notice_title" >
+               <input id="update_board_notice_title" type="text" name="board_notice_title" value="${board_notice.board_notice_title}">
             </p>
             <p>
-               <textarea name="board_notice_info" rows="10" cols="80" ></textarea>
+               <textarea name="board_notice_info" rows="10" cols="80" >${board_notice.board_notice_info}</textarea>
             </p>          
+            <p>
+               <input type="file" name = "board_notice_info">
+            </p>
             <p >
-               <input type="hidden" name="board_notice_num">
-               <input type="hidden" name="expert_id" >
-               <input type="submit" value="등록하기" />
+               <!-- 
+                placeholder="제목을 입력해주세요"
+               <input type="hidden" name="board_notice_num" value="${board_notice.board_notice_num }">
+               <input type="hidden" name="expert_id" > //관리자 아이디 없다.
+                -->               
+               <input type="submit" value="수정하기" />
             </p>
          </form>
       </div>

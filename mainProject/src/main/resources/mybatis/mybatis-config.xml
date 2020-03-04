@@ -11,6 +11,7 @@
 		<typeAlias type="main.project.web.chat.vo.ChatContentVO" alias="chatContentVO"></typeAlias>
 		<typeAlias type="main.project.web.chat.vo.RoomListVO" alias="roomListVO"></typeAlias>
 		<typeAlias type="main.project.web.purchase.vo.PurchaseVO" alias="purchaseVO"></typeAlias>
+		<typeAlias type="main.project.admin.board.vo.AdminBoardNoticeVO" alias="abnVO"></typeAlias>
 	</typeAliases>
 	
 	<mappers>
@@ -21,5 +22,6 @@
 		<mapper resource="mybatis/mappers/chatContentMapper.xml" />
 		<mapper resource="mybatis/mappers/roomListMapper.xml" />
 		<mapper resource="mybatis/mappers/purchaseMapper.xml" />
+		<mapper resource="mybatis/mappers/boardNoticeMapper.xml" />
 	</mappers>
 </configuration>

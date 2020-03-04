@@ -12,31 +12,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import main.project.admin.board.service.adminIBoardNoticeService;
+import main.project.admin.board.vo.AdminBoardNoticeVO;
 import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
-
-import main.project.web.member.service.MemberService;
-
 import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberFindVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.notice.vo.NoticeVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
-import main.project.web.question.vo.QuestionVO;
 
 @Controller("adminController")
 @RequestMapping(value="/admin")
 public class adminController {
 	//* package  -> "main.project.admin
 	//localhost:8080/web/admin/*.mdo
-	
+
 	@Autowired
 	private IProductService productService;
 	@Autowired
 	private IMemberService memberService;
+
 	@Autowired
 	private IExpertService expertService;
+
+	@Autowired
+	private adminIBoardNoticeService adminBoardNoticeService;
 
 
 	
@@ -159,7 +161,7 @@ public class adminController {
 		
 		return "admin/adminProduct.page2";
 	}
-	
+	//
 	@RequestMapping(value = "/adminProductDelete.mdo", method= RequestMethod.GET)
 	public String adminProductDelete(@RequestParam String num,ProductVO product, HttpSession session , Model model) {
 		product.setProduct_num(num);
@@ -192,15 +194,67 @@ public class adminController {
 	
 
 	 //<!-- *******20200229 -->
-	//-----------게시판(공지사항) 관리
+	//-----------게시판(공지사항) 목록
 	@RequestMapping(value = "/adminBoardNotice.mdo", method= RequestMethod.GET)	//임의의주소값
-	public String adminBoardNotice() {
-		System.out.println("GET adminBoardNotice 호출");
+	public String adminBoardNotice(HttpSession session, Model model) {
+		System.out.println("adminBoardNotice GET 목록 호출");
+
+		List<AdminBoardNoticeVO> adminBoardNoticeList = adminBoardNoticeService.selectListAdminBoardNotice();
+		if(adminBoardNoticeList != null) {
+			for(AdminBoardNoticeVO adminBoardNotice : adminBoardNoticeList) {
+				System.out.println(adminBoardNotice);
+			}
+			model.addAttribute("adminBoardNoticeList", adminBoardNoticeList);
+		}
+		
 		return "admin/adminBoard_Notice.page2";								//jsp 설정.
 	}
 	
-	 //<!-- *******20200229 -->
+	
+	 //<!-- *******20200303 -->
 	//-----------게시판(공지사항) 글등록_GET
+	@RequestMapping(value = "/adminBoard_Notice_Insert.mdo", method= RequestMethod.GET)	
+	public String adminBoardNotice_Insert() {
+		System.out.println("adminBoardNotice_Insert GET호출");
+
+		return "admin/adminBoard_Notice_Insert.page2";								
+	}
+	 //<!-- *******20200303 -->
+	//-----------게시판(공지사항) 글등록_Post
+	@RequestMapping(value = "/adminBoard_Notice_Insert.mdo", method= RequestMethod.POST)	
+	public String adminBoardNotice_Insert(AdminBoardNoticeVO abnVO, HttpSession session, Model model) {
+		System.out.println("adminBoardNotice_Insert POST 호출");
+
+//		MemberVO member = (MemberVO) session.getAttribute("member");
+//		System.out.println(member.getId());
+//		
+//		String sessionId = member.getId();
+//		abnVO.setBoard_notice_title(sessionId);
+//		System.out.println(abnVO);
+		
+		
+		
+		//내용이 업성야한다.
+		System.out.println("입력된 abnVO num : "+abnVO.getBoard_notice_num());
+		System.out.println("입력된 abnVO title : "+abnVO.getBoard_notice_title()); 
+		System.out.println("입력된 abnVO info : "+abnVO.getBoard_notice_info());
+		System.out.println("입력된 abnVO date : "+abnVO.getBoard_notice_date());
+		//저장될 번호.
+		//저장될 날짜.
+		
+		adminBoardNoticeService.insertBoardNotice(abnVO);
+		
+//		List<AdminBoardNoticeVO> adminBoardNoticeList = adminBoardNoticeService.selectListAdminBoardNotice();		
+//		model.addAttribute("adminBoardNoticeList", adminBoardNoticeList);
+		
+		return "admin/adminBoard_Notice.page2";								
+	}
+	
+	/*
+	 
+	 
+	 //<!-- *******20200229 -->
+	//-----------게시판(공지사항) 글수정_GET
 	@RequestMapping(value = "/adminBoard_Notice_Update.mdo", method= RequestMethod.GET)	
 	public String adminBoardNotice_Update() {
 		System.out.println("GET adminBoardNotice_Update 호출");
@@ -208,15 +262,13 @@ public class adminController {
 	}
 	
 	 //<!-- *******20200229 -->
-		//-----------게시판(공지사항) 글등록_POST
+		//-----------게시판(공지사항) 글수정_POST
 	@RequestMapping(value = "/adminBoard_Notice_Update.mdo", method= RequestMethod.POST)	
 	public String adminBoardNotice_Update(NoticeVO notice) {
 		System.out.println("GET adminBoardNotice_Update POST 호출");
 		System.out.println(notice);
 		return "admin/adminBoard_Notice.page2";								
 	}
+*/	 
 
-
-	
-	
 }
