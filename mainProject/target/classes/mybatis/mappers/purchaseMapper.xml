@@ -20,4 +20,17 @@
 	<select id="selectListPurchase" resultType="purchaseVO">
 		 SELECT * FROM purchase ORDER BY purchase_num DESC 
 	</select>
+	
+	<insert id="addCart" parameterType="cartVO" >
+		INSERT INTO cart VALUES (#{num}, #{member_id}, #{product_num}, #{product_title}, #{price})
+	</insert>
+	<select id="selectMyCart" resultType="cartVO">
+		SELECT * FROM cart WHERE member_id = #{memberId}
+	</select>
+	<delete id="deleteCart" parameterType="String">
+		DELETE FROM cart WHERE num = #{cartNum}
+	</delete>
+	<delete id="checkOut" parameterType="String">
+		DELETE FROM cart WHERE member_id = #{memberId}
+	</delete>
 </mapper>

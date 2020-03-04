@@ -33,11 +33,11 @@
 					<span class="qt-plus">+</span>
 
 					<h2 class="full-price">
-						29.98₩
+						1000₩
 					</h2>
 
 					<h2 class="price">
-						14.99₩
+						2000₩
 					</h2>
 				</footer>
 			</article>
@@ -60,11 +60,11 @@
 					<span class="qt-plus">+</span>
 
 					<h2 class="full-price">
-						79.99₩
+						5000₩
 					</h2>
 
 					<h2 class="price">
-						79.99₩
+						5000₩
 					</h2>
 				</footer>
 			</article>
@@ -87,11 +87,11 @@
 					<span class="qt-plus">+</span>
 
 					<h2 class="full-price">
-						53.99₩
+						3000₩
 					</h2>
 
 					<h2 class="price">
-						17.99₩
+						1000₩
 					</h2>
 				</footer>
 			</article>
@@ -104,13 +104,13 @@
 		<div class="container clearfix">
 
 			<div class="left">
-				<h2 class="subtotal">Subtotal: <span>163.96</span>₩</h2>
-				<h3 class="tax">Taxes (5%): <span>8.2</span>₩</h3>
-				<h3 class="shipping">Shipping: <span>5.00</span>₩</h3>
+				<h2 class="subtotal">Subtotal: <span>0</span>₩</h2>
+				<h3 class="tax">Taxes (5%): <span>0</span>₩</h3>
+				<h3 class="shipping">Shipping: <span>0</span>₩</h3>
 			</div>
 
 			<div class="right">
-				<h1 class="total">Total: <span>177.16</span>₩</h1>
+				<h1 class="total">Total: <span>0</span>₩</h1>
 				<a class="btn" href="/web/purchase/checkout.do">Checkout</a>
 			</div>
 

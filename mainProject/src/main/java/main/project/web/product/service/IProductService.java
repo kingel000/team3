@@ -19,4 +19,6 @@ public interface IProductService {
 	MemberVO select_NickName(String expert_id);
 	MemberVO select_Id(String product_num);
 	List<ProductVO> selectFindList(findVO find);
+	List<ProductVO> mainFindList(String mainFindText);
+	List<ProductVO> newProductList();
 }

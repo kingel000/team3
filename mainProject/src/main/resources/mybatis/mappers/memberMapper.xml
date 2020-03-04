@@ -61,4 +61,14 @@
 		SELECT nick FROM member WHERE nick_name = #{value}
 	</select>
 	-->
+	
+	<select id="selectFindList" parameterType="findVO" resultType="memberVO">
+		SELECT * FROM member WHERE 
+		<if test="category=='id'">
+			id like '%'||#{findText}||'%'
+		</if>
+		<if test="category=='nick_name'">
+			nick_name like '%'||#{findText}||'%'
+		</if>
+	</select>
 </mapper>

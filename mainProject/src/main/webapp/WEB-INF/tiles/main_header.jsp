@@ -90,31 +90,34 @@
 			</ul>
 	  </div>
 	  <div class="navigation__column right">
-		<form class="ps-search--header" action="do_action" method="post">
-		  <input class="form-control" type="text" placeholder="Search Product…">
+		<form class="ps-search--header" action="mainFind.do" method="post">
+		  <input class="form-control" type="text" name="mainFindText" placeholder="상품명을 입력하세요">
 		  <button><i class="ps-icon-search"></i></button>
 		</form>
-		<div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i class="ps-icon-shopping-cart"></i></a>
+		<div class="ps-cart"><a class="ps-cart__toggle" href="#"><c:if test="${count != null }"><span><i>${count}</i></span></c:if><i class="ps-icon-shopping-cart"></i></a>
 		  <div class="ps-cart__listing">
 			<div class="ps-cart__content">
-			  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-				<div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="<c:url value="/resources/images/cart-preview/1.jpg" />" alt=""></div>
-				<div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">Amazin’ Glazin’</a>
-				 	<span>Price:<i>1000￦</i></span></p>
-				</div>
-			  </div>
-			 
-			</div>
-			<div class="ps-cart__total">
-			  <p>Number of items:<span>1</span></p>
-			  <p>Total Price:<span>1000￦</span></p>
+			<!-- 장바구니 목록 -->
+				<c:if test="${cartList != null }">
+					<c:forEach var="cart" items="${cartList}" varStatus="status">
+						<div class="ps-cart-item"><a class="ps-cart-item__close" href="/web/purchase/deleteCart.do?num=${cart.num}"></a>
+							<div class="ps-cart-item__thumbnail">
+								<a href="/web/product/detailProduct.do?num=${cart.product_num}"></a><img src="<c:url value="/resources/images/cart-preview/1.jpg" />" >
+							</div>
+							<div class="ps-cart-item__content">
+								<a class="ps-cart-item__title" href="product-detail.html">${cart.product_title }</a>
+								<p><span>Price:<i>${cart.price }: ￦</i></span></p>
+							</div>
+						</div>
+					</c:forEach>
+				</c:if>
 			</div>
 			<c:choose>
 	           	 <c:when test="${member.id == null}">
 					 <div class="ps-cart__footer"><a class="ps-btn" href="/web/member/login.do">Check out<i class="ps-icon-arrow-left"></i></a></div>
 	           	 </c:when>
 	            <c:otherwise>
-	             	 <div class="ps-cart__footer"><a class="ps-btn" href="/web/product/cart.do">Check out<i class="ps-icon-arrow-left"></i></a></div>
+	             	 <div class="ps-cart__footer"><a class="ps-btn" href="/web/purchase/myCart.do">Check out<i class="ps-icon-arrow-left"></i></a></div>
 	           	 </c:otherwise>
 	        </c:choose>
 			

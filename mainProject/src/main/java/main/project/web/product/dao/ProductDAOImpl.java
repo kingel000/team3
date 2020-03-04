@@ -57,9 +57,18 @@ public class ProductDAOImpl implements IProductDAO {
 		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectFindList", find);
 	}
 	@Override
+<<<<<<< HEAD
 	public MemberVO select_Id(String product_num) {
 		return sqlSessiontemplate.selectOne("main.project.web.product.dao.IProductDAO.select_Id",product_num);
 
+=======
+	public List<ProductVO> mainFindList(String mainFindText) {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.mainFindList", mainFindText);
+	}
+	@Override
+	public List<ProductVO> newProductList() {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.newProductList");
+>>>>>>> branch 'master' of https://github.com/kingel000/team3
 	}
 
 	
