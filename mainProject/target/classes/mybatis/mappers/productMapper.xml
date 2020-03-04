@@ -81,6 +81,13 @@
 		WHERE <![CDATA[ ROWNUM >= 1 AND ROWNUM <= 10 ]]>
 	</select>
 	
+	<delete id="deleteProductId" parameterType="String">
+		DELETE FROM product
+		WHERE expert_id=#{id}
+	</delete>
+	
+	
+	
 
 	
 

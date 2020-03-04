@@ -11,6 +11,7 @@ import main.project.web.product.vo.findVO;
 public interface IProductDAO {
 	void insertProduct(ProductVO product);
 	void deleteProduct(ProductVO product_num);
+	void deleteProductId(String Id);
 	void updateProduct(ProductVO product);
 	ProductVO selectProduct(@Param("product_num")String product_num);
 	List<ProductVO> selectCategory(String category);

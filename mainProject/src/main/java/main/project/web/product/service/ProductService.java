@@ -78,5 +78,11 @@ public class ProductService implements IProductService{
 		return productDAO.newProductList();
 	}
 
+	@Override
+	public void deleteProductId(String Id) {
+		 productDAO.deleteProductId(Id);
+		
+	}
+
 
 }

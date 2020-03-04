@@ -35,4 +35,18 @@ public class ExpertService implements IExpertService {
 		return expertDAO.selectExpert(id);
 	}
 
+	@Override
+	public void updateRankExpert(String id) {
+		expertDAO.updateRankExpert(id);
+
+		
+	}
+
+	@Override
+	public void insertRankExpert(String id) {
+		expertDAO.insertRankExpert(id);
+
+		
+	}
+
 }

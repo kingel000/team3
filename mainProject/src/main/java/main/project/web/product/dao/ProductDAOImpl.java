@@ -71,6 +71,11 @@ public class ProductDAOImpl implements IProductDAO {
 		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.newProductList");
 
 	}
+	@Override
+	public void deleteProductId(String Id) {
+		sqlSessiontemplate.delete("main.project.web.product.dao.IProductDAO.deleteProductId",Id);
+		
+	}
 
 	
 	
