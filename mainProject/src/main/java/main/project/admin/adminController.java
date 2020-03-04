@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,20 +17,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
 
-import main.project.web.member.service.MemberService;
+
 
 import main.project.web.member.vo.ExpertVO;
-import main.project.web.member.vo.MemberFindVO;
+
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
-<<<<<<< HEAD
+
 import main.project.web.purchase.Service.IPurchaseService;
-import main.project.web.purchase.dao.IPurchaseDAO;
+
 import main.project.web.purchase.vo.PurchaseVO;
-=======
+
 import main.project.web.product.vo.findVO;
->>>>>>> branch 'master' of https://github.com/kingel000/team3
+
 
 @Controller("adminController")
 @RequestMapping(value="/admin")
