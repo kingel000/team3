@@ -18,5 +18,7 @@ public interface IProductDAO {
 	List<ProductVO> selectAllListProduct();
 	MemberVO select_NickName(String expert_id);
 	List<ProductVO> selectFindList(findVO find);
+	List<ProductVO> mainFindList(String mainFindText);
+	List<ProductVO> newProductList();
 	
 }

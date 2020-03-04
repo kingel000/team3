@@ -4,6 +4,7 @@ import java.util.List;
 
 import main.project.web.member.vo.MemberFindVO;
 import main.project.web.member.vo.MemberVO;
+import main.project.web.product.vo.findVO;
 
 public interface IMemberService {
 	MemberVO checkMemberId(String id);
@@ -15,4 +16,5 @@ public interface IMemberService {
 	void rankupdate(String id);
 	List<MemberVO> selectAllMember();
 	//List<MemberVO> selectOneMember(MemberFindVO find);
+	List<MemberVO> selectFindList(findVO find);
 }

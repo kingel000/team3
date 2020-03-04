@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import main.project.web.member.dao.IMemberDAO;
 import main.project.web.member.vo.MemberFindVO;
 import main.project.web.member.vo.MemberVO;
+import main.project.web.product.vo.findVO;
 
 @Service("memberService")
 public class MemberService implements IMemberService{
@@ -63,5 +64,10 @@ public class MemberService implements IMemberService{
 	}
 
 **/
+
+	@Override
+	public List<MemberVO> selectFindList(findVO find) {
+		return memberDAO.selectFindList(find);
+	}
 
 }

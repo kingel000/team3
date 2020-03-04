@@ -61,4 +61,14 @@ public class ProductService implements IProductService{
 		return productDAO.selectFindList(find);
 	}
 
+	@Override
+	public List<ProductVO> mainFindList(String mainFindText) {
+		return productDAO.mainFindList(mainFindText);
+	}
+
+	@Override
+	public List<ProductVO> newProductList() {
+		return productDAO.newProductList();
+	}
+
 }
