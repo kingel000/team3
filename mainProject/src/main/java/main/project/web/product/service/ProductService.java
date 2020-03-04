@@ -62,13 +62,13 @@ public class ProductService implements IProductService{
 	}
 
 	@Override
-<<<<<<< HEAD
+
 	public MemberVO select_Id(String product_num) {
 		return productDAO.select_Id(product_num);
 
 	}
 
-=======
+
 	public List<ProductVO> mainFindList(String mainFindText) {
 		return productDAO.mainFindList(mainFindText);
 	}
@@ -77,6 +77,6 @@ public class ProductService implements IProductService{
 	public List<ProductVO> newProductList() {
 		return productDAO.newProductList();
 	}
->>>>>>> branch 'master' of https://github.com/kingel000/team3
+
 
 }

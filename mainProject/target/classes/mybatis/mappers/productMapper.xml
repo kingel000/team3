@@ -65,11 +65,11 @@
 			expert_id like '%'||#{findText}||'%'
 		</if>
 	</select>
-<<<<<<< HEAD
+
 		<select id="select_Id" parameterType="String" resultType="memberVO" >
 		SELECT * FROM PRODUCT WHERE product_num = #{product_num}
 	</select>
-=======
+
 	
 	<select id="mainFindList" parameterType="String" resultType="productVO">
 		SELECT * FROM product WHERE product_title like '%'||#{mainFindText}||'%'
@@ -83,7 +83,7 @@
 	
 
 	
->>>>>>> branch 'master' of https://github.com/kingel000/team3
+
 
 	
 </mapper>
