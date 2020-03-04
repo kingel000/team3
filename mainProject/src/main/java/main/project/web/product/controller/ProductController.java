@@ -85,7 +85,7 @@ public class ProductController {
 		session.setAttribute("expert",expert);
 		List<ProductVO> productList = productService.selectListProduct(sessionId);
 		for(ProductVO product : productList) {
-			System.out.println(product);
+			System.out.println("상품정보 " + product);
 		}
 		model.addAttribute("productList",productList);
 		return "product/boardManager.page";
@@ -146,10 +146,9 @@ public class ProductController {
 	}
 	
 	//------------------------------장바구니-------------------------------------------
-
-	@RequestMapping(value = "/cart.do", method = RequestMethod.GET)
-	public String cartPage() {
-
-		return "/product/cart.page";
+	@RequestMapping(value="/orderList.do", method = RequestMethod.GET)
+	public String orderListProduct(Model model) {
+		
+		return "/product/orderList.page";
 	}
 }

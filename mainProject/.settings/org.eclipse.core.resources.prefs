@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
+encoding//src/main/java/main/project/admin/adminController.java=UTF-8
+encoding//src/main/java/main/project/web/ckeditor/CkeditorFileUploadController.java=UTF-8
 encoding//src/main/java/main/project/web/product/controller/ProductController.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/main/main.jsp=UTF-8
 encoding//src/main/webapp/resources/css/admin.css=UTF-8

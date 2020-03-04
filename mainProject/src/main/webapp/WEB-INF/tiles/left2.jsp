@@ -55,20 +55,11 @@
                   </a>
               </div>
           </li>
-          
-          <li class="group">
-   		      <div class="box">
-                  <a href="/web/admin/adminHomePage.mdo">
-                     <h3>HomePage Manager</h3>
-                     <p>홈페이지 관리</p>
-                  </a>
-              </div>
-          </li>
 
     
          <li class="group">
             <div class="box">
-               <a href="#">
+               <a href="/web/admin/adminpurchase.mdo">
                   <h3>Transaction history</h3>
                   <p>거래 내역</p>
                </a>

@@ -8,10 +8,15 @@
 		<typeAlias type="main.project.web.question.vo.QuestionVO" alias="questionVO"></typeAlias>
 		<typeAlias type="main.project.web.question.vo.PagingVO" alias="pagingVO"></typeAlias>
 		<typeAlias type="main.project.web.product.vo.ProductVO" alias="productVO"></typeAlias>
+		<typeAlias type="main.project.web.product.vo.findVO" alias="findVO"></typeAlias>
 		<typeAlias type="main.project.web.chat.vo.ChatContentVO" alias="chatContentVO"></typeAlias>
 		<typeAlias type="main.project.web.chat.vo.RoomListVO" alias="roomListVO"></typeAlias>
 		<typeAlias type="main.project.web.purchase.vo.PurchaseVO" alias="purchaseVO"></typeAlias>
+<<<<<<< HEAD
 		<typeAlias type="main.project.admin.board.vo.AdminBoardNoticeVO" alias="abnVO"></typeAlias>
+=======
+		<typeAlias type="main.project.web.purchase.vo.CartVO" alias="cartVO"></typeAlias>
+>>>>>>> branch 'master' of https://github.com/kingel000/team3
 	</typeAliases>
 	
 	<mappers>

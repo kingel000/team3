@@ -1,24 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
-<!--[if IE 7]><html class="ie ie7"><![endif]-->
-<!--[if IE 8]><html class="ie ie8"><![endif]-->
-<!--[if IE 9]><html class="ie ie9"><![endif]-->
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="format-detection" content="telephone=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<link href="apple-touch-icon.png" rel="apple-touch-icon">
-<link href="favicon.png" rel="icon">
-<meta name="author" content="Nghia Minh Luong">
-<meta name="keywords" content="Default Description">
-<meta name="description" content="Default keyword">
-<title>Product Listing</title>
-<!-- Fonts-->
+	<meta charset="UTF-8">
+	<title>상품 검색</title>
+	<!-- Fonts-->
 <link
 	href="https://fonts.googleapis.com/css?family=Archivo+Narrow:300,400,700%7CMontserrat:300,400,500,600,700,800,900"
 	rel="stylesheet">
@@ -56,7 +45,10 @@
 
 <!-- Custom-->
 <link rel="stylesheet" href="css/style.css">
-
+	
+	<style type="text/css">
+		h2{margin:20px 0 0 500px;}
+	</style>
 </head>
 
 <body>
@@ -68,7 +60,7 @@
 			<div class="ps-products" data-mh="product-listing">
 				<div class="ps-product-action"></div>
 				<div class="ps-product__columns" id="list">
-					<c:forEach var="product" items="${productList}" varStatus="status">
+					<c:forEach var="product" items="${mainFindList}" varStatus="status">
 						<div class="ps-product__column">
 							<div class="ps-shoe__thumbnail">
 							<c:choose>
@@ -80,48 +72,28 @@
 									
 									</c:otherwise>
 							</c:choose>
-							 <img src="<c:url value="/resources/images2/123.png"/>" alt="#">
+								<img src="<c:url value="/web/img/e5e26848-35c4-486c-83c5-dd901c5f493a"/>" alt="#">
 							
-								<!--								<img src="<c:url value="/web/img/e5e26848-35c4-486c-83c5-dd901c5f493a"/>" alt="#">
-								 -->
+								<!--  <img src="<c:url value="/resources/images2/123.png"/>" alt="#">-->
 								<a class="ps-shoe__overlay" href="product-detail.html"></a>
 							</div>
 							<div class="ps-shoe__content">
 								<div class="ps-shoe__variants"></div>
 								<div class="ps-shoe__detail">
 									<a class="ps-shoe__name" href="/web/product/detailProduct.do?num=${product.product_num}"><c:out value="${product.product_title }"/></a>
-									<p class="ps-shoe__categories">
-										<a href="#"><c:out value="${nick.get(status.count-1)}"/></a>
-									</p>
 								</div>
 							</div>
 						</div>
 					</c:forEach>
 				</div>
 				<div class="ps-product-action">
-					<div class="ps-pagination">
-						<ul class="pagination">
-							<li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">...</a></li>
-							<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-						</ul>
-					</div>
+					
 				</div>
 			</div>
 			<div class="ps-sidebar" data-mh="product-listing">
 				<aside class="ps-widget--sidebar ps-widget--category">
 					<div class="ps-widget__header">
-						<h3>정렬</h3>
-					</div>
-					<div class="ps-widget__content">
-						<ul class="ps-list--checked">
-							<li class="current"><a href="product-listing.html">상품명 순</a></li>
-							<li><a href="product-listing.html">최신등록 순</a></li>
-
-						</ul>
+						<h3>상품 검색 목록 </h3>
 					</div>
 				</aside>
 
@@ -129,9 +101,6 @@
 
 			</div>
 		</div>
-
-
-
 
 	</main>
 	<!-- JS Library-->

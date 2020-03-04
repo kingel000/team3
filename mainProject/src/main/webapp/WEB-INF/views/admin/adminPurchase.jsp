@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>관리자 상품관리 </title>
+	<title>관리자 거래내역 </title>
 	
 	<style>
 		thead>tr>th{background-color: #eee; text-align: center;}
@@ -19,36 +19,40 @@
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 <body>
 	<div>
-		<h3 class="title">상품 관리</h3>
+		<h3 class="title">거래 내역</h3>
 			
 			<table class="table table-striped" >
 			  <thead>
 			  	<tr>
+			      <th>거래번호</th>
 			      <th>상품번호</th>
-			      <th>카테고리</th>
 			      <th>상품명</th>
-			      <th>아이디</th>
-			      <th>관리</th>
+			      <th>구매자</th>
+			      <th>판매자</th>
+			      <th>금액</th>
+			      <th>상태</th>
 			   <tr>
 			  </thead>
 			  <tbody>
-				  <c:forEach var="adminproduct" items="${adminproductList}">
+				  <c:forEach var="adminPurchase" items="${purchaseList}" varStatus="status">
 				 	<tr>
-				      <td>${adminproduct.product_num}</td>
-				      <td>${adminproduct.category}</td>
-				      <td><a href="adminDetailProduct.mdo?num=${adminproduct.product_num}">${adminproduct.product_title}</a></td>
-				      <td>${adminproduct.expert_id}</td>
-				      <td><a href="adminProductDelete.mdo?num=${adminproduct.product_num }">글 삭제</a></td>
+				      <td>${adminPurchase.purchase_num}</td>
+				      <td>${adminPurchase.product_num}</td>
+				      <td>${producttitleList.get(status.index)}</td>
+				      <td>${adminPurchase.member_id}</td> 
+				      <td>${expertidList.get(status.index)}</td>
+				      <td>${adminPurchase.purchase_price}</td>
+				      <td>${adminPurchase.purchase_state}</td>
 				    <tr>
 				   </c:forEach>
 			  </tbody>
 			</table>
 			
-			<form action="/web/admin/find.mdo" method="post">
+			<form action="/web/admin//purchase.mdo" method="post">
               	 <select name="category">
-              		 <option value="" selected disabled hidden>= 선택 =</option>
-                 	 <option value="카테고리">카테고리</option>
-                 	 <option value="아이디">아이디</option>
+              		 <option value="" selected disabled hidden>= 선택  =</option>
+                 	 <option value="상품번호">상품번호</option>
+                 	 <option value="구매자">구매자</option>
               	 </select>
 		 		 <input type="text" name="findText" placeholder="검색어를 입력해주세요">
 		 		 <input type="submit" value="검색" />
