@@ -72,7 +72,7 @@
        
        	 <li class="group">
             <div class="box">
-               <a href="/web/product/cart.do">
+               <a href="/web/purchase/myCart.do">
                   <h3>Cart</h3>
                   <p>장바구니</p>
                </a>

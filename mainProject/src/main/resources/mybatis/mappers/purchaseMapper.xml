@@ -22,7 +22,7 @@
 	</select>
 	
 	<insert id="addCart" parameterType="cartVO" >
-		INSERT INTO cart VALUES (#{num}, #{member_id}, #{product_num}, #{product_title}, #{price})
+		INSERT INTO cart VALUES (#{num}, #{member_id}, #{product_num}, #{product_title}, #{price}, #{expert_nick})
 	</insert>
 	<select id="selectMyCart" resultType="cartVO">
 		SELECT * FROM cart WHERE member_id = #{memberId}

@@ -36,6 +36,7 @@ public class ChatController {
 		model.addAttribute("memberName",member.getNick_name());
 		List<RoomListVO> roomList = roomListService.getMemberList(member.getId());
 		model.addAttribute("roomList",roomList);
+		
 		return "chat/expertChat.part2";
 	}
 
@@ -48,6 +49,7 @@ public class ChatController {
 		model.addAttribute("memberName",member.getNick_name());
 		List<RoomListVO> roomList = roomListService.getRoomList(member.getId());
 		model.addAttribute("roomList",roomList);
+		
 		return "chat/memberChat.part2";
 	}
 	
@@ -78,6 +80,7 @@ public class ChatController {
 		if(chatContent != null) {
 			model.addAttribute("chatContents",chatContent);
 		}
+		
 		return "chat/expertChat.part2";
 	}
 	@RequestMapping(value="/createChat.do", method =RequestMethod.GET)
@@ -115,6 +118,7 @@ public class ChatController {
 		if(chatContent != null) {
 			model.addAttribute("chatContents",chatContent);
 		}
+
 		return "chat/memberChat.part2";
 	}
 
@@ -146,6 +150,7 @@ public class ChatController {
 		if(chatContent != null) {
 			model.addAttribute("chatContents",chatContent);
 		}
+		
 		return "chat/memberChat.part2";
 	}
 }
