@@ -18,6 +18,8 @@ import main.project.web.chat.vo.ChatContentVO;
 import main.project.web.chat.vo.RoomListVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.vo.ProductVO;
+import main.project.web.purchase.Service.IPurchaseService;
+import main.project.web.purchase.vo.CartVO;
 
 @Controller("chatController")
 @RequestMapping(value="/chat")
@@ -26,17 +28,27 @@ public class ChatController {
 	private IChatContentService chatContentService;
 	@Autowired
 	private IRoomListService roomListService;
+	@Autowired
+	private IPurchaseService purchaseService;
 
 	@RequestMapping(value="/expertChat.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String expertChat (Model model,HttpSession session) throws Exception{
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		if(member == null) {
-			return "main/main.part2";
+			return "redirect:/main/main.do";
 		}
 		model.addAttribute("memberName",member.getNick_name());
 		List<RoomListVO> roomList = roomListService.getMemberList(member.getId());
 		model.addAttribute("roomList",roomList);
 		
+		//장바구니
+		List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
+		if(cartList != null) {
+			model.addAttribute("cartList",cartList);
+			if(cartList.size() != 0) {
+				model.addAttribute("count",cartList.size());
+			}
+		}
 		return "chat/expertChat.part2";
 	}
 
@@ -44,12 +56,20 @@ public class ChatController {
 	public String memberChat (Model model,HttpSession session) throws Exception{
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		if(member == null) {
-			return "main/main.part2";
+			return "redirect:/main/main.do";
 		}
 		model.addAttribute("memberName",member.getNick_name());
 		List<RoomListVO> roomList = roomListService.getRoomList(member.getId());
 		model.addAttribute("roomList",roomList);
 		
+		//장바구니
+		List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
+		if(cartList != null) {
+			model.addAttribute("cartList",cartList);
+			if(cartList.size() != 0) {
+				model.addAttribute("count",cartList.size());
+			}
+		}
 		return "chat/memberChat.part2";
 	}
 	
@@ -58,7 +78,7 @@ public class ChatController {
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		RoomListVO roomChange = (RoomListVO)session.getAttribute("room");
 		if(member == null) {
-			return "main/main.part2";
+			return "redirect:/main/main.do";
 		}
 		model.addAttribute("memberName",member.getNick_name());
 		
@@ -81,13 +101,21 @@ public class ChatController {
 			model.addAttribute("chatContents",chatContent);
 		}
 		
+		//장바구니
+		List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
+		if(cartList != null) {
+			model.addAttribute("cartList",cartList);
+			if(cartList.size() != 0) {
+				model.addAttribute("count",cartList.size());
+			}
+		}
 		return "chat/expertChat.part2";
 	}
 	@RequestMapping(value="/createChat.do", method =RequestMethod.GET)
 	public String createChat(Model model, HttpSession session, ProductVO product, String expertName)throws Exception{
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		if(member == null) {
-			return "main/main.part2";
+			return "redirect:/main/main.do";
 		}
 		model.addAttribute("memberName",member.getNick_name());
 
@@ -119,6 +147,14 @@ public class ChatController {
 			model.addAttribute("chatContents",chatContent);
 		}
 
+		//장바구니
+		List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
+		if(cartList != null) {
+			model.addAttribute("cartList",cartList);
+			if(cartList.size() != 0) {
+				model.addAttribute("count",cartList.size());
+			}
+		}
 		return "chat/memberChat.part2";
 	}
 
@@ -127,7 +163,7 @@ public class ChatController {
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		RoomListVO roomChange = (RoomListVO)session.getAttribute("room");
 		if(member == null) {
-			return "main/main.part2";
+			return "redirect:/main/main.do";
 		}
 		model.addAttribute("memberName",member.getNick_name());
 		
@@ -151,6 +187,14 @@ public class ChatController {
 			model.addAttribute("chatContents",chatContent);
 		}
 		
+		//장바구니
+		List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
+		if(cartList != null) {
+			model.addAttribute("cartList",cartList);
+			if(cartList.size() != 0) {
+				model.addAttribute("count",cartList.size());
+			}
+		}
 		return "chat/memberChat.part2";
 	}
 }

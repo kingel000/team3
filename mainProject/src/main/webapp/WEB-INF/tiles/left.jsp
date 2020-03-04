@@ -36,7 +36,7 @@
    <div class="myPage_menu" >
       <ul>
          <div class="mypage_title">
-            <a href="/web/member/mypage.do">MY PAGE</a>
+            <a href="/web/main/main.do">MY PAGE</a>
          </div><br>
          <li class="group">
             <div class="box">

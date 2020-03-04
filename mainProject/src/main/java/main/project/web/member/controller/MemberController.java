@@ -48,7 +48,7 @@ public class MemberController {
 			if(check.getPwd().equals(member.getPwd())) {
 				session.setAttribute("member", check);
 				model.addAttribute("member", check);
-				return "main/main.part2";
+				return "redirect:/main/main.do";
 			}else {
 				String msg = "비밀번호 오류";
 				System.out.println(msg);
@@ -134,7 +134,7 @@ public class MemberController {
 	@RequestMapping(value="/logout.do", method=RequestMethod.GET)
 	public String memberLogout(HttpSession session, Model model) {
 		session.invalidate();
-		return "main/main.part2";
+		return "redirect:/main/main.do";
 	}
 
 	@RequestMapping(value="/mypage.do", method = RequestMethod.GET)
@@ -218,7 +218,7 @@ public class MemberController {
 				}
 				String msg = "회원탈퇴 되었습니다.";
 				model.addAttribute("msg",msg);
-				return "main/main.part2";
+				return "redirect:/main/main.do";
 			}
 		}
 		String msg = "비밀번호 다시 확인";
@@ -238,7 +238,7 @@ public class MemberController {
 	@RequestMapping(value="/boardManager.do", method = RequestMethod.POST)
 	public String editBoard(ExpertVO expert , Model model , HttpSession session) {
 
-		return "main/main.part2";
+		return "redirect:main/main.do";
 	}
 
 	@RequestMapping(value="/masterPage.do", method = RequestMethod.GET)

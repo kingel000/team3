@@ -36,9 +36,10 @@
 						<h2><c:out value="${cart.price }" /> ￦</h2>
 					</li>
 					<li class="cart_del_col">
-       			 		<img src="https://i.imgur.com/bI4oD5C.png">
+       			 		<a href="/web/purchase/deleteCart.do?num=${cart.num}"><img src="<c:url value="/resources/images2/delete.png"/>"></a>
 					</li>
 				</ul>
+				<button class="checkout" type="button" onclick="location.href='/web/purchase/checkout.do' ">CheckOut</button>
 			</c:forEach>
 		</c:if>
 	</div>

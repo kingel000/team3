@@ -108,7 +108,7 @@ public class ProductController {
 	@RequestMapping(value="/boardManager.do", method = RequestMethod.POST)
 	public String editBoard(ExpertVO expert , Model model , HttpSession session) {
 
-		return "main/main.part2";
+		return "redirect:/main/main.do";
 	}
 	
 	@RequestMapping(value="/updateProduct.do", method = RequestMethod.GET)

@@ -54,7 +54,7 @@ public class PurchaseController {
 		if(cartList != null) {
 			model.addAttribute("cartList",cartList);
 		}
-		return "purchase/myCart";
+		return "purchase/myCart.page";
 	}
 
 	@RequestMapping(value="/checkout.do", method=RequestMethod.GET)
