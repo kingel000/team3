@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import main.project.web.product.vo.findVO;
 import main.project.web.purchase.vo.CartVO;
 import main.project.web.purchase.vo.PurchaseVO;
 
@@ -19,4 +20,5 @@ public interface IPurchaseDAO {
 	List<CartVO> selectMyCart(@Param("memberId") String memberId);
 	void deleteCart(@Param("cartNum") String cartNum);
 	void checkOut(@Param("memberId") String memberId);
+	List<PurchaseVO> purchaseFindList(findVO find);
 }

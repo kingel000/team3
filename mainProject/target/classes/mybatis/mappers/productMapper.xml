@@ -65,6 +65,11 @@
 			expert_id like '%'||#{findText}||'%'
 		</if>
 	</select>
+
+		<select id="select_Id" parameterType="String" resultType="memberVO" >
+		SELECT * FROM PRODUCT WHERE product_num = #{product_num}
+	</select>
+
 	
 	<select id="mainFindList" parameterType="String" resultType="productVO">
 		SELECT * FROM product WHERE product_title like '%'||#{mainFindText}||'%'
@@ -76,8 +81,16 @@
 		WHERE <![CDATA[ ROWNUM >= 1 AND ROWNUM <= 10 ]]>
 	</select>
 	
+	<delete id="deleteProductId" parameterType="String">
+		DELETE FROM product
+		WHERE expert_id=#{id}
+	</delete>
+	
+	
+	
 
 	
+
 
 	
 </mapper>

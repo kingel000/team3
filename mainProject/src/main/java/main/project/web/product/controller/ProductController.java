@@ -169,5 +169,9 @@ public class ProductController {
 	}
 	
 	//------------------------------장바구니-------------------------------------------
-	
+	@RequestMapping(value="/orderList.do", method = RequestMethod.GET)
+	public String orderListProduct(Model model) {
+		
+		return "/product/orderList.page";
+	}
 }

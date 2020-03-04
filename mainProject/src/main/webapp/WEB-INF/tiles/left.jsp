@@ -81,7 +81,7 @@
     
          <li class="group">
             <div class="box">
-               <a href="#">
+               <a href="/web/product/orderList.do">
                   <h3>Order List</h3>
                   <p>구매 내역</p>
                </a>

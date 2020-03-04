@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import main.project.web.product.vo.findVO;
 import main.project.web.purchase.dao.IPurchaseDAO;
 import main.project.web.purchase.vo.CartVO;
 import main.project.web.purchase.vo.PurchaseVO;
@@ -58,6 +59,11 @@ public class PurchaseService implements IPurchaseService{
 	@Override
 	public void checkOut(String memberId) {
 		purchaseDAO.checkOut(memberId);
+	}
+
+	@Override
+	public List<PurchaseVO> purchaseFindList(findVO find) {
+		return purchaseDAO.purchaseFindList(find);
 	}
 
 }

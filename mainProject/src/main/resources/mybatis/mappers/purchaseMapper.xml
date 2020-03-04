@@ -33,4 +33,15 @@
 	<delete id="checkOut" parameterType="String">
 		DELETE FROM cart WHERE member_id = #{memberId}
 	</delete>
+	
+	<select id="purchaseFindList" parameterType="findVO" resultType="purchaseVO">
+		SELECT * FROM purchase WHERE 
+		<if test="category=='product_num'">
+			product_num like '%'||#{findText}||'%'
+		</if>
+		<if test="category=='member_id'">
+			member_id like '%'||#{findText}||'%'
+		</if>
+	</select>
+	
 </mapper>

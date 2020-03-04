@@ -59,7 +59,7 @@
     
          <li class="group">
             <div class="box">
-               <a href="#">
+               <a href="/web/admin/adminpurchase.mdo">
                   <h3>Transaction history</h3>
                   <p>거래 내역</p>
                </a>

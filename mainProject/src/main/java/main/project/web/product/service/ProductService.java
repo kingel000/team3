@@ -62,6 +62,13 @@ public class ProductService implements IProductService{
 	}
 
 	@Override
+
+	public MemberVO select_Id(String product_num) {
+		return productDAO.select_Id(product_num);
+
+	}
+
+
 	public List<ProductVO> mainFindList(String mainFindText) {
 		return productDAO.mainFindList(mainFindText);
 	}
@@ -70,5 +77,12 @@ public class ProductService implements IProductService{
 	public List<ProductVO> newProductList() {
 		return productDAO.newProductList();
 	}
+
+	@Override
+	public void deleteProductId(String Id) {
+		 productDAO.deleteProductId(Id);
+		
+	}
+
 
 }
