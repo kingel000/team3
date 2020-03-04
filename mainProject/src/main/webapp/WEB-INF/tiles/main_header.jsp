@@ -94,17 +94,23 @@
 		  <input class="form-control" type="text" placeholder="Search Product…">
 		  <button><i class="ps-icon-search"></i></button>
 		</form>
-		<div class="ps-cart"><a class="ps-cart__toggle" href="#"><span><i>20</i></span><i class="ps-icon-shopping-cart"></i></a>
+		<div class="ps-cart"><a class="ps-cart__toggle" href="#"><c:if test="${count != null }"><span><i>${count}</i></span></c:if><i class="ps-icon-shopping-cart"></i></a>
 		  <div class="ps-cart__listing">
 			<div class="ps-cart__content">
 			<!-- 장바구니 목록 -->
-			  <div class="ps-cart-item"><a class="ps-cart-item__close" href="#"></a>
-				<div class="ps-cart-item__thumbnail"><a href="product-detail.html"></a><img src="<c:url value="/resources/images/cart-preview/1.jpg" />" ></div>
-				<div class="ps-cart-item__content"><a class="ps-cart-item__title" href="product-detail.html">Amazin’ Glazin’</a>
-				 	<p><span>Price:<i>1000￦</i></span></p>
-				</div>
-			  </div>
-			 
+				<c:if test="${cartList != null }">
+					<c:forEach var="cart" items="${cartList}" varStatus="status">
+						<div class="ps-cart-item"><a class="ps-cart-item__close" href="/web/purchase/deleteCart.do?num=${cart.num}"></a>
+							<div class="ps-cart-item__thumbnail">
+								<a href="/web/product/detailProduct.do?num=${cart.product_num}"></a><img src="<c:url value="/resources/images/cart-preview/1.jpg" />" >
+							</div>
+							<div class="ps-cart-item__content">
+								<a class="ps-cart-item__title" href="product-detail.html">${cart.product_title }</a>
+								<p><span>Price:<i>${cart.price }: ￦</i></span></p>
+							</div>
+						</div>
+					</c:forEach>
+				</c:if>
 			</div>
 			<c:choose>
 	           	 <c:when test="${member.id == null}">

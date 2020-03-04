@@ -27,6 +27,14 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
 
 <title>상품 상세페이지</title>
+<script type="text/javascript">
+function addCart(){
+	var f = document.content;
+	f.action="/web/purchase/addCart.do"
+	f.method="post";
+	f.submit();
+}
+</script>
 </head>
 <body>
 <main class="ps-main">
@@ -75,7 +83,7 @@
 			</div>
 			
 			<div class="ps-product__shopping">
-			<form action="/web/chat/createChat.do" >
+			<form action="/web/chat/createChat.do" name="content" >
 				<div class="ps-product__block ps-product__size">
 			  		<div class="form-group">
 			  			<input class="form-control" type="text" placeholder="가격 입력" name="price" value=""/>
@@ -92,7 +100,7 @@
 						<a href="/web/member/login.do" class="ps-btn mb-10">Expert Chat</a>
 	           	 	</c:when>
 	            	<c:otherwise>
-	            		<a href="/web/purchase/addCart.do?num=${numProduct.product_num }" class="ps-btn mb-10">Cart</a>
+	            		<input type="button" value="Cart" onClick="javascript:addCart();" class="ps-btn mb-10"/>
 	             	 	<input class="ps-btn mb-10" type="submit" value="Expert Chat"><i class="ps-icon-next"></i>
 	           		 </c:otherwise>
 	         	</c:choose>
