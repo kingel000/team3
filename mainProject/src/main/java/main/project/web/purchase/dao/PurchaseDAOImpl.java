@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import main.project.web.product.vo.findVO;
 import main.project.web.purchase.vo.CartVO;
 import main.project.web.purchase.vo.PurchaseVO;
 
@@ -61,5 +62,11 @@ public class PurchaseDAOImpl implements IPurchaseDAO {
 	public void checkOut(String memberId) {
 		sqlSessionTemplate.delete("main.project.web.purchase.dao.IPurchaseDAO.checkOut", memberId);
 	}
+
+	@Override
+	public List<PurchaseVO> purchaseFindList(findVO find) {
+		return sqlSessionTemplate.selectList("main.project.web.purchase.dao.IPurchaseDAO.purchaseFindList", find);
+	}
+
 
 }
