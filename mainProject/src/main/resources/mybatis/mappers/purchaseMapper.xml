@@ -21,6 +21,7 @@
 		 SELECT * FROM purchase ORDER BY purchase_num DESC 
 	</select>
 	
+	<!-- 장바구니 -->
 	<insert id="addCart" parameterType="cartVO" >
 		INSERT INTO cart VALUES (#{num}, #{member_id}, #{product_num}, #{product_title}, #{price}, #{expert_nick})
 	</insert>
