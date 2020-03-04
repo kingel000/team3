@@ -32,7 +32,6 @@ public class PurchaseController {
 		if(price == null) {
 			return "redirect:/product/detailProduct.do?num="+product.getProduct_num();
 		}
-<<<<<<< HEAD
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		String date = (new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date());
 		String expertNick = productService.select_NickName(product.getExpert_id()).getNick_name();
@@ -62,10 +61,4 @@ public class PurchaseController {
 	public String checkout() {
 		return "purchase/checkout";
 	}
-
-=======
-		
-		   
-		
->>>>>>> branch 'master' of https://github.com/kingel000/team3.git
 }

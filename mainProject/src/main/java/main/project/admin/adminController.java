@@ -255,12 +255,6 @@ public class adminController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return "admin/adminPurchase.page2";
-
-<<<<<<< HEAD
-	}
-=======
       return "admin/adminPurchase.page2";
    
    }
@@ -283,6 +277,4 @@ public class adminController {
   		model.addAttribute("purchaseList",purchaseList);
   		return "admin/adminPurchase.page2";
    }
->>>>>>> branch 'master' of https://github.com/kingel000/team3
-
 }
