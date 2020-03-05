@@ -188,6 +188,7 @@ public class adminController {
       return "admin/adminProduct.page2";
    }
    
+   //관리자모드에서 상품삭제
    @RequestMapping(value = "/adminProductDelete.mdo", method= RequestMethod.GET)
    public String adminProductDelete(@RequestParam String num,ProductVO product, HttpSession session , Model model) {
       product.setProduct_num(num);
@@ -224,7 +225,7 @@ public class adminController {
 
 		model.addAttribute("adminproductList",adminproductList);
 		return "admin/adminProduct.page2";
-<<<<<<< HEAD
+
 	}
 	//
 	@RequestMapping(value = "/adminProductDelete.mdo", method= RequestMethod.GET)
@@ -257,38 +258,9 @@ public class adminController {
 		return "admin/adminHomePage.page2";
 	}
 	
-=======
-   }
-   
-   //-----------홈페이지 관리
-   @RequestMapping(value = "/adminHomePage.mdo", method= RequestMethod.GET)
-   public String adminHomePageManager() {
-      
-      return "admin/adminHomePage.page2";
-   }
-   
-   //---------- 거래 내역
-   
-   @RequestMapping(value = "/adminpurchase.mdo", method= RequestMethod.GET)
-   public String adminpurchase(PurchaseVO purchase , ProductVO product, Model model , HttpSession session) {
-	   System.out.println("admin Purchase GET 호출 ");
-	   ArrayList<String>ExpertidList = new ArrayList<>();
-	   ArrayList<String>ProducttitleList = new ArrayList<>();
-	   //ArrayList<ProductVO>ExpertidList = new ArrayList<>();
-	  
-	   try {
-	   List<PurchaseVO> purchaseList = purchaseService.selectListPurchase();
-	   System.out.println("거래내역 사이즈 : " + purchaseList.size());
-	   for(PurchaseVO purchaseVO : purchaseList) {
-			System.out.println("DB 저장된 거래 내역 리스트 !!! : " + purchaseVO);
-			String Expert_id =  productService.selectProduct(purchaseVO.getProduct_num()).getExpert_id();
-			String Product_title = productService.selectProduct(purchaseVO.getProduct_num()).getProduct_title();
-			System.out.println("리스트에 들어가는 판매자 아이디 : " + Expert_id);
-			ExpertidList.add(Expert_id);
-			ProducttitleList.add(Product_title);
->>>>>>> branch 'master' of https://github.com/kingel000/team3
 
-<<<<<<< HEAD
+
+
 	 //<!-- *******20200229 -->
 	//-----------�Խ���(��������) ���
 	@RequestMapping(value = "/adminBoardNotice.mdo", method= RequestMethod.GET)	//�������ּҰ�
@@ -366,46 +338,8 @@ public class adminController {
 		return "admin/adminBoard_Notice.page2";								
 	}
 */	 
-=======
-			
-		}
-	   
->>>>>>> branch 'master' of https://github.com/kingel000/team3
 
-<<<<<<< HEAD
+
+
 }
-=======
-	   model.addAttribute("purchaseList",purchaseList);
-	   model.addAttribute("expertidList",ExpertidList);
-	   model.addAttribute("producttitleList",ProducttitleList);
-	   }catch(Exception e) {
-		   e.printStackTrace();
-	   }
 
-      return "admin/adminPurchase.page2";
-   
-   }
-   
-   @RequestMapping(value = "/purchase.mdo", method= RequestMethod.POST)
-  	public String purchasefind(@RequestParam String category, @RequestParam String findText,
-  						PurchaseVO purchase, findVO find,HttpSession session , Model model) {
-  		if(category.equals("상품번호") || category == "상품번호") {
-  			find.setCategory("product_num");
-  		}else {
-			find.setCategory("member_id");
-		}
-  		
-  		find.setFindText(findText);
-  		System.out.println("검색어====="+find);
-  		
-  		List<PurchaseVO> purchaseList = purchaseService.purchaseFindList(find);
-  		System.out.println(purchaseList);
-  		
-  		model.addAttribute("purchaseList",purchaseList);
-  		return "admin/adminPurchase.page2";
-   }
-
-   
-   
-}
->>>>>>> branch 'master' of https://github.com/kingel000/team3
