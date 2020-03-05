@@ -24,18 +24,18 @@ public class PurchaseDAOImpl implements IPurchaseDAO {
 
 	@Override
 	public void updatePurchase(PurchaseVO purchase) {
-		sqlSessionTemplate.update("main.project.web.purchase.dao.IPurchaseDAO.insertPurchase", purchase);
+		sqlSessionTemplate.update("main.project.web.purchase.dao.IPurchaseDAO.updatePurchase", purchase);
 
 	}
 
 	@Override
-	public void deletePurchase(PurchaseVO purchase) {
-		sqlSessionTemplate.delete("main.project.web.purchase.dao.IPurchaseDAO.insertPurchase", purchase);
+	public void deletePurchase(String purchaseNum) {
+		sqlSessionTemplate.delete("main.project.web.purchase.dao.IPurchaseDAO.deletePurchase", purchaseNum);
 	}
 
 	@Override
-	public PurchaseVO selectPurchase(PurchaseVO purchase) {
-		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.insertPurchase", purchase);
+	public PurchaseVO selectPurchase(String purchaseNum) {
+		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.selectPurchase", purchaseNum);
 	}
 
 	@Override

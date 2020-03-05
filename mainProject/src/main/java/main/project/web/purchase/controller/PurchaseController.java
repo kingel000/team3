@@ -12,11 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
+import main.project.web.purchase.PaymentCheck;
 import main.project.web.purchase.Service.IPurchaseService;
 import main.project.web.purchase.vo.CartVO;
+import main.project.web.purchase.vo.PurchaseVO;
 
 @Controller("purchaseCntroller")
 @RequestMapping(value = "/purchase")
@@ -57,8 +60,25 @@ public class PurchaseController {
 		return "purchase/myCart.page";
 	}
 
-	@RequestMapping(value="/checkout.do", method=RequestMethod.GET)
-	public String checkout() {
+	@RequestMapping(value="/checkout.do", method=RequestMethod.POST)
+	public String checkout(CartVO cart, HttpSession session, Model model) {
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		String mid = "mid" + (new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date());
+		PurchaseVO purchase = new PurchaseVO(mid, cart.getProduct_num(), "¥Î±‚¡ﬂ", cart.getMember_id(), cart.getPrice());
+		purchaseService.deleteCart(cart.getNum());
+		purchaseService.insertPurchase(purchase);
+		model.addAttribute("mid", mid);
+		model.addAttribute("cart", cart);
+		model.addAttribute("memberName", member.getNick_name());
+	
 		return "purchase/checkout";
+	}
+	
+	@RequestMapping(value="/paymentCancel.do")
+	public String PaymentCancel() {
+		PaymentCheck pay = new PaymentCheck();
+		//purchaseService.deletePurchase("mid20200305231111");
+		//pay.cancelPayment(pay.getImportToken(),"mid20200305231111" ,"Cancel payment");
+		return null;
 	}
 }

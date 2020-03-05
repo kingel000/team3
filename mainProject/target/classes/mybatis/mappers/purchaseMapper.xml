@@ -11,11 +11,11 @@
 		UPDATE purchase SET purchase_state=#{purchase_state}
 		WHERE purchase_num=#{purchase_num}
 	</update>
-	<delete id="deletePurchase" parameterType="purchaseVO">
-		 DELETE FROM purchase WHERE purchase_num=#{purchase_num}
+	<delete id="deletePurchase" parameterType="String">
+		 DELETE FROM purchase WHERE purchase_num=#{purchaseNum}
 	</delete>
-	<select id="selectPurchase" parameterType="purchaseVO" resultType="purchaseVO">
-		SELECT * FROM purchase WHERE purchase_num=#{purchase_num}
+	<select id="selectPurchase" parameterType="String" resultType="purchaseVO">
+		SELECT * FROM purchase WHERE purchase_num=#{purchaseNum}
 	</select>
 	<select id="selectListPurchase" resultType="purchaseVO">
 		 SELECT * FROM purchase ORDER BY purchase_num DESC 

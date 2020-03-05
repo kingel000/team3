@@ -10,6 +10,18 @@ public class PurchaseVO {
 	private String member_id;
 	private Integer purchase_price;
 	
+	public PurchaseVO() {}
+	
+	public PurchaseVO(String purchase_num, String product_num, String purchase_state, String member_id, Integer purchase_price) {
+		this.purchase_num = purchase_num;
+		this.product_num = product_num;
+		this.purchase_state = purchase_state;
+		this.member_id = member_id;
+		this.purchase_price = purchase_price;
+	}
+
+
+
 	public String getPurchase_num() {
 		return purchase_num;
 	}

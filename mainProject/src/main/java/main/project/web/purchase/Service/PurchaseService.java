@@ -27,13 +27,13 @@ public class PurchaseService implements IPurchaseService{
 	}
 
 	@Override
-	public void deletePurchase(PurchaseVO purchase) {
-		purchaseDAO.deletePurchase(purchase);
+	public void deletePurchase(String purchaseNum) {
+		purchaseDAO.deletePurchase(purchaseNum);
 	}
 
 	@Override
-	public PurchaseVO selectPurchase(PurchaseVO purchase) {
-		return purchaseDAO.selectPurchase(purchase);
+	public PurchaseVO selectPurchase(String purchaseNum) {
+		return purchaseDAO.selectPurchase(purchaseNum);
 	}
 
 	@Override
