@@ -81,6 +81,12 @@
 		WHERE <![CDATA[ ROWNUM >= 1 AND ROWNUM <= 10 ]]>
 	</select>
 	
+	<select id="newAlignmentList" parameterType="String" resultType="productVO">
+		SELECT * FROM (SELECT * FROM product WHERE category=#{category}) ORDER BY product_date DESC
+	</select>
+	<select id="nameAlignmentList" parameterType="String" resultType="productVO">
+		SELECT * FROM (SELECT * FROM product WHERE category=#{category}) ORDER BY product_title
+	</select>
 
 	
 

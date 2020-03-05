@@ -78,5 +78,15 @@ public class ProductService implements IProductService{
 		return productDAO.newProductList();
 	}
 
+	@Override
+	public List<ProductVO> newAlignmentList(String category) {
+		return productDAO.newAlignmentList(category);
+	}
+
+	@Override
+	public List<ProductVO> nameAlignmentList(String category) {
+		return productDAO.nameAlignmentList(category);
+	}
+
 
 }

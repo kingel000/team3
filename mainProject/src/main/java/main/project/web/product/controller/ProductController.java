@@ -51,7 +51,20 @@ public class ProductController {
 		}
 		model.addAttribute("productList",productCategory);
 		model.addAttribute("nick",nick);
-		
+		return "product/mainProduct.part2";
+	}
+	
+	@RequestMapping(value = "/alignmentProduct.do", method = RequestMethod.POST)
+	public String alignmentProduct(@RequestParam String alignment,ProductVO product, Model model, HttpSession session) {
+		String category = product.getCategory();
+		if(alignment == "최신등록순" || alignment.equals("최신등록순")) {
+			List<ProductVO> productList = productService.newAlignmentList(category);
+			model.addAttribute("productList",productList);
+		}else {
+			List<ProductVO> productList = productService.nameAlignmentList(category);
+			model.addAttribute("productList",productList);
+		}
+
 		return "product/mainProduct.part2";
 	}
 	
