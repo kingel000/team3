@@ -10,10 +10,6 @@
 
 <title>Edit Page</title>
 
-
-<!-- Custom-->
-<link rel="stylesheet" href="<c:url value="/resources/css/style2.css"/>">
-
 </head>
 <body>
 	<div id="myPage_form">

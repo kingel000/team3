@@ -61,4 +61,16 @@ public class PurchaseController {
 	public String checkout() {
 		return "purchase/checkout";
 	}
+	
+	@RequestMapping(value="/orderList.do", method = RequestMethod.GET)
+	public String orderListProduct(Model model) {
+		
+		return "purchase/orderList.page";
+	}
+	
+	@RequestMapping(value="/salesList.do", method = RequestMethod.GET)
+	public String salesListProduct(Model model) {
+		
+		return "purchase/salesList.page";
+	}
 }

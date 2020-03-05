@@ -70,7 +70,7 @@
             </li>
             <li class="group">
                <div class="box">
-                    <a href="/web/product/salesList.do">
+                    <a href="/web/purchase/salesList.do">
                      <h3>Sales Status</h3>
                      <p>판매 내역</p>
                   </a>
@@ -81,7 +81,7 @@
        
        	 <li class="group">
             <div class="box">
-               <a href="/web/product/cart.do">
+               <a href="/web/purchase/myCart.do">
                   <h3>Cart</h3>
                   <p>장바구니</p>
                </a>
@@ -90,7 +90,7 @@
     
          <li class="group">
             <div class="box">
-               <a href="/web/product/orderList.do">
+               <a href="/web/purchase/orderList.do">
                   <h3>Order Status</h3>
                   <p>구매 내역</p>
                </a>
