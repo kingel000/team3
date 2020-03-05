@@ -324,9 +324,7 @@ public class adminController {
 //		
 //		String sessionId = member.getId();
 //		abnVO.setBoard_notice_title(sessionId);
-//		System.out.println(abnVO);
-		
-		
+//		System.out.println(abnVO);	
 		
 		//abnVO_Check
 		System.out.println("abnVO_num :"+abnVO.getBoard_notice_num());
