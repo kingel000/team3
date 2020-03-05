@@ -35,29 +35,13 @@ import main.project.web.product.vo.findVO;
 @Controller("adminController")
 @RequestMapping(value = "/admin")
 public class adminController {
-<<<<<<< HEAD
 
-   //* package  -> "main.project.admin
-   //localhost:8080/web/admin/*.mdo
-   
-   @Autowired
-   private IProductService productService;
-   @Autowired
-   private IMemberService memberService;
-   @Autowired
-   private IExpertService expertService;
-   @Autowired
-   private IPurchaseService purchaseService;
-=======
 	// * package -> "main.project.admin
 	// localhost:8080/web/admin/*.mdo
->>>>>>> branch 'master' of https://github.com/kingel000/team3
+
 
 	@Autowired
-<<<<<<< HEAD
-	private adminIBoardNoticeService adminBoardNoticeService;
 
-=======
 	private IProductService productService;
 	@Autowired
 	private IMemberService memberService;
@@ -65,7 +49,7 @@ public class adminController {
 	private IExpertService expertService;
 	@Autowired
 	private IPurchaseService purchaseService;
->>>>>>> branch 'master' of https://github.com/kingel000/team3
+
 
 	@RequestMapping({ "/", "/admin.mdo" })
 	public String home(Locale locale, Model model) {
@@ -192,47 +176,7 @@ public class adminController {
 		List<MemberVO> adminmemberList = memberService.selectFindList(find);
 		System.out.println(adminmemberList);
 
-<<<<<<< HEAD
-   
-   
-   //-----------상품관리
-   @RequestMapping(value = "/adminProduct.mdo", method= RequestMethod.GET )
-   public String ProductManager( HttpSession session , Model model) {
-      List<ProductVO> adminproductList = productService.selectAllListProduct();
-      model.addAttribute("adminproductList", adminproductList);
-      
-      return "admin/adminProduct.page2";
-   }
-   
-   //관리자모드에서 상품삭제
-   @RequestMapping(value = "/adminProductDelete.mdo", method= RequestMethod.GET)
-   public String adminProductDelete(@RequestParam String num,ProductVO product, HttpSession session , Model model) {
-      product.setProduct_num(num);
-      productService.deleteProduct(product);
-      return "redirect:/admin/adminProduct.mdo";
-   }
-   
-   @RequestMapping(value = "/adminDetailProduct.mdo", method= RequestMethod.GET)
-   public String adminDetailProduct(@RequestParam String num,ProductVO product, HttpSession session , Model model) {
-      System.out.println("선택한 상품 번호 : " + num);
-      product = productService.selectProduct(num);
-      model.addAttribute("product", product);
-      
-      MemberVO nick_name = new MemberVO();
-      nick_name = productService.select_NickName(product.getExpert_id());
-      model.addAttribute("nick_name",nick_name);
-      
-      System.out.println(nick_name);
-      System.out.println(product);
-      
-      return "admin/adminDetailProduct.page2";
-   }
-   
-   @RequestMapping(value = "/find.mdo", method = RequestMethod.POST)
-	public String find(@RequestParam String category, @RequestParam String findText,
-						ProductVO product, findVO find,HttpSession session , Model model) {
-		if(category.equals("카테고리") || category == "카테고리") {
-=======
+
 		model.addAttribute("adminmemberList", adminmemberList);
 		return "admin/adminMember.page2";
 	}
@@ -273,7 +217,7 @@ public class adminController {
 	public String find(@RequestParam String category, @RequestParam String findText, ProductVO product, findVO find,
 			HttpSession session, Model model) {
 		if (category.equals("카테고리") || category == "카테고리") {
->>>>>>> branch 'master' of https://github.com/kingel000/team3
+
 			find.setCategory("category");
 		} else {
 			find.setCategory("expert_id");
@@ -283,60 +227,11 @@ public class adminController {
 
 		model.addAttribute("adminproductList", adminproductList);
 		return "admin/adminProduct.page2";
-<<<<<<< HEAD
-=======
-	}
->>>>>>> branch 'master' of https://github.com/kingel000/team3
 
-<<<<<<< HEAD
 	}
-	//
-	@RequestMapping(value = "/adminProductDelete.mdo", method= RequestMethod.GET)
-	public String adminProductDelete(@RequestParam String num,ProductVO product, HttpSession session , Model model) {
-		product.setProduct_num(num);
-		productService.deleteProduct(product);
-		return "redirect:/admin/adminProduct.mdo";
-	}
-	
-	@RequestMapping(value = "/adminDetailProduct.mdo", method= RequestMethod.GET)
-	public String adminDetailProduct(@RequestParam String num,ProductVO product, HttpSession session , Model model) {
-		System.out.println("������ ��ǰ ��ȣ : " + num);
-		product = productService.selectProduct(num);
-		model.addAttribute("product", product);
-		
-		MemberVO nick_name = new MemberVO();
-		nick_name = productService.select_NickName(product.getExpert_id());
-		model.addAttribute("nick_name",nick_name);
-		
-		System.out.println(nick_name);
-		System.out.println(product);
-		
-		return "admin/adminDetailProduct.page2";
-	}
-	
-	//-----------Ȩ������ ����
-	@RequestMapping(value = "/adminHomePage.mdo", method= RequestMethod.GET)
-	public String adminHomePageManager() {
-		
-		return "admin/adminHomePage.page2";
-	}
-	
 
 
 
-	 //<!-- *******20200229 -->
-	//-----------�Խ���(��������) ���
-	@RequestMapping(value = "/adminBoardNotice.mdo", method= RequestMethod.GET)	//�������ּҰ�
-	public String adminBoardNotice(HttpSession session, Model model) {
-		System.out.println("adminBoardNotice GET ��� ȣ��");
-
-		List<AdminBoardNoticeVO> adminBoardNoticeList = adminBoardNoticeService.selectListAdminBoardNotice();
-		if(adminBoardNoticeList != null) {
-			for(AdminBoardNoticeVO adminBoardNotice : adminBoardNoticeList) {
-				System.out.println(adminBoardNotice);
-			}
-			model.addAttribute("adminBoardNoticeList", adminBoardNoticeList);
-=======
 	// -----------홈페이지 관리
 	@RequestMapping(value = "/adminHomePage.mdo", method = RequestMethod.GET)
 	public String adminHomePageManager() {
@@ -371,79 +266,9 @@ public class adminController {
 			model.addAttribute("producttitleList", ProducttitleList);
 		} catch (Exception e) {
 			e.printStackTrace();
->>>>>>> branch 'master' of https://github.com/kingel000/team3
+
 		}
-<<<<<<< HEAD
-		
-		return "admin/adminBoard_Notice.page2";								//jsp ����.
-	}
-	
-	
-	 //<!-- *******20200303 -->
-	//-----------�Խ���(��������) �۵��_GET
-	@RequestMapping(value = "/adminBoard_Notice_Insert.mdo", method= RequestMethod.GET)	
-	public String adminBoardNotice_Insert() {
-		System.out.println("adminBoardNotice_Insert GETȣ��");
 
-		return "admin/adminBoard_Notice_Insert.page2";								
-	}
-	 //<!-- *******20200303 -->
-	//-----------�Խ���(��������) �۵��_Post
-	@RequestMapping(value = "/adminBoard_Notice_Insert.mdo", method= RequestMethod.POST)	
-	public String adminBoardNotice_Insert(AdminBoardNoticeVO abnVO, HttpSession session, Model model) {
-		System.out.println("adminBoardNotice_Insert POST ȣ��");
-
-//		MemberVO member = (MemberVO) session.getAttribute("member");
-//		System.out.println(member.getId());
-//		
-//		String sessionId = member.getId();
-//		abnVO.setBoard_notice_title(sessionId);
-//		System.out.println(abnVO);
-		
-		
-		
-		//������ �������Ѵ�.
-		System.out.println("�Էµ� abnVO num : "+abnVO.getBoard_notice_num());
-		System.out.println("�Էµ� abnVO title : "+abnVO.getBoard_notice_title()); 
-		System.out.println("�Էµ� abnVO info : "+abnVO.getBoard_notice_info());
-		System.out.println("�Էµ� abnVO date : "+abnVO.getBoard_notice_date());
-		//����� ��ȣ.
-		//����� ��¥.
-		
-		adminBoardNoticeService.insertBoardNotice(abnVO);
-		
-//		List<AdminBoardNoticeVO> adminBoardNoticeList = adminBoardNoticeService.selectListAdminBoardNotice();		
-//		model.addAttribute("adminBoardNoticeList", adminBoardNoticeList);
-		
-		return "admin/adminBoard_Notice.page2";								
-	}
-	
-	/*
-	 
-	 
-	 //<!-- *******20200229 -->
-	//-----------�Խ���(��������) �ۼ���_GET
-	@RequestMapping(value = "/adminBoard_Notice_Update.mdo", method= RequestMethod.GET)	
-	public String adminBoardNotice_Update() {
-		System.out.println("GET adminBoardNotice_Update ȣ��");
-		return "admin/adminBoard_Notice_Update.page2";								
-	}
-	
-	 //<!-- *******20200229 -->
-		//-----------�Խ���(��������) �ۼ���_POST
-	@RequestMapping(value = "/adminBoard_Notice_Update.mdo", method= RequestMethod.POST)	
-	public String adminBoardNotice_Update(NoticeVO notice) {
-		System.out.println("GET adminBoardNotice_Update POST ȣ��");
-		System.out.println(notice);
-		return "admin/adminBoard_Notice.page2";								
-	}
-*/	 
-
-
-
-}
-
-=======
       return "admin/adminPurchase.page2";
    
    }
@@ -467,4 +292,4 @@ public class adminController {
   		return "admin/adminPurchase.page2";
    }
 }
->>>>>>> branch 'master' of https://github.com/kingel000/team3
+
