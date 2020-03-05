@@ -17,6 +17,8 @@ import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
+import main.project.web.purchase.Service.IPurchaseService;
+import main.project.web.purchase.vo.CartVO;
 
 @Controller("productController")
 @RequestMapping(value="/product")
@@ -25,6 +27,8 @@ public class ProductController {
 	private IProductService productService;
 	@Autowired
 	private IMemberService memberService;
+	@Autowired
+	private IPurchaseService purchaseService;
 	
 	@RequestMapping(value="/mainProduct.do", method=RequestMethod.GET)
 	public String mainProduct(@RequestParam String category,ProductVO product, Model model, HttpSession session) {
@@ -63,6 +67,18 @@ public class ProductController {
 		}else {
 			List<ProductVO> productList = productService.nameAlignmentList(category);
 			model.addAttribute("productList",productList);
+		}
+
+		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		if(member != null) {
+			List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
+			if(cartList != null) {
+				model.addAttribute("cartList",cartList);
+				if(cartList.size() != 0) {
+					model.addAttribute("count",cartList.size());
+				}
+			}
 		}
 
 		return "product/mainProduct.part2";
@@ -107,7 +123,7 @@ public class ProductController {
 	@RequestMapping(value="/boardManager.do", method = RequestMethod.POST)
 	public String editBoard(ExpertVO expert , Model model , HttpSession session) {
 
-		return "main/main.part2";
+		return "redirect:/main/main.do";
 	}
 	
 	@RequestMapping(value="/updateProduct.do", method = RequestMethod.GET)
@@ -136,7 +152,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="/detailProduct.do", method = RequestMethod.GET)
-	public String detailProduct(@RequestParam String num,ProductVO product, Model model , HttpSession session, MemberVO member) {
+	public String detailProduct(@RequestParam String num,ProductVO product, Model model , HttpSession session) {
 		System.out.println("detailProduct GET 받음 ");
 		System.out.println("선택한 상품 넘버 : " + num);
 		ProductVO numProduct = productService.selectProduct(num);
@@ -148,7 +164,16 @@ public class ProductController {
 		model.addAttribute("exper_id",numProduct.getExpert_id());
 		model.addAttribute("nick_name",nick_name);
 		
-		
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		if(member != null) {
+			List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
+			if(cartList != null) {
+				model.addAttribute("cartList",cartList);
+				if(cartList.size() != 0) {
+					model.addAttribute("count",cartList.size());
+				}
+			}
+		}
 		return "/product/detailProduct.part2";
 	}
 	
@@ -159,5 +184,9 @@ public class ProductController {
 	}
 	
 	//------------------------------장바구니-------------------------------------------
-	
+	@RequestMapping(value="/orderList.do", method = RequestMethod.GET)
+	public String orderListProduct(Model model) {
+		
+		return "/product/orderList.page";
+	}
 }

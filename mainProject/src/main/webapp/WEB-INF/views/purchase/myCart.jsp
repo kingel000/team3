@@ -1,120 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Basket</title>
-  <script src="<c:url value="/resources/js/jquery-3.4.1.min.js"/>"></script>
-  <script src="<c:url value="/resources/js/myCart.js"/>"></script>
-  <link href="<c:url value="/resources/css/myCart.css"/>" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	  <link href="<c:url value="/resources/css/myCart.css"/>" rel="stylesheet" type="text/css">
 </head>
-
 <body>
-	<div class="container">
-
-		<section id="cart"> 
-			<article class="product">
-				<header>
-					<a class="remove">
-						<img src="<c:url value="http://www.astudio.si/preview/blockedwp/wp-content/uploads/2012/08/1.jpg" />"  alt="">
-						<h3>Remove product</h3>
-					</a>
-				</header>
-				<div class="content">
-					<h1>Lorem ipsum</h1>
-				</div>
-
-				<footer class="content">
-					<span class="qt-minus">-</span>
-					<span class="qt">2</span>
-					<span class="qt-plus">+</span>
-
-					<h2 class="full-price">
-						1000₩
-					</h2>
-
-					<h2 class="price">
-						2000₩
-					</h2>
-				</footer>
-			</article>
-
-			<article class="product">
-				<header>
-					<a class="remove">
-						<img src="<c:url value="http://www.astudio.si/preview/blockedwp/wp-content/uploads/2012/08/3.jpg" />"  alt="">
-						<h3>Remove product</h3>
-					</a>
-				</header>
-				<div class="content">
-					<h1>Lorem ipsum dolor</h1>
-				</div>
-
-				<footer class="content">
-					
-					<span class="qt-minus">-</span>
-					<span class="qt">1</span>
-					<span class="qt-plus">+</span>
-
-					<h2 class="full-price">
-						5000₩
-					</h2>
-
-					<h2 class="price">
-						5000₩
-					</h2>
-				</footer>
-			</article>
-
-			<article class="product">
-				<header>
-					<a class="remove">
-						<img src="<c:url value="http://www.astudio.si/preview/blockedwp/wp-content/uploads/2012/08/5.jpg" />"  alt="">
-						<h3>Remove product</h3>
-					</a>
-				</header>
-				<div class="content">
-					<h1>Lorem ipsum dolor ipsdu</h1>
-				</div>
-
-				<footer class="content">
-					
-					<span class="qt-minus">-</span>
-					<span class="qt">3</span>
-					<span class="qt-plus">+</span>
-
-					<h2 class="full-price">
-						3000₩
-					</h2>
-
-					<h2 class="price">
-						1000₩
-					</h2>
-				</footer>
-			</article>
-
-		</section>
-
+<div class="page">
+	<div id="store_cart">
+		<ul class="cart_head">
+			<li class="cart_head_title">
+				My Cart
+			</li>
+			<li class="cart_head_product">
+				Product
+			</li>
+			<li class="cart_head_price">
+				Price
+			</li>
+		</ul>
+		<c:if test="${cartList != null }">
+			<c:forEach var="cart" items="${cartList}" varStatus="status">
+				<ul class="cart_item">
+					<li class="cart_img_col">
+						<img src="https://i.imgur.com/3P8WF5D.jpg">
+					</li>
+					<li class="cart_product_col">
+						<p><c:out value="${cart.product_title } " /></p>
+						<span><strong>판매자: </strong><c:out value="${cart.expert_nick }" /></span>
+					</li>
+					<li class="cart_price_col">
+						<h2><c:out value="${cart.price }" /> ￦</h2>
+					</li>
+					<li class="cart_del_col">
+       			 		<a href="/web/purchase/deleteCart.do?num=${cart.num}"><img src="<c:url value="/resources/images2/delete.png"/>"></a>
+					</li>
+				</ul>
+				<button class="checkout" type="button" onclick="location.href='/web/purchase/checkout.do' ">CheckOut</button>
+			</c:forEach>
+		</c:if>
 	</div>
-
-	<footer id="site-footer">
-		<div class="container clearfix">
-
-			<div class="left">
-				<h2 class="subtotal">Subtotal: <span>0</span>₩</h2>
-				<h3 class="tax">Taxes (5%): <span>0</span>₩</h3>
-				<h3 class="shipping">Shipping: <span>0</span>₩</h3>
-			</div>
-
-			<div class="right">
-				<h1 class="total">Total: <span>0</span>₩</h1>
-				<a class="btn" href="/web/purchase/checkout.do">Checkout</a>
-			</div>
-
-		</div>
-	</footer>
+</div>
 </body>
 </html>

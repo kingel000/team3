@@ -105,8 +105,8 @@
 								<a href="/web/product/detailProduct.do?num=${cart.product_num}"></a><img src="<c:url value="/resources/images/cart-preview/1.jpg" />" >
 							</div>
 							<div class="ps-cart-item__content">
-								<a class="ps-cart-item__title" href="product-detail.html">${cart.product_title }</a>
-								<p><span>Price:<i>${cart.price }: ￦</i></span></p>
+								<a class="ps-cart-item__title" href="/web/product/detailProduct.do?num=${cart.product_num}">${cart.product_title }</a>
+								<p><span>Price:<i>${cart.price } ￦</i></span></p>
 							</div>
 						</div>
 					</c:forEach>

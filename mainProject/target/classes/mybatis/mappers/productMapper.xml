@@ -81,6 +81,7 @@
 		WHERE <![CDATA[ ROWNUM >= 1 AND ROWNUM <= 10 ]]>
 	</select>
 	
+
 	<select id="newAlignmentList" parameterType="String" resultType="productVO">
 		SELECT * FROM (SELECT * FROM product WHERE category=#{category}) ORDER BY product_date DESC
 	</select>
@@ -88,8 +89,9 @@
 		SELECT * FROM (SELECT * FROM product WHERE category=#{category}) ORDER BY product_title
 	</select>
 
-	
+	<delete id="deleteProductId" parameterType="String">
+		DELETE FROM product
+		WHERE expert_id=#{id}
+	</delete>
 
-
-	
 </mapper>
