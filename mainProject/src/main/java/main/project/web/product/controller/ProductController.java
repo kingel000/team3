@@ -184,9 +184,16 @@ public class ProductController {
 	}
 	
 	//------------------------------장바구니-------------------------------------------
+
 	@RequestMapping(value="/orderList.do", method = RequestMethod.GET)
 	public String orderListProduct(Model model) {
 		
 		return "/product/orderList.page";
+	}
+	
+	@RequestMapping(value="/salesList.do", method = RequestMethod.GET)
+	public String salesListProduct(Model model) {
+		
+		return "/product/salesList.page";
 	}
 }

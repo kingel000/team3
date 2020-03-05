@@ -36,8 +36,9 @@
    <div class="myPage_menu" >
       <ul>
          <div class="mypage_title">
-            <a href="/web/main/main.do">MY PAGE</a>
-         </div><br>
+            <a href="/web/member/mypage.do">MY PAGE</a>
+         </div>
+         <br>
          <li class="group">
             <div class="box">
                <a href="/web/member/editMember.do">
@@ -67,12 +68,20 @@
                   </a>
                 </div>
             </li>
+            <li class="group">
+               <div class="box">
+                    <a href="/web/product/salesList.do">
+                     <h3>Sales Status</h3>
+                     <p>판매 내역</p>
+                  </a>
+                </div>
+            </li>
             </c:otherwise>
          </c:choose>
        
        	 <li class="group">
             <div class="box">
-               <a href="/web/purchase/myCart.do">
+               <a href="/web/product/cart.do">
                   <h3>Cart</h3>
                   <p>장바구니</p>
                </a>
@@ -82,7 +91,7 @@
          <li class="group">
             <div class="box">
                <a href="/web/product/orderList.do">
-                  <h3>Order List</h3>
+                  <h3>Order Status</h3>
                   <p>구매 내역</p>
                </a>
             </div>
