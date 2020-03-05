@@ -117,11 +117,12 @@
 						<h3>정렬</h3>
 					</div>
 					<div class="ps-widget__content">
-						<ul class="ps-list--checked">
-							<li class="current"><a href="product-listing.html">상품명 순</a></li>
-							<li><a href="product-listing.html">최신등록 순</a></li>
-
-						</ul>
+						<form action="/web/product/alignmentProduct.do" method="Post">
+							 <input type="hidden" name="category" value="${productList.get(0).category }">
+ 							 <input type="radio" name="alignment" value="최신등록순" /> 최신등록순 <br>
+ 							 <input type="radio" name="alignment" value="상품명순" /> 상품명순 <br><br>
+ 							 <input type="submit" value="정렬하기">
+						</form>
 					</div>
 				</aside>
 

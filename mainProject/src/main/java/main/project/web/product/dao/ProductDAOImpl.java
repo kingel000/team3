@@ -72,9 +72,18 @@ public class ProductDAOImpl implements IProductDAO {
 
 	}
 	@Override
+
+	public List<ProductVO> newAlignmentList(String category) {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.newAlignmentList",category);
+	}
+	@Override
+	public List<ProductVO> nameAlignmentList(String category) {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.nameAlignmentList",category);
+	}
 	public void deleteProductId(String Id) {
 		sqlSessiontemplate.delete("main.project.web.product.dao.IProductDAO.deleteProductId",Id);
 		
+
 	}
 
 	

@@ -8,7 +8,6 @@
 <title>제목</title>
 <style>
 
-
 #left2 {
 	float: left;
 	margin-left: 5px;
@@ -20,7 +19,6 @@
 	width: 70%;
 	margin-top: 50px;
 	margin-bottom: 50px;
-	padding-right: 80px;
 }
 
 
@@ -34,14 +32,12 @@
 </head>
 <body>
 	<div style="width: 100%; height: 100%;">
-
 		<div id="left2">
 			<tiles:insertAttribute name="left2" />
 		</div>
 		<div id="main">
 			<tiles:insertAttribute name="body" />
 		</div>
-
 	</div>
 </body>
 </html>
