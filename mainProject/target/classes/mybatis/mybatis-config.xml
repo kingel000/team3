@@ -12,7 +12,6 @@
 		<typeAlias type="main.project.web.chat.vo.ChatContentVO" alias="chatContentVO"></typeAlias>
 		<typeAlias type="main.project.web.chat.vo.RoomListVO" alias="roomListVO"></typeAlias>
 		<typeAlias type="main.project.web.purchase.vo.PurchaseVO" alias="purchaseVO"></typeAlias>
-
 		<typeAlias type="main.project.admin.board.vo.AdminBoardNoticeVO" alias="abnVO"></typeAlias>
 
 	</typeAliases>
