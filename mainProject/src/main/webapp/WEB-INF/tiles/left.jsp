@@ -36,7 +36,7 @@
    <div class="myPage_menu" >
       <ul>
          <div class="mypage_title">
-            <a href="/web/member/mypage.do">MY PAGE</a>
+            <a href="/web/main/main.do">MY PAGE</a>
          </div><br>
          <li class="group">
             <div class="box">
@@ -72,7 +72,7 @@
        
        	 <li class="group">
             <div class="box">
-               <a href="/web/product/cart.do">
+               <a href="/web/purchase/myCart.do">
                   <h3>Cart</h3>
                   <p>장바구니</p>
                </a>

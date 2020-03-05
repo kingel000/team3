@@ -42,6 +42,20 @@ public class ExpertDAOImpl implements IExpertDAO {
 
 	}
 
+	@Override
+	public void updateRankExpert(String id) {
+		 sqlSessiontemplate.update("main.project.web.member.dao.IExpertDAO.updateRankExpert",id);
+
+		
+	}
+
+	@Override
+	public void insertRankExpert(String id) {
+		sqlSessiontemplate.insert("main.project.web.member.dao.IExpertDAO.insertRankExpert",id);
+
+		
+	}
+
 
 		
 

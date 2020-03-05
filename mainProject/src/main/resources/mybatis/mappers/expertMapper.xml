@@ -18,7 +18,7 @@
 	</update>
 
 	<delete id="deleteExpert" parameterType="String">
-		DELETE FROM member_expert WHERE id=#{expert_id}
+		DELETE FROM member_expert WHERE id=#{id}
 	</delete>
 
 	<select id="selectExpert" parameterType="String"
@@ -26,5 +26,13 @@
 		SELECT * FROM member_expert
 		WHERE id=#{expert_id}
 	</select>
+
+		
+	<insert id="insertRankExpert"
+		parameterType="String">
+		INSERT INTO member_expert 
+		VALUES(#{id},'변경 후 사용','변경 후 사용','변경 후 사용',0)
+	</insert>
+	
 
 </mapper>

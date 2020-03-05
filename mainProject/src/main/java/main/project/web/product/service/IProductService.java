@@ -11,6 +11,7 @@ import main.project.web.product.vo.findVO;
 public interface IProductService {
 	void insertProduct(ProductVO product);
 	void deleteProduct(ProductVO product_num);
+	void deleteProductId(String Id);
 	void updateProduct(ProductVO product);
 	ProductVO selectProduct(String product_num);
 	List<ProductVO> selectCategory(String category);
@@ -21,4 +22,6 @@ public interface IProductService {
 	List<ProductVO> selectFindList(findVO find);
 	List<ProductVO> mainFindList(String mainFindText);
 	List<ProductVO> newProductList();
+	List<ProductVO> newAlignmentList(String category);
+	List<ProductVO> nameAlignmentList(String category);
 }
