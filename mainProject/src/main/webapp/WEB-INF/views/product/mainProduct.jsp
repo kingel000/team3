@@ -68,35 +68,29 @@
 			<div class="ps-products" data-mh="product-listing">
 				<div class="ps-product-action"></div>
 				<div class="ps-product__columns" id="list">
-					<c:forEach var="product" items="${productList}" varStatus="status">
-						<div class="ps-product__column">
-							<div class="ps-shoe__thumbnail">
-							<c:choose>
-								<c:when test="">
+					<c:if test="${productList != null }">
+						<c:forEach var="product" items="${productList}" varStatus="status">
+							<div class="ps-product__column">
+								<div class="ps-shoe__thumbnail">
 								
-								</c:when>
+								 <img src="<c:url value="/resources/images2/123.png"/>" alt="#">
 								
-									<c:otherwise>
-									
-									</c:otherwise>
-							</c:choose>
-							 <img src="<c:url value="/resources/images2/123.png"/>" alt="#">
-							
-								<!--								<img src="<c:url value="/web/img/e5e26848-35c4-486c-83c5-dd901c5f493a"/>" alt="#">
-								 -->
-								<a class="ps-shoe__overlay" href="product-detail.html"></a>
-							</div>
-							<div class="ps-shoe__content">
-								<div class="ps-shoe__variants"></div>
-								<div class="ps-shoe__detail">
-									<a class="ps-shoe__name" href="/web/product/detailProduct.do?num=${product.product_num}"><c:out value="${product.product_title }"/></a>
-									<p class="ps-shoe__categories">
-										<a href="#"><c:out value="${nick.get(status.count-1)}"/></a>
-									</p>
+									<!--								<img src="<c:url value="/web/img/e5e26848-35c4-486c-83c5-dd901c5f493a"/>" alt="#">
+									 -->
+									<a class="ps-shoe__overlay" href="product-detail.html"></a>
+								</div>
+								<div class="ps-shoe__content">
+									<div class="ps-shoe__variants"></div>
+									<div class="ps-shoe__detail">
+										<a class="ps-shoe__name" href="/web/product/detailProduct.do?num=${product.product_num}"><c:out value="${product.product_title }"/></a>
+										<p class="ps-shoe__categories">
+											<a href="#"><c:out value="${nick.get(status.count-1)}"/></a>
+										</p>
+									</div>
 								</div>
 							</div>
-						</div>
-					</c:forEach>
+						</c:forEach>
+					</c:if>
 				</div>
 				<div class="ps-product-action">
 					<div class="ps-pagination">
@@ -117,12 +111,16 @@
 						<h3>정렬</h3>
 					</div>
 					<div class="ps-widget__content">
-						<form action="/web/product/alignmentProduct.do" method="Post">
-							 <input type="hidden" name="category" value="${productList.get(0).category }">
- 							 <input type="radio" name="alignment" value="최신등록순" /> 최신등록순 <br>
- 							 <input type="radio" name="alignment" value="상품명순" /> 상품명순 <br><br>
- 							 <input type="submit" value="정렬하기">
-						</form>
+					 	
+							<form action="/web/product/alignmentProduct.do" method="Post">
+								<c:if test="${productList == null }">
+									<input type="hidden" name="category" value="${productList.get(0).category }">
+								</c:if>
+ 							 	<input type="radio" name="alignment" value="최신등록순" /> 최신등록순 <br>
+ 							 	<input type="radio" name="alignment" value="상품명순" /> 상품명순 <br><br>
+ 							 	<input type="submit" value="정렬하기">
+							</form>
+						
 					</div>
 				</aside>
 
