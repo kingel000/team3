@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
 import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
@@ -29,6 +30,8 @@ public class ProductController {
 	private IMemberService memberService;
 	@Autowired
 	private IPurchaseService purchaseService;
+	@Autowired
+	private IExpertService expertService;
 	
 	@RequestMapping(value="/mainProduct.do", method=RequestMethod.GET)
 	public String mainProduct(@RequestParam String category,ProductVO product, Model model, HttpSession session) {
@@ -108,7 +111,7 @@ public class ProductController {
 		productService.insertProduct(product);
 //		session.setAttribute("member", member);
 		
-		return "product/insertProduct.page";
+		return "redirect:/product/boardManager.do";
 	}
 
 	@RequestMapping(value="/boardManager.do", method = RequestMethod.GET)
@@ -157,18 +160,20 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="/detailProduct.do", method = RequestMethod.GET)
-	public String detailProduct(@RequestParam String num,ProductVO product, Model model , HttpSession session) {
+	public String detailProduct(@RequestParam String num,ProductVO product,ExpertVO expert, Model model , HttpSession session) {
 		System.out.println("detailProduct GET 받음 ");
 		System.out.println("선택한 상품 넘버 : " + num);
 		ProductVO numProduct = productService.selectProduct(num);
 		System.out.println("선택한 상품 정보 " + numProduct);
 		model.addAttribute("numProduct",numProduct);
-		
 		MemberVO nick_name = new MemberVO();
 		nick_name = productService.select_NickName(numProduct.getExpert_id());
+		System.out.println("닉네임 담긴 정보 : " + nick_name);
+		expert = expertService.selectExpert(numProduct.getExpert_id());
+		System.out.println("클릭한 상품의 판매자 정보 : " + expert);
 		model.addAttribute("exper_id",numProduct.getExpert_id());
 		model.addAttribute("nick_name",nick_name);
-		
+		model.addAttribute("expert",expert);
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		if(member != null) {
 			List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
@@ -179,6 +184,7 @@ public class ProductController {
 				}
 			}
 		}
+		
 		return "/product/detailProduct.part2";
 	}
 	

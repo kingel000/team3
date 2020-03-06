@@ -24,6 +24,7 @@ $(function(){
 	});
 });
 function checkValue() {
+	alert("상품이 등록되었습니다 !")
 	if (!document.product_value.category.value || document.product_value.category.value == "") {
 		alert("카테고리를 선택해주세요.");
 		document.product_value.category.focus();

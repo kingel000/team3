@@ -98,6 +98,10 @@ public class adminController {
 		System.out.println(member);
 		productService.deleteProductId(member.getId());
 		memberService.admindeleteMember(member);
+		if(member.getRank().equals("E")) {
+			expertService.deleteExpert(member.getId());
+		}
+
 		return "redirect:/admin/memberManager.mdo";
 	}
 
