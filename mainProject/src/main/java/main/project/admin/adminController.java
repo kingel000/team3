@@ -255,6 +255,7 @@ public class adminController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
 
 		return "admin/adminPurchase.page2";
 
@@ -262,6 +263,11 @@ public class adminController {
 	}
 
 
+=======
+      return "admin/adminPurchase.page2";
+   
+   }
+>>>>>>> branch 'master' of https://github.com/kingel000/team3
    
    @RequestMapping(value = "/purchase.mdo", method= RequestMethod.POST)
   	public String purchasefind(@RequestParam String category, @RequestParam String findText,
@@ -281,6 +287,9 @@ public class adminController {
   		model.addAttribute("purchaseList",purchaseList);
   		return "admin/adminPurchase.page2";
    }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> branch 'master' of https://github.com/kingel000/team3
 }

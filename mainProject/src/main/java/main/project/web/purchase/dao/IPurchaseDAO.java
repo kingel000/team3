@@ -12,8 +12,8 @@ import main.project.web.purchase.vo.PurchaseVO;
 public interface IPurchaseDAO {
 	void insertPurchase(PurchaseVO purchase);
 	void updatePurchase(PurchaseVO purchase);
-	void deletePurchase(PurchaseVO purchase);
-	PurchaseVO selectPurchase(PurchaseVO purchase);
+	void deletePurchase(@Param("purchaseNum") String purchaseNum);
+	PurchaseVO selectPurchase(@Param("purchaseNum") String purchaseNum);
 	List<PurchaseVO> selectListPurchase();
 	
 	void addCart(CartVO cart);

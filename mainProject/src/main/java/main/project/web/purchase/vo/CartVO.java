@@ -6,16 +6,17 @@ public class CartVO {
 	private String product_num;
 	private String product_title;
 	private Integer price;
-	
+	private String expert_nick;
 	public CartVO() {}
 	
 	
-	public CartVO(String num, String member_id, String product_num, String product_title, Integer price) {
+	public CartVO(String num, String member_id, String product_num, String product_title, Integer price, String expert_nick) {
 		this.num = num;
 		this.member_id = member_id;
 		this.product_num = product_num;
 		this.product_title = product_title;
 		this.price = price;
+		this.expert_nick = expert_nick;
 	}
 
 
@@ -49,12 +50,17 @@ public class CartVO {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
-	
+	public String getExpert_nick() {
+		return expert_nick;
+	}
+	public void setExpert_nick(String expert_nick) {
+		this.expert_nick = expert_nick;
+	}
+
 	@Override
 	public String toString() {
 		return "CartVO [num=" + num + ", member_id=" + member_id + ", product_num=" + product_num + ", product_title="
-				+ product_title + ", price=" + price + "]";
-	}
-	
+				+ product_title + ", price=" + price + ", expert_nick=" + expert_nick + "]";
+	}	
 	
 }

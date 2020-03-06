@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>장바구니</title>
+<title>구매 현황</title>
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/orderList.css"/>">
 </head>
@@ -20,7 +20,6 @@
 					<li><a href="#">입금&#47;결제 0</a></li>
 					<li><a href="#">제작중 0</a></li>
 					<li><a href="#">거래완료 0</a></li>
-					<li><a href="#">구매확정 0</a></li>
 					<li><a href="#">환불 0</a></li>
 					<li><a href="#">환불완료 0</a></li>
 				</ul>
@@ -108,7 +107,7 @@
 
 												<li class="brand"><a href="#">아이템</a></li>
 												<li class="name"><a href="#">반응형 자바 웹 개발</a></li>
-												<li class="option">100000~</li>
+												<li class="option">(구매옵션)</li>
 											</ul>
 										</div>
 									</td>
@@ -118,11 +117,11 @@
 									<td>가격 들어갈곳<br> <span class="txt-default">수량..?</span></td>
 									<td><div class="btn-set">
 											<button type="button" class="n-btn btn-sm btn-default"
-												onclick="">구매 확정</button>
+												onclick="">채팅문의?</button>
 										</div></td>
 									<td>
 										<button type="button" class="n-btn btn-sm btn-default"
-											onclick="">구매후기</button>
+											onclick="">구매 확정</button>
 									</td>
 								</tr>
 							</tbody>
@@ -146,22 +145,21 @@
 				<dl class="state1">
 					<dt>주문 상태</dt>
 					<dd>주문 접수 : 가상계좌 주문의 입금 전 상태</dd>
-					<dd>입금 확인 : 해당 브랜드로 주문서가 전달되어 발송 요청한 상태</dd>
-					<dd>배송 준비 중 : 출고지에서 상품을 준비 중인 상태</dd>
-					<dd>발송 완료 : 출고지에서 택배업체로 인계된 상태</dd>
-					<dd>배송 완료 : 상품이 배송지에 도착한 상태</dd>
+					<dd>입금 확인 : 해당 전문가에게 주문서가 전달되어 발송 요청한 상태</dd>
+					<dd>제작 중 : 상품을 제작 중인 상태</dd>
+					<dd>발송 완료 : 상품이 구매자에게 인계된 상태</dd>
 					<dd>구매 확정 : 상품 수령 후 구매를 결정한 상태</dd>
 					<dd>주문 취소 : 가상계좌 주문 후 입금 전 취소 상태</dd>
 					<dd>결제 오류 : 카드 한도 초과, 할부 개월 수 오류 등으로 결제되지 않은 상태</dd>
 				</dl>
 				<dl class="state2">
 					<dt class="n-hidden">클레임 상태</dt>
-					<dd>교환 요청 : 반품 확인 전 교환 접수 후 대기 상태(교환 주문건 생성)</dd>
-					<dd>교환 처리 중 : 반품 확인 후 교환 준비 중 상태</dd>
-					<dd>교환 완료 : 교환 주문의 발송 요청 상태</dd>
-					<dd>교환 철회 : 교환 요청을 취소한 상태</dd>
-					<dd>환불 요청 : 반품 확인 전 환불 접수 후 대기 상태</dd>
-					<dd>환불 처리 중 : 반품 확인 후 환불 진행 중 상태</dd>
+					<dd>수정 요청 : 상품의 유지보수를 위한 수정 접수 후 대기 상태(교환 주문건 생성)</dd>
+					<dd>수정 처리 중 : 수정 처리 중 상태</dd>
+					<dd>수정 완료 : 수정 주문의 완료 요청 상태</dd>
+					<dd>수정 철회 : 수정 요청을 취소한 상태</dd>
+					<dd>환불 요청 : 환불 접수 후 대기 상태</dd>
+					<dd>환불 처리 중 : 환불 진행 중 상태</dd>
 					<dd>환불 완료 : 환불 요청 승인 완료 상태 (결제대행사를 통해 1~3일 내 환불)</dd>
 				</dl>
 			</div>

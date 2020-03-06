@@ -22,6 +22,7 @@ public interface IProductDAO {
 	List<ProductVO> selectFindList(findVO find);
 	List<ProductVO> mainFindList(String mainFindText);
 	List<ProductVO> newProductList();
-	
+	List<ProductVO> newAlignmentList(String category);
+	List<ProductVO> nameAlignmentList(String category);
 	
 }
