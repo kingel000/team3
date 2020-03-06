@@ -55,18 +55,31 @@ public class PurchaseController {
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
 		if(cartList != null) {
+			
 			model.addAttribute("cartList",cartList);
 		}
 		return "purchase/myCart.page";
 	}
 
+	@RequestMapping(value="/success.do")
+	public String success(@RequestParam String cartNum,@RequestParam String mid, HttpSession session, Model model) {
+		CartVO cart = purchaseService.getCart(cartNum);
+		PurchaseVO purchase = new PurchaseVO(mid, cart.getProduct_num(), "대기중", cart.getMember_id(), cart.getPrice());
+		purchaseService.insertPurchase(purchase);
+		purchaseService.deleteCart(cartNum);
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
+		if(cartList != null) {
+			model.addAttribute("cartList",cartList);
+		}
+		
+		return "purchase/myCart.page";
+	}
+	
 	@RequestMapping(value="/checkout.do", method=RequestMethod.POST)
 	public String checkout(CartVO cart, HttpSession session, Model model) {
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		String mid = "mid" + (new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date());
-		PurchaseVO purchase = new PurchaseVO(mid, cart.getProduct_num(), "대기중", cart.getMember_id(), cart.getPrice());
-		purchaseService.deleteCart(cart.getNum());
-		purchaseService.insertPurchase(purchase);
 		model.addAttribute("mid", mid);
 		model.addAttribute("cart", cart);
 		model.addAttribute("memberName", member.getNick_name());
@@ -75,10 +88,10 @@ public class PurchaseController {
 	}
 	
 	@RequestMapping(value="/paymentCancel.do")
-	public String PaymentCancel() {
+	public String PaymentCancel(@RequestParam String mid) {
 		PaymentCheck pay = new PaymentCheck();
-		//purchaseService.deletePurchase("mid20200305231111");
-		//pay.cancelPayment(pay.getImportToken(),"mid20200305231111" ,"Cancel payment");
+		purchaseService.deletePurchase(mid);
+		pay.cancelPayment(pay.getImportToken(),mid,"Cancel payment");
 		return null;
 	}
 	@RequestMapping(value="/orderList.do", method = RequestMethod.GET)

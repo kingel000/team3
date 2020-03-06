@@ -28,6 +28,9 @@
 	<select id="selectMyCart" resultType="cartVO">
 		SELECT * FROM cart WHERE member_id = #{memberId}
 	</select>
+	<select id="getCart" parameterType="String" resultType="cartVO">
+		SELECT * FROM cart WHERE num = #{cartNum}
+	</select>
 	<delete id="deleteCart" parameterType="String">
 		DELETE FROM cart WHERE num = #{cartNum}
 	</delete>

@@ -53,7 +53,7 @@
                     }
                 });
                 //성공시 이동할 페이지
-                location.href="/web/purchase/myCart.do";
+                location.href="/web/purchase/success.do?cartNum=${cart.num}&&mid=${mid}";
             } else {
                 msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;

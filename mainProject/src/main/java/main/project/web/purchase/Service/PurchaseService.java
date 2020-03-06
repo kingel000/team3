@@ -66,4 +66,9 @@ public class PurchaseService implements IPurchaseService{
 		return purchaseDAO.purchaseFindList(find);
 	}
 
+	@Override
+	public CartVO getCart(String cartNum) {
+		return purchaseDAO.getCart(cartNum);
+	}
+
 }
