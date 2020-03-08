@@ -8,89 +8,46 @@
 			<div class="ps-container">
 				<div class="row">
 					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
-						<aside class="ps-widget--footer ps-widget--info">
-							<header>
-								<h3 class="ps-widget__title">Address Office 1</h3>
-							</header>
-							<footer>
-								<p>
-									<strong>460 West 34th Street, 15th floor, New York</strong>
-								</p>
-								<p>
-									Email: <a href='mailto:support@store.com'>support@store.com</a>
-								</p>
-								<p>Phone: +323 32434 5334</p>
-								<p>Fax: ++323 32434 5333</p>
-							</footer>
-						</aside>
+						
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 ">
-						<div class="ps-widget--footer ps-widget--info second">
+						<aside class="ps-widget--footer ps-widget--info">
 							<header>
-								<h3 class="ps-widget__title">Address Office 2</h3>
+								<h3 class="ps-widget__title">ITEM PROJECT</h3>
 							</header>
 							<footer>
 								<p>
-									<strong>PO Box 16122 Collins Victoria 3000 Australia</strong>
+									<strong>3조: 김용기  정민 김백륜 설동희 모지나</strong>
 								</p>
 								<p>
-									Email: <a href='mailto:support@store.com'>support@store.com</a>
+									Email: item2881@gmail.com
 								</p>
-								<p>Phone: +323 32434 5334</p>
-								<p>Fax: ++323 32434 5333</p>
-							</footer>
-						</div>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
-						<aside class="ps-widget--footer ps-widget--link">
-							<header>
-								<h3 class="ps-widget__title">Find Our store</h3>
-							</header>
-							<footer>
-								<ul class="ps-list--link">
-									<li><a href="#">Coupon Code</a></li>
-									<li><a href="#">SignUp For Email</a></li>
-									<li><a href="#">Site Feedback</a></li>
-									<li><a href="/web/admin/adminPage.mdo">관리자 페이지</a></li>
-								</ul>
 							</footer>
 						</aside>
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
 						<aside class="ps-widget--footer ps-widget--link">
 							<header>
-								<h3 class="ps-widget__title">Get Help</h3>
+								<h3 class="ps-widget__title">고객지원</h3>
 							</header>
 							<footer>
 								<ul class="ps-list--line">
-									<li><a href="#">Order Status</a></li>
-									<li><a href="#">Shipping and Delivery</a></li>
-									<li><a href="#">Returns</a></li>
-									<li><a href="#">Payment Options</a></li>
-									<li><a href="#">Contact Us</a></li>
+									<li><a href="/web/board/notice.do">공지사항</a></li>
+									<li><a href="/web/board/question.do">문의사항</a></li>
+									<li><a href="/web/admin/admin.mdo">관리자페이지</a></li>
 								</ul>
 							</footer>
 						</aside>
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
-						<aside class="ps-widget--footer ps-widget--link">
-							<header>
-								<h3 class="ps-widget__title">Products</h3>
-							</header>
-							<footer>
-								<ul class="ps-list--line">
-									<li><a href="#">Shoes</a></li>
-									<li><a href="#">Clothing</a></li>
-									<li><a href="#">Accessries</a></li>
-									<li><a href="#">Football Boots</a></li>
-								</ul>
-							</footer>
-						</aside>
+						
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12 ">
+						
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 </main>
 <!-- JS Library-->
 <script type="text/javascript"

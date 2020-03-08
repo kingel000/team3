@@ -113,9 +113,9 @@
 					<div class="ps-widget__content">
 					 	
 							<form action="/web/product/alignmentProduct.do" method="Post">
-								<c:if test="${productList == null }">
+					
 									<input type="hidden" name="category" value="${productList.get(0).category }">
-								</c:if>
+							
  							 	<input type="radio" name="alignment" value="최신등록순" /> 최신등록순 <br>
  							 	<input type="radio" name="alignment" value="상품명순" /> 상품명순 <br><br>
  							 	<input type="submit" value="정렬하기">

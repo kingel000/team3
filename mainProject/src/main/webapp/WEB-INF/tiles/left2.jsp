@@ -36,7 +36,7 @@
 	 <div class="myPage_menu" align="left">
       <ul>
          <div class="mypage_title">
-            <a href="#">MASTER PAGE</a>
+            <a href="/web/admin/adminDetail.mdo">MASTER PAGE</a>
          </div><br>
          <li class="group">
             <div class="box">

@@ -51,6 +51,13 @@ public class adminController {
 	}
 
 	// -----------로그인 검증
+	@RequestMapping(value = "/adminDetail.mdo", method = RequestMethod.GET)
+	public String adminDetail(Model model) {
+		System.out.println("ADMIN DETAIL MDO GET 호출");
+		return "admin/adminDetail.page2";
+	
+	}
+	
 	@RequestMapping(value = "/adminDetail.mdo", method = RequestMethod.POST)
 	public String adminDetail(MemberVO member, HttpSession session, Model model) {
 		System.out.println("ADMIN DETAIL MDO POST 호출");
@@ -98,6 +105,10 @@ public class adminController {
 		System.out.println(member);
 		productService.deleteProductId(member.getId());
 		memberService.admindeleteMember(member);
+		if(member.getRank().equals("E")) {
+			expertService.deleteExpert(member.getId());
+		}
+
 		return "redirect:/admin/memberManager.mdo";
 	}
 
@@ -190,15 +201,17 @@ public class adminController {
 	}
 
 	@RequestMapping(value = "/adminDetailProduct.mdo", method = RequestMethod.GET)
-	public String adminDetailProduct(@RequestParam String num, ProductVO product, HttpSession session, Model model) {
+	public String adminDetailProduct(@RequestParam String num, ProductVO product,ExpertVO expert, HttpSession session, Model model) {
 		System.out.println("선택한 상품 번호 : " + num);
 		product = productService.selectProduct(num);
 		model.addAttribute("product", product);
 
 		MemberVO nick_name = new MemberVO();
 		nick_name = productService.select_NickName(product.getExpert_id());
+		expert = expertService.selectExpert(product.getExpert_id());
+		System.out.println("클릭한 상품의 판매자 정보 : " + expert);
 		model.addAttribute("nick_name", nick_name);
-
+		model.addAttribute("expert",expert);
 		System.out.println(nick_name);
 		System.out.println(product);
 
