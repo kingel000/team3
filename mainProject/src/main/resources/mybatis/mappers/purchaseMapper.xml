@@ -20,6 +20,9 @@
 	<select id="selectListPurchase" resultType="purchaseVO">
 		 SELECT * FROM purchase ORDER BY purchase_num DESC 
 	</select>
+	<select id="selectPurchaseList" resultType="purchaseVO">
+		SELECT * FROM purchase WHERE member_id = #{member_id} ORDER BY purchase_num DESC
+	</select>
 	
 	<!-- 장바구니 -->
 	<insert id="addCart" parameterType="cartVO" >

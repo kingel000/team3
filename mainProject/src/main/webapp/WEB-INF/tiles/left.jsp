@@ -87,7 +87,7 @@
                </a>
             </div>
          </li>
-    
+     
          <li class="group">
             <div class="box">
                <a href="/web/purchase/orderList.do">
@@ -122,16 +122,25 @@
             <c:when test="${member.rank == 'E'}">
                 <li class="group">
                <div class="box">
-                    <a href="/web/chat/expertChat.do">
+                    <a href="/web/chat/expertRoomList.do">
                      <h3>Expert Chat</h3>
-                     <p>전문가 채팅</p>
+                     <p>전문가 채팅방 목록</p>
                   </a>
                 </div>
             </li>
             
             </c:when>
          </c:choose> 
-           
+         
+         <li class="group">
+            <div class="box">
+               <a href="/web/chat/memberRoomList.do">
+                  <h3>MemberRoomList</h3>
+                  <p>구매자 채팅방 목록</p>
+               </a>
+            </div>
+         </li>
+         
          <li class="group">
             <div class="box">
                <a href="/web/member/withdrawal.do">

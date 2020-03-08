@@ -15,6 +15,7 @@ public interface IPurchaseDAO {
 	void deletePurchase(@Param("purchaseNum") String purchaseNum);
 	PurchaseVO selectPurchase(@Param("purchaseNum") String purchaseNum);
 	List<PurchaseVO> selectListPurchase();
+	List<PurchaseVO> selectPurchaseList(@Param("memberId")String memberId);
 	
 	void addCart(CartVO cart);
 	List<CartVO> selectMyCart(@Param("memberId") String memberId);
