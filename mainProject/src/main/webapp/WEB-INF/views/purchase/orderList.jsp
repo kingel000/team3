@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +75,7 @@
 				<!-- //filter -->
 			</form>
 			<c:choose>
-				<c:when test="${purchaseList == null }">
+				<c:when test="${purchaseList != null }">
 					<table class="n-table table-col">
 						<colgroup>
 							<col style="width: *">
@@ -93,39 +94,39 @@
 								<th scope="col" colspan="2">주문 상태</th>
 							</tr>
 						</thead>
-						<%-- <c:set var="productList" value="${productList}" />
-						<c:forEach var="product" items="${productList}"> --%>
+						<c:forEach var="purchase" items="${purchaseList}" varStatus="status">
 							<tbody>
 								<tr>
 									<td>
 										<div class="n-prd-row">
-											<a href="#" class="img-block"> <img
-												src="<c:url value="/resources/images2/123.png"/>" alt="abc">
-											</a>
 											<ul class="info">
-
-
-												<li class="brand"><a href="#">아이템</a></li>
-												<li class="name"><a href="#">반응형 자바 웹 개발</a></li>
-												<li class="option">(구매옵션)</li>
+												<li class="name"><a href="/web/product/detailProduct.do?num=${productList.get(status.index).product_num}">${productList.get(status.index).product_title}</a></li>
 											</ul>
 										</div>
 									</td>
-									<td>날짜 들어갈곳</td>
-									<td><a href="#">구매코드 들어갈곳</a></td>
+									<td>
+										<fmt:formatDate value="${purchase.purchase_date}" pattern="yyyy-MM-dd" /><br>
+										<fmt:formatDate value="${purchase.purchase_date}" pattern="aa hh:mm:ss" />
+									</td>
+									<td>${purchase.purchase_num}</td>
 									<!-- test code -->
-									<td>가격 들어갈곳<br> <span class="txt-default">수량..?</span></td>
-									<td><div class="btn-set">
-											<button type="button" class="n-btn btn-sm btn-default"
-												onclick="">채팅문의?</button>
-										</div></td>
+									<td>${purchase.purchase_price }</td>
+									<td>
+										<div class="btn-set">
+											<form action="/web/chat/memberChat.do" method="post">
+												<input type="hidden" name ="product_id" value="${productList.get(status.index).product_num}">
+												<input type="hidden" name="member_id"  value="${purchase.member_id }">
+												<input class="n-btn btn-sm btn-default" type="submit" value="채팅문의">
+											</form>
+										</div>
+									</td>
 									<td>
 										<button type="button" class="n-btn btn-sm btn-default"
 											onclick="">구매 확정</button>
 									</td>
 								</tr>
 							</tbody>
-						<%-- </c:forEach> --%>
+						</c:forEach>
 					</table>
 					<!-- test code -->
 					<div class="n-paging">

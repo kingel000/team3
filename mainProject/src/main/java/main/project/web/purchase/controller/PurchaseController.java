@@ -1,6 +1,7 @@
 package main.project.web.purchase.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import main.project.web.chat.service.IRoomListService;
+import main.project.web.chat.vo.RoomListVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
@@ -29,13 +32,17 @@ public class PurchaseController {
 	private IPurchaseService purchaseService;
 	@Autowired
 	private IProductService productService;
+	@Autowired
+	private IRoomListService roomListService;
 
 	@RequestMapping(value="/addCart.do", method=RequestMethod.POST)
 	public String addCart(String price,ProductVO product,HttpSession session, Model model) {		
-		if(price == null) {
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		RoomListVO roomListVO = new RoomListVO(member.getId(),product.getProduct_num());
+		RoomListVO roomCheck = roomListService.checkRoom(roomListVO);
+		if(price == null || roomCheck == null) {
 			return "redirect:/product/detailProduct.do?num="+product.getProduct_num();
 		}
-		MemberVO member = (MemberVO)session.getAttribute("member");
 		String date = (new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date());
 		String expertNick = productService.select_NickName(product.getExpert_id()).getNick_name();
 		System.out.println("expertNick: "+expertNick);
@@ -95,8 +102,17 @@ public class PurchaseController {
 		return null;
 	}
 	@RequestMapping(value="/orderList.do", method = RequestMethod.GET)
-	public String orderListProduct(Model model) {
-		
+	public String orderListProduct(HttpSession session, Model model) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		List<PurchaseVO> purchaseList = purchaseService.selectPurchaseList(member.getId());
+		List<ProductVO> productList = new ArrayList<ProductVO>();
+		if(purchaseList.size()>0) {
+			for(PurchaseVO purchase:purchaseList) {
+				productList.add(productService.selectProduct(purchase.getProduct_num()));
+			}
+			model.addAttribute("productList", productList);
+		}
+		model.addAttribute("purchaseList", purchaseList);
 		return "purchase/orderList.page";
 	}
 	

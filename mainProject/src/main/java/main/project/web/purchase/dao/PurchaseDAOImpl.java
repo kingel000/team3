@@ -73,5 +73,10 @@ public class PurchaseDAOImpl implements IPurchaseDAO {
 		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.getCart", cartNum);
 	}
 
+	@Override
+	public List<PurchaseVO> selectPurchaseList(String memberId) {
+		return sqlSessionTemplate.selectList("main.project.web.purchase.dao.IPurchaseDAO.selectPurchaseList", memberId);
+	}
+
 
 }
