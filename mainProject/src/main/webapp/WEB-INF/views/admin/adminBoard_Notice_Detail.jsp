@@ -11,34 +11,49 @@
 	.Board>table {	boarder: 1px solid #ddd; text-align: center;}
 	th {	background-color: #eee;	text-align: center;}
 	.title {	color: #fff;	text-align: center;	background-color: #2ac37d;}
-	h2{text-align: center;}
+	h2{	text-align: center;}
 
 </style>
 </head>
 <body>	
 	<div id="Notice_info">		
-		<h3 class="title">공지사항 보기</h3>
-		<table class="Notice_table_info" >
+		<h3 class="title">공지사항 게시판</h3>
+		
+		<table class="table table-striped" style="text-align: center; border: 1px solid #ddd">
+		<thead>
+			<tr>
+				<th colspan="3" style="background-color: #eee; text-align: center;">게시글 보기</th>
+			</tr>
+		</thead>
+		<tbody>
 			<tr>				
-				<th>제목</th>
-				<td>${board_notice.board_notice_title}</td>
+				<td style="width: 20%;">제목</td>
+				<td colspan="2">${board_notice.board_notice_title}</td>
 			</tr>
 			<tr>
-				<th>작성자</th><th></th>
-				<td>관리자</td>
+				<td>작성자</td>
+				<td colspan="2">관리자</td>
 			</tr>
 			<tr>
-				<th>작성일자</th><th></th>
-				<th>${board_notice.board_notice_date}</th>
+				<td>작성일자</td>
+				<td colspan="2"><fmt:formatDate type="date" value="${board_notice.board_notice_date}"/></td>
+				
 			</tr>
 			<tr>
-				<th>내용</th><th></th>
-				<td>${board_notice.board_notice_info}</td>
+				<td>내용</td>
+				<td colspan="2" style="min-height: 200px; text-align: left;">${board_notice.board_notice_info}</td>
 			</tr>
-		</table>
-						
-					<input type="submit" value="정보변경완료" />
+		</tbody>
+		</table>			
 
+		</div>
+		<!-- 왼쪽1 오른쪽2 하고싶음. 목록버튼 실행안됨. -->
+		<div >
+		<button align="left"><a href="web/admin/adminBoard_Notice.mdo">목록</a></button>		
+		<button type="button" onclick="location.href='/web/admin/adminBoard_Notice.mdo'" >글목록</button>
+		
+		<button align="right"><a href="adminBoard_Notice_Update.mdo?num=${board_notice.board_notice_num}">수정</a></button>	
+		<button align="right"><a href="adminBoard_Notice_Delete.mdo?num=${board_notice.board_notice_num}">삭제</a></button>		
 		</div>
 
 </body>
