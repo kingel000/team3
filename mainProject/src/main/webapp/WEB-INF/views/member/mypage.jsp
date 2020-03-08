@@ -4,22 +4,24 @@
 
 <!DOCTYPE html>
 
+
 <html id="wrap">
 <head>
+
 <meta charset="utf-8">
 
 <title>My Page</title>
-<script type="text/javascript">
-	$(function() {
 
-	});
-</script>
 
 <!-- Custom-->
 <link rel="stylesheet" href="<c:url value="/resources/css/style2.css"/>">
 
 </head>
 <body>
+<div>
 	
+<h4><label>${member.nick_name }</label> 님의 MY PAGE 입니다 </h4>
+
+</div>
 </body>
 </html>

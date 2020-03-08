@@ -141,8 +141,10 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="/mypage.do", method = RequestMethod.GET)
-	public String memberMyPage() {
+	public String memberMyPage(HttpSession session,Model model) {
 		System.out.println("mypage GET »£√‚");
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		model.addAttribute("member",memberVO);
 		return "member/mypage.page";
 	}
 

@@ -70,7 +70,7 @@ ul, ol {list-style: none;padding: 0;margin: 0;}
 /* »∏ø¯ ≈ª≈ */
 .withdrawal_Box1{width: 500px;margin:100px 130px;background: #f1f1f1}
 .withdrawal_Box2{padding: 20px; margin: 20px;text-align: center;}
-.withdrawal_Box2>form>p>input{width: 250px}
+.withdrawal_Box2>form>p>input{width: 250px; margin: 0 auto;}
 
 /* ¿ÂπŸ±∏¥œ  */
 .cartBox1{width:900px; height: audo;}

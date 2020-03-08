@@ -67,31 +67,32 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/alignmentProduct.do", method = RequestMethod.POST)
-	public String alignmentProduct(@RequestParam String alignment,ProductVO product, Model model, HttpSession session) {
-		String category = product.getCategory();
-		if(alignment == "최신등록순" || alignment.equals("최신등록순")) {
-			List<ProductVO> productList = productService.newAlignmentList(category);
-			model.addAttribute("productList",productList);
-		}else {
-			List<ProductVO> productList = productService.nameAlignmentList(category);
-			model.addAttribute("productList",productList);
-		}
+	   public String alignmentProduct(@RequestParam String alignment,ProductVO product, Model model, HttpSession session) {
+	      String category = product.getCategory();
+	      if(alignment == "최신등록순" || alignment.equals("최신등록순")) {
+	    	  System.out.println("최신등록순");
+	         List<ProductVO> productList = productService.newAlignmentList(category);
+	         model.addAttribute("productList",productList);
+	      }else {
+	    	  System.out.println("이름");
+	         List<ProductVO> productList = productService.nameAlignmentList(category);
+	         model.addAttribute("productList",productList);
+	      }
 
-		
-		MemberVO member = (MemberVO) session.getAttribute("member");
-		if(member != null) {
-			List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
-			if(cartList != null) {
-				model.addAttribute("cartList",cartList);
-				if(cartList.size() != 0) {
-					model.addAttribute("count",cartList.size());
-				}
-			}
-		}
+	      
+	      MemberVO member = (MemberVO) session.getAttribute("member");
+	      if(member != null) {
+	         List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
+	         if(cartList != null) {
+	            model.addAttribute("cartList",cartList);
+	            if(cartList.size() != 0) {
+	               model.addAttribute("count",cartList.size());
+	            }
+	         }
+	      }
 
-		return "product/mainProduct.part2";
-	}
-	
+	      return "product/mainProduct.part2";
+	   }
 	@RequestMapping(value="/insertProduct.do", method=RequestMethod.GET)
 	public String insertProduct(Model model) {
 		System.out.println("produdct insert GET 호출 ");

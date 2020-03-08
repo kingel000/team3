@@ -76,7 +76,7 @@
 		  <div class="ps-product__content mt-50">
 			<ul class="tab-list" role="tablist">
 			  <li class="active"><a href="#tab_01" aria-controls="tab_01" role="tab" data-toggle="tab">Overview</a></li>
-			  <li><a href="#tab_02" aria-controls="tab_02" role="tab" data-toggle="tab">Review</a></li>
+			  <li><a href="#tab_02" aria-controls="tab_02" role="tab" data-toggle="tab">Career</a></li>
 
 			</ul>
 		  </div>
@@ -85,35 +85,8 @@
 			  <p>${product.product_info}</p>
 			</div>
 			<div class="tab-pane" role="tabpanel" id="tab_02">
+		<p>${expert.career}</p>
 		
-			  <div class="ps-review">
-			
-				<div class="ps-review__content">
-				  <header>
-
-					<p>By<a href=""> Buyer Name</a>- Buy Date</p>
-				  </header>
-				  <p>Review</p>
-				</div>
-			  </div>
-			  
-			</div>
-			<div class="tab-pane" role="tabpanel" id="tab_03">
-			  <p>Add your tag <span> *</span></p>
-			  <form class="ps-product__tags" action="_action" method="post">
-				<div class="form-group">
-				  <input class="form-control" type="text" placeholder="">
-				  <button class="ps-btn ps-btn--sm">Add Tags</button>
-				</div>
-			  </form>
-			</div>
-			<div class="tab-pane" role="tabpanel" id="tab_04">
-			  <div class="form-group">
-				<textarea class="form-control" rows="6" placeholder="Enter your addition here..."></textarea>
-			  </div>
-			  <div class="form-group">
-				<button class="ps-btn" type="button">Submit</button>
-			  </div>
 			</div>
 		  </div>
 		</div>

@@ -4,6 +4,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
+<script type="text/javascript">
+function deleteCheck() {
+	var product_num = ${adminproduct.product_num };
+	if(confirm("게시글을 삭제하시겠습니까 ? ")){
+		 location.href="adminProductDelete.mdo?num="+product_num;
+	}
+	else{
+		alert("게시글 삭제를 취소합니다")
+	}	
+	
+}
+</script>
 <head>
 	<meta charset="UTF-8">
 	<title>관리자 상품관리 </title>
