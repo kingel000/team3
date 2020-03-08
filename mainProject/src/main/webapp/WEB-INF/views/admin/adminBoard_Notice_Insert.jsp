@@ -10,7 +10,6 @@
         .insert_BoardNotice{width:690px; margin: 0 auto; border: solid 2px #2AC37D; padding: 35px;}
         .insert_BoardNotice>form>h4{text-align: center; margin-bottom:15px;}
         .insert_BoardNotice>form>p>input{width: 595px;}
-        .insert_BoardNotice>form>p>a{background-color: #dddddd; padding: 1px;}
     </style>
 <!-- Custom-->
 <meta charset="UTF-8">
@@ -48,7 +47,7 @@ function checkValue() {
                <input id="insert_Board_notice_title" type="text" name="board_notice_title" placeholder="제목을 입력해주세요">
             </p>
             <p>
-               <textarea name="board_notice_info" rows="10" cols="80" placeholder="상품 설명을 입력해주세요"></textarea>
+               <textarea name="board_notice_info"  placeholder="상품 설명을 입력해주세요"></textarea>
             </p>
             <p >
                <input type="submit" value="등록하기" />

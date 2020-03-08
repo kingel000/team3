@@ -29,8 +29,8 @@
 					<input type="hidden" name="id" value="${member.id }">
 				</p>
 				<p>
-					<label for="nick_name">닉네임</label><br> <input id="nick_name"
-						type="text" name="nick_name" value="${member.nick_name }">
+					<label for="nick_name">닉네임</label><br> 
+					<input id="nick_name" type="text" name="nick_name" value="${member.nick_name }">
 				</p>
 				<p>
 					<label for="pwd">비밀번호 변경</label><br> 

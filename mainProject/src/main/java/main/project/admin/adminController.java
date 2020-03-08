@@ -1,6 +1,5 @@
 package main.project.admin;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -294,9 +293,11 @@ public class adminController {
 
 		List<AdminBoardNoticeVO> adminBoardNoticeList = adminBoardNoticeService.selectListAdminBoardNotice();
 		if(adminBoardNoticeList != null) {
-			for(AdminBoardNoticeVO adminBoardNotice : adminBoardNoticeList) {
-				System.out.println(adminBoardNotice);
-			}
+//			for(AdminBoardNoticeVO adminBoardNotice : adminBoardNoticeList) {
+//				System.out.println(adminBoardNotice);
+//			}
+			//System.out.println("NOticeNum : " +adminBoardNoticeService.selectListAdminBoardNotice().get(0).getBoard_notice_num());
+			
 			model.addAttribute("adminBoardNoticeList", adminBoardNoticeList);
 		}
 		
@@ -305,62 +306,123 @@ public class adminController {
 	
 	
 	 //<!-- *******BeakRyun_20200305 -->
-	//-----------AdminBoardNotice_Insert_GET
+	//-----------AdminBoardNotice_Insert_GET	//등록
 	@RequestMapping(value = "/adminBoard_Notice_Insert.mdo", method= RequestMethod.GET)	
 	public String adminBoardNotice_Insert() {
 		System.out.println("adminBoardNotice_Insert GET Call");
-
+		
+		//Integer noticeNum = adminBoardNoticeService.selectBoardNoticeNumber()+1;
+		//System.out.println("getboardNum : "+adminBoardNoticeService.selectListAdminBoardNotice().get(0).getBoard_notice_num());
+		
+		
 		return "admin/adminBoard_Notice_Insert.page2";								
 	}
 	
 	 //<!-- *******BeakRyun_20200305 -->
 	//-----------AdminBoardNotice_Insert_Post
 	@RequestMapping(value = "/adminBoard_Notice_Insert.mdo", method= RequestMethod.POST)	
-	public String adminBoardNotice_Insert(AdminBoardNoticeVO abnVO, HttpSession session, Model model) {
+	public String adminBoardNotice_Insert(AdminBoardNoticeVO abnVO, Model model) {
 		System.out.println("adminBoardNotice_Insert POST Call");
+		
+		// +Notice_Next_Number
+		Integer noticeNum = Integer.valueOf(adminBoardNoticeService.selectListAdminBoardNotice().get(0).getBoard_notice_num());
+		//System.out.println("NoticeNum : " +noticeNum);
+		noticeNum+=1;
+		//System.out.println("NoticeNum +1 : " +noticeNum);
+		
+		//Integer noticeNum = adminBoardNoticeService.selectBoardNoticeNumber()+1;
+		//System.out.println("NOticeNum : " +noticeNum);
+		abnVO.setBoard_notice_num(String.valueOf(noticeNum));
+		
+		adminBoardNoticeService.insertAbnVO(abnVO);
 
-//		MemberVO member = (MemberVO) session.getAttribute("member");
-//		System.out.println(member.getId());
-//		
-//		String sessionId = member.getId();
-//		abnVO.setBoard_notice_title(sessionId);
-//		System.out.println(abnVO);	
-		
-		//abnVO_Check
-		System.out.println("abnVO_num :"+abnVO.getBoard_notice_num());
-		System.out.println("abnVO_title : "+abnVO.getBoard_notice_title()); 
-		System.out.println("abnVO_info : "+abnVO.getBoard_notice_info());
-		System.out.println("abnVO_date : "+abnVO.getBoard_notice_date());
+		return "redirect:/admin/adminBoardNotice.mdo";								
+	}
 	
+	//↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+	//<!-- *******BeakRyun_20200306 -->
+	//-----------AdminBoardNotice_Detail_GET	//게시글 보기
+	@RequestMapping(value = "/adminBoard_Notice_Detail.mdo", method= RequestMethod.GET)	
+	public String adminBoardNotice_Detail(@RequestParam String num, Model model) {
+		System.out.println("adminBoardNotice_Detail GET Call");
 		
-		adminBoardNoticeService.insertBoardNotice(abnVO);
+		System.out.println("공지사항 게시물의 번호 GET: " + num);
+		AdminBoardNoticeVO board = adminBoardNoticeService.adminBoardNotice_Detail(num);
 		
-//		List<AdminBoardNoticeVO> adminBoardNoticeList = adminBoardNoticeService.selectListAdminBoardNotice();		
+		model.addAttribute("board_notice",board);	
+	
+
+
+		return "admin/adminBoard_Notice_Detail.page2";				
+	}
+
+	//<!-- *******BeakRyun_20200306 -->
+	//-----------AdminBoardNotice_Detail_POST	//게시글 보기
+	@RequestMapping(value = "/adminBoard_Notice_Detail.mdo", method= RequestMethod.POST)	
+	public String adminBoardNotice_Detail(AdminBoardNoticeVO abnVO) {
+
+		Integer noticeNum = adminBoardNoticeService.selectBoardNoticeNumber();
+		abnVO.setBoard_notice_num(String.valueOf(noticeNum));
+		System.out.println("수정하고자하는 공지사항 게시물의 번호 POST: " + abnVO.getBoard_notice_num());
+
+//		List<AdminBoardNoticeVO> adminBoardNoticeList = adminBoardNoticeService.selectListAdminBoardNotice();
 //		model.addAttribute("adminBoardNoticeList", adminBoardNoticeList);
+
+		adminBoardNoticeService.insertAbnVO(abnVO);
+		return "admin/adminBoard_Notice_Detail.page2";				
+	}
+	
+	//*****************************************************************************************************************************
+	 //<!-- *******BeakRyun_20200306 -->
+	//-----------AdminBoardNotice_Update_GET	//수정
+	   @RequestMapping(value = "/adminBoard_Notice_Update.mdo", method= RequestMethod.GET)	
+	public String adminBoardNotice_Update(@RequestParam String num, Model model) {
+		System.out.println("adminBoardNotice_Update GET Call");
 		
-		return "admin/adminBoard_Notice.page2";								
+		System.out.println("수정하는 공지사항 게시물의 번호 GET : " + num);		
+		AdminBoardNoticeVO board = adminBoardNoticeService.adminBoardNotice_Detail(num);
+		System.out.println("board : "+board);		
+		model.addAttribute("board_notice",board);		
+		
+		return "admin/adminBoard_Notice_Update.page2";
 	}
-	
-	/*
-	 
-	 
-	 //<!-- *******20200229 -->
-	//-----------�Խ���(��������) �ۼ���_GET
-	@RequestMapping(value = "/adminBoard_Notice_Update.mdo", method= RequestMethod.GET)	
-	public String adminBoardNotice_Update() {
-		System.out.println("GET adminBoardNotice_Update ȣ��");
-		return "admin/adminBoard_Notice_Update.page2";								
-	}
-	
-	 //<!-- *******20200229 -->
-		//-----------�Խ���(��������) �ۼ���_POST
+	   	
+		 //<!-- *******BeakRyun_20200306 -->
+		//-----------AdminBoardNotice_Update_POST	//수정
 	@RequestMapping(value = "/adminBoard_Notice_Update.mdo", method= RequestMethod.POST)	
-	public String adminBoardNotice_Update(NoticeVO notice) {
-		System.out.println("GET adminBoardNotice_Update POST ȣ��");
-		System.out.println(notice);
-		return "admin/adminBoard_Notice.page2";								
+	public String adminBoardNotice_Update(AdminBoardNoticeVO abnVO) {
+		System.out.println("adminBoardNotice_Update POST  Call");
+		System.out.println("abnVO : "+abnVO);
+		adminBoardNoticeService.updateBoardNotice(abnVO);
+		
+		return "redirect:/admin/adminBoardNotice.mdo";								
 	}
-*/	 
+	 
+	
+	//<!-- *******BeakRyun_20200306 -->
+	//-----------AdminBoardNotice_Delete_GET	//삭제
+	@RequestMapping(value = "/adminBoard_Notice_Delete.mdo", method=RequestMethod.GET)
+	public String adminBoardNotice_Delete(@RequestParam String num, Model model) {
+		System.out.println("adminBoardNotice_Delete GET  Call");
+		
+		//System.out.println("번호확인 : " + num);
+		adminBoardNoticeService.deleteBoardNotice(num);
+		
+		return "redirect:/admin/adminBoardNotice.mdo";	
+	}
+	   
+	   
+	
+//	//<!-- *******BeakRyun_20200306 -->
+//	//-----------AdminBoardNotice_Delete_POST	
+//	@RequestMapping(value = "/adminBoard_Notice_Delete.mdo", method=RequestMethod.POST)
+//	public String adminBoardNotice_Delete(AdminBoardNoticeVO abnVO) {
+//		System.out.println("adminBoardNotice_Delete POST  Call");
+//		
+//		return "admin/adminBoard_Notice_Detail.page2";
+//	}
+	
+	
 
    @RequestMapping(value = "/purchase.mdo", method= RequestMethod.POST)
   	public String purchasefind(@RequestParam String category, @RequestParam String findText,

@@ -4,23 +4,8 @@
 
 <mapper namespace="main.project.admin.board.dao.adminIBoardNoticeDAO">
 
-	<insert id="insertBoardNotice" parameterType="abnVO">
-		<!-- 
-			insert into board_notice(
+	<insert id="insertAbnVO" parameterType="abnVO">
 
-			board_notice_title,
-			board_notice_info,
-
-		)
-		values
-		(
-
-			#{board_notice_title},
-			#{board_notice_info},
-
-		)	
-		 -->
-	
 		insert into board_notice(
 			board_notice_num,
 			board_notice_title,
@@ -40,4 +25,22 @@
 		SELECT * FROM board_notice order by board_notice_num desc
 	</select>
 	
+	<select id="selectBoardNoticeNumber" resultType="Integer">
+		 SELECT COUNT(*) FROM board_notice
+	</select>
+		
+	<select id="adminBoardNotice_Detail" parameterType="String" resultType="abnVO" >
+		 SELECT * FROM board_notice WHERE board_notice_num = #{boardNum}
+	</select>
+	
+	<update id="updateBoardNotice" parameterType="abnVO">
+		UPDATE board_notice  SET board_notice_title=#{board_notice_title},board_notice_info=#{board_notice_info} WHERE board_notice_num=#{board_notice_num}
+	</update>
+
+	<delete id="deleteBoardNotice" parameterType="String">
+		delete from board_notice where board_notice_num = #{boardNum}
+		
+	</delete>
+ 
+		
 </mapper>

@@ -3,7 +3,7 @@ package main.project.admin.board.vo;
 import java.util.Date;
 
 public class AdminBoardNoticeVO {
-	private Integer board_notice_num;	//공지 번호
+	private String board_notice_num;	//공지 번호
 	private String board_notice_title;	//공지 제목
 	private String board_notice_info;	//공지 내용
 	private String board_notice_file;	//공지 첨부파일
@@ -11,12 +11,17 @@ public class AdminBoardNoticeVO {
 	
 	public AdminBoardNoticeVO() {}
 	
-	public Integer getBoard_notice_num() {
+	
+	public String getBoard_notice_num() {
 		return board_notice_num;
 	}
-	public void setBoard_notice_num(Integer board_notice_num) {
+
+
+	public void setBoard_notice_num(String board_notice_num) {
 		this.board_notice_num = board_notice_num;
 	}
+
+
 	public String getBoard_notice_title() {
 		return board_notice_title;
 	}
@@ -41,15 +46,14 @@ public class AdminBoardNoticeVO {
 	public void setBoard_notice_date(Date board_notice_date) {
 		this.board_notice_date = board_notice_date;
 	}
+
+
 	@Override
 	public String toString() {
-		return "adminBoardNoticeVO [board_notice_num=" + board_notice_num + ", board_notice_title=" + board_notice_title
+		return "AdminBoardNoticeVO [board_notice_num=" + board_notice_num + ", board_notice_title=" + board_notice_title
 				+ ", board_notice_info=" + board_notice_info + ", board_notice_file=" + board_notice_file
 				+ ", board_notice_date=" + board_notice_date + "]";
 	}
-	
-	
-	
 	
 	
 }

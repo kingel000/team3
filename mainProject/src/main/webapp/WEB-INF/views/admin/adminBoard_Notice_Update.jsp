@@ -35,11 +35,7 @@ function checkValue() {
 		document.board_notice_value.board_notice_title.focus();
 		return false;
 	}
-	if (!document.board_notice_value.board_notice_info.value) {
-		alert("상세내용을 입력 해주세요.");
-		document.board_notice_value.board_notice_info.focus();
-		return false;
-	}
+
 }
 </script>
 </head>
@@ -61,11 +57,7 @@ function checkValue() {
                <input type="file" name = "board_notice_info">
             </p>
             <p >
-               <!-- 
-                placeholder="제목을 입력해주세요"
                <input type="hidden" name="board_notice_num" value="${board_notice.board_notice_num }">
-               <input type="hidden" name="expert_id" > //관리자 아이디 없다.
-                -->               
                <input type="submit" value="수정하기" />
             </p>
          </form>

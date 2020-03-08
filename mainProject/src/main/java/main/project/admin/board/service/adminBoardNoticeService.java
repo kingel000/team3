@@ -15,13 +15,34 @@ public class adminBoardNoticeService implements adminIBoardNoticeService {
 	private adminIBoardNoticeDAO adminBoardNoticeDAO;
 	
 	@Override
-	public void insertBoardNotice(AdminBoardNoticeVO abnVO) {
-		adminBoardNoticeDAO.insertBoardNotice(abnVO);
+	public void insertAbnVO(AdminBoardNoticeVO abnVO) {
+		adminBoardNoticeDAO.insertAbnVO(abnVO);
 	}
 
 	@Override
 	public List<AdminBoardNoticeVO> selectListAdminBoardNotice() {
+		
 		return adminBoardNoticeDAO.selectListAdminBoardNotice();
+	}
+
+	@Override
+	public Integer selectBoardNoticeNumber() {
+		return adminBoardNoticeDAO.selectBoardNoticeNumber();
+	}
+
+	@Override
+	public AdminBoardNoticeVO adminBoardNotice_Detail(String boardNum) {
+		return adminBoardNoticeDAO.adminBoardNotice_Detail(boardNum);
+	}
+
+	@Override
+	public void updateBoardNotice(AdminBoardNoticeVO abnVO) {
+		adminBoardNoticeDAO.updateBoardNotice(abnVO);
+	}
+
+	@Override
+	public void deleteBoardNotice(String boardNum) {
+		adminBoardNoticeDAO.deleteBoardNotice(boardNum);
 	}
 
 }
