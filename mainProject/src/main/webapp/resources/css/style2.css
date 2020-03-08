@@ -40,6 +40,8 @@
 .footer_text>div{text-align: center;}
 .footer_text>div>p{text-align:center; margin-top: 20px;}
 
+
+
 /* 로그인 */
 .join>div{background-color:#f1f1f1;width:370px;height:30px;border-radius: 4px; padding: 5px; margin-bottom:10px;border: solid 1px #e4e5ed;}
 .join>div>a{font-size: 13px;}
@@ -51,7 +53,7 @@
 
 /* 좌측 메뉴 */
 .myPage_menu {margin: 0 auto;padding: 0px 10px;text-align: left;float: left;}
-.mypage_title{border-bottom: 2px solid #1ab26c;;}
+.mypage_title{border-bottom: 2px solid #1ab26c;}
 .mypage_title>a{font-size: 31px;margin-bottom: 20px;font-weight: 600;color: #555;}
 h1, h2, h3, h4, h5, h6 {position: relative;margin-bottom: 0;}
 h3 {font-size: 22px;}
@@ -68,7 +70,7 @@ ul, ol {list-style: none;padding: 0;margin: 0;}
 /* 회원 탈퇴 */
 .withdrawal_Box1{width: 500px;margin:100px 130px;background: #f1f1f1}
 .withdrawal_Box2{padding: 20px; margin: 20px;text-align: center;}
-.withdrawal_Box2>form>p>input{width: 250px}
+.withdrawal_Box2>form>p>input{width: 250px; margin: 0 auto;}
 
 /* 장바구니  */
 .cartBox1{width:900px; height: audo;}

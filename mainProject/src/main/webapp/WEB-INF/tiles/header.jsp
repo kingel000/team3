@@ -88,13 +88,14 @@
                            <!--  <div class="btn-group ps-dropdown"><a href="#">Expert</a></div>-->
                         </c:when>
                         <c:otherwise>
-                           <a href="#">${member.nick_name }</a>
+                           <a href="/web/main/main.do">${member.nick_name }</a>
+                           <a href="/web/main/main.do">Main Page</a>
                            <div class="btn-group ps-dropdown">
                               <a href="/web/member/mypage.do">MyPage</a>
                            </div>
                            <div class="btn-group ps-dropdown">
                               <a href="/web/member/logout.do">LogOut</a>
-                           </div>
+                           </div>	
                         </c:otherwise>
                      </c:choose>
                   </div>

@@ -9,7 +9,7 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
-    <script>
+	<script type="text/javascript">
     $(function(){
         var IMP = window.IMP; // 생략가능
         IMP.init('imp77454320'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
@@ -18,13 +18,14 @@
         IMP.request_pay({
             pg : 'kakaopay',
             pay_method : 'card', //card(신용카드)
-            merchant_uid : 'merchant_' + new Date().getTime(),//가맹점에서 생성/관리 하는 고유 주문번호 (필수항목)
+            // 'samsung':삼성페이, 'card':신용카드, 'trans':실시간계좌이체, 'vbank':가상계좌, 'phone':휴대폰소액결제
+            merchant_uid : '${mid}',//가맹점에서 생성/관리 하는 고유 주문번호 (필수항목)
             
-            name : 'ITEM 상품', //주문명
-            amount : 14000, //결제할 금액
-            buyer_email : 'item999@gmail.com', //주문자 이메일
-            buyer_name : '구매자이름',  //주문자명
-            buyer_tel : '010-1234-5678', // 주문자 연락처 (필수항목) 누락되거나 blank일 때 일부 PG사에서 오류발생
+            name : '${cart.product_title }', //주문명
+            amount : '${cart.price }', //결제할 금액
+            buyer_email : '${cart.member_id }', //주문자 이메일
+            buyer_name : '${memberName}',  //주문자명
+            buyer_tel : 'xxx-xxxx-xxxx', // 주문자 연락처 (필수항목) 누락되거나 blank일 때 일부 PG사에서 오류발생
         }, function(rsp) {
             if ( rsp.success ) {
                 //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
@@ -52,7 +53,7 @@
                     }
                 });
                 //성공시 이동할 페이지
-                location.href="/web/main/main.do";
+                location.href="/web/purchase/success.do?cartNum=${cart.num}&&mid=${mid}";
             } else {
                 msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
@@ -63,6 +64,6 @@
         });
         
     });
-    </script> 
+	</script> 
 </body>
 </html>

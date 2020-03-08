@@ -21,6 +21,7 @@ import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
 import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
+import main.project.web.product.service.IProductService;
 @Controller("memberController")
 @RequestMapping(value="/member")
 public class MemberController {
@@ -30,6 +31,8 @@ public class MemberController {
 	private IExpertService expertService;
 	@Autowired
 	private JavaMailSender mailSender;
+	@Autowired
+	private IProductService productService;
 
 	@RequestMapping(value="/login.do", method = RequestMethod.GET)
 	public String memberLogin(Model model) {
@@ -138,8 +141,10 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="/mypage.do", method = RequestMethod.GET)
-	public String memberMyPage() {
+	public String memberMyPage(HttpSession session,Model model) {
 		System.out.println("mypage GET 호출");
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		model.addAttribute("member",memberVO);
 		return "member/mypage.page";
 	}
 
@@ -199,7 +204,10 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="/withdrawal.do", method= RequestMethod.GET)
-	public String Withdrawal() {
+	public String Withdrawal(MemberVO member, Model model) {
+		System.out.println("회원 탈퇴 GET 호출");
+		
+		
 		return "member/withdrawal.page";
 	}
 
@@ -215,6 +223,7 @@ public class MemberController {
 				memberService.deleteMember(check);
 				if(check.getRank().equals("E")) {
 					expertService.deleteExpert(check.getId());
+					productService.deleteProductId(check.getId());
 				}
 				String msg = "회원탈퇴 되었습니다.";
 				model.addAttribute("msg",msg);
@@ -223,6 +232,7 @@ public class MemberController {
 		}
 		String msg = "비밀번호 다시 확인";
 		model.addAttribute("msg",msg);
+		
 		return "member/mypage.page";
 	}
 

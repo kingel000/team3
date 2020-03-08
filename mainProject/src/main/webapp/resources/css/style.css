@@ -2219,7 +2219,7 @@ textarea.form-control {
     font-weight: 700; }
 
 .ps-widget--info.second {
-  padding-top: 55px; }
+  padding-top: 0px; }
 
 @media (max-width: 991px) {
   .ps-widget--info.second {

@@ -15,8 +15,6 @@
 	</style>
 </head>
 
-<!-- Custom-->
-<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 <body>
 	<div>
 		<h3 class="title">거래 내역</h3>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
 import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
@@ -29,11 +30,14 @@ public class ProductController {
 	private IMemberService memberService;
 	@Autowired
 	private IPurchaseService purchaseService;
+	@Autowired
+	private IExpertService expertService;
 	
 	@RequestMapping(value="/mainProduct.do", method=RequestMethod.GET)
 	public String mainProduct(@RequestParam String category,ProductVO product, Model model, HttpSession session) {
 		System.out.println("produdct GET 호출 ");
 
+		
 		if(category.equals("'C1'")) {
 			category ="웹 개발";
 		}else if(category.equals("'C2'")) {
@@ -49,41 +53,46 @@ public class ProductController {
 		List<ProductVO> productCategory = productService.selectCategory(category);
 		List<String> nick = new ArrayList<String>(); 
 		System.out.println("----");
-		for(ProductVO productVO : productCategory) {
-			System.out.println("DB 저장 카테고리별 상품 리스트 " + productVO);
-			nick.add(memberService.checkMemberId(productVO.getExpert_id()).getNick_name());
+		if(productCategory.size() != 0) {
+			for(ProductVO productVO : productCategory) {
+				System.out.println("DB 저장 카테고리별 상품 리스트 " + productVO);
+				nick.add(memberService.checkMemberId(productVO.getExpert_id()).getNick_name());
+			}
+
+			model.addAttribute("productList",productCategory);
+			model.addAttribute("nick",nick);
 		}
-		model.addAttribute("productList",productCategory);
-		model.addAttribute("nick",nick);
+
 		return "product/mainProduct.part2";
 	}
 	
 	@RequestMapping(value = "/alignmentProduct.do", method = RequestMethod.POST)
-	public String alignmentProduct(@RequestParam String alignment,ProductVO product, Model model, HttpSession session) {
-		String category = product.getCategory();
-		if(alignment == "최신등록순" || alignment.equals("최신등록순")) {
-			List<ProductVO> productList = productService.newAlignmentList(category);
-			model.addAttribute("productList",productList);
-		}else {
-			List<ProductVO> productList = productService.nameAlignmentList(category);
-			model.addAttribute("productList",productList);
-		}
+	   public String alignmentProduct(@RequestParam String alignment,ProductVO product, Model model, HttpSession session) {
+	      String category = product.getCategory();
+	      if(alignment == "최신등록순" || alignment.equals("최신등록순")) {
+	    	  System.out.println("최신등록순");
+	         List<ProductVO> productList = productService.newAlignmentList(category);
+	         model.addAttribute("productList",productList);
+	      }else {
+	    	  System.out.println("이름");
+	         List<ProductVO> productList = productService.nameAlignmentList(category);
+	         model.addAttribute("productList",productList);
+	      }
 
-		
-		MemberVO member = (MemberVO) session.getAttribute("member");
-		if(member != null) {
-			List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
-			if(cartList != null) {
-				model.addAttribute("cartList",cartList);
-				if(cartList.size() != 0) {
-					model.addAttribute("count",cartList.size());
-				}
-			}
-		}
+	      
+	      MemberVO member = (MemberVO) session.getAttribute("member");
+	      if(member != null) {
+	         List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
+	         if(cartList != null) {
+	            model.addAttribute("cartList",cartList);
+	            if(cartList.size() != 0) {
+	               model.addAttribute("count",cartList.size());
+	            }
+	         }
+	      }
 
-		return "product/mainProduct.part2";
-	}
-	
+	      return "product/mainProduct.part2";
+	   }
 	@RequestMapping(value="/insertProduct.do", method=RequestMethod.GET)
 	public String insertProduct(Model model) {
 		System.out.println("produdct insert GET 호출 ");
@@ -103,7 +112,7 @@ public class ProductController {
 		productService.insertProduct(product);
 //		session.setAttribute("member", member);
 		
-		return "product/insertProduct.page";
+		return "redirect:/product/boardManager.do";
 	}
 
 	@RequestMapping(value="/boardManager.do", method = RequestMethod.GET)
@@ -152,18 +161,20 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="/detailProduct.do", method = RequestMethod.GET)
-	public String detailProduct(@RequestParam String num,ProductVO product, Model model , HttpSession session) {
+	public String detailProduct(@RequestParam String num,ProductVO product,ExpertVO expert, Model model , HttpSession session) {
 		System.out.println("detailProduct GET 받음 ");
 		System.out.println("선택한 상품 넘버 : " + num);
 		ProductVO numProduct = productService.selectProduct(num);
 		System.out.println("선택한 상품 정보 " + numProduct);
 		model.addAttribute("numProduct",numProduct);
-		
 		MemberVO nick_name = new MemberVO();
 		nick_name = productService.select_NickName(numProduct.getExpert_id());
+		System.out.println("닉네임 담긴 정보 : " + nick_name);
+		expert = expertService.selectExpert(numProduct.getExpert_id());
+		System.out.println("클릭한 상품의 판매자 정보 : " + expert);
 		model.addAttribute("exper_id",numProduct.getExpert_id());
 		model.addAttribute("nick_name",nick_name);
-		
+		model.addAttribute("expert",expert);
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		if(member != null) {
 			List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
@@ -174,6 +185,7 @@ public class ProductController {
 				}
 			}
 		}
+		
 		return "/product/detailProduct.part2";
 	}
 	
@@ -183,10 +195,4 @@ public class ProductController {
 		return "/product/boardManager.page";
 	}
 	
-	//------------------------------장바구니-------------------------------------------
-	@RequestMapping(value="/orderList.do", method = RequestMethod.GET)
-	public String orderListProduct(Model model) {
-		
-		return "/product/orderList.page";
-	}
 }
