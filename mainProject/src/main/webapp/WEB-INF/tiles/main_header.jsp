@@ -75,11 +75,11 @@
 	  </div>
 	  <div class="navigation__column center">
 			<ul class="main-menu menu">
-			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C1'">웹 개발</a></li>
-			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C2'">모바일앱·웹</a></li>
-			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C3'">게임</a></li>
-			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C4'">응용프로그래밍</a></li>
-			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C5'">기타</a></li>
+			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C1'&num=1">웹 개발</a></li>
+			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C2'&num=1">모바일앱·웹</a></li>
+			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C3'&num=1">게임</a></li>
+			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C4'&num=1">응용프로그래밍</a></li>
+			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C5'&num=1">기타</a></li>
 			  <li class="menu-item menu-item-has-children dropdown"><a href="#">고객센터</a>
 					<ul class="sub-menu">
 					  <li class="menu-item"><a href="/web/board/notice.do">공지사항</a></li>

@@ -108,15 +108,25 @@ public class ProductService implements IProductService{
 		return productDAO.category_product_num(category);
 	}
 
-
-	public int count(String id) throws Exception {
-		return productDAO.count(id);
+	//계정별 상품수
+	@Override
+	public int countProduct(String id) throws Exception {
+		return productDAO.countProduct(id);
 	}
-
-	// 게시물 목록 + 페이징
+	//계정 게시물 목록 + 페이징
 	@Override
 	public List<ProductVO> listPage(int displayPost, int postNum, String id) throws Exception {
 		return productDAO.listPage(displayPost, postNum, id);
+	}
+	//카테고리별 상품수
+	@Override
+	public int countCategory(String category) throws Exception {
+		return productDAO.countCategory(category);
+	}
+	//카테고리별 목록 + 페이징
+	@Override
+	public List<ProductVO> categoryPage(int displayPost, int postNum, String category) throws Exception {
+		return productDAO.categoryPage(displayPost, postNum, category);
 	}
 
 }

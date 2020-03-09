@@ -27,9 +27,12 @@ public interface IProductService {
 	List<ProductVO> category_product_num(String category);
 
 	
-	//상품의 총 갯수
-	public int count(String id) throws Exception;
-	// 게시물 목록 + 페이징
+	//카테고리별 상품수
+	public int countProduct(String id) throws Exception;
+	//계정 게시물 목록 + 페이징
 	public List<ProductVO> listPage(int displayPost, int postNum, String id) throws Exception;
-
+	//카테고리별 상품수
+	public int countCategory(String category) throws Exception;
+	//카테고리별 목록 + 페이징
+	public List<ProductVO> categoryPage(int displayPost, int postNum, String category) throws Exception;
 }

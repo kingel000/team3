@@ -99,13 +99,13 @@ public class ProductDAOImpl implements IProductDAO {
 		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.category_product_num", category);
 	}
 
-	//목록
+	//계정별 상품수
 	@Override
-	public int count(String id) throws Exception {
-		return sqlSessiontemplate.selectOne(namespace + ".count", id);
+	public int countProduct(String id) throws Exception {
+		return sqlSessiontemplate.selectOne(namespace + ".countProduct", id);
 	}
 	
-	// 게시물 목록 + 페이징
+	//계정 게시물 목록 + 페이징
 	@Override
 	public List<ProductVO> listPage(int displayPost, int postNum, String id) throws Exception {
 		HashMap data = new HashMap();
@@ -114,5 +114,16 @@ public class ProductDAOImpl implements IProductDAO {
 		data.put("id", id);
 		return sqlSessiontemplate.selectList(namespace + ".listPage", data);
 	}
-
+	//카테고리별 상품수
+	public int countCategory(String category) throws Exception{
+		return sqlSessiontemplate.selectOne(namespace + ".countCategory", category);
+	}
+	//카테고리별 목록 + 페이징
+	public List<ProductVO> categoryPage(int displayPost, int postNum, String category) throws Exception {
+		HashMap data = new HashMap();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("category", category);
+		return sqlSessiontemplate.selectList(namespace + ".categoryPage", data);
+	}
 }
