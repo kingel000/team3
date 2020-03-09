@@ -35,8 +35,7 @@
 		<tbody>
 		<!-- ****************현재 상품 판매 목록 출력 -->
 		<c:choose>
-			<c:when test="${adminBoardNoticeList != null }">
-			
+			<c:when test="${adminBoardNoticeList != null }">			
 		
 				<c:set var="adminBoardNoticeList" value="${adminBoardNoticeList}" />
 				<c:forEach var="board_notice" items="${adminBoardNoticeList}">
