@@ -107,7 +107,6 @@ public class ProductController {
 		
 		String sessionId = member.getId();
 		product.setExpert_id(sessionId);
-//		product.setProduct_num("A012");
 		System.out.println(product);
 		productService.insertProduct(product);
 //		session.setAttribute("member", member);
@@ -115,7 +114,7 @@ public class ProductController {
 		return "redirect:/product/boardManager.do";
 	}
 
-	@RequestMapping(value="/boardManager.do", method = RequestMethod.GET)
+	/*@RequestMapping(value="/boardManager.do", method = RequestMethod.GET)
 	public String editBoard(ExpertVO expert, HttpSession session , Model model) {
 		MemberVO sessionId = (MemberVO)session.getAttribute("member");
 		expert.setId(sessionId.getId());
@@ -127,8 +126,58 @@ public class ProductController {
 		}
 		model.addAttribute("productList",productList);
 		return "product/boardManager.page";
-	}
+	}*/
+	// 게시물 목록 + 페이징 추가
+	@RequestMapping(value="/boardManager.do", method = RequestMethod.GET)
+	public String editBoard(@RequestParam("num") int num, ExpertVO expert, HttpSession session , Model model) throws Exception {
+		MemberVO sessionId = (MemberVO)session.getAttribute("member");
+		List<ProductVO> productList = null; 
+		
+		// 게시물 총 갯수
+		int count = productService.count(sessionId.getId());
+		// 한 페이지에 출력할 게시물 갯수
+		int postNum = 10;
+		// 하단 페이징 번호 ([ 게시물 총 갯수 ÷ 한 페이지에 출력할 갯수 ]의 올림)
+		int pageNum = (int)Math.ceil((double)count/postNum);
+		// 출력할 게시물
+		int displayPost = (num - 1) * postNum + 1;
+		// 한번에 표시할 페이징 번호의 갯수
+		int pageNum_cnt = 5;
 
+		// 표시되는 페이지 번호 중 마지막 번호
+		int endPageNum = (int)(Math.ceil((double)num / (double)pageNum_cnt) * pageNum_cnt);
+
+		// 표시되는 페이지 번호 중 첫번째 번호
+		int startPageNum = endPageNum - (pageNum_cnt - 1);
+		
+		// 마지막 번호 재계산
+		int endPageNum_tmp = (int)(Math.ceil((double)count / (double)postNum));
+		 
+		if(endPageNum > endPageNum_tmp) {
+		 endPageNum = endPageNum_tmp;
+		}
+		boolean prev = startPageNum == 1 ? false : true;
+		boolean next = endPageNum * postNum >= count ? false : true;
+		expert.setId(sessionId.getId());
+		session.setAttribute("expert",expert);
+		int num1 = num==1 ? 0 : 1;
+		productList = productService.listPage(displayPost+num1, (postNum * num) + 1, sessionId.getId());
+		model.addAttribute("productList", productList);
+		model.addAttribute("pageNum", pageNum);
+		
+		// 시작 및 끝 번호
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+
+		// 이전 및 다음 
+		model.addAttribute("prev", prev);
+		model.addAttribute("next", next);
+		
+		// 현재 페이지
+		model.addAttribute("select", num);
+		return "product/boardManager.page";
+	}
+	
 	@RequestMapping(value="/boardManager.do", method = RequestMethod.POST)
 	public String editBoard(ExpertVO expert , Model model , HttpSession session) {
 

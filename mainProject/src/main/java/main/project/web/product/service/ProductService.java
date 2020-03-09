@@ -15,7 +15,7 @@ public class ProductService implements IProductService{
 
 	@Autowired
 	private ProductDAOImpl productDAO;
-	
+
 	@Override
 	public void insertProduct(ProductVO product) {
 		productDAO.insertProduct(product);
@@ -89,9 +89,19 @@ public class ProductService implements IProductService{
 		return productDAO.nameAlignmentList(category);
 	}
 	public void deleteProductId(String Id) {
-		 productDAO.deleteProductId(Id);
+		productDAO.deleteProductId(Id);
 
 	}
 
+	@Override
+	public int count(String id) throws Exception {
+		return productDAO.count(id);
+	}
+
+	// 게시물 목록 + 페이징
+	@Override
+	public List<ProductVO> listPage(int displayPost, int postNum, String id) throws Exception {
+		return productDAO.listPage(displayPost, postNum, id);
+	}
 
 }
