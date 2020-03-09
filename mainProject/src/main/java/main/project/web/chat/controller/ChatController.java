@@ -77,13 +77,14 @@ public class ChatController {
 	@RequestMapping(value="/createChat.do", method =RequestMethod.GET)
 	public String createChat(Model model, HttpSession session, ProductVO product, String expertName)throws Exception{
 		MemberVO member = (MemberVO)session.getAttribute("member");
-		if(member == null) {
+		if(member == null || member.getId().equals(product.getExpert_id())) {
 			return "redirect:/main/main.do";
 		}
 		model.addAttribute("memberName",member.getNick_name());
 
 		RoomListVO roomListVO = new RoomListVO(member.getId(),product.getProduct_num());
 		RoomListVO roomCheck = roomListService.checkRoom(roomListVO);
+		
 		String roomId = null;
 		if(roomCheck == null) {
 			Integer num = roomListService.selectNumCount()+1;

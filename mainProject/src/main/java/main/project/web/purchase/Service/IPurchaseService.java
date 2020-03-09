@@ -12,6 +12,9 @@ public interface IPurchaseService {
 	PurchaseVO selectPurchase(String purchaseNum);
 	List<PurchaseVO> selectListPurchase();
 	List<PurchaseVO> selectPurchaseList(String memberId);
+	List<PurchaseVO> selectMemberOrder(PurchaseVO purchase);
+	List<PurchaseVO> selectExpertOrder(PurchaseVO purchase);
+	List<PurchaseVO> selectExpertPurchase(String expertId);
 	
 	void addCart(CartVO cart);
 	List<CartVO> selectMyCart(String memberId);

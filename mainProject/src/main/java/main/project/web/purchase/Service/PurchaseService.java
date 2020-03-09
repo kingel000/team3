@@ -76,4 +76,19 @@ public class PurchaseService implements IPurchaseService{
 		return purchaseDAO.selectPurchaseList(memberId);
 	}
 
+	@Override
+	public List<PurchaseVO> selectMemberOrder(PurchaseVO purchase) {
+		return purchaseDAO.selectMemberOrder(purchase);
+	}
+
+	@Override
+	public List<PurchaseVO> selectExpertPurchase(String expertId) {
+		return purchaseDAO.selectExpertPurchase(expertId);
+	}
+
+	@Override
+	public List<PurchaseVO> selectExpertOrder(PurchaseVO purchase) {
+		return purchaseDAO.selectExpertOrder(purchase);
+	}
+
 }

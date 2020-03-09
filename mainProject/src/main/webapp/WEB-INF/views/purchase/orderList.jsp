@@ -18,11 +18,10 @@
 			<header class="n-section-title">
 				<ul class="state">
 					<li><h1 class="tit">주문내역 조회</h1></li>
-					<li><a href="#">입금&#47;결제 0</a></li>
-					<li><a href="#">제작중 0</a></li>
-					<li><a href="#">거래완료 0</a></li>
-					<li><a href="#">환불 0</a></li>
-					<li><a href="#">환불완료 0</a></li>
+					<li><a href="/web/purchase/selectMemberOrder.do?status=Waiting">대기중: ${countList[0] }</a></li>
+					<li><a href="/web/purchase/selectMemberOrder.do?status=Running">제작중: ${countList[1] }</a></li>
+					<li><a href="/web/purchase/selectMemberOrder.do?status=Success">거래완료:${countList[2] }</a></li>
+					<li><a href="/web/purchase/selectMemberOrder.do?status=Cancel">취소:${countList[3] }</a></li>
 				</ul>
 			</header>
 
@@ -30,39 +29,6 @@
 				<li>입금 확인 상태만 주문 취소 가능합니다. 제작 중엔 취소가 어려우며 판매자 문의 후 환불 처리 됩니다.</li>
 				<li>구매 확정시 환불이 불가능합니다.</li>
 			</ul>
-			<!-- 
-			<form name="#" id="#" method="get" action="/app/mypage/order_list_opt">
-				<input type="hidden" name="state_type" value="" /> <input
-					type="hidden" name="ord_state" value="" /> <input type="hidden"
-					name="period" value="" /> <input type="hidden" name="dt_fr"
-					value="" /> <input type="hidden" name="dt_to" value="" /> <input
-					type="hidden" name="page" value="1" /> <input type="hidden">
-				
-				<div class="n-table-filter">
-					<div class="n-select">
-						<select style="visibility: hidden">
-							<option value="" selected="selected">전체 상태</option>
-							<option value="ord|1">주문접수</option>
-							<option value="ord|10">입금확인</option>
-							<option value="ord|20">배송 준비 중</option>
-							<option value="ord|30">발송 완료</option>
-							<option value="ord|40">배송 완료</option>
-							<option value="ord|50">구매 확정</option>
-							<option value="clm|-10">주문취소</option>
-							<option value="clm|40">교환 요청</option>
-							<option value="clm|50">교환 처리 중</option>
-							<option value="clm|60">교환 완료</option>
-							<option value="clm|41">환불 요청</option>
-							<option value="clm|51">환불 처리 중</option>
-							<option value="clm|61">환불 완료</option>
-						</select>
-					</div>
-					
-					<button type="button" class="n-btn btn-sm btn-accent"
-						onclick="search();">조회</button>
-				</div>
-			</form>
-			-->
 			<form name="f1" id="f1" method="get"
 				action="/app/mypage/order_list_opt">
 				<input type="hidden" name="state_type" value="" /> <input
@@ -91,7 +57,8 @@
 								<th scope="col">주문일자</th>
 								<th scope="col">주문번호</th>
 								<th scope="col">주문금액</th>
-								<th scope="col" colspan="2">주문 상태</th>
+								<th scope="col"> 주문상태</th>
+								<th scope="col"></th>
 							</tr>
 						</thead>
 						<c:forEach var="purchase" items="${purchaseList}" varStatus="status">
@@ -110,19 +77,23 @@
 									</td>
 									<td>${purchase.purchase_num}</td>
 									<!-- test code -->
-									<td>${purchase.purchase_price }</td>
+									<td>${purchase.purchase_price } ￦</td>
+									<td>${purchase.purchase_state}</td>
 									<td>
 										<div class="btn-set">
 											<form action="/web/chat/memberChat.do" method="post">
 												<input type="hidden" name ="product_id" value="${productList.get(status.index).product_num}">
 												<input type="hidden" name="member_id"  value="${purchase.member_id }">
 												<input class="n-btn btn-sm btn-default" type="submit" value="채팅문의">
-											</form>
+											</form>					
+											<c:if test="${ purchase.purchase_state eq 'Running' }">
+												<form action="/web/purchase/successOrder.do" method="post">
+													<input type="hidden" name="purchase_num" value="${purchase.purchase_num}">
+													<input class="n-btn btn-sm btn-default" type="submit" value="구매 확정">
+												</form>
+											</c:if>
+											
 										</div>
-									</td>
-									<td>
-										<button type="button" class="n-btn btn-sm btn-default"
-											onclick="">구매 확정</button>
 									</td>
 								</tr>
 							</tbody>

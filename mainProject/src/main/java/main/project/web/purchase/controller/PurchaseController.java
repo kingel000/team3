@@ -62,7 +62,7 @@ public class PurchaseController {
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
 		if(cartList != null) {
-			
+
 			model.addAttribute("cartList",cartList);
 		}
 		return "purchase/myCart.page";
@@ -71,7 +71,8 @@ public class PurchaseController {
 	@RequestMapping(value="/success.do")
 	public String success(@RequestParam String cartNum,@RequestParam String mid, HttpSession session, Model model) {
 		CartVO cart = purchaseService.getCart(cartNum);
-		PurchaseVO purchase = new PurchaseVO(mid, cart.getProduct_num(), "¥Î±‚¡ﬂ", cart.getMember_id(), cart.getPrice());
+		ProductVO product = productService.selectProduct(cart.getProduct_num());
+		PurchaseVO purchase = new PurchaseVO(mid, cart.getProduct_num(), "Waiting", cart.getMember_id(), cart.getPrice(),product.getExpert_id());
 		purchaseService.insertPurchase(purchase);
 		purchaseService.deleteCart(cartNum);
 		MemberVO member = (MemberVO) session.getAttribute("member");
@@ -79,10 +80,10 @@ public class PurchaseController {
 		if(cartList != null) {
 			model.addAttribute("cartList",cartList);
 		}
-		
+
 		return "purchase/myCart.page";
 	}
-	
+
 	@RequestMapping(value="/checkout.do", method=RequestMethod.POST)
 	public String checkout(CartVO cart, HttpSession session, Model model) {
 		MemberVO member = (MemberVO)session.getAttribute("member");
@@ -90,35 +91,164 @@ public class PurchaseController {
 		model.addAttribute("mid", mid);
 		model.addAttribute("cart", cart);
 		model.addAttribute("memberName", member.getNick_name());
-	
+
 		return "purchase/checkout";
 	}
-	
-	@RequestMapping(value="/paymentCancel.do")
-	public String PaymentCancel(@RequestParam String mid) {
-		PaymentCheck pay = new PaymentCheck();
-		purchaseService.deletePurchase(mid);
-		pay.cancelPayment(pay.getImportToken(),mid,"Cancel payment");
-		return null;
-	}
+
 	@RequestMapping(value="/orderList.do", method = RequestMethod.GET)
 	public String orderListProduct(HttpSession session, Model model) {
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		List<PurchaseVO> purchaseList = purchaseService.selectPurchaseList(member.getId());
 		List<ProductVO> productList = new ArrayList<ProductVO>();
+		int[] count = {0,0,0,0};
 		if(purchaseList.size()>0) {
 			for(PurchaseVO purchase:purchaseList) {
+				switch(purchase.getPurchase_state()) {
+				case "Waiting":
+					count[0]++;
+					break;
+				case "Running":
+					count[1]++;
+					break;
+				case "Success":
+					count[2]++;
+					break;
+				case "Cancel":
+					count[3]++;
+					break;
+				}
 				productList.add(productService.selectProduct(purchase.getProduct_num()));
 			}
 			model.addAttribute("productList", productList);
+			model.addAttribute("countList", count);
 		}
 		model.addAttribute("purchaseList", purchaseList);
 		return "purchase/orderList.page";
 	}
+
+	@RequestMapping(value="/selectMemberOrder.do",method=RequestMethod.GET)
+	public String selectMemberOrder(@RequestParam String status,HttpSession session, Model model) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		List<PurchaseVO> purchaseList = purchaseService.selectPurchaseList(member.getId());
+		int[] count = {0,0,0,0};
+		if(purchaseList.size()>0) {
+			for(PurchaseVO purchase:purchaseList) {
+				switch(purchase.getPurchase_state()) {
+				case "Waiting":
+					count[0]++;
+					break;
+				case "Running":
+					count[1]++;
+					break;
+				case "Success":
+					count[2]++;
+					break;
+				case "Cancel":
+					count[3]++;
+					break;
+				}
+			}
+			model.addAttribute("countList", count);
+			List<ProductVO> productList = new ArrayList<ProductVO>();
+			List<PurchaseVO> orderList = purchaseService.selectMemberOrder(new PurchaseVO(status,member.getId()));
+			for(PurchaseVO purchase: orderList) {
+				productList.add(productService.selectProduct(purchase.getProduct_num()));
+			}
+			model.addAttribute("productList", productList);
+			model.addAttribute("purchaseList", orderList);
+		}	
+		return "purchase/orderList.page";
+	}
+
+	@RequestMapping(value="/successOrder.do", method = RequestMethod.POST)
+	public String successOrder(PurchaseVO purchase) {
+		purchase.setPurchase_state("Success");
+		purchaseService.updatePurchase(purchase);
+		return "redirect:/purchase/orderList.do";
+	}
 	
 	@RequestMapping(value="/salesList.do", method = RequestMethod.GET)
-	public String salesListProduct(Model model) {
-		
+	public String salesListProduct(HttpSession session,Model model) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		List<PurchaseVO> purchaseList = purchaseService.selectExpertPurchase(member.getId());
+		List<ProductVO> productList = new ArrayList<ProductVO>();
+		int[] count = {0,0,0,0};
+		if(purchaseList.size()>0) {
+			for(PurchaseVO purchase:purchaseList) {
+				switch(purchase.getPurchase_state()) {
+				case "Waiting":
+					count[0]++;
+					break;
+				case "Running":
+					count[1]++;
+					break;
+				case "Success":
+					count[2]++;
+					break;
+				case "Cancel":
+					count[3]++;
+					break;
+				}
+				productList.add(productService.selectProduct(purchase.getProduct_num()));
+			}
+			model.addAttribute("productList", productList);
+			model.addAttribute("countList", count);
+		}
+		model.addAttribute("purchaseList", purchaseList);
 		return "purchase/salesList.page";
 	}
+	
+	@RequestMapping(value="/selectExpertOrder.do",method=RequestMethod.GET)
+	public String selectExpertOrder(@RequestParam String status,HttpSession session, Model model) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		List<PurchaseVO> purchaseList = purchaseService.selectExpertPurchase(member.getId());
+		int[] count = {0,0,0,0};
+		if(purchaseList.size()>0) {
+			for(PurchaseVO purchase:purchaseList) {
+				switch(purchase.getPurchase_state()) {
+				case "Waiting":
+					count[0]++;
+					break;
+				case "Running":
+					count[1]++;
+					break;
+				case "Success":
+					count[2]++;
+					break;
+				case "Cancel":
+					count[3]++;
+					break;
+				}
+			}
+			model.addAttribute("countList", count);
+			List<ProductVO> productList = new ArrayList<ProductVO>();
+			PurchaseVO p = new PurchaseVO();
+			p.setExpert_id(member.getId());
+			p.setPurchase_state(status);
+			List<PurchaseVO> orderList = purchaseService.selectExpertOrder(p);
+			for(PurchaseVO purchase: orderList) {
+				productList.add(productService.selectProduct(purchase.getProduct_num()));
+			}
+			model.addAttribute("productList", productList);
+			model.addAttribute("purchaseList", orderList);
+		}	
+		return "purchase/salesList.page";
+	}
+
+	@RequestMapping(value="/workStart.do",method=RequestMethod.POST)
+	public String workStart(PurchaseVO purchase) {
+		purchase.setPurchase_state("Running");
+		purchaseService.updatePurchase(purchase);
+		return "redirect:/purchase/salesList.do";
+	}
+	
+	@RequestMapping(value="/paymentCancel.do",method=RequestMethod.POST)
+	public String PaymentCancel(PurchaseVO purchase) {
+		PaymentCheck pay = new PaymentCheck();
+		purchase.setPurchase_state("Cancel");
+		purchaseService.updatePurchase(purchase);
+		pay.cancelPayment(pay.getImportToken(),purchase.getPurchase_num(),"Cancel payment");
+		return "redirect:/purchase/salesList.do";
+	}
+	
 }
