@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 게시판</title>
+<title>문의사항 게시판</title>
 <style>
 	.Board>table {	text-align: left;	boarder: 1px solid #ddd; text-align: center;}
 	th {	background-color: #eee;	text-align: center;}
@@ -18,7 +18,7 @@
 
 <body>
 	<div class="Board">
-		<h3 class="title">공지사항 게시판</h3>
+		<h3 class="title">문의사항 게시판</h3>
 		<table class="table table-striped">
 			<thead>
 				<tr>							
