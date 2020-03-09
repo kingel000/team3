@@ -97,6 +97,11 @@
                </a>
             </div>
          </li>
+         <li class="group">
+            <div class="box">
+          	  <button onclick="window.open('chartMain.mdo')"> * 통계관리 이동하기 * </button>
+            </div>
+         </li>
          
          
       </ul>

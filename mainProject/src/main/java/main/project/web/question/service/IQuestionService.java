@@ -13,4 +13,5 @@ public interface IQuestionService {
 	Integer selectNumQuestion();
 	List<QuestionVO> selectPage(PagingVO vo); 
 	Integer selectTotal();
+
 }

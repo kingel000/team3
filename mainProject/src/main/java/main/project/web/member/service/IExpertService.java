@@ -10,5 +10,6 @@ public interface IExpertService {
    void updateExpert(ExpertVO expert);
    void updateRankExpert(String id);
    ExpertVO selectExpert(String id);
+   Integer totalMember_expert();
    
 }

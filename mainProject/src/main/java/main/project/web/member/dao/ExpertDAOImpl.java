@@ -56,6 +56,11 @@ public class ExpertDAOImpl implements IExpertDAO {
 		
 	}
 
+	@Override
+	public Integer totalMember_expert() {
+		return sqlSessiontemplate.selectOne("main.project.web.member.dao.IExpertDAO.totalMember_expert");
+	}
+
 
 		
 

@@ -9,7 +9,7 @@ public class PurchaseVO {
 	private String purchase_state;
 	private String member_id;
 	private Integer purchase_price;
-	
+	private String expert_id;
 	public String getPurchase_num() {
 		return purchase_num;
 	}
@@ -46,12 +46,21 @@ public class PurchaseVO {
 	public void setPurchase_price(Integer purchase_price) {
 		this.purchase_price = purchase_price;
 	}
+	public String getExpert_id() {
+		return expert_id;
+	}
+	public void setExpert_id(String expert_id) {
+		this.expert_id = expert_id;
+	}
 	@Override
 	public String toString() {
 		return "PurchaseVO [purchase_num=" + purchase_num + ", product_num=" + product_num + ", purchase_date="
 				+ purchase_date + ", purchase_state=" + purchase_state + ", member_id=" + member_id
-				+ ", purchase_price=" + purchase_price + "]";
+				+ ", purchase_price=" + purchase_price + ", expert_id=" + expert_id + "]";
 	}
+	
+	
+	
 	
 	
 }

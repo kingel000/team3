@@ -70,4 +70,11 @@ public class MemberService implements IMemberService{
 		return memberDAO.selectFindList(find);
 	}
 
+	@Override
+	public Integer totalMember() {
+		return memberDAO.totalMember();
+	}
+
+
+
 }

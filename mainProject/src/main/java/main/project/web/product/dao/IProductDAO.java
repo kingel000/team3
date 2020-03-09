@@ -24,5 +24,8 @@ public interface IProductDAO {
 	List<ProductVO> newProductList();
 	List<ProductVO> newAlignmentList(String category);
 	List<ProductVO> nameAlignmentList(String category);
+	Integer totalProduct();
+	List<ProductVO> expertProductList(String member_id);
+	List<ProductVO> category_product_num(String category); //카테고리별 상품번호 가져오기
 	
 }

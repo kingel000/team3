@@ -93,5 +93,17 @@
 		DELETE FROM product
 		WHERE expert_id=#{id}
 	</delete>
+	
+	<!-- 통계 -->
+	<select id="totalProduct" resultType="Integer">
+		SELECT COUNT(*) FROM product
+	</select>
+	<select id="expertProductList" parameterType="String" resultType="productVO">
+		SELECT * FROM product WHERE expert_id = #{member_id}
+	</select>
+	<select id="category_product_num" parameterType="String" resultType="productVO">
+		SELECT product_num FROM (SELECT * FROM product WHERE category =#{category})
+	</select>
+	
 
 </mapper>

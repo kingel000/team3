@@ -85,6 +85,18 @@ public class ProductDAOImpl implements IProductDAO {
 		
 
 	}
+	@Override
+	public Integer totalProduct() {
+		return sqlSessiontemplate.selectOne("main.project.web.product.dao.IProductDAO.totalProduct");
+	}
+	@Override
+	public List<ProductVO> expertProductList(String member_id) {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.expertProductList", member_id);
+	}
+	@Override
+	public List<ProductVO> category_product_num(String category) {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.category_product_num", category);
+	}
 
 	
 	

@@ -20,5 +20,8 @@ public interface IMemberDAO {
 	List<MemberVO> selectAllMember();
 	//List<MemberVO> selectOneMember(MemberFindVO find);
 	List<MemberVO> selectFindList(findVO find);
+	Integer totalMember();
+
+
 }
 

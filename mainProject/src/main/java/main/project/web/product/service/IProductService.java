@@ -24,4 +24,7 @@ public interface IProductService {
 	List<ProductVO> newProductList();
 	List<ProductVO> newAlignmentList(String category);
 	List<ProductVO> nameAlignmentList(String category);
+	Integer totalProduct();
+	List<ProductVO> expertProductList(String member_id);
+	List<ProductVO> category_product_num(String category);
 }

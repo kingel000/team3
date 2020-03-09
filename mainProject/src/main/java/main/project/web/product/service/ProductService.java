@@ -93,5 +93,20 @@ public class ProductService implements IProductService{
 
 	}
 
+	@Override
+	public Integer totalProduct() {
+		return productDAO.totalProduct();
+	}
+
+	@Override
+	public List<ProductVO> expertProductList(String member_id) {
+		return productDAO.expertProductList(member_id);
+	}
+
+	@Override
+	public List<ProductVO> category_product_num(String category) {
+		return productDAO.category_product_num(category);
+	}
+
 
 }
