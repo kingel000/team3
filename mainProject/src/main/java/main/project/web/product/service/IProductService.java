@@ -2,8 +2,6 @@ package main.project.web.product.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.vo.ProductVO;
 import main.project.web.product.vo.findVO;
@@ -24,4 +22,9 @@ public interface IProductService {
 	List<ProductVO> newProductList();
 	List<ProductVO> newAlignmentList(String category);
 	List<ProductVO> nameAlignmentList(String category);
+	
+	//»óÇ°ÀÇ ÃÑ °¹¼ö
+	public int count(String id) throws Exception;
+	// °Ô½Ã¹° ¸ñ·Ï + ÆäÀÌÂ¡
+	public List<ProductVO> listPage(int displayPost, int postNum, String id) throws Exception;
 }

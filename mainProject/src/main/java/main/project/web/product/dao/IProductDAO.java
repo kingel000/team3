@@ -25,4 +25,8 @@ public interface IProductDAO {
 	List<ProductVO> newAlignmentList(String category);
 	List<ProductVO> nameAlignmentList(String category);
 	
+	//상품의 총 갯수
+	public int count(String id) throws Exception;
+	// 게시물 목록 + 페이징
+	public List<ProductVO> listPage(int displayPost, int postNum, String id) throws Exception;
 }

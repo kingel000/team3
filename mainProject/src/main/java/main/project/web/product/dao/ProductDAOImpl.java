@@ -1,5 +1,6 @@
 package main.project.web.product.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,6 +18,8 @@ public class ProductDAOImpl implements IProductDAO {
 	@Inject
 	private SqlSessionTemplate sqlSessiontemplate;
 
+	private static String namespace = "main.project.web.product.dao.IProductDAO";
+	
 	@Override
 	public void insertProduct(ProductVO product) {
 		sqlSessiontemplate.insert("main.project.web.product.dao.IProductDAO.insertProduct",product);
@@ -82,10 +85,22 @@ public class ProductDAOImpl implements IProductDAO {
 	}
 	public void deleteProductId(String Id) {
 		sqlSessiontemplate.delete("main.project.web.product.dao.IProductDAO.deleteProductId",Id);
-		
-
 	}
 
+	//목록
+	@Override
+	public int count(String id) throws Exception {
+		return sqlSessiontemplate.selectOne(namespace + ".count", id);
+	}
 	
-	
+	// 게시물 목록 + 페이징
+	@Override
+	public List<ProductVO> listPage(int displayPost, int postNum, String id) throws Exception {
+		HashMap data = new HashMap();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("id", id);
+		return sqlSessiontemplate.selectList(namespace + ".listPage", data);
+	}
+
 }
