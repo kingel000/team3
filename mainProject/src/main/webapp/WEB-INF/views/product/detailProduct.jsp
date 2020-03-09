@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="jquery.tooltip.css" />
+<script src="jquery.js" type="text/javascript"></script>
+<script src="jquery.tooltip.js" type="text/javascript"></script>
 <meta charset="UTF-8">
 <link href="apple-touch-icon.png" rel="apple-touch-icon">
 <link href="<c:url value="/resources/favicon.png"/>" rel="icon">
@@ -28,13 +31,26 @@
 
 <title>상품 상세페이지</title>
 <script type="text/javascript">
+var msg = '${msg}';
+if(msg == 'Expert'){
+	alert("판매자와 채팅 후 Cart 등록 가능합니다!");
+}
 function addCart(){
+
 	var f = document.content;
+	if($("#price").val()==0 || $("#price").val()== null){
+		alert("가격을 입력하세요!")
+		return;
+	}
 	f.action="/web/purchase/addCart.do"
 	f.method="post";
 	f.submit();
 }
+
+
+
 </script>
+
 </head>
 <body>
 <main class="ps-main">
@@ -51,15 +67,7 @@ function addCart(){
 	  <div class="row">
 		<div class="col-lg-10 col-md-12 col-lg-offset-1">
 		  <div class="ps-product__thumbnail">
-			<div class="ps-product__preview">
-			  <div class="ps-product__variants">
-				<div class="item"><img src="images/shoe-detail/1.jpg" alt=""></div>
-				<div class="item"><img src="images/shoe-detail/2.jpg" alt=""></div>
-				<div class="item"><img src="images/shoe-detail/3.jpg" alt=""></div>
-				<div class="item"><img src="images/shoe-detail/3.jpg" alt=""></div>
-				<div class="item"><img src="images/shoe-detail/3.jpg" alt=""></div>
-			  </div><a class="popup-youtube ps-product__video" href=""><img src="images/shoe-detail/1.jpg" alt=""><i class="fa fa-play"></i></a>
-			</div>
+			
 			<div class="ps-product__image">
 
 			  <div class="item"><img class="zoom" src="<c:url value="/resources/images/shoe-detail/1.jpg"/>"> </div>
@@ -69,7 +77,6 @@ function addCart(){
 		  </div>
 		  <div class="ps-product__thumbnail--mobile">
 			<div class="ps-product__main-img"><img src="images/shoe-detail/1.jpg" alt=""></div>
-			<div class="ps-product__preview owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="20" data-owl-nav="true" data-owl-dots="false" data-owl-item="3" data-owl-item-xs="3" data-owl-item-sm="3" data-owl-item-md="3" data-owl-item-lg="3" data-owl-duration="1000" data-owl-mousedrag="on"><img src="images/shoe-detail/1.jpg" alt=""><img src="images/shoe-detail/2.jpg" alt=""><img src="images/shoe-detail/3.jpg" alt=""></div>
 		  </div>
 		  <div class="ps-product__info">
 		
@@ -86,7 +93,8 @@ function addCart(){
 			<form action="/web/chat/createChat.do" name="content" >
 				<div class="ps-product__block ps-product__size">
 			  		<div class="form-group">
-			  			<input class="form-control" type="text" placeholder="가격 입력" name="price" value=""/>
+			  			<input class="form-control" title="판매자와 협의 후 가격을 입력해주세요 !" type="text" placeholder="가격 입력" id="price" name="price" value="" onClick="javascript:pricemsg();"/>
+			  			
 			  		</div>
 				</div>
 				<input type="hidden" name="product_num" value="${numProduct.product_num }">
@@ -112,7 +120,7 @@ function addCart(){
 		  <div class="ps-product__content mt-50">
 			<ul class="tab-list" role="tablist">
 			  <li class="active"><a href="#tab_01" aria-controls="tab_01" role="tab" data-toggle="tab">Overview</a></li>
-			  <li><a href="#tab_02" aria-controls="tab_02" role="tab" data-toggle="tab">Review</a></li>
+			  <li><a href="#tab_02" aria-controls="tab_02" role="tab" data-toggle="tab">Career</a></li>
 
 			</ul>
 		  </div>
@@ -121,41 +129,17 @@ function addCart(){
 			  <p>${numProduct.product_info}</p>
 			</div>
 			<div class="tab-pane" role="tabpanel" id="tab_02">
-		
-			  <div class="ps-review">
-			
-				<div class="ps-review__content">
-				  <header>
+			<p>${expert.career}</p>
 
-					<p>By<a href=""> Buyer Name</a>- Buy Date</p>
-				  </header>
-				  <p>Review</p>
 				</div>
 			  </div>
 			  
 			</div>
-			<div class="tab-pane" role="tabpanel" id="tab_03">
-			  <p>Add your tag <span> *</span></p>
-			  <form class="ps-product__tags" action="_action" method="post">
-				<div class="form-group">
-				  <input class="form-control" type="text" placeholder="">
-				  <button class="ps-btn ps-btn--sm">Add Tags</button>
-				</div>
-			  </form>
-			</div>
-			<div class="tab-pane" role="tabpanel" id="tab_04">
-			  <div class="form-group">
-				<textarea class="form-control" rows="6" placeholder="Enter your addition here..."></textarea>
-			  </div>
-			  <div class="form-group">
-				<button class="ps-btn" type="button">Submit</button>
-			  </div>
+	
 			</div>
 		  </div>
 		</div>
-	  </div>
-	</div>
-  </div>
+
 </main>
 <!-- JS Library-->
 	<script type="text/javascript"

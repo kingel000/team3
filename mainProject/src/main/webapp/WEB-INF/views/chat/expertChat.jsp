@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
 	$(document).ready(function() {
 		// 웹소켓을 지정한 url로 연결한다.
 		console.log("===========================================")
-		var ws = new WebSocket("ws://192.168.0.42:8080/web/echo.do");
+		var ws = new WebSocket("ws://192.168.59.211:8080/web/echo.do");
 		socket = ws;
 
 		//서버로 메세지 보낼때
@@ -103,19 +104,15 @@
 								</div>
 							</div>
 						 -->
-						 <c:if test="${roomList != null }">
-						 	<c:forEach var="memberRoom" items="${roomList }" varStatus="status">
-						 		<div class="chat_people" style=" cursor: pointer;" onclick="location.href='/web/chat/moveERoom.do?roomId=${memberRoom.room_id}';">
-									<div class="chat_img">
-										<img src="<c:url value="/resources/images2/user-profile.png" />"alt="sunil">
-									</div>
-									<div class="chat_ib">
-										<h5><c:out value="${ memberRoom.room_title}" /><span class="chat_date"><c:out value="${ memberRoom.room_date}" /></span></h5>
-									</div>
-								</div><br>
-						 	</c:forEach>
-						 </c:if>
-							<!-- 채팅방 추가 -->
+						<div class="chat_people">
+							<div class="chat_img">
+								<img src="<c:url value="/resources/images2/user-profile.png" />"alt="sunil">
+							</div>
+							<div class="chat_ib">
+								<h5><c:out value="${ room.room_title}" /></h5>
+								<h5>[방생성 날짜]:<span class="chat_date"><fmt:formatDate value="${ room.room_date}" pattern="yyyy-MM-dd aa hh:mm:ss" /></span></h5>
+							</div>
+						</div><br>
 							
 						</div>
 					</div>

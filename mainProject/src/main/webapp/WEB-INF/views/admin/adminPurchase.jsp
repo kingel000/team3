@@ -4,6 +4,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
+<script type="text/javascript">
+function checkCancel() {
+	
+	if(confirm("결제 취소를 진행하시겠습니까 ? ")){
+		alert("결제 취소 진행 되었습니다");
+	}else{
+		
+		return false;
+		
+	}
+	
+}
+
+</script>
 <head>
 	<meta charset="UTF-8">
 	<title>관리자 거래내역 </title>
@@ -15,8 +29,6 @@
 	</style>
 </head>
 
-<!-- Custom-->
-<link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 <body>
 	<div>
 		<h3 class="title">거래 내역</h3>
@@ -24,13 +36,14 @@
 			<table class="table table-striped" >
 			  <thead>
 			  	<tr>
-			      <th>거래번호</th>
+			      <th>주문번호</th>
 			      <th>상품번호</th>
 			      <th>상품명</th>
 			      <th>구매자</th>
 			      <th>판매자</th>
 			      <th>금액</th>
 			      <th>상태</th>
+			      <th>관리</th>
 			   <tr>
 			  </thead>
 			  <tbody>
@@ -38,11 +51,21 @@
 				 	<tr>
 				      <td>${adminPurchase.purchase_num}</td>
 				      <td>${adminPurchase.product_num}</td>
-				      <td>${producttitleList.get(status.index)}</td>
+				      <td>${producttileList.get(status.index)}</td>
 				      <td>${adminPurchase.member_id}</td> 
-				      <td>${expertidList.get(status.index)}</td>
+				      <td>${adminPurchase.expert_id}</td>
 				      <td>${adminPurchase.purchase_price}</td>
 				      <td>${adminPurchase.purchase_state}</td>
+				      <td>
+				      	<form action="/web/admin/purchaseCancel.mdo" method="post" onsubmit='return checkCancel();'>
+				      		<input type="hidden" name="purchase_num" value="${adminPurchase.purchase_num}">
+				      		<c:choose>
+				      			<c:when test="${adminPurchase.purchase_state ne 'Cancel'}">
+				      		<input type="submit" value="결제취소">
+				      			</c:when>
+				      		</c:choose>
+				      	</form>
+				      </td>
 				    <tr>
 				   </c:forEach>
 			  </tbody>
@@ -56,6 +79,7 @@
               	 </select>
 		 		 <input type="text" name="findText" placeholder="검색어를 입력해주세요">
 		 		 <input type="submit" value="검색" />
+		 		
 			</form>
 	</div>
 </body>

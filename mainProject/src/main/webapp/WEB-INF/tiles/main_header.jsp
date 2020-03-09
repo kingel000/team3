@@ -60,7 +60,6 @@
 							<c:otherwise>
 								<a href="#">${member.nick_name }</a>
 								<div class="btn-group ps-dropdown"><a href="/web/member/mypage.do">MyPage</a></div>
-								<div class="btn-group ps-dropdown"><a href="/web/chat/memberChat.do">Chatting</a></div>
 								<div class="btn-group ps-dropdown"><a href="/web/member/logout.do">LogOut</a></div>
 							</c:otherwise>
 						</c:choose>
@@ -76,8 +75,8 @@
 	  </div>
 	  <div class="navigation__column center">
 			<ul class="main-menu menu">
-			  <li class="menu-item menu-item-has-children dropdown"><a href="/web/product/mainProduct.do?category='C1'">웹 개발</a></li>
-			  <li class="menu-item menu-item-has-children has-mega-menu"><a href="/web/product/mainProduct.do?category='C2'">모바일앱·웹</a></li>
+			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C1'">웹 개발</a></li>
+			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C2'">모바일앱·웹</a></li>
 			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C3'">게임</a></li>
 			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C4'">응용프로그래밍</a></li>
 			  <li class="menu-item"><a href="/web/product/mainProduct.do?category='C5'">기타</a></li>

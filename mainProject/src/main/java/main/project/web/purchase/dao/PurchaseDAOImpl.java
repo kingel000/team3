@@ -24,18 +24,18 @@ public class PurchaseDAOImpl implements IPurchaseDAO {
 
 	@Override
 	public void updatePurchase(PurchaseVO purchase) {
-		sqlSessionTemplate.update("main.project.web.purchase.dao.IPurchaseDAO.insertPurchase", purchase);
+		sqlSessionTemplate.update("main.project.web.purchase.dao.IPurchaseDAO.updatePurchase", purchase);
 
 	}
 
 	@Override
-	public void deletePurchase(PurchaseVO purchase) {
-		sqlSessionTemplate.delete("main.project.web.purchase.dao.IPurchaseDAO.insertPurchase", purchase);
+	public void deletePurchase(String purchaseNum) {
+		sqlSessionTemplate.delete("main.project.web.purchase.dao.IPurchaseDAO.deletePurchase", purchaseNum);
 	}
 
 	@Override
-	public PurchaseVO selectPurchase(PurchaseVO purchase) {
-		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.insertPurchase", purchase);
+	public PurchaseVO selectPurchase(String purchaseNum) {
+		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.selectPurchase", purchaseNum);
 	}
 
 	@Override
@@ -109,6 +109,30 @@ public class PurchaseDAOImpl implements IPurchaseDAO {
 	}
 
 	
+	public CartVO getCart(String cartNum) {
+		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.getCart", cartNum);
+	}
+
+	@Override
+	public List<PurchaseVO> selectPurchaseList(String memberId) {
+		return sqlSessionTemplate.selectList("main.project.web.purchase.dao.IPurchaseDAO.selectPurchaseList", memberId);
+	}
+
+	@Override
+	public List<PurchaseVO> selectMemberOrder(PurchaseVO purchase) {
+		return sqlSessionTemplate.selectList("main.project.web.purchase.dao.IPurchaseDAO.selectMemberOrder", purchase);
+	}
+
+	@Override
+	public List<PurchaseVO> selectExpertPurchase(String expertId) {
+		return sqlSessionTemplate.selectList("main.project.web.purchase.dao.IPurchaseDAO.selectExpertPurchase", expertId);
+	}
+
+	@Override
+	public List<PurchaseVO> selectExpertOrder(PurchaseVO purchase) {
+		return sqlSessionTemplate.selectList("main.project.web.purchase.dao.IPurchaseDAO.selectExpertOrder", purchase);
+	}
+
 
 
 }

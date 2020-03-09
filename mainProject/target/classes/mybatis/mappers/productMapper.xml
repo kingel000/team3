@@ -83,11 +83,11 @@
 	
 
 	<select id="newAlignmentList" parameterType="String" resultType="productVO">
-		SELECT * FROM (SELECT * FROM product WHERE category=#{category}) ORDER BY product_date DESC
-	</select>
-	<select id="nameAlignmentList" parameterType="String" resultType="productVO">
-		SELECT * FROM (SELECT * FROM product WHERE category=#{category}) ORDER BY product_title
-	</select>
+      SELECT * FROM (SELECT * FROM product WHERE category=#{category}) ORDER BY product_date DESC
+   </select>
+   <select id="nameAlignmentList" parameterType="String" resultType="productVO">
+      SELECT * FROM (SELECT * FROM product WHERE category=#{category}) ORDER BY product_title
+   </select>
 
 	<delete id="deleteProductId" parameterType="String">
 		DELETE FROM product
@@ -106,4 +106,22 @@
 	</select>
 	
 
+	<!-- 게시물 정렬 후 설정한 범위 select -->
+	<select id="listPage" resultType="productVO" parameterType="hashMap">
+	select product_num, category, product_title, expert_id, product_date
+	from (
+	select product_num, category, product_title, expert_id, product_date,
+	row_number() over(order by product_num desc) as rNum
+	from product
+	) mb
+	where expert_id=#{id} and
+	rNum between #{displayPost} and #{postNum} order by product_num desc
+	</select>
+	
+	<!-- 게시물 총 갯수 -->
+	<select id="count" resultType="int" parameterType="String">
+		select count(product_num) from product where expert_id=#{id}
+	</select>
+	
+	
 </mapper>

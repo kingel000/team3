@@ -9,9 +9,21 @@
 
 <title>판매자 전환</title>
 <script type="text/javascript">
-   $(function() {
 
-   });
+	function checkValue(){
+		if(!document.rankUp.name.value){
+			alert("이름을 입력해주세요!")
+			document.rankUp.name.focus();
+			return false;
+		}
+		if(!document.rankUp.tel.value){
+			alert("이름을 입력해주세요!")
+			document.rankUp.tel.focus();
+			return false;
+		}
+		
+		alert("판매자 전환이 완료되었습니다 !");
+	}
 </script>
 
 <!-- Custom-->
@@ -33,7 +45,7 @@
          </h4>
       </div>
       <div class="rankUp_Box2">
-         <form action="/web/member/rankUp.do" method="post">
+         <form action="/web/member/rankUp.do" method="post" name="rankUp" onsubmit="return checkValue()">
             <p>
                <label for="name">이름</label><br> <input id="name" type="text"
                   name="name" placeholder="이름을 입력해주세요">
@@ -44,7 +56,7 @@
             </p>
             <p>
                <label>경력을 자유롭게 입력해주세요</label><br>
-               <textarea name="career" rows="8" cols="51"></textarea>
+               <textarea name="career" rows="8" cols="51" placeholder="경력을 입력해주세요 [공백 허용]"></textarea>
             </p>
             <p class="join">
                <input type="hidden" value="0" name="point">

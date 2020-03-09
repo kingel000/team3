@@ -27,13 +27,13 @@ public class PurchaseService implements IPurchaseService{
 	}
 
 	@Override
-	public void deletePurchase(PurchaseVO purchase) {
-		purchaseDAO.deletePurchase(purchase);
+	public void deletePurchase(String purchaseNum) {
+		purchaseDAO.deletePurchase(purchaseNum);
 	}
 
 	@Override
-	public PurchaseVO selectPurchase(PurchaseVO purchase) {
-		return purchaseDAO.selectPurchase(purchase);
+	public PurchaseVO selectPurchase(String purchaseNum) {
+		return purchaseDAO.selectPurchase(purchaseNum);
 	}
 
 	@Override
@@ -104,6 +104,31 @@ public class PurchaseService implements IPurchaseService{
 	@Override
 	public Integer productNum_PurchaseCount(String product_num) {
 		return purchaseDAO.productNum_PurchaseCount(product_num);
+	}
+	
+	@Override
+	public CartVO getCart(String cartNum) {
+		return purchaseDAO.getCart(cartNum);
+	}
+
+	@Override
+	public List<PurchaseVO> selectPurchaseList(String memberId) {
+		return purchaseDAO.selectPurchaseList(memberId);
+	}
+
+	@Override
+	public List<PurchaseVO> selectMemberOrder(PurchaseVO purchase) {
+		return purchaseDAO.selectMemberOrder(purchase);
+	}
+
+	@Override
+	public List<PurchaseVO> selectExpertPurchase(String expertId) {
+		return purchaseDAO.selectExpertPurchase(expertId);
+	}
+
+	@Override
+	public List<PurchaseVO> selectExpertOrder(PurchaseVO purchase) {
+		return purchaseDAO.selectExpertOrder(purchase);
 	}
 
 }

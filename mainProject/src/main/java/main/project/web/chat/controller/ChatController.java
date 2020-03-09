@@ -1,6 +1,5 @@
 package main.project.web.chat.controller;
 
-
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -30,99 +29,62 @@ public class ChatController {
 	private IRoomListService roomListService;
 	@Autowired
 	private IPurchaseService purchaseService;
-
+	
 	@RequestMapping(value="/expertChat.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String expertChat (Model model,HttpSession session) throws Exception{
+	public String expertChat (RoomListVO room,Model model,HttpSession session) throws Exception{
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		if(member == null) {
 			return "redirect:/main/main.do";
 		}
 		model.addAttribute("memberName",member.getNick_name());
-		List<RoomListVO> roomList = roomListService.getMemberList(member.getId());
-		model.addAttribute("roomList",roomList);
-		
+		RoomListVO check = roomListService.checkRoom(room);
+		model.addAttribute("room",check);
+		session.setAttribute("room", check);
 		//장바구니
 		List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
-		if(cartList != null) {
+		if(cartList.size() != 0) {
 			model.addAttribute("cartList",cartList);
-			if(cartList.size() != 0) {
-				model.addAttribute("count",cartList.size());
-			}
+			model.addAttribute("count",cartList.size());
 		}
 		return "chat/expertChat.part2";
 	}
-
-	@RequestMapping(value="/memberChat.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String memberChat (Model model,HttpSession session) throws Exception{
-		MemberVO member = (MemberVO)session.getAttribute("member");
-		if(member == null) {
-			return "redirect:/main/main.do";
-		}
-		model.addAttribute("memberName",member.getNick_name());
-		List<RoomListVO> roomList = roomListService.getRoomList(member.getId());
-		model.addAttribute("roomList",roomList);
-		
-		//장바구니
-		List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
-		if(cartList != null) {
-			model.addAttribute("cartList",cartList);
-			if(cartList.size() != 0) {
-				model.addAttribute("count",cartList.size());
-			}
-		}
-		return "chat/memberChat.part2";
-	}
 	
-	@RequestMapping(value="/moveERoom.do", method =RequestMethod.GET)
-	public String moveERoom(HttpSession session, Model model, @RequestParam String roomId) {
+	@RequestMapping(value="/memberChat.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String memberChat (RoomListVO room, Model model,HttpSession session) throws Exception{
 		MemberVO member = (MemberVO)session.getAttribute("member");
-		RoomListVO roomChange = (RoomListVO)session.getAttribute("room");
 		if(member == null) {
 			return "redirect:/main/main.do";
 		}
 		model.addAttribute("memberName",member.getNick_name());
+		RoomListVO check = roomListService.checkRoom(room);
+		model.addAttribute("room",check);
+		session.setAttribute("room", check);
 		
-		if(roomChange != null) {
-			if(!roomChange.getRoom_id().equals(roomId)) {
-				RoomListVO room = roomListService.getRoom(roomId);
-				roomChange.setRoomListVO(room);
-			}
-		}else {
-			roomChange = roomListService.getRoom(roomId);
-		}
-		model.addAttribute("room",roomChange);
-		session.setAttribute("room", roomChange);
-		
-		List<RoomListVO> roomList = roomListService.getMemberList(member.getId());
-		model.addAttribute("roomList",roomList);
-		
-		List<ChatContentVO> chatContent = chatContentService.selectContentList(roomId);
-		if(chatContent != null) {
+		List<ChatContentVO> chatContent = chatContentService.selectContentList(check.getRoom_id());
+		if(chatContent.size() != 0) {
 			model.addAttribute("chatContents",chatContent);
 		}
 		
 		//장바구니
 		List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
-		if(cartList != null) {
+		if(cartList.size() != 0) {
 			model.addAttribute("cartList",cartList);
-			if(cartList.size() != 0) {
-				model.addAttribute("count",cartList.size());
-			}
+			model.addAttribute("count",cartList.size());
 		}
-		return "chat/expertChat.part2";
+		return "chat/memberChat.part2";
 	}
+	
 	@RequestMapping(value="/createChat.do", method =RequestMethod.GET)
 	public String createChat(Model model, HttpSession session, ProductVO product, String expertName)throws Exception{
 		MemberVO member = (MemberVO)session.getAttribute("member");
-		if(member == null) {
+		if(member == null || member.getId().equals(product.getExpert_id())) {
 			return "redirect:/main/main.do";
 		}
 		model.addAttribute("memberName",member.getNick_name());
 
 		RoomListVO roomListVO = new RoomListVO(member.getId(),product.getProduct_num());
-		System.out.println("roomListVO:"+roomListVO);
 		RoomListVO roomCheck = roomListService.checkRoom(roomListVO);
-		System.out.println("roomCheck:"+roomCheck);
+		
 		String roomId = null;
 		if(roomCheck == null) {
 			Integer num = roomListService.selectNumCount()+1;
@@ -134,67 +96,46 @@ public class ChatController {
 			session.setAttribute("room", room);
 			
 		}else {
+			//날짜 새로 변경
 			roomListService.updateRoom(roomCheck);
 			roomId = roomCheck.getRoom_id();
 			model.addAttribute("room",roomCheck);
 			session.setAttribute("room", roomCheck);
 		}
-		List<RoomListVO> roomList = roomListService.getRoomList(member.getId());
-		model.addAttribute("roomList",roomList);
 		
 		List<ChatContentVO> chatContent = chatContentService.selectContentList(roomId);
-		if(chatContent != null) {
+		if(chatContent.size() != 0) {
 			model.addAttribute("chatContents",chatContent);
 		}
 
 		//장바구니
 		List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
-		if(cartList != null) {
+		if(cartList.size() != 0) {
 			model.addAttribute("cartList",cartList);
-			if(cartList.size() != 0) {
-				model.addAttribute("count",cartList.size());
-			}
+			model.addAttribute("count",cartList.size());
 		}
 		return "chat/memberChat.part2";
 	}
-
-	@RequestMapping(value="/moveMRoom.do", method =RequestMethod.GET)
-	public String moveRoom(HttpSession session, Model model, @RequestParam String roomId) {
+	
+	@RequestMapping(value="/memberRoomList.do", method =RequestMethod.GET)
+	public String memberRoomList(HttpSession session, Model model) {
 		MemberVO member = (MemberVO)session.getAttribute("member");
-		RoomListVO roomChange = (RoomListVO)session.getAttribute("room");
 		if(member == null) {
 			return "redirect:/main/main.do";
 		}
-		model.addAttribute("memberName",member.getNick_name());
-		
-		System.out.println(roomId);
-		if(roomChange != null) {
-			if(!roomChange.getRoom_id().equals(roomId)) {
-				RoomListVO room = roomListService.getRoom(roomId);
-				roomChange.setRoomListVO(room);
-			}
-		}else {
-			roomChange = roomListService.getRoom(roomId);
+		List<RoomListVO> roomList = roomListService.getRoomList(member.getId());
+		model.addAttribute("roomList",roomList);
+		return "chat/memberRoomList.page";
+	}
+	
+	@RequestMapping(value="/expertRoomList.do", method=RequestMethod.GET)
+	public String expertRoomList(HttpSession session, Model model) {
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		if(member == null) {
+			return "redirect:/main/main.do";
 		}
-		model.addAttribute("room",roomChange);
-		session.setAttribute("room", roomChange);
-		
 		List<RoomListVO> roomList = roomListService.getMemberList(member.getId());
 		model.addAttribute("roomList",roomList);
-		
-		List<ChatContentVO> chatContent = chatContentService.selectContentList(roomId);
-		if(chatContent != null) {
-			model.addAttribute("chatContents",chatContent);
-		}
-		
-		//장바구니
-		List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
-		if(cartList != null) {
-			model.addAttribute("cartList",cartList);
-			if(cartList.size() != 0) {
-				model.addAttribute("count",cartList.size());
-			}
-		}
-		return "chat/memberChat.part2";
+		return "chat/expertRoomList.page";
 	}
 }

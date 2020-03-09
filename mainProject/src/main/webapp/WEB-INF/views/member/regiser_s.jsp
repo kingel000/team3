@@ -15,15 +15,7 @@
 <script type="text/javascript">
    // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
    function checkValue() {
-      /* if (!document.userInfo.id.value) {
-         alert("이메일 ID를 입력해주세요.");
-         document.userInfo.id.focus();
-         return false;
-      }
-      if (document.userInfo.idCheckResult.value != "idCheck") {
-         alert("이메일인증을 해주세요.");
-         return false;
-      } */
+	
       if (!document.userInfo.nick_name.value) {
          alert("닉네임을 입력해주세요.");
          document.userInfo.nick_name.focus();
@@ -45,17 +37,12 @@
          document.userInfo.pwd.focus();
          return false;
       }
+      alert("ITEM 가입을 축하드립니다 !")
    }
-   /* function emailCheck(){
-      document.userInfo.idCheckResult.value ="idCheck";
-   }
-   function inputIdCheck(){
-      document.userInfo.idCheckResult.value ="idUnCheck";
-   } */
+
 </script>
 
 </head>
-
 <body class="body">
    <div class="logoBox">
       <div>

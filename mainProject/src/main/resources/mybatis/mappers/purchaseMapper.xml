@@ -5,28 +5,42 @@
 <mapper namespace="main.project.web.purchase.dao.IPurchaseDAO">
 	<insert id="insertPurchase" parameterType="purchaseVO">
 		INSERT INTO purchase VALUES 
-		(#{purchase_num},#{product_num},sysdate,#{purchase_state},#{member_id},#{purchase_price})
+		(#{purchase_num},#{product_num},sysdate,#{purchase_state},#{member_id},#{purchase_price},#{expert_id})
 	</insert>
 	<update id="updatePurchase" parameterType="purchaseVO">
 		UPDATE purchase SET purchase_state=#{purchase_state}
 		WHERE purchase_num=#{purchase_num}
 	</update>
-	<delete id="deletePurchase" parameterType="purchaseVO">
-		 DELETE FROM purchase WHERE purchase_num=#{purchase_num}
+	<delete id="deletePurchase" parameterType="String">
+		 DELETE FROM purchase WHERE purchase_num=#{purchaseNum}
 	</delete>
-	<select id="selectPurchase" parameterType="purchaseVO" resultType="purchaseVO">
-		SELECT * FROM purchase WHERE purchase_num=#{purchase_num}
+	<select id="selectPurchase" parameterType="String" resultType="purchaseVO">
+		SELECT * FROM purchase WHERE purchase_num=#{purchaseNum}
 	</select>
 	<select id="selectListPurchase" resultType="purchaseVO">
 		 SELECT * FROM purchase ORDER BY purchase_num DESC 
 	</select>
-	
+	<select id="selectPurchaseList" resultType="purchaseVO">
+		SELECT * FROM purchase WHERE member_id = #{member_id} ORDER BY purchase_num DESC
+	</select>
+	<select id="selectExpertPurchase" resultType="purchaseVO">
+		SELECT * FROM purchase WHERE expert_id = #{expert_id} ORDER BY purchase_num DESC
+	</select>
+	<select id="selectMemberOrder" resultType="purchaseVO">
+		SELECT * FROM purchase WHERE member_id =#{member_id} AND purchase_state=#{purchase_state} ORDER BY purchase_num DESC
+	</select>
+	<select id="selectExpertOrder" resultType="purchaseVO">
+		SELECT * FROM purchase WHERE expert_id = #{expert_id} AND purchase_state=#{purchase_state} ORDER BY purchase_num DESC
+	</select>	
 	<!-- 장바구니 -->
 	<insert id="addCart" parameterType="cartVO" >
 		INSERT INTO cart VALUES (#{num}, #{member_id}, #{product_num}, #{product_title}, #{price}, #{expert_nick})
 	</insert>
 	<select id="selectMyCart" resultType="cartVO">
 		SELECT * FROM cart WHERE member_id = #{memberId}
+	</select>
+	<select id="getCart" parameterType="String" resultType="cartVO">
+		SELECT * FROM cart WHERE num = #{cartNum}
 	</select>
 	<delete id="deleteCart" parameterType="String">
 		DELETE FROM cart WHERE num = #{cartNum}

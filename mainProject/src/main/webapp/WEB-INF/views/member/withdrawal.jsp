@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html id="wrap">
 <head>
+<style>
+
+</style>
 <meta charset="UTF-8">
 <title>회원 탈퇴</title>
 

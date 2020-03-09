@@ -35,4 +35,10 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
+	
+//	// Delete <p> tag
+//	config.enterMode = CKEDITOR.ENTER_BR
+//	//p 태그 삭제	
+//	config.disallowedContent = 'p';
+	
 };

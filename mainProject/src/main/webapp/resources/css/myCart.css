@@ -11,10 +11,6 @@ img {
  /*  outline: 1px grey solid; */
 }
 
-a{
-  color: #739931;
-}
-
 .page{
   max-width: 78%;
   margin: 0 auto;
@@ -316,7 +312,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', end
   padding: 6px 25px;
   background-color: #6b6;
   color: #fff;
-  font-size: 25px;
+  font-size: 18px;
   border-radius: 3px;
 }
 

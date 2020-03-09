@@ -36,8 +36,9 @@
    <div class="myPage_menu" >
       <ul>
          <div class="mypage_title">
-            <a href="/web/main/main.do">MY PAGE</a>
-         </div><br>
+            <a href="/web/member/mypage.do">MY PAGE</a>
+         </div>
+         <br>
          <li class="group">
             <div class="box">
                <a href="/web/member/editMember.do">
@@ -67,6 +68,14 @@
                   </a>
                 </div>
             </li>
+            <li class="group">
+               <div class="box">
+                    <a href="/web/purchase/salesList.do">
+                     <h3>Sales Status</h3>
+                     <p>판매 내역</p>
+                  </a>
+                </div>
+            </li>
             </c:otherwise>
          </c:choose>
        
@@ -78,11 +87,11 @@
                </a>
             </div>
          </li>
-    
+     
          <li class="group">
             <div class="box">
-               <a href="/web/product/orderList.do">
-                  <h3>Order List</h3>
+               <a href="/web/purchase/orderList.do">
+                  <h3>Order Status</h3>
                   <p>구매 내역</p>
                </a>
             </div>
@@ -102,7 +111,7 @@
          </c:choose>    
          <li class="group">
             <div class="box">
-               <a href="/web/product/boardManager.do">
+               <a href="/web/product/boardManager.do?num=1">
                   <h3>Board</h3>
                   <p>게시물 관리</p>
                </a>
@@ -113,16 +122,25 @@
             <c:when test="${member.rank == 'E'}">
                 <li class="group">
                <div class="box">
-                    <a href="/web/chat/expertChat.do">
+                    <a href="/web/chat/expertRoomList.do">
                      <h3>Expert Chat</h3>
-                     <p>전문가 채팅</p>
+                     <p>전문가 채팅방 목록</p>
                   </a>
                 </div>
             </li>
             
             </c:when>
          </c:choose> 
-           
+         
+         <li class="group">
+            <div class="box">
+               <a href="/web/chat/memberRoomList.do">
+                  <h3>MemberRoomList</h3>
+                  <p>구매자 채팅방 목록</p>
+               </a>
+            </div>
+         </li>
+         
          <li class="group">
             <div class="box">
                <a href="/web/member/withdrawal.do">
