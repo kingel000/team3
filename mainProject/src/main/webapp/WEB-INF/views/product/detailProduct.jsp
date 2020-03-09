@@ -31,9 +31,12 @@
 
 <title>상품 상세페이지</title>
 <script type="text/javascript">
-
+var msg = '${msg}';
+if(msg == 'Expert'){
+	alert("판매자와 채팅 후 Cart 등록 가능합니다!");
+}
 function addCart(){
-	
+
 	var f = document.content;
 	if($("#price").val()==0 || $("#price").val()== null){
 		alert("가격을 입력하세요!")

@@ -1,5 +1,6 @@
 package main.project.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -23,8 +24,7 @@ import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
-
-
+import main.project.web.purchase.PaymentCheck;
 import main.project.web.purchase.Service.IPurchaseService;
 import main.project.web.purchase.vo.CartVO;
 import main.project.web.purchase.vo.PurchaseVO;
@@ -268,29 +268,55 @@ public class adminController {
 	}
 
 
-	/*
+	
 
    //---------- 거래 내역
 
    @RequestMapping(value = "/adminpurchase.mdo", method= RequestMethod.GET)
-   public String adminpurchase(PurchaseVO purchase , ProductVO product, Model model , HttpSession session) {
+   public String adminpurchase(Model model , HttpSession session) {
 	   System.out.println("admin Purchase GET 호출 ");
-	   ArrayList<String>ExpertidList = new ArrayList<>();
 	   ArrayList<String>ProducttitleList = new ArrayList<>();
 	   //ArrayList<ProductVO>ExpertidList = new ArrayList<>();
 
 	   try {
 	   List<PurchaseVO> purchaseList = purchaseService.selectListPurchase();
 	   System.out.println("거래내역 사이즈 : " + purchaseList.size());
+	  
 	   for(PurchaseVO purchaseVO : purchaseList) {
 			System.out.println("DB 저장된 거래 내역 리스트 !!! : " + purchaseVO);
-			String Expert_id =  productService.selectProduct(purchaseVO.getProduct_num()).getExpert_id();
-			String Product_title = productService.selectProduct(purchaseVO.getProduct_num()).getProduct_title();
-			System.out.println("리스트에 들어가는 판매자 아이디 : " + Expert_id);
-			ExpertidList.add(Expert_id);
-			ProducttitleList.add(Product_title);
-	 */
+			//String Expert_id =  productService.selectProduct(purchaseVO.getProduct_num()).getExpert_id();
+			ProductVO p = productService.selectProduct(purchaseVO.getProduct_num());
+			if(p != null) {
+				System.out.println(p.getProduct_title());
+				ProducttitleList.add(p.getProduct_title());
+			}else {
+				System.out.println("null!!!");
+				String Product_title = "상품이 삭제되었습니다!";
+				ProducttitleList.add(Product_title);
+			}
+			//ExpertidList.add(Expert_id);
+			
+	
+	   }
+	   model.addAttribute("purchaseList",purchaseList);
+	   model.addAttribute("producttileList",ProducttitleList);
+	   }catch (Exception e) {
+		   e.printStackTrace();
+	}
+	return "admin/adminPurchase.page2";
+   }
+   
+   
+	@RequestMapping(value = "/purchaseCancel.mdo", method= RequestMethod.POST)
+	public String purchaseCancel(PurchaseVO purchase) {
+		PaymentCheck pay = new PaymentCheck();
+		purchase.setPurchase_state("Cancel");
+		purchaseService.updatePurchase(purchase);
+		pay.cancelPayment(pay.getImportToken(),purchase.getPurchase_num(),"Master Cancel");
+		return "redirect:/admin/adminpurchase.mdo";
+	}
 
+   
 
 	//<!-- *******BeakRyun_20200305 -->
 	//-----------AdminBoardNotice_Main_GET

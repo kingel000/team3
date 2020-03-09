@@ -49,13 +49,10 @@ public class ProductController {
 		}else if(category.equals("'C5'")) {
 			category =	"기타";
 		}
-		System.out.println("선택한 카테고리 : " + category);
 		List<ProductVO> productCategory = productService.selectCategory(category);
 		List<String> nick = new ArrayList<String>(); 
-		System.out.println("----");
 		if(productCategory.size() != 0) {
 			for(ProductVO productVO : productCategory) {
-				System.out.println("DB 저장 카테고리별 상품 리스트 " + productVO);
 				nick.add(memberService.checkMemberId(productVO.getExpert_id()).getNick_name());
 			}
 
@@ -163,15 +160,12 @@ public class ProductController {
 	@RequestMapping(value="/detailProduct.do", method = RequestMethod.GET)
 	public String detailProduct(@RequestParam String num,ProductVO product,ExpertVO expert, Model model , HttpSession session) {
 		System.out.println("detailProduct GET 받음 ");
-		System.out.println("선택한 상품 넘버 : " + num);
+
 		ProductVO numProduct = productService.selectProduct(num);
-		System.out.println("선택한 상품 정보 " + numProduct);
 		model.addAttribute("numProduct",numProduct);
 		MemberVO nick_name = new MemberVO();
 		nick_name = productService.select_NickName(numProduct.getExpert_id());
-		System.out.println("닉네임 담긴 정보 : " + nick_name);
 		expert = expertService.selectExpert(numProduct.getExpert_id());
-		System.out.println("클릭한 상품의 판매자 정보 : " + expert);
 		model.addAttribute("exper_id",numProduct.getExpert_id());
 		model.addAttribute("nick_name",nick_name);
 		model.addAttribute("expert",expert);
@@ -188,6 +182,34 @@ public class ProductController {
 		
 		return "/product/detailProduct.part2";
 	}
+	
+	@RequestMapping(value="/detailP.do", method = RequestMethod.GET)
+	public String detailP(@RequestParam String num,@RequestParam String msg,ProductVO product,ExpertVO expert, Model model , HttpSession session) {
+		System.out.println("detailProduct GET 받음 ");
+
+		ProductVO numProduct = productService.selectProduct(num);
+		model.addAttribute("numProduct",numProduct);
+		MemberVO nick_name = new MemberVO();
+		nick_name = productService.select_NickName(numProduct.getExpert_id());
+		expert = expertService.selectExpert(numProduct.getExpert_id());
+		model.addAttribute("exper_id",numProduct.getExpert_id());
+		model.addAttribute("nick_name",nick_name);
+		model.addAttribute("expert",expert);
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		if(member != null) {
+			List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
+			if(cartList != null) {
+				model.addAttribute("cartList",cartList);
+				if(cartList.size() != 0) {
+					model.addAttribute("count",cartList.size());
+				}
+			}
+		}
+		System.out.println(msg);
+		model.addAttribute("msg", msg);
+		return "/product/detailProduct.part2";
+	}
+	
 	
 	@RequestMapping(value="/detailProduct.do", method = RequestMethod.POST)
 	public String detailProduct(ProductVO product, Model model , HttpSession session) {
