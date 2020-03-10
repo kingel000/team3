@@ -101,7 +101,7 @@
             <c:when test="${member.rank == 'E'}">
                 <li class="group">
                <div class="box">
-                    <a href="/web/product/insertProduct.do">
+                    <a href="/web/product/insertThumbnail.do">
                      <h3>Product</h3>
                      <p>상품등록</p>
                   </a>

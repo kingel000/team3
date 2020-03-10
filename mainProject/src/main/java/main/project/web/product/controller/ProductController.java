@@ -143,7 +143,15 @@ public class ProductController {
 		
 		return "redirect:/product/boardManager.do";
 	}
-
+	
+	
+	// 섬네일 등록 페이지
+	@RequestMapping(value="/insertThumbnail.do", method=RequestMethod.GET)
+	public String insertThumnail(Model model) {
+		System.out.println("Thumnail insert GET 호출 ");
+		return "product/insertThumbnail";
+	}	
+	
 	// 게시물 목록 + 페이징 추가
 	@RequestMapping(value="/boardManager.do", method = RequestMethod.GET)
 	public String editBoard(@RequestParam("num") int num, ExpertVO expert, HttpSession session , Model model) throws Exception {
