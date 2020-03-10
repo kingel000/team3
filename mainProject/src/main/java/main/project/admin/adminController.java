@@ -96,13 +96,50 @@ public class adminController {
 
 
 	//-----------멤버관리
-	@RequestMapping(value="/memberManager.mdo",method = RequestMethod.GET)
-	public String memberManager(HttpSession session,Model model) {
-		System.out.println("memberManager mdo GET 호출 ");
-		List<MemberVO> adminmemberList = memberService.selectAllMember();
-		model.addAttribute("adminmemberList",adminmemberList);
-		return "admin/adminMember.page2";
-	}
+		@RequestMapping(value="/memberManager.mdo",method = RequestMethod.GET)
+		public String memberManager(@RequestParam("num") int num, HttpSession session,Model model) throws Exception {
+			System.out.println("memberManager mdo GET 호출 ");
+			// 게시물 총 갯수
+			int count = memberService.totalMember();
+			System.out.println(count);
+			// 한 페이지에 출력할 게시물 갯수
+			int postNum = 5;
+			// 출력할 게시물
+			int displayPost = (num - 1) * postNum;
+			// 한번에 표시할 페이징 번호의 갯수
+			int pageNum_cnt = 5;
+
+			// 표시되는 페이지 번호 중 마지막 번호
+			int endPageNum = (int)(Math.ceil((double)num / (double)pageNum_cnt) * pageNum_cnt);
+
+			// 표시되는 페이지 번호 중 첫번째 번호
+			int startPageNum = endPageNum - (pageNum_cnt - 1);
+			
+			// 마지막 번호 재계산
+			int endPageNum_tmp = (int)(Math.ceil((double)count / (double)postNum));
+			 
+			if(endPageNum > endPageNum_tmp) {
+			 endPageNum = endPageNum_tmp;
+			}
+			boolean prev = startPageNum == 1 ? false : true;
+			boolean next = endPageNum * postNum >= count ? false : true;
+			int num1 = num==1 ? 0 : 1;
+			List<MemberVO> adminmemberList = memberService.memberPage(displayPost+num1, postNum * num);
+			model.addAttribute("adminmemberList",adminmemberList);
+			
+			// 시작 및 끝 번호
+			model.addAttribute("startPageNum", startPageNum);
+			model.addAttribute("endPageNum", endPageNum);
+
+			// 이전 및 다음 
+			model.addAttribute("prev", prev);
+			model.addAttribute("next", next);
+
+			// 현재 페이지
+			model.addAttribute("select", num);
+			
+			return "admin/adminMember.page2";
+		}
 
 	@RequestMapping(value = "/adminMemberDelete.mdo", method= RequestMethod.GET)
 	public String adminMemberDelete(@RequestParam String id,MemberVO member, HttpSession session , Model model) {
@@ -176,19 +213,46 @@ public class adminController {
 		return "admin/adminMember.page2";
 	}
 
-
-
-
-
-
-
-
 	//-----------상품관리
 	@RequestMapping(value = "/adminProduct.mdo", method= RequestMethod.GET )
-	public String ProductManager( HttpSession session , Model model) {
-		List<ProductVO> adminproductList = productService.selectAllListProduct();
-		model.addAttribute("adminproductList", adminproductList);
+	public String ProductManager(@RequestParam("num") int num, HttpSession session , Model model) throws Exception {
+		// 게시물 총 갯수
+		int count = productService.totalProduct();
+		// 한 페이지에 출력할 게시물 갯수
+		int postNum = 10;
+		// 출력할 게시물
+		int displayPost = (num - 1) * postNum;
+		// 한번에 표시할 페이징 번호의 갯수
+		int pageNum_cnt = 5;
 
+		// 표시되는 페이지 번호 중 마지막 번호
+		int endPageNum = (int)(Math.ceil((double)num / (double)pageNum_cnt) * pageNum_cnt);
+
+		// 표시되는 페이지 번호 중 첫번째 번호
+		int startPageNum = endPageNum - (pageNum_cnt - 1);
+		
+		// 마지막 번호 재계산
+		int endPageNum_tmp = (int)(Math.ceil((double)count / (double)postNum));
+		 
+		if(endPageNum > endPageNum_tmp) {
+		 endPageNum = endPageNum_tmp;
+		}
+		boolean prev = startPageNum == 1 ? false : true;
+		boolean next = endPageNum * postNum >= count ? false : true;
+		int num1 = num==1 ? 0 : 1;
+		
+		List<ProductVO> adminproductList = productService.productPage(displayPost+num1, (postNum * num));
+		model.addAttribute("adminproductList", adminproductList);
+		// 시작 및 끝 번호
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+
+		// 이전 및 다음 
+		model.addAttribute("prev", prev);
+		model.addAttribute("next", next);
+
+		// 현재 페이지
+		model.addAttribute("select", num);
 		return "admin/adminProduct.page2";
 	}
 
@@ -271,40 +335,69 @@ public class adminController {
 
 	
 
-   //---------- 거래 내역
-
+	//---------- 거래 내역
    @RequestMapping(value = "/adminpurchase.mdo", method= RequestMethod.GET)
-   public String adminpurchase(Model model , HttpSession session) {
+   public String adminpurchase(@RequestParam("num") int num, Model model , HttpSession session) throws Exception {
 	   System.out.println("admin Purchase GET 호출 ");
-	   ArrayList<String>ProducttitleList = new ArrayList<>();
-	   //ArrayList<ProductVO>ExpertidList = new ArrayList<>();
+	   // 게시물 총 갯수
+	   int count = purchaseService.countPurchase();
+	   System.out.println(count);
+	   // 한 페이지에 출력할 게시물 갯수
+	   int postNum = 5;
+	   // 출력할 게시물
+	   int displayPost = (num - 1) * postNum;
+	   // 한번에 표시할 페이징 번호의 갯수
+	   int pageNum_cnt = 5;
 
-	   try {
-	   List<PurchaseVO> purchaseList = purchaseService.selectListPurchase();
-	   System.out.println("거래내역 사이즈 : " + purchaseList.size());
+	   // 표시되는 페이지 번호 중 마지막 번호
+	   int endPageNum = (int)(Math.ceil((double)num / (double)pageNum_cnt) * pageNum_cnt);
+
+	   // 표시되는 페이지 번호 중 첫번째 번호
+	   int startPageNum = endPageNum - (pageNum_cnt - 1);
+
+	   // 마지막 번호 재계산
+	   int endPageNum_tmp = (int)(Math.ceil((double)count / (double)postNum));
+
+	   if(endPageNum > endPageNum_tmp) {
+		   endPageNum = endPageNum_tmp;
+	   }
+	   boolean prev = startPageNum == 1 ? false : true;
+	   boolean next = endPageNum * postNum >= count ? false : true;
+	   int num1 = num==1 ? 0 : 1;
+
+	   ArrayList<String>ProducttitleList = new ArrayList<>();
 	  
+	   List<PurchaseVO> purchaseList = purchaseService.purchasePage(displayPost+num1, postNum * num);
+	   System.out.println("거래내역 사이즈 : " + purchaseList.size());
+
 	   for(PurchaseVO purchaseVO : purchaseList) {
-			System.out.println("DB 저장된 거래 내역 리스트 !!! : " + purchaseVO);
-			//String Expert_id =  productService.selectProduct(purchaseVO.getProduct_num()).getExpert_id();
-			ProductVO p = productService.selectProduct(purchaseVO.getProduct_num());
-			if(p != null) {
-				System.out.println(p.getProduct_title());
-				ProducttitleList.add(p.getProduct_title());
-			}else {
-				System.out.println("null!!!");
-				String Product_title = "상품이 삭제되었습니다!";
-				ProducttitleList.add(Product_title);
-			}
-			//ExpertidList.add(Expert_id);
-			
-	
+		   System.out.println("DB 저장된 거래 내역 리스트 !!! : " + purchaseVO);
+		   //String Expert_id =  productService.selectProduct(purchaseVO.getProduct_num()).getExpert_id();
+		   ProductVO p = productService.selectProduct(purchaseVO.getProduct_num());
+		   if(p != null) {
+			   System.out.println(p.getProduct_title());
+			   ProducttitleList.add(p.getProduct_title());
+		   }else {
+			   System.out.println("null!!!");
+			   String Product_title = "상품이 삭제되었습니다!";
+			   ProducttitleList.add(Product_title);
+		   }
+		   //ExpertidList.add(Expert_id);
 	   }
 	   model.addAttribute("purchaseList",purchaseList);
 	   model.addAttribute("producttileList",ProducttitleList);
-	   }catch (Exception e) {
-		   e.printStackTrace();
-	}
-	return "admin/adminPurchase.page2";
+	   // 시작 및 끝 번호
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+
+		// 이전 및 다음 
+		model.addAttribute("prev", prev);
+		model.addAttribute("next", next);
+
+		// 현재 페이지
+		model.addAttribute("select", num);
+  
+	   return "admin/adminPurchase.page2";
    }
    
    

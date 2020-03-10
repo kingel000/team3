@@ -1,5 +1,6 @@
 package main.project.web.purchase.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,6 +8,7 @@ import javax.inject.Inject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import main.project.web.product.vo.ProductVO;
 import main.project.web.product.vo.findVO;
 import main.project.web.purchase.vo.CartVO;
 import main.project.web.purchase.vo.PurchaseVO;
@@ -17,6 +19,8 @@ public class PurchaseDAOImpl implements IPurchaseDAO {
 	@Inject
 	private SqlSessionTemplate sqlSessionTemplate;
 
+	private static String namespace = "main.project.web.purchase.dao.IPurchaseDAO";
+	
 	@Override
 	public void insertPurchase(PurchaseVO purchase) {
 		sqlSessionTemplate.insert("main.project.web.purchase.dao.IPurchaseDAO.insertPurchase", purchase);
@@ -34,13 +38,13 @@ public class PurchaseDAOImpl implements IPurchaseDAO {
 	}
 
 	@Override
-	public PurchaseVO selectPurchase(String purchaseNum) {
-		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.selectPurchase", purchaseNum);
+	public List<PurchaseVO> selectListPurchase() {
+		return sqlSessionTemplate.selectList("main.project.web.purchase.dao.IPurchaseDAO.selectListPurchase");
 	}
 
 	@Override
-	public List<PurchaseVO> selectListPurchase() {
-		return sqlSessionTemplate.selectList("main.project.web.purchase.dao.IPurchaseDAO.selectListPurchase");
+	public PurchaseVO selectPurchase(String purchaseNum) {
+		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.selectPurchase", purchaseNum);
 	}
 
 	@Override
@@ -77,7 +81,18 @@ public class PurchaseDAOImpl implements IPurchaseDAO {
 	public Integer totalCountPurchase() {
 		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.totalCountPurchase");
 	}
-
+	@Override
+	public int countPurchase() {
+		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.countPurchase");
+	}
+	@Override
+	public List<PurchaseVO> purchasePage(int displayPost, int postNum)throws Exception {
+		HashMap data = new HashMap();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		return sqlSessionTemplate.selectList(namespace + ".purchasePage", data);
+	}
+	
 	@Override
 	public Integer Id_totalCountPurchase(String id) {
 		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.Id_totalCountPurchase", id);
@@ -132,7 +147,5 @@ public class PurchaseDAOImpl implements IPurchaseDAO {
 	public List<PurchaseVO> selectExpertOrder(PurchaseVO purchase) {
 		return sqlSessionTemplate.selectList("main.project.web.purchase.dao.IPurchaseDAO.selectExpertOrder", purchase);
 	}
-
-
 
 }

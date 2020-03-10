@@ -85,5 +85,15 @@
 		SELECT COUNT(*) FROM (SELECT * FROM purchase WHERE product_num=#{product_num}) WHERE purchase_state !='Cancel'
 	</select>
 	
-	
+	<select id="countPurchase" resultType="int">
+		SELECT COUNT(*) FROM purchase
+	</select>
+	<!-- total purchase page -->
+	<select id="purchasePage" resultType="purchaseVO" parameterType="hashMap">
+		select * from (
+		select purchase_num, product_num, purchase_date, purchase_state, member_id, purchase_price, expert_id,
+		row_number() over(order by purchase_num desc) as rNum
+		from purchase) 
+		mb where rNum between #{displayPost} and #{postNum} order by purchase_num desc
+	</select>
 </mapper>

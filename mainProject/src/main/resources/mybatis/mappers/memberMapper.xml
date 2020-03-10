@@ -77,4 +77,12 @@
 		SELECT COUNT(*) FROM member
 	</select>
 	
+	<!-- member page -->
+	<select id="memberPage" resultType="memberVO" parameterType="hashMap">
+		select * from (
+		select id, pwd, nick_name, rank,
+		row_number() over(order by id desc) as rNum
+		from member) 
+		mb where rNum between #{displayPost} and #{postNum} order by id desc
+	</select>
 </mapper>

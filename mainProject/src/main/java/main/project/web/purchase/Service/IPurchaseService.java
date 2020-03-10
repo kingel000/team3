@@ -24,6 +24,8 @@ public interface IPurchaseService {
 	List<PurchaseVO> purchaseFindList(findVO find);
 	Integer totalPoint();
 	Integer totalCountPurchase();
+	int countPurchase();
+	public List<PurchaseVO> purchasePage(int displayPost, int postNum)throws Exception;
 	Integer Id_totalCountPurchase(String id);
 	Integer Id_totalPurchasePrice(String id);
 	Integer Id_PurchaseCount(String id);

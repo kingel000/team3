@@ -36,20 +36,14 @@ public class ProductDAOImpl implements IProductDAO {
 	public ProductVO selectProduct(String product_num) {
 		return sqlSessiontemplate.selectOne("main.project.web.product.dao.IProductDAO.selectProduct",product_num);
 	}
-	@Override
-	public List<ProductVO> selectListProduct(MemberVO sessionId) {
-		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectListProduct", sessionId);
-	}
-	
-	@Override
-	public List<ProductVO> selectAllListProduct() {
-		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectAllListProduct");
-	}
-	@Override
-	public List<ProductVO> selectCategory(String category) {
-		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectCategory",category);
-
-	}
+//	@Override
+//	public List<ProductVO> selectListProduct(MemberVO sessionId) {
+//		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectListProduct", sessionId);
+//	}
+//	@Override
+//	public List<ProductVO> selectCategory(String category) {
+//		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.selectCategory",category);
+//	}
 	@Override
 	public MemberVO select_NickName(String expert_id) {
 		return sqlSessiontemplate.selectOne("main.project.web.product.dao.IProductDAO.select_NickName",expert_id);
@@ -89,6 +83,13 @@ public class ProductDAOImpl implements IProductDAO {
 	@Override
 	public Integer totalProduct() {
 		return sqlSessiontemplate.selectOne("main.project.web.product.dao.IProductDAO.totalProduct");
+	}
+	@Override
+	public List<ProductVO> productPage(int displayPost, int postNum)throws Exception {
+		HashMap data = new HashMap();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		return sqlSessiontemplate.selectList(namespace + ".productPage", data);
 	}
 	@Override
 	public List<ProductVO> expertProductList(String member_id) {
