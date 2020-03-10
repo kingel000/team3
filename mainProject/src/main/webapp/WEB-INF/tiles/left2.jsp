@@ -97,6 +97,15 @@
                </a>
             </div>
          </li>
+         
+         <li class="group">
+            <div class="box">
+               <a href="/web/admin/homePageManagement.mdo">
+                  <h3>HomePage</h3>
+                  <p>홈페이지 관리</p>
+               </a>
+            </div>
+         </li>
          <li class="group">
             <div class="box">
           	  <button onclick="window.open('chartMain.mdo')"> * 통계관리 이동하기 * </button>

@@ -506,6 +506,12 @@ public class adminController {
   		return "admin/adminPurchase.page2";
    }
    
+	//--------홈페이지 관리
+	@RequestMapping(value = "/homePageManagement.mdo", method = RequestMethod.GET)
+	public String homePageManagement(HttpSession session , Model model){
+		
+		return "admin/homePageManagement.page2";
+	}
    
    
    //--------통계
