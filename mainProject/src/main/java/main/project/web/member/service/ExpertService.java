@@ -49,4 +49,9 @@ public class ExpertService implements IExpertService {
 		
 	}
 
+	@Override
+	public Integer totalMember_expert() {
+		return expertDAO.totalMember_expert();
+	}
+
 }

@@ -69,6 +69,46 @@ public class PurchaseDAOImpl implements IPurchaseDAO {
 	}
 
 	@Override
+	public Integer totalPoint() {
+		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.totalPoint");
+	}
+
+	@Override
+	public Integer totalCountPurchase() {
+		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.totalCountPurchase");
+	}
+
+	@Override
+	public Integer Id_totalCountPurchase(String id) {
+		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.Id_totalCountPurchase", id);
+	}
+
+	@Override
+	public Integer Id_totalPurchasePrice(String id) {
+		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.Id_totalPurchasePrice", id);
+	}
+
+	@Override
+	public Integer Id_PurchaseCount(String id) {
+		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.Id_PurchaseCount", id);
+	}
+
+	@Override
+	public Integer Id_totalSalesPrice(String id) {
+		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.Id_totalSalesPrice", id);
+	}
+
+	@Override
+	public Integer date_totalSales(String findDate) {
+		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.date_totalSales", findDate);
+	}
+
+	@Override
+	public Integer productNum_PurchaseCount(String product_num) {
+		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.productNum_PurchaseCount", product_num);
+	}
+
+	
 	public CartVO getCart(String cartNum) {
 		return sqlSessionTemplate.selectOne("main.project.web.purchase.dao.IPurchaseDAO.getCart", cartNum);
 	}
@@ -92,6 +132,7 @@ public class PurchaseDAOImpl implements IPurchaseDAO {
 	public List<PurchaseVO> selectExpertOrder(PurchaseVO purchase) {
 		return sqlSessionTemplate.selectList("main.project.web.purchase.dao.IPurchaseDAO.selectExpertOrder", purchase);
 	}
+
 
 
 }

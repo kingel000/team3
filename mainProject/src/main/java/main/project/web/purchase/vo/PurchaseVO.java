@@ -10,6 +10,7 @@ public class PurchaseVO {
 	private String member_id;
 	private Integer purchase_price;
 	private String expert_id;
+
 	public PurchaseVO() {}
 
 	public PurchaseVO(String purchase_num, String product_num, String purchase_state,
@@ -77,7 +78,5 @@ public class PurchaseVO {
 				+ purchase_date + ", purchase_state=" + purchase_state + ", member_id=" + member_id
 				+ ", purchase_price=" + purchase_price + ", expert_id=" + expert_id + "]";
 	}
-	
-	
 	
 }

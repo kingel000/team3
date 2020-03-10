@@ -41,6 +41,7 @@ public class MemberController {
 
 	@RequestMapping(value="/login.do", method = RequestMethod.POST)
 	public String memberLogin(MemberVO member,HttpSession session, Model model) {
+		System.out.println("로그인 시도 계정 정보 " + member);
 		System.out.println(member.getId());
 		System.out.println(member.getPwd());
 		MemberVO check = memberService.selectMember(member);
@@ -51,6 +52,9 @@ public class MemberController {
 			if(check.getPwd().equals(member.getPwd())) {
 				session.setAttribute("member", check);
 				model.addAttribute("member", check);
+				String msg = check.getNick_name()+" 님 환영합니다";
+				System.out.println(msg);
+				model.addAttribute("msg",msg);
 				return "redirect:/main/main.do";
 			}else {
 				String msg = "비밀번호 오류";

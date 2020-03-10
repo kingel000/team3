@@ -82,7 +82,7 @@
 	</select>
 	
 
-<select id="newAlignmentList" parameterType="String" resultType="productVO">
+	<select id="newAlignmentList" parameterType="String" resultType="productVO">
       SELECT * FROM (SELECT * FROM product WHERE category=#{category}) ORDER BY product_date DESC
    </select>
    <select id="nameAlignmentList" parameterType="String" resultType="productVO">
@@ -93,5 +93,51 @@
 		DELETE FROM product
 		WHERE expert_id=#{id}
 	</delete>
+	
+	<!-- 통계 -->
+	<select id="totalProduct" resultType="Integer">
+		SELECT COUNT(*) FROM product
+	</select>
+	<select id="expertProductList" parameterType="String" resultType="productVO">
+		SELECT * FROM product WHERE expert_id = #{member_id}
+	</select>
+	<select id="category_product_num" parameterType="String" resultType="productVO">
+		SELECT product_num FROM (SELECT * FROM product WHERE category =#{category})
+	</select>
+	
 
+	<!-- 게시물 정렬 후 설정한 범위 select -->
+	<select id="listPage" resultType="productVO" parameterType="hashMap">
+		select product_num, category, product_title, expert_id, product_date
+		from (
+		select product_num, category, product_title, expert_id, product_date,
+		row_number() over(order by product_num desc) as rNum
+		from product
+		) mb
+		where expert_id=#{id} and
+		rNum between #{displayPost} and #{postNum} order by product_num desc
+	</select>
+	
+	<!-- 게시물 총 갯수 -->
+	<select id="countProduct" resultType="int" parameterType="String">
+		select count(product_num) from product where expert_id=#{id}
+	</select>
+	
+	<!-- 게시물 정렬 후 설정한 범위 select -->
+	<select id="categoryPage" resultType="productVO" parameterType="hashMap">
+		select product_num, category, product_title, expert_id, product_date
+		from (
+		select product_num, category, product_title, expert_id, product_date,
+		row_number() over(order by product_num desc) as rNum
+		from product
+		) mb
+		where category=#{category} and
+		rNum between #{displayPost} and #{postNum} order by product_num desc
+	</select>
+	
+	<!-- 게시물 총 갯수 -->
+	<select id="countCategory" resultType="int" parameterType="String">
+		select count(product_num) from product where category=#{category}
+	</select>
+	
 </mapper>

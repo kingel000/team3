@@ -14,4 +14,5 @@ public interface IQuestionDAO {
 	List<QuestionVO> selectPage(PagingVO vo); 
 	Integer selectTotal(); // 전체 데이터 갯수
 
+
 }

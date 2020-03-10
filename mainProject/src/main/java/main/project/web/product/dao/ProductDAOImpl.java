@@ -1,5 +1,6 @@
 package main.project.web.product.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,6 +18,8 @@ public class ProductDAOImpl implements IProductDAO {
 	@Inject
 	private SqlSessionTemplate sqlSessiontemplate;
 
+	private static String namespace = "main.project.web.product.dao.IProductDAO";
+	
 	@Override
 	public void insertProduct(ProductVO product) {
 		sqlSessiontemplate.insert("main.project.web.product.dao.IProductDAO.insertProduct",product);
@@ -82,10 +85,45 @@ public class ProductDAOImpl implements IProductDAO {
 	}
 	public void deleteProductId(String Id) {
 		sqlSessiontemplate.delete("main.project.web.product.dao.IProductDAO.deleteProductId",Id);
-		
-
+	}
+	@Override
+	public Integer totalProduct() {
+		return sqlSessiontemplate.selectOne("main.project.web.product.dao.IProductDAO.totalProduct");
+	}
+	@Override
+	public List<ProductVO> expertProductList(String member_id) {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.expertProductList", member_id);
+	}
+	@Override
+	public List<ProductVO> category_product_num(String category) {
+		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.category_product_num", category);
 	}
 
+	//계정별 상품수
+	@Override
+	public int countProduct(String id) throws Exception {
+		return sqlSessiontemplate.selectOne(namespace + ".countProduct", id);
+	}
 	
-	
+	//계정 게시물 목록 + 페이징
+	@Override
+	public List<ProductVO> listPage(int displayPost, int postNum, String id) throws Exception {
+		HashMap data = new HashMap();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("id", id);
+		return sqlSessiontemplate.selectList(namespace + ".listPage", data);
+	}
+	//카테고리별 상품수
+	public int countCategory(String category) throws Exception{
+		return sqlSessiontemplate.selectOne(namespace + ".countCategory", category);
+	}
+	//카테고리별 목록 + 페이징
+	public List<ProductVO> categoryPage(int displayPost, int postNum, String category) throws Exception {
+		HashMap data = new HashMap();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		data.put("category", category);
+		return sqlSessiontemplate.selectList(namespace + ".categoryPage", data);
+	}
 }

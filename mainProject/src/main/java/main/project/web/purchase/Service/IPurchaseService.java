@@ -22,4 +22,12 @@ public interface IPurchaseService {
 	void deleteCart(String cartNum);
 	void checkOut(String memberId);
 	List<PurchaseVO> purchaseFindList(findVO find);
+	Integer totalPoint();
+	Integer totalCountPurchase();
+	Integer Id_totalCountPurchase(String id);
+	Integer Id_totalPurchasePrice(String id);
+	Integer Id_PurchaseCount(String id);
+	Integer Id_totalSalesPrice(String id);
+	Integer date_totalSales(String findDate);
+	Integer productNum_PurchaseCount(String product_num);
 }

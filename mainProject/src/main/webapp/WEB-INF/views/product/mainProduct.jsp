@@ -95,13 +95,36 @@
 				<div class="ps-product-action">
 					<div class="ps-pagination">
 						<ul class="pagination">
-							<li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">...</a></li>
-							<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+						<c:if test="${prev}">
+							<li>
+								<a href="/web/product/mainProduct.do?category=${category}&num=${startPageNum - 1}">
+									<i class="fa fa-angle-left"></i>
+								</a>
+							</li>
+						</c:if>
+						<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
+							<c:choose>
+								<c:when test="${select == num}">
+									<li class="active">
+										<a href="/web/product/mainProduct.do?category=${category}&num=${num}">${num}</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li>
+										<a href="/web/product/mainProduct.do?category=${category}&num=${num}">${num}</a>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${next}">
+							<li>
+								<a href="/web/product/mainProduct.do?category=${category}&num=${endPageNum + 1}">
+									<i class="fa fa-angle-right"></i>
+								</a>
+							</li>
+						</c:if>
 						</ul>
+						
 					</div>
 				</div>
 			</div>

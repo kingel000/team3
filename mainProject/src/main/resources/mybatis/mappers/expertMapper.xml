@@ -34,5 +34,10 @@
 		VALUES(#{id},'변경 후 사용','변경 후 사용','변경 후 사용',0)
 	</insert>
 	
+	<!-- 통계 -->
+	<select id="totalMember_expert" resultType="Integer">
+		SELECT COUNT(*) FROM member_expert
+	</select>
+	
 
 </mapper>

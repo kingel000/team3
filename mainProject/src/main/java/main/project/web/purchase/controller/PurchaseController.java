@@ -41,14 +41,15 @@ public class PurchaseController {
 		RoomListVO roomListVO = new RoomListVO(member.getId(),product.getProduct_num());
 		RoomListVO roomCheck = roomListService.checkRoom(roomListVO);
 		if(price == null || roomCheck == null) {
-			return "redirect:/product/detailProduct.do?num="+product.getProduct_num();
+			String msg = "Expert";
+			return "redirect:/product/detailP.do?num="+product.getProduct_num()+"&&msg="+msg;
 		}
 		String date = (new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date());
 		String expertNick = productService.select_NickName(product.getExpert_id()).getNick_name();
 		System.out.println("expertNick: "+expertNick);
 		CartVO cart = new CartVO(date,member.getId(),product.getProduct_num(),product.getProduct_title(),Integer.parseInt(price),expertNick);
 		purchaseService.addCart(cart);
-		return "redirect:/main/main.do";
+		return "redirect:/purchase/myCart.do";
 	}
 
 	@RequestMapping(value="/deleteCart", method=RequestMethod.GET)

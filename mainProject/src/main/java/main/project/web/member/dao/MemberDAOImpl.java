@@ -66,6 +66,14 @@ public class MemberDAOImpl implements IMemberDAO {
 		return sqlSessionTemplate.selectList("main.project.web.member.dao.IMemberDAO.selectFindList",find);
 	}
 
+	@Override
+	public Integer totalMember() {
+		return sqlSessionTemplate.selectOne("main.project.web.member.dao.IMemberDAO.totalMember");
+	}
+
+
+
+
 	/**@Override
 	public List<MemberVO> selectOneMember(MemberFindVO find) {
 		return sqlSessionTemplate.selectList("main.project.web.member.dao.IMemberDAO.selectOneMember",find);

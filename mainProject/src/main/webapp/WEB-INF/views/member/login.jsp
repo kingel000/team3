@@ -15,7 +15,8 @@
 	var message = '${msg}';
 	if(message != ""){
 		alert(message);
-	} 		
+	} 	
+
 </script>
 <body class="body">
 	<div class="logoBox">

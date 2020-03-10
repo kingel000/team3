@@ -12,5 +12,6 @@ public interface IExpertDAO {
    void updateRankExpert(String id);
   
    ExpertVO selectExpert(@Param("expert_id")String id);
+   Integer totalMember_expert();
    
 }

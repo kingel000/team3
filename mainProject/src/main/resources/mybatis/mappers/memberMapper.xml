@@ -71,4 +71,10 @@
 			nick_name like '%'||#{findText}||'%'
 		</if>
 	</select>
+	
+	<!-- 통계 -->
+	<select id="totalMember" resultType="Integer">
+		SELECT COUNT(*) FROM member
+	</select>
+	
 </mapper>

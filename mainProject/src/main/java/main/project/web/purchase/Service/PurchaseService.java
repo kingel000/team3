@@ -67,6 +67,46 @@ public class PurchaseService implements IPurchaseService{
 	}
 
 	@Override
+	public Integer totalPoint() {
+		return purchaseDAO.totalPoint();
+	}
+
+	@Override
+	public Integer totalCountPurchase() {
+		return purchaseDAO.totalCountPurchase();
+	}
+
+	@Override
+	public Integer Id_totalCountPurchase(String id) {
+		return purchaseDAO.Id_totalCountPurchase(id);
+	}
+
+	@Override
+	public Integer Id_totalPurchasePrice(String id) {
+		return purchaseDAO.Id_totalPurchasePrice(id);
+	}
+
+	@Override
+	public Integer Id_PurchaseCount(String id) {
+		return purchaseDAO.Id_PurchaseCount(id);
+	}
+
+	@Override
+	public Integer Id_totalSalesPrice(String id) {
+		return purchaseDAO.Id_totalSalesPrice(id);
+	}
+
+	@Override
+	public Integer date_totalSales(String findDate) {
+		return purchaseDAO.date_totalSales(findDate);
+	}
+
+	@Override
+	public Integer productNum_PurchaseCount(String product_num) {
+		return purchaseDAO.productNum_PurchaseCount(product_num);
+	}
+	
+	@Override
 	public CartVO getCart(String cartNum) {
 		return purchaseDAO.getCart(cartNum);
 	}

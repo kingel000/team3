@@ -1,5 +1,6 @@
 package main.project.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -22,9 +23,9 @@ import main.project.web.member.vo.ExpertVO;
 
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
+import main.project.web.product.service.ProductService;
 import main.project.web.product.vo.ProductVO;
-
-
+import main.project.web.purchase.PaymentCheck;
 import main.project.web.purchase.Service.IPurchaseService;
 import main.project.web.purchase.vo.CartVO;
 import main.project.web.purchase.vo.PurchaseVO;
@@ -268,29 +269,55 @@ public class adminController {
 	}
 
 
-	/*
+	
 
    //---------- 거래 내역
 
    @RequestMapping(value = "/adminpurchase.mdo", method= RequestMethod.GET)
-   public String adminpurchase(PurchaseVO purchase , ProductVO product, Model model , HttpSession session) {
+   public String adminpurchase(Model model , HttpSession session) {
 	   System.out.println("admin Purchase GET 호출 ");
-	   ArrayList<String>ExpertidList = new ArrayList<>();
 	   ArrayList<String>ProducttitleList = new ArrayList<>();
 	   //ArrayList<ProductVO>ExpertidList = new ArrayList<>();
 
 	   try {
 	   List<PurchaseVO> purchaseList = purchaseService.selectListPurchase();
 	   System.out.println("거래내역 사이즈 : " + purchaseList.size());
+	  
 	   for(PurchaseVO purchaseVO : purchaseList) {
 			System.out.println("DB 저장된 거래 내역 리스트 !!! : " + purchaseVO);
-			String Expert_id =  productService.selectProduct(purchaseVO.getProduct_num()).getExpert_id();
-			String Product_title = productService.selectProduct(purchaseVO.getProduct_num()).getProduct_title();
-			System.out.println("리스트에 들어가는 판매자 아이디 : " + Expert_id);
-			ExpertidList.add(Expert_id);
-			ProducttitleList.add(Product_title);
-	 */
+			//String Expert_id =  productService.selectProduct(purchaseVO.getProduct_num()).getExpert_id();
+			ProductVO p = productService.selectProduct(purchaseVO.getProduct_num());
+			if(p != null) {
+				System.out.println(p.getProduct_title());
+				ProducttitleList.add(p.getProduct_title());
+			}else {
+				System.out.println("null!!!");
+				String Product_title = "상품이 삭제되었습니다!";
+				ProducttitleList.add(Product_title);
+			}
+			//ExpertidList.add(Expert_id);
+			
+	
+	   }
+	   model.addAttribute("purchaseList",purchaseList);
+	   model.addAttribute("producttileList",ProducttitleList);
+	   }catch (Exception e) {
+		   e.printStackTrace();
+	}
+	return "admin/adminPurchase.page2";
+   }
+   
+   
+	@RequestMapping(value = "/purchaseCancel.mdo", method= RequestMethod.POST)
+	public String purchaseCancel(PurchaseVO purchase) {
+		PaymentCheck pay = new PaymentCheck();
+		purchase.setPurchase_state("Cancel");
+		purchaseService.updatePurchase(purchase);
+		pay.cancelPayment(pay.getImportToken(),purchase.getPurchase_num(),"Master Cancel");
+		return "redirect:/admin/adminpurchase.mdo";
+	}
 
+   
 
 	//<!-- *******BeakRyun_20200305 -->
 	//-----------AdminBoardNotice_Main_GET
@@ -470,17 +497,162 @@ public class adminController {
 		}else {
 			find.setCategory("member_id");
 		}
+  		
+  		find.setFindText(findText);
+  		System.out.println("검색어====="+find);
+  		
+  		List<PurchaseVO> purchaseList = purchaseService.purchaseFindList(find);
+  		System.out.println(purchaseList);
+  		
+  		model.addAttribute("purchaseList",purchaseList);
+  		return "admin/adminPurchase.page2";
+   }
+   
+   
+   
+   //--------통계
+   @RequestMapping(value = "/chartMain.mdo", method = RequestMethod.GET)
+   public String adminChart(HttpSession session , Model model) {
+	   Integer totalPoint = purchaseService.totalPoint(); //총금액
+	   Integer totalCountPurchase = purchaseService.totalCountPurchase();
+	   Integer totalProduct = productService.totalProduct();
+	   Integer totalMember = memberService.totalMember();
+	   
+	   model.addAttribute("totalPoint", totalPoint);
+	   model.addAttribute("totalCountPurchase", totalCountPurchase);
+	   model.addAttribute("totalProduct",totalProduct);
+	   model.addAttribute("totalMember",totalMember);
+	   return "chart/chartMain";
+   }
+   
+   @RequestMapping(value = "/tables1.mdo", method = RequestMethod.GET)
+   public String admintables1(HttpSession session , Model model) {
+	   ArrayList<String> expertIdList = new ArrayList<>();
+	   ArrayList<String> productTitleList = new ArrayList<>();
+	   try {
+		   List<PurchaseVO> T1purchase = purchaseService.selectListPurchase();
+		   for(PurchaseVO purchaseVO: T1purchase) {
 
-		find.setFindText(findText);
-		System.out.println("검색어====="+find);
+//			   String productTitle = productService.selectProduct(purchaseVO.getProduct_num()).getProduct_title();
+			   ProductVO productList = productService.selectProduct(purchaseVO.getProduct_num());
+			   String productTitle;
+			   if(productList != null) {
+				   productTitle = productList.getProduct_title();
+			   }else {
+				   productTitle = "삭제된 게시물입니다";
+			   }
+			   productTitleList.add(productTitle);
+		   }
+		   model.addAttribute("T1purchase", T1purchase); 
+		   model.addAttribute("productTitleList", productTitleList);
+	   } catch (Exception e) {
+			e.printStackTrace();
+	   }
+	   return "chart/tables1";
+   }
+   
+   @RequestMapping(value = "/tables2.mdo", method = RequestMethod.GET)
+   public String admintables2(HttpSession session , Model model) {
+	   ArrayList<Integer> Id_totalCountPurchaseList = new ArrayList<>();
+	   ArrayList<Integer> Id_totalPurchasePriceList = new ArrayList<>();
+	   ArrayList<Integer> Id_totalCountSalesList = new ArrayList<>();
+	   ArrayList<Integer> Id_totalSalesPriceList = new ArrayList<>();
+	   
+	   try {
+		   List<MemberVO> T2member = memberService.selectAllMember();
+		   for(MemberVO memberVO : T2member) {
+			   Integer Id_totalCountPurchase = purchaseService.Id_totalCountPurchase(memberVO.getId());
+			   Integer Id_totalPurchasePrice = purchaseService.Id_totalPurchasePrice(memberVO.getId());
+			   Integer Id_totalCountSales = purchaseService.Id_PurchaseCount(memberVO.getId());
+			   Integer Id_totalSalesPrice = purchaseService.Id_totalSalesPrice(memberVO.getId());
+			   Id_totalCountPurchaseList.add(Id_totalCountPurchase);
+			   Id_totalPurchasePriceList.add(Id_totalPurchasePrice);
+			   Id_totalCountSalesList.add(Id_totalCountSales);
+			   Id_totalSalesPriceList.add(Id_totalSalesPrice);
+			   
+		   }
+		   model.addAttribute("T2member",T2member);
+		   model.addAttribute("Id_totalCountPurchaseList",Id_totalCountPurchaseList);
+		   model.addAttribute("Id_totalPurchasePriceList",Id_totalPurchasePriceList);
+		   model.addAttribute("Id_totalCountSalesList",Id_totalCountSalesList);
+		   model.addAttribute("Id_totalSalesPriceList",Id_totalSalesPriceList);
+		 
+	   } catch (Exception e) {
+			e.printStackTrace();
+	   }
+	   return "chart/tables2";
+   }
+   
 
-		List<PurchaseVO> purchaseList = purchaseService.purchaseFindList(find);
-		System.out.println(purchaseList);
+   
+   @RequestMapping(value = "/charts1.mdo", method = RequestMethod.GET)
+   public String admincharts1(HttpSession session , Model model) {
+	  //회원통계
+	  Integer expertMemberCount = expertService.totalMember_expert();
+	  Integer nomalMemberCount = memberService.totalMember() - expertMemberCount -1;
+	  model.addAttribute("nomalMemberCount",nomalMemberCount);
+	  model.addAttribute("expertMemberCount",expertMemberCount);
+	  
+	  
+	  //월별 매출통계
+	  String[] year = {"20/01","20/02","20/03","20/04","20/05","20/06","20/07","20/08","20/09","20/10","20/11","20/12"};
+	  int[] year_totalSalesList = {1,2,3,4,5,6,7,8,9,10,11,12};
+	  for(int i=0;i<year.length;i++) {
+		  year_totalSalesList[i] = purchaseService.date_totalSales(year[i]);
+	  }
+	  model.addAttribute("M1",year_totalSalesList[0]);
+	  model.addAttribute("M2",year_totalSalesList[1]);
+	  model.addAttribute("M3",year_totalSalesList[2]);
+	  model.addAttribute("M4",year_totalSalesList[3]);
+	  model.addAttribute("M5",year_totalSalesList[4]);
+	  model.addAttribute("M6",year_totalSalesList[5]);
+	  model.addAttribute("M7",year_totalSalesList[6]);
+	  model.addAttribute("M8",year_totalSalesList[7]);
+	  model.addAttribute("M9",year_totalSalesList[8]);
+	  model.addAttribute("M10",year_totalSalesList[9]);
+	  model.addAttribute("M11",year_totalSalesList[10]);
+	  model.addAttribute("M12",year_totalSalesList[11]);
+	  
+	  //카테고리별 판매통계
+	  List<ProductVO> category_product_num;
+	  Integer category_totalSales1=0, category_totalSales2=0, category_totalSales3=0, category_totalSales4=0;
+	  String[] category = {"웹 개발", "모바일앱·웹", "게임", "응용프로그래밍"};
+	  for(String c : category) {
+		  if(c == "웹 개발") {
+			  category_product_num = productService.category_product_num(c);
+			  for(ProductVO p : category_product_num) {
+				  category_totalSales1 += purchaseService.productNum_PurchaseCount(p.getProduct_num());
+			  }
+		  }else if (c == "모바일앱·웹") {
+			  category_product_num = productService.category_product_num(c);
+			  for(ProductVO p : category_product_num) {
+				  category_totalSales2 += purchaseService.productNum_PurchaseCount(p.getProduct_num());
+			  }
+		  }else if (c == "게임") {
+			  category_product_num = productService.category_product_num(c);
+			  for(ProductVO p : category_product_num) {
+				  category_totalSales3 += purchaseService.productNum_PurchaseCount(p.getProduct_num());
+			  }
+		  }else if (c == "응용프로그래밍") {
+			  category_product_num = productService.category_product_num(c);
+			  for(ProductVO p : category_product_num) {
+				  category_totalSales4 += purchaseService.productNum_PurchaseCount(p.getProduct_num());
+		  }
+		} 
+		
 
-		model.addAttribute("purchaseList",purchaseList);
-		return "admin/adminPurchase.page2";
-	}
-
-
-
+	  }
+	  model.addAttribute("category_totalSales1", category_totalSales1);
+	  model.addAttribute("category_totalSales2", category_totalSales2);
+	  model.addAttribute("category_totalSales3", category_totalSales3);
+	  model.addAttribute("category_totalSales4", category_totalSales4);
+	  
+	  
+	   return "chart/charts1";
+   }
+   
+   
 }
+
+
+
