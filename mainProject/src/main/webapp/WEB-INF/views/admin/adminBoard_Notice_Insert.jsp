@@ -47,7 +47,7 @@ function checkValue() {
                <input id="insert_Board_notice_title" type="text" name="board_notice_title" placeholder="제목을 입력해주세요">
             </p>
             <p>
-               <textarea name="board_notice_info"  placeholder="상품 설명을 입력해주세요"></textarea>
+               <textarea name="board_notice_info"   placeholder="상품 설명을 입력해주세요" ></textarea>
             </p>
             <p >
                <input type="submit" value="등록하기" />
