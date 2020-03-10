@@ -362,7 +362,7 @@ public class adminController {
 		Integer noticeNum = adminBoardNoticeService.selectBoardNoticeNumber();
 		abnVO.setBoard_notice_num(String.valueOf(noticeNum));
 
-		//System.out.println("UpdateNotice_Num POST: " + abnVO.getBoard_notice_num());
+		//System.out.println("UpdateNotice_Num POST : " + abnVO.getBoard_notice_num());
 		adminBoardNoticeService.insertAbnVO(abnVO);
 		return "admin/adminBoard_Notice_Detail.page2";				
 	}
@@ -408,46 +408,48 @@ public class adminController {
 		return "redirect:/admin/adminBoardNotice.mdo";	
 	}
 
+//	
+//	//<!-- *******BeakRyun_20200308 -->
+//	//-----------Member_Notice_Main_GET		//공지사항 리스트 보기
+//	@RequestMapping(value="/notice.mdo", method=RequestMethod.GET)
+//	public String noticeMain(Model model, HttpSession session) {
+//		System.out.println("MemberNotice_Main GET Call");
+//	
+//		List<AdminBoardNoticeVO> adminBoardNoticeList = adminBoardNoticeService.selectListAdminBoardNotice();
+//		if(adminBoardNoticeList.size() != 0) {
+//			//System.out.println("MemberNotice_Main (size != 0) Call");
+//			model.addAttribute("adminBoardNoticeList", adminBoardNoticeList);
+//		}
+//
+//		//장바구니
+//		MemberVO member = (MemberVO) session.getAttribute("member");
+//		if(member != null) {
+//			List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
+//			if(cartList != null) {
+//				model.addAttribute("cartList",cartList);
+//				if(cartList.size() != 0) {
+//					model.addAttribute("count",cartList.size());
+//				}
+//			}
+//		}
+//		return "board/noticeBoard.part2";
+//	}
+//
+//	//<!-- *******BeakRyun_20200308 -->
+//	//-----------Member_Notice_Detail_GET	//공지사항 자세히 보기
+//	@RequestMapping(value = "/notice_Detail.mdo", method= RequestMethod.GET)	
+//	public String boardNotice_Detail(@RequestParam String num, Model model) {
+//		System.out.println("MemberNotice_Detail GET Call");
+//		
+//		//System.out.println("DetailNotice_Num GET: " + num);
+//		AdminBoardNoticeVO board = adminBoardNoticeService.adminBoardNotice_Detail(num);
+//		
+//		model.addAttribute("board_notice",board);	
+//		
+//		return "board/notice_Detail.part2";
+//	}
+//	
 	
-	//<!-- *******BeakRyun_20200308 -->
-	//-----------Member_Notice_Main_GET		//공지사항 리스트 보기
-	@RequestMapping(value="/notice.mdo", method=RequestMethod.GET)
-	public String noticeMain(Model model, HttpSession session) {
-		System.out.println("MemberNotice_Main GET Call");
-	
-		List<AdminBoardNoticeVO> adminBoardNoticeList = adminBoardNoticeService.selectListAdminBoardNotice();
-		if(adminBoardNoticeList.size() != 0) {
-			//System.out.println("MemberNotice_Main (size != 0) Call");
-			model.addAttribute("adminBoardNoticeList", adminBoardNoticeList);
-		}
-
-		//장바구니
-		MemberVO member = (MemberVO) session.getAttribute("member");
-		if(member != null) {
-			List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
-			if(cartList != null) {
-				model.addAttribute("cartList",cartList);
-				if(cartList.size() != 0) {
-					model.addAttribute("count",cartList.size());
-				}
-			}
-		}
-		return "board/noticeBoard.part2";
-	}
-
-	//<!-- *******BeakRyun_20200308 -->
-	//-----------Member_Notice_Detail_GET	//공지사항 자세히 보기
-	@RequestMapping(value = "/notice_Detail.mdo", method= RequestMethod.GET)	
-	public String boardNotice_Detail(@RequestParam String num, Model model) {
-		System.out.println("MemberNotice_Detail GET Call");
-		
-		//System.out.println("DetailNotice_Num GET: " + num);
-		AdminBoardNoticeVO board = adminBoardNoticeService.adminBoardNotice_Detail(num);
-		
-		model.addAttribute("board_notice",board);	
-		
-		return "board/notice_Detail.part2";
-	}
 
 	//	//<!-- *******BeakRyun_20200306 -->
 	//	//-----------AdminBoardNotice_Delete_POST	
