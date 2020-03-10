@@ -67,7 +67,7 @@
 		SELECT COUNT(*) FROM purchase WHERE purchase_state !='Cancel'
 	</select>
 	<select id="Id_totalCountPurchase" parameterType="String" resultType="Integer">
-		SELECT COUNT(*) FROM purchase WHERE member_id= #{id}
+		SELECT COUNT(*) FROM (SELECT * FROM purchase WHERE purchase.purchase_state !='Cancel') WHERE member_id= #{id}
 	</select>
 	<select id="Id_totalPurchasePrice" parameterType="String" resultType="Integer">
 		SELECT SUM(purchase_price) FROM (SELECT * FROM (SELECT * FROM purchase WHERE purchase.member_id=#{id}) WHERE purchase_state !='Cancel')
