@@ -12,9 +12,6 @@ public interface IProductService {
 	void deleteProductId(String Id);
 	void updateProduct(ProductVO product);
 	ProductVO selectProduct(String product_num);
-	List<ProductVO> selectCategory(String category);
-	List<ProductVO> selectListProduct(MemberVO sessionId);
-	List<ProductVO> selectAllListProduct();
 	MemberVO select_NickName(String expert_id);
 	MemberVO select_Id(String product_num);
 	List<ProductVO> selectFindList(findVO find);
@@ -23,6 +20,7 @@ public interface IProductService {
 	List<ProductVO> newAlignmentList(String category);
 	List<ProductVO> nameAlignmentList(String category);
 	Integer totalProduct();
+	List<ProductVO> productPage(int displayPost, int postNum)throws Exception;
 	List<ProductVO> expertProductList(String member_id);
 	List<ProductVO> category_product_num(String category);
 

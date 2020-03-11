@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
@@ -28,19 +29,21 @@ public class HomeController {
 
 	@RequestMapping({ "/","/main/main.do"} )
 	public String home(ProductVO product, HttpSession session, Model model) {
-		MemberVO member = (MemberVO) session.getAttribute("member");
-		if(member != null) {
-			List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
-			if(cartList != null) {
-				model.addAttribute("cartList",cartList);
-				if(cartList.size() != 0) {
-					model.addAttribute("count",cartList.size());
-				}
-			}
-		}
+		
 		List<ProductVO> newProductList = productService.newProductList();
 		model.addAttribute("newProductList",newProductList);
 		return "main/main.part2";
+	}
+	
+	@RequestMapping(value="/main/headCart.do", method=RequestMethod.POST)
+	@ResponseBody
+	public Object headCart(HttpSession session) {
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		if(member != null) {
+			List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
+			return cartList;
+		}
+		return null;
 	}
 
 	@RequestMapping(value = "/main/mainFind.do", method = RequestMethod.POST)

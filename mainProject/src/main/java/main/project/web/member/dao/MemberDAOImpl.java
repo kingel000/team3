@@ -1,5 +1,6 @@
 package main.project.web.member.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,6 +17,8 @@ public class MemberDAOImpl implements IMemberDAO {
 
 	@Inject
 	private SqlSessionTemplate sqlSessionTemplate;
+	
+	private static String namespace = "main.project.web.member.dao.IMemberDAO";
 	@Override
 	public MemberVO checkMemberId(String id) {
 
@@ -55,10 +58,7 @@ public class MemberDAOImpl implements IMemberDAO {
 
 	@Override
 	public void admindeleteMember(MemberVO member) {
-		
 		 sqlSessionTemplate.delete("main.project.web.member.dao.IMemberDAO.admindeleteMember",member);
-
-		
 	}
 
 	@Override
@@ -71,14 +71,12 @@ public class MemberDAOImpl implements IMemberDAO {
 		return sqlSessionTemplate.selectOne("main.project.web.member.dao.IMemberDAO.totalMember");
 	}
 
-
-
-
-	/**@Override
-	public List<MemberVO> selectOneMember(MemberFindVO find) {
-		return sqlSessionTemplate.selectList("main.project.web.member.dao.IMemberDAO.selectOneMember",find);
-
+	@Override
+	public List<MemberVO> memberPage(int displayPost, int postNum) throws Exception {
+		HashMap data = new HashMap();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		return sqlSessionTemplate.selectList(namespace + ".memberPage", data);
 	}
-	**/
 
 }

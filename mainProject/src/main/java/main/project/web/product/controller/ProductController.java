@@ -70,9 +70,8 @@ public class ProductController {
 		}
 		boolean prev = startPageNum == 1 ? false : true;
 		boolean next = endPageNum * postNum >= count ? false : true;
-		int num1 = num==1 ? 0 : 1;
 		
-		List<ProductVO> productCategory = productService.categoryPage(displayPost+num1, (postNum * num) + 1, category);
+		List<ProductVO> productCategory = productService.categoryPage(displayPost+(num==1 ? 0:1), (postNum * num)+1, category);
 		List<String> nick = new ArrayList<String>(); 
 		System.out.println("----");
 		if(productCategory.size() != 0) {
@@ -144,14 +143,12 @@ public class ProductController {
 		return "redirect:/product/boardManager.do";
 	}
 	
-	
 	// 섬네일 등록 페이지
 	@RequestMapping(value="/insertThumbnail.do", method=RequestMethod.GET)
 	public String insertThumnail(Model model) {
 		System.out.println("Thumnail insert GET 호출 ");
 		return "product/insertThumbnail.page";
 	}	
-	
 	// 게시물 목록 + 페이징 추가
 	@RequestMapping(value="/boardManager.do", method = RequestMethod.GET)
 	public String editBoard(@RequestParam("num") int num, ExpertVO expert, HttpSession session , Model model) throws Exception {
@@ -185,7 +182,7 @@ public class ProductController {
 		int num1 = num==1 ? 0 : 1;
 		expert.setId(sessionId.getId());
 		session.setAttribute("expert",expert);
-		productList = productService.listPage(displayPost+num1, (postNum * num) + 1, sessionId.getId());
+		productList = productService.listPage(displayPost+num1, (postNum * num)+1, sessionId.getId());
 		model.addAttribute("productList", productList);
 		model.addAttribute("pageNum", pageNum);
 
@@ -245,16 +242,6 @@ public class ProductController {
 		model.addAttribute("exper_id",numProduct.getExpert_id());
 		model.addAttribute("nick_name",nick_name);
 		model.addAttribute("expert",expert);
-		MemberVO member = (MemberVO) session.getAttribute("member");
-		if(member != null) {
-			List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
-			if(cartList != null) {
-				model.addAttribute("cartList",cartList);
-				if(cartList.size() != 0) {
-					model.addAttribute("count",cartList.size());
-				}
-			}
-		}
 		
 		return "/product/detailProduct.part2";
 	}
@@ -271,16 +258,7 @@ public class ProductController {
 		model.addAttribute("exper_id",numProduct.getExpert_id());
 		model.addAttribute("nick_name",nick_name);
 		model.addAttribute("expert",expert);
-		MemberVO member = (MemberVO) session.getAttribute("member");
-		if(member != null) {
-			List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
-			if(cartList != null) {
-				model.addAttribute("cartList",cartList);
-				if(cartList.size() != 0) {
-					model.addAttribute("count",cartList.size());
-				}
-			}
-		}
+		
 		System.out.println(msg);
 		model.addAttribute("msg", msg);
 		return "/product/detailProduct.part2";

@@ -18,9 +18,7 @@ public class adminIBoardNoticeDAOImpl implements adminIBoardNoticeDAO {
 	@Override
 	public void insertAbnVO(AdminBoardNoticeVO abnVO) {
 		sqlSessionTemplate.insert("main.project.admin.board.dao.adminIBoardNoticeDAO.insertAbnVO",abnVO);
-		
 	}
-
 	@Override
 	public List<AdminBoardNoticeVO> selectListAdminBoardNotice() {
 		return sqlSessionTemplate.selectList("main.project.admin.board.dao.adminIBoardNoticeDAO.selectListAdminBoardNotice");
@@ -44,9 +42,6 @@ public class adminIBoardNoticeDAOImpl implements adminIBoardNoticeDAO {
 	@Override
 	public void deleteBoardNotice(String boardNum) {
 		sqlSessionTemplate.delete("main.project.admin.board.dao.adminIBoardNoticeDAO.deleteBoardNotice", boardNum);
-		
 	}
-
-
 
 }

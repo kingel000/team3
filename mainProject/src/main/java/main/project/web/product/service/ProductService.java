@@ -20,89 +20,60 @@ public class ProductService implements IProductService{
 	public void insertProduct(ProductVO product) {
 		productDAO.insertProduct(product);
 	}
-
 	@Override
 	public void deleteProduct(ProductVO product_num) {
 		productDAO.deleteProduct(product_num);
 	}
-
 	@Override
 	public void updateProduct(ProductVO product) {
 		productDAO.updateProduct(product);
 	}
-
 	@Override
 	public ProductVO selectProduct(String product_num) {
 		return productDAO.selectProduct(product_num);
 	}
-
-	@Override
-	public List<ProductVO> selectListProduct(MemberVO sessionId) {
-		return productDAO.selectListProduct(sessionId);
-	}
-
-	@Override
-	public List<ProductVO> selectCategory(String category) {
-		return productDAO.selectCategory(category);
-	}
-
 	@Override
 	public MemberVO select_NickName(String expert_id) {
 		return productDAO.select_NickName(expert_id);
 	}
-
-	@Override
-	public List<ProductVO> selectAllListProduct() {
-		return productDAO.selectAllListProduct();
-	}
-
 	@Override
 	public List<ProductVO> selectFindList(findVO find) {
 		return productDAO.selectFindList(find);
 	}
-
 	@Override
-
 	public MemberVO select_Id(String product_num) {
 		return productDAO.select_Id(product_num);
-
 	}
-
-
 	public List<ProductVO> mainFindList(String mainFindText) {
 		return productDAO.mainFindList(mainFindText);
 	}
-
 	@Override
 	public List<ProductVO> newProductList() {
 		return productDAO.newProductList();
 	}
-
 	@Override
-
 	public List<ProductVO> newAlignmentList(String category) {
 		return productDAO.newAlignmentList(category);
 	}
-
 	@Override
 	public List<ProductVO> nameAlignmentList(String category) {
 		return productDAO.nameAlignmentList(category);
 	}
 	public void deleteProductId(String Id) {
 		productDAO.deleteProductId(Id);
-
 	}
-
 	@Override
 	public Integer totalProduct() {
 		return productDAO.totalProduct();
 	}
-
+	@Override
+	public List<ProductVO> productPage(int displayPost, int postNum)throws Exception {
+		return productDAO.productPage(displayPost, postNum);
+	}
 	@Override
 	public List<ProductVO> expertProductList(String member_id) {
 		return productDAO.expertProductList(member_id);
 	}
-
 	@Override
 	public List<ProductVO> category_product_num(String category) {
 		return productDAO.category_product_num(category);

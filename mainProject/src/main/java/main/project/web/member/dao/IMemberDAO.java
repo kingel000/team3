@@ -18,10 +18,9 @@ public interface IMemberDAO {
 	void admindeleteMember(MemberVO member);
 	void rankupdate(@Param("member_id") String id);
 	List<MemberVO> selectAllMember();
-	//List<MemberVO> selectOneMember(MemberFindVO find);
 	List<MemberVO> selectFindList(findVO find);
 	Integer totalMember();
-
+	public List<MemberVO> memberPage(int displayPost, int postNum) throws Exception;
 
 }
 
