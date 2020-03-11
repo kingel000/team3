@@ -17,4 +17,24 @@ public class BannerService implements IBannerService {
 		return bannerDAO.selectBanner();
 	}
 
+	@Override
+	public void updateBanner(BannerVO bannerVO) {
+		bannerDAO.updateBanner(bannerVO);
+		
+	}
+
+	@Override
+	public void updateBannerText(BannerVO bannerVO) {
+		bannerDAO.updateBannerText(bannerVO);
+		
+	}
+
+	@Override
+	public void updateBanner2(BannerVO bannerVO) {
+		bannerDAO.updateBanner2(bannerVO);
+		
+	}
+
+	
+
 }

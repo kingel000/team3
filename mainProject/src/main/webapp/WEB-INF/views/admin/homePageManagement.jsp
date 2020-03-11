@@ -23,11 +23,11 @@
          </h4>
       </div>
       <div class="rankUp_Box2">
-         <form action="#" method="post" enctype="multipart/form-data">
+         <form action="/web/admin/homePageManagement1.mdo" method="post" enctype="multipart/form-data">
             <p>
                <label for="name">*이미지1* </label> <br>
                	설정된 파일 : ${bannerVO.banner1_img}
-               <input type="file" name="filename">
+               <input type="file" name="file">
             </p>
             <p>
                <label>*배너 내용1*</label><br>
@@ -51,11 +51,11 @@
          </h4>
       </div>
       <div class="rankUp_Box2">
-         <form action="#" method="post">
+         <form action="/web/admin/homePageManagement2.mdo" method="post">
             <p>
                <label for="name">*이미지2* </label> <br>
                	설정된 파일 : ${bannerVO.banner2_img}
-               <input type="file" name="filename">
+               <input type="file" name="file">
             </p>
             <p>
                <label>*배너 내용2*</label><br>
