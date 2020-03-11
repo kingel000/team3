@@ -14,6 +14,7 @@
 		<typeAlias type="main.project.web.purchase.vo.PurchaseVO" alias="purchaseVO"></typeAlias>
 		<typeAlias type="main.project.admin.board.vo.AdminBoardNoticeVO" alias="abnVO"></typeAlias>
 		<typeAlias type="main.project.web.purchase.vo.CartVO" alias="cartVO"></typeAlias>
+		<typeAlias type="main.project.web.banner.vo.BannerVO" alias="bannerVO"></typeAlias>
 		<typeAlias type="main.project.web.notice.vo.NoticeVO" alias="noticeVO"></typeAlias>		
 	</typeAliases>
 	
@@ -26,6 +27,7 @@
 		<mapper resource="mybatis/mappers/roomListMapper.xml" />
 		<mapper resource="mybatis/mappers/purchaseMapper.xml" />
 		<mapper resource="mybatis/mappers/boardNoticeMapper.xml" />
+		<mapper resource="mybatis/mappers/bannerMapper.xml" />
 		<mapper resource="mybatis/mappers/noticeMapper.xml" />
 	</mappers>
 </configuration>

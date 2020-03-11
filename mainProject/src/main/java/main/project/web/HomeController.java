@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
-
+import main.project.web.banner.service.IBannerService;
+import main.project.web.banner.vo.BannerVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.purchase.Service.IPurchaseService;
 import main.project.web.purchase.vo.CartVO;
@@ -26,12 +27,20 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	private IProductService productService;
+	@Autowired
+	private IBannerService bannerService;
 
 	@RequestMapping({ "/","/main/main.do"} )
 	public String home(ProductVO product, HttpSession session, Model model) {
 		
 		List<ProductVO> newProductList = productService.newProductList();
 		model.addAttribute("newProductList",newProductList);
+		
+		//banner
+		BannerVO bannerVO = bannerService.selectBanner();
+		System.out.println(bannerVO);
+		model.addAttribute("bannerVO", bannerVO);
+		
 		return "main/main.part2";
 	}
 	
@@ -56,5 +65,6 @@ public class HomeController {
 		model.addAttribute("mainFindList", mainFindList);
 		return "main/mainFind.part2";
 	}
+	
 
 }

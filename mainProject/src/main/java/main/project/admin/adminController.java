@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import main.project.admin.board.service.adminIBoardNoticeService;
 import main.project.admin.board.vo.AdminBoardNoticeVO;
+import main.project.web.banner.service.IBannerService;
+import main.project.web.banner.vo.BannerVO;
 import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
 import main.project.web.member.vo.ExpertVO;
@@ -39,6 +41,8 @@ public class adminController {
 	private IExpertService expertService;
 	@Autowired
 	private IPurchaseService purchaseService;
+	@Autowired
+	private IBannerService bannerService;
 
 	@Autowired
 	private adminIBoardNoticeService adminBoardNoticeService;
@@ -552,15 +556,25 @@ public class adminController {
 		}else {
 			find.setCategory("member_id");
 		}
-
-		find.setFindText(findText);
-		System.out.println("검색어====="+find);
-
-		List<PurchaseVO> purchaseList = purchaseService.purchaseFindList(find);
-		System.out.println(purchaseList);
-
-		model.addAttribute("purchaseList",purchaseList);
-		return "admin/adminPurchase.page2";
+  		
+  		find.setFindText(findText);
+  		System.out.println("검색어====="+find);
+  		
+  		List<PurchaseVO> purchaseList = purchaseService.purchaseFindList(find);
+  		System.out.println(purchaseList);
+  		
+  		model.addAttribute("purchaseList",purchaseList);
+  		return "admin/adminPurchase.page2";
+   }
+   
+	//--------홈페이지 관리
+	@RequestMapping(value = "/homePageManagement.mdo", method = RequestMethod.GET)
+	public String homePageManagement(HttpSession session , Model model){
+		BannerVO bannerVO = bannerService.selectBanner();
+		System.out.println(bannerVO);
+		model.addAttribute("bannerVO", bannerVO);
+		
+		return "admin/homePageManagement.page2";
 	}
 
 	//--------통계
