@@ -149,7 +149,7 @@ public class ProductController {
 	@RequestMapping(value="/insertThumbnail.do", method=RequestMethod.GET)
 	public String insertThumnail(Model model) {
 		System.out.println("Thumnail insert GET 호출 ");
-		return "product/insertThumbnail";
+		return "product/insertThumbnail.page";
 	}	
 	
 	// 게시물 목록 + 페이징 추가

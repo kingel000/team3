@@ -61,7 +61,6 @@ $(document).ready(function(){
 	            if(checkImageType(data)){ 
 	                str = "<div><a href='/web/ajax/displayFile.do?fileName="+getImageLink(data)+"'>";
 	                str += "<img src='/web/ajax/displayFile.do?fileName="+data+"'></a>";
-	            // 일반파일이면 다운로드링크
 	            }
 	            // 삭제 버튼
 	            str += "<span data-src="+data+">[삭제]</span></div>";

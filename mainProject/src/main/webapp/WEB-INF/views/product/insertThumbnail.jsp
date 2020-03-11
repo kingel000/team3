@@ -21,7 +21,6 @@
 <script type="text/javascript" src="<c:url value="/resources/js/thumbnail.js" />"></script>
 </head>
 <body>
-	<h2>AJAX File Upload</h2>
 	<!-- 파일을 업로드할 영역 -->
 	<div class="content"></div>
 	<!-- 업로드된 파일 목록 -->
