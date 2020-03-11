@@ -2,7 +2,9 @@ $(document).ready(function(){
 	$('.content').on("dragover", dragOver);
 	$('.content').on("dragleave", dragOver);
 	$('.content').on("drop", uploadFiles);
-
+	$('#ajaxFile').on("change",ajaxFileChange);
+    var flag = true;
+    
 	function dragOver(e){
 	    e.stopPropagation();
 	    e.preventDefault();
@@ -27,8 +29,9 @@ $(document).ready(function(){
 	    var formData = new FormData();
 	    formData.append("file", file);
 
+
 	    dragOver(event);
-	    if (files.length > 1) {
+	    if (!flag) {
 	        alert('하나만 올려라.');
 	        return;
 	    }
@@ -52,25 +55,61 @@ $(document).ready(function(){
 	        contentType: false,
 	        // 업로드 성공하면
 	        success: function(data) {
-	            var str = "";
 	            // 이미지 파일이면 썸네일 이미지 출력
+	        	console.log("success");
 	            if(checkImageType(data)){ 
-	                str = "<div><a href='/web/ajax/displayFile.do?fileName="+getImageLink(data)+"'>";
-	                str += "<img src='/web/ajax/displayFile.do?fileName="+data+"'></a>";
 	            	$(".uploadedList").append("<div><a href='/web/ajax/displayFile.do?fileName="+getImageLink(data)+"'>");
 	            	$(".uploadedList").append("<img src='/web/ajax/displayFile.do?fileName="+data+"'></a>");
 	            }
 	            // 삭제 버튼
 	            $(".uploadedList").append("<span data-src="+data+">[삭제]</span></div>");
+	            $("#upload").attr('disabled', true);
+	            flag = false;
 	        }
 	    });
 	    
 		
 	}
 	//-------------------------------------------------------------
+	$("#upload").click(function(){
+		$('#ajaxFile').click();
+    });
+	
+	function ajaxFileChange() {
+
+        ajaxFileTransmit();
+    }
+
+	function ajaxFileTransmit(){
+		var file = $("input[name=ajaxFile]")[0].files[0];
+		console.log(file);
+        var formData = new FormData();
+        formData.append("file", file);
+        
+        $.ajax({
+	        type: "post",
+	        url: "/web/ajax/uploadAjax.do",
+	        data: formData,
+	        dataType: "text",
+	        processData: false,
+	        contentType: false,
+	        // 업로드 성공하면
+	        success: function(data) {
+	            // 이미지 파일이면 썸네일 이미지 출력
+	            if(checkImageType(data)){ 
+	            	$(".uploadedList").append("<div><a href='/web/ajax/displayFile.do?fileName="+getImageLink(data)+"'>");
+	            	$(".uploadedList").append("<img src='/web/ajax/displayFile.do?fileName="+data+"'></a>");
+	            }
+	            // 삭제 버튼
+	            $(".uploadedList").append("<span data-src="+data+">[삭제]</span></div>");
+	            $("#upload").attr('disabled', true);
+	            flag = false;
+	        }
+	    });
+	}
 	//파일 삭제
 	$(".uploadedList").on("click", "span", function(event){
-	    alert("이미지 삭제")
+	    alert("이미지 삭제");
 	    var that = $(this); // 여기서 this는 클릭한 span태그
 	    $.ajax({
 	        url: "/web/ajax/deleteFile.do",
@@ -82,7 +121,9 @@ $(document).ready(function(){
 	        success: function(result){
 	            if( result == "deleted" ){
 	                // 클릭한 span태그가 속한 div를 제거
-	                that.parent("div").remove();
+	            	$(".uploadedList").empty();
+	            	 $("#upload").attr('disabled', false);
+	                flag = true;
 	            }
 	        }
 	    });
