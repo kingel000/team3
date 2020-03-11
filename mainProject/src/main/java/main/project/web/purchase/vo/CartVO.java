@@ -18,6 +18,7 @@ public class CartVO {
 		this.product_title = product_title;
 		this.price = price;
 		this.expert_nick = expert_nick;
+		this.Thumbnail = Thumbnail;
 	}
 
 
@@ -65,7 +66,7 @@ public class CartVO {
 
 
 	public void setThumbnail(String thumbnail) {
-		Thumbnail = thumbnail;
+		this.Thumbnail = thumbnail;
 	}	
 
 	@Override

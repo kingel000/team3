@@ -48,6 +48,7 @@ public class HomeController {
 	@ResponseBody
 	public Object headCart(HttpSession session) {
 		MemberVO member = (MemberVO) session.getAttribute("member");
+		System.out.println("+++");
 		if(member != null) {
 			List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
 			return cartList;

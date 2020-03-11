@@ -36,7 +36,7 @@ public class PurchaseController {
 	private IRoomListService roomListService;
 
 	@RequestMapping(value="/addCart.do", method=RequestMethod.POST)
-	public String addCart(String price,ProductVO product,HttpSession session, Model model) {		
+	public String addCart(String price,ProductVO product,HttpSession session, Model model) {	
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		RoomListVO roomListVO = new RoomListVO(member.getId(),product.getProduct_num());
 		RoomListVO roomCheck = roomListService.checkRoom(roomListVO);
@@ -46,8 +46,12 @@ public class PurchaseController {
 		}
 		String date = (new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date());
 		String expertNick = productService.select_NickName(product.getExpert_id()).getNick_name();
-		System.out.println("expertNick: "+expertNick);
-		CartVO cart = new CartVO(date,member.getId(),product.getProduct_num(),product.getProduct_title(),Integer.parseInt(price),expertNick,product.getThumbnail());
+		ProductVO productVO = productService.selectThumbnail(product.getProduct_num());
+		String Thumbnail = productVO.getThumbnail();
+		System.out.println(product.getProduct_num() + "번호에 대한 썸네일 링크 : " + Thumbnail);
+		System.out.println("select 한 상품 정보 " + productVO);
+		CartVO cart = new CartVO(date,member.getId(),product.getProduct_num(),product.getProduct_title(),Integer.parseInt(price),expertNick,Thumbnail);
+		System.out.println("장바구니에 추가하는 상품의 정보 : " + cart);
 		purchaseService.addCart(cart);
 		return "redirect:/purchase/myCart.do";
 	}

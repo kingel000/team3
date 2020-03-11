@@ -36,6 +36,13 @@ public class ProductService implements IProductService{
 	public MemberVO select_NickName(String expert_id) {
 		return productDAO.select_NickName(expert_id);
 	}
+	
+	@Override
+	public ProductVO selectThumbnail(String product_num) {
+		return productDAO.selectThumbnail(product_num);
+
+	}
+
 	@Override
 	public List<ProductVO> selectFindList(findVO find) {
 		return productDAO.selectFindList(find);

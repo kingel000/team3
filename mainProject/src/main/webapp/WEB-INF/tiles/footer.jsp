@@ -48,6 +48,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 </main>
 <!-- JS Library-->
 <script type="text/javascript"

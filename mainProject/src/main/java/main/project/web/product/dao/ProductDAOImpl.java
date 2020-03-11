@@ -48,6 +48,12 @@ public class ProductDAOImpl implements IProductDAO {
 	public MemberVO select_NickName(String expert_id) {
 		return sqlSessiontemplate.selectOne("main.project.web.product.dao.IProductDAO.select_NickName",expert_id);
 	}
+	
+	@Override
+	public ProductVO selectThumbnail(String product_num) {
+		return sqlSessiontemplate.selectOne("main.project.web.product.dao.IProductDAO.selectThumbnail",product_num);
+
+	}
 
 	@Override
 	public List<ProductVO> selectFindList(findVO find) {
@@ -127,4 +133,5 @@ public class ProductDAOImpl implements IProductDAO {
 		data.put("category", category);
 		return sqlSessiontemplate.selectList(namespace + ".categoryPage", data);
 	}
+
 }
