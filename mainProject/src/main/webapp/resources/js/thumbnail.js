@@ -21,17 +21,13 @@ $(document).ready(function(){
 
 	function uploadFiles(event) {
 		event.preventDefault(); 
-	    var files = event.originalEvent.dataTransfer.files;
+	    var files = event.target.files || event.originalEvent.dataTransfer.files;
 	    var file = files[0];
 	    console.log(file);
 	    var formData = new FormData();
 	    formData.append("file", file);
 
-	    event.stopPropagation();
 	    dragOver(event);
-	  
-	    event.dataTransfer = event.originalEvent.dataTransfer;
-	    var files = event.target.files || event.dataTransfer.files;
 	    if (files.length > 1) {
 	        alert('하나만 올려라.');
 	        return;
@@ -59,13 +55,11 @@ $(document).ready(function(){
 	            var str = "";
 	            // 이미지 파일이면 썸네일 이미지 출력
 	            if(checkImageType(data)){ 
-	                str = "<div><a href='/web/ajax/displayFile.do?fileName="+getImageLink(data)+"'>";
-	                str += "<img src='/web/ajax/displayFile.do?fileName="+data+"'></a>";
-	            // 일반파일이면 다운로드링크
+	            	$(".uploadedList").append("<div><a href='/web/ajax/displayFile.do?fileName="+getImageLink(data)+"'>");
+	            	$(".uploadedList").append("<img src='/web/ajax/displayFile.do?fileName="+data+"'></a>");
 	            }
 	            // 삭제 버튼
-	            str += "<span data-src="+data+">[삭제]</span></div>";
-	            $(".uploadedList").append(str);
+	            $(".uploadedList").append("<span data-src="+data+">[삭제]</span></div>");
 	        }
 	    });
 	    

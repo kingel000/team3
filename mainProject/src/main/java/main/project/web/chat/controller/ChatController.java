@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import main.project.web.chat.service.IChatContentService;
 import main.project.web.chat.service.IRoomListService;
@@ -17,8 +16,6 @@ import main.project.web.chat.vo.ChatContentVO;
 import main.project.web.chat.vo.RoomListVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.vo.ProductVO;
-import main.project.web.purchase.Service.IPurchaseService;
-import main.project.web.purchase.vo.CartVO;
 
 @Controller("chatController")
 @RequestMapping(value="/chat")
@@ -27,8 +24,6 @@ public class ChatController {
 	private IChatContentService chatContentService;
 	@Autowired
 	private IRoomListService roomListService;
-	@Autowired
-	private IPurchaseService purchaseService;
 	
 	@RequestMapping(value="/expertChat.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String expertChat (RoomListVO room,Model model,HttpSession session) throws Exception{
@@ -40,12 +35,7 @@ public class ChatController {
 		RoomListVO check = roomListService.checkRoom(room);
 		model.addAttribute("room",check);
 		session.setAttribute("room", check);
-		//장바구니
-		List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
-		if(cartList.size() != 0) {
-			model.addAttribute("cartList",cartList);
-			model.addAttribute("count",cartList.size());
-		}
+
 		return "chat/expertChat.part2";
 	}
 	
@@ -65,12 +55,7 @@ public class ChatController {
 			model.addAttribute("chatContents",chatContent);
 		}
 		
-		//장바구니
-		List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
-		if(cartList.size() != 0) {
-			model.addAttribute("cartList",cartList);
-			model.addAttribute("count",cartList.size());
-		}
+
 		return "chat/memberChat.part2";
 	}
 	
@@ -108,12 +93,6 @@ public class ChatController {
 			model.addAttribute("chatContents",chatContent);
 		}
 
-		//장바구니
-		List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
-		if(cartList.size() != 0) {
-			model.addAttribute("cartList",cartList);
-			model.addAttribute("count",cartList.size());
-		}
 		return "chat/memberChat.part2";
 	}
 	

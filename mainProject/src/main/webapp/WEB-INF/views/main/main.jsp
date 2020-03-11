@@ -125,14 +125,10 @@
 				</div>
 			  </div>
 		  </c:forEach>
-		  
-		  
-			
-
-		  
 	  </div>
 	</div>
   </div>
+ </div>
 </main>
 <!-- JS Library-->
 <script type="text/javascript" src="<c:url value="/resources/plugins/jquery/dist/jquery.min.js" />"></script>
