@@ -1,6 +1,7 @@
 package main.project.web.product.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
@@ -128,19 +131,20 @@ public class ProductController {
 		return "product/insertProduct.page";
 	}
 	@RequestMapping(value="/insertProduct.do", method=RequestMethod.POST)
-	public String insertProduct(ProductVO product,HttpSession session ,Model model) {
+	public String insertProduct(ProductVO product,HttpSession session ,Model model,@RequestParam("fileName")String fileName) {
 		System.out.println("produdct insert POST 호출 ");
-		
+		System.out.println("file 실제 경로 :"+fileName);
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		System.out.println(member.getId());
 		
 		String sessionId = member.getId();
 		product.setExpert_id(sessionId);
-		System.out.println(product);
+		product.setThumbnail(fileName);
+		System.out.println("등록하는 상품의 정보 : " + product);
 		productService.insertProduct(product);
-//		session.setAttribute("member", member);
 		
-		return "redirect:/product/boardManager.do";
+		
+		return "redirect:/member/mypage.do";
 	}
 	
 	// 섬네일 등록 페이지

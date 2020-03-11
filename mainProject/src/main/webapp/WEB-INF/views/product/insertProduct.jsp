@@ -60,7 +60,7 @@ function checkValue() {
       	<div>		
           </div>
        </div> 
-         <form id="ajaxFrom" action="/web/product/insertProduct.do" method="post" name="product_value" onsubmit="return checkValue()" >
+         <form id="ajaxFrom" action="/web/product/insertProduct.do" method="post" name="product_value" onsubmit="return checkValue()" enctype="multipart/form-data" >
             
             <p>
                <select name="category">
@@ -90,6 +90,7 @@ function checkValue() {
 			<div class="uploadedList"></div>
           <br><br>
             <p >
+               <input type="hidden" name="fileName" value="">
                <input type="submit" value="등록하기" />
             </p>
          </form>

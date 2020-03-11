@@ -47,7 +47,7 @@ public class PurchaseController {
 		String date = (new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date());
 		String expertNick = productService.select_NickName(product.getExpert_id()).getNick_name();
 		System.out.println("expertNick: "+expertNick);
-		CartVO cart = new CartVO(date,member.getId(),product.getProduct_num(),product.getProduct_title(),Integer.parseInt(price),expertNick);
+		CartVO cart = new CartVO(date,member.getId(),product.getProduct_num(),product.getProduct_title(),Integer.parseInt(price),expertNick,product.getThumbnail());
 		purchaseService.addCart(cart);
 		return "redirect:/purchase/myCart.do";
 	}
