@@ -104,6 +104,7 @@ $(document).ready(function(){
 	            $(".uploadedList").append("<span data-src="+data+">[삭제]</span></div>");
 	            $("#upload").attr('disabled', true);
 	            flag = false;
+	            $("input[name=fileName]").attr('value',data);
 	        }
 	    });
 	}

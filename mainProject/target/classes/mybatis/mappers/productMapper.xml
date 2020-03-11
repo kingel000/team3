@@ -8,23 +8,23 @@
 		<choose>
 			<when test = "category == '웹 개발'">
 				(('A'||LPAD(product_num_seq_A.nextval,3,0)),#{category},#{product_title},#{expert_id},
-				#{product_info},sysdate)
+				#{product_info},sysdate,#{Thumbnail})
 			</when>
 			 <when test = "category == '모바일앱·웹'">
 				(('B'||LPAD(product_num_seq_B.nextval,3,0)),#{category},#{product_title},#{expert_id},
-				#{product_info},sysdate)
+				#{product_info},sysdate,#{Thumbnail})
 			</when>
 			<when test = "category == '게임'">
 				(('C'||LPAD(product_num_seq_C.nextval,3,0)),#{category},#{product_title},#{expert_id},
-				#{product_info},sysdate)
+				#{product_info},sysdate,#{Thumbnail})
 			</when>
 			<when test = "category == '응용프로그래밍'">
 				(('D'||LPAD(product_num_seq_D.nextval,3,0)),#{category},#{product_title},#{expert_id},
-				#{product_info},sysdate)
+				#{product_info},sysdate,#{Thumbnail})
 			</when>
 			<when test = "category == '기타'">
 				(('E'||LPAD(product_num_seq_E.nextval,3,0)),#{category},#{product_title},#{expert_id},
-				#{product_info},sysdate)
+				#{product_info},sysdate,#{Thumbnail})
 			</when> 
 		</choose>
 	</insert>

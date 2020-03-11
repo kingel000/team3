@@ -37,6 +37,7 @@ public class UploadFileUtils {
             // 아이콘 생성
             uploadedFileName = makeIcon(uploadPath, savedPath, savedName);
         }
+        System.out.println("uploadedFileName:"+uploadedFileName);
         return uploadedFileName;
     }
 

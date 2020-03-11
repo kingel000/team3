@@ -7,10 +7,11 @@ public class CartVO {
 	private String product_title;
 	private Integer price;
 	private String expert_nick;
+	private String Thumbnail;
 	public CartVO() {}
 	
 	
-	public CartVO(String num, String member_id, String product_num, String product_title, Integer price, String expert_nick) {
+	public CartVO(String num, String member_id, String product_num, String product_title, Integer price, String expert_nick,String Thumbnail) {
 		this.num = num;
 		this.member_id = member_id;
 		this.product_num = product_num;
@@ -56,11 +57,23 @@ public class CartVO {
 	public void setExpert_nick(String expert_nick) {
 		this.expert_nick = expert_nick;
 	}
+	
+
+	public String getThumbnail() {
+		return Thumbnail;
+	}
+
+
+	public void setThumbnail(String thumbnail) {
+		Thumbnail = thumbnail;
+	}	
 
 	@Override
 	public String toString() {
 		return "CartVO [num=" + num + ", member_id=" + member_id + ", product_num=" + product_num + ", product_title="
-				+ product_title + ", price=" + price + ", expert_nick=" + expert_nick + "]";
-	}	
+				+ product_title + ", price=" + price + ", expert_nick=" + expert_nick + ", Thumbnail=" +  Thumbnail +"]";
+	}
+
+
 	
 }
