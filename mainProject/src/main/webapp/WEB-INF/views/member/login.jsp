@@ -21,7 +21,7 @@
 <body class="body">
 	<div class="logoBox">
 		<div>
-			<a href="/web/main/main.do"><img src="<c:url value="/resources/images/logo.png"/>"alt='logo'></a>
+			<a href="/web/main/main.do"><img src="<c:url value="/resources/images2/itemLogo.jpg"/>"alt='logo'></a>
 		</div>
 	</div>
 	<div id="regider_form">

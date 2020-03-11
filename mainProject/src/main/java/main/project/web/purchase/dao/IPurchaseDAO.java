@@ -28,6 +28,8 @@ public interface IPurchaseDAO {
 	List<PurchaseVO> purchaseFindList(findVO find);
 	Integer totalPoint();	//총 포인트
 	Integer totalCountPurchase(); //총 구매 개수
+	int countPurchase(); //총 구매 개수
+	public List<PurchaseVO> purchasePage(int displayPost, int postNum)throws Exception; //총 구매 리스트 + 페이징
 	Integer Id_totalCountPurchase(String id); //아이디별 구매 개수
 	Integer Id_totalPurchasePrice(String id); //아이디별 총 구매 가격
 	Integer Id_PurchaseCount(String id); //아이디별 판매개수

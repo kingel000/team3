@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="main.project.web.notice.dao.INoticeDAO">
+
+	<select id="selectListNotice" resultType="noticeVO">
+		select * from board_notice order by board_notice_num desc
+	</select>
+
+	<select id="selectNoticeNumber" resultType="Integer">
+		 select count(*) from board_notice
+	</select>
+	
+	<select id="Notice_Detail" parameterType="String" resultType="noticeVO" >
+		 select * from board_notice where board_notice_num = #{noticeNum}
+	</select>
+	
+</mapper>

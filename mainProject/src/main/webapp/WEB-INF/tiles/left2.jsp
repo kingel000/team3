@@ -40,7 +40,7 @@
          </div><br>
          <li class="group">
             <div class="box">
-               <a href="/web/admin/memberManager.mdo">
+               <a href="/web/admin/memberManager.mdo?num=1">
                   <h3>Member Manager</h3>
                   <p>회원 정보 관리</p>
                </a>
@@ -49,7 +49,7 @@
 
          <li class="group">
    		      <div class="box">
-                  <a href="/web/admin/adminProduct.mdo">
+                  <a href="/web/admin/adminProduct.mdo?num=1">
                      <h3>Product Manager</h3>
                      <p>상품 관리</p>
                   </a>
@@ -59,7 +59,7 @@
     
          <li class="group">
             <div class="box">
-               <a href="/web/admin/adminpurchase.mdo">
+               <a href="/web/admin/adminpurchase.mdo?num=1">
                   <h3>Transaction history</h3>
                   <p>거래 내역</p>
                </a>

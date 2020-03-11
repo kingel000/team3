@@ -13,14 +13,16 @@
    <style>
   		.question_Board>table {text-align: center; boarder: 1px solid #ddd}
     	thead>tr>th{background-color: #eee; text-align: center;}
+    	tr{text-align: center;}
+    	
     </style>
    
 </head>
 <body>
 	<div>
-		<div class="question_Board">
+		<div class="notice_Board">
 			<c:choose>
-				<c:when test="${adminBoardNoticeList != null }">
+				<c:when test="${NoticeList != null }">
 					<table class="table table-striped" >
 					  <thead>
 					  	<tr>
@@ -30,11 +32,11 @@
 					      <th>날짜</th>
 					   <tr>
 					  </thead>
-					  <c:forEach var="board_notice" items="${adminBoardNoticeList}" varStatus="status">
+					  <c:forEach var="board_notice" items="${NoticeList}" varStatus="status">
 					  <tbody>					  
 							<tr>
 								<td>${board_notice.board_notice_num}</td>
-								<td><a href="/web/admin/notice_Detail.mdo?num=${board_notice.board_notice_num}">${board_notice.board_notice_title}</a></td>
+								<td><a href="/web/board/notice_Detail.do?num=${board_notice.board_notice_num}">${board_notice.board_notice_title}</a></td>
 								<td>관리자</td>
 								<!-- 희망 : 당일이면 시간 / 지난날이면 날짜로 출력 -->
 								<td><fmt:formatDate type="date"	value="${board_notice.board_notice_date}" /></td>					
@@ -44,7 +46,7 @@
 					</table>
 				</c:when>
 				<c:otherwise>
-					<h2>공지사항 없음</h2>
+					<h2>공지사항 없음_메인버전</h2>
 				</c:otherwise>
 			</c:choose>
 		</div>

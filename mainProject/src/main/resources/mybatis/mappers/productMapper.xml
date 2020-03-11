@@ -41,17 +41,17 @@
 		SELECT * FROM product
 		WHERE product_num=#{product_num}
 	</select>
-	<select id="selectListProduct" resultType="productVO">
+	<!-- <select id="selectListProduct" resultType="productVO">
 		SELECT * FROM product
 		WHERE expert_id=#{id}
-	</select>
+	</select> -->
 	<select id="selectAllListProduct" resultType="productVO">
 		SELECT * FROM product
 	</select>
-	<select id="selectCategory" resultType="productVO">
+	<!-- <select id="selectCategory" resultType="productVO">
 		SELECT * FROM product
 		WHERE category=#{category}
-	</select>
+	</select> -->
 	<select id="select_NickName" parameterType="String" resultType="memberVO" >
 		SELECT * FROM MEMBER WHERE ID = #{expert_id}
 	</select>
@@ -94,10 +94,6 @@
 		WHERE expert_id=#{id}
 	</delete>
 	
-	<!-- 통계 -->
-	<select id="totalProduct" resultType="Integer">
-		SELECT COUNT(*) FROM product
-	</select>
 	<select id="expertProductList" parameterType="String" resultType="productVO">
 		SELECT * FROM product WHERE expert_id = #{member_id}
 	</select>
@@ -105,6 +101,18 @@
 		SELECT product_num FROM (SELECT * FROM product WHERE category =#{category})
 	</select>
 	
+	<!-- 통계 -->
+	<select id="totalProduct" resultType="Integer">
+		SELECT COUNT(*) FROM product
+	</select>
+	<!-- total product page -->
+	<select id="productPage" resultType="productVO" parameterType="hashMap">
+		select * from (
+		select product_num, category, product_title, expert_id, product_date,
+		row_number() over(order by product_num asc) as rNum
+		from product) 
+		mb where rNum between #{displayPost} and #{postNum} order by product_num asc
+	</select>
 
 	<!-- 게시물 정렬 후 설정한 범위 select -->
 	<select id="listPage" resultType="productVO" parameterType="hashMap">
@@ -112,8 +120,7 @@
 		from (
 		select product_num, category, product_title, expert_id, product_date,
 		row_number() over(order by product_num desc) as rNum
-		from product
-		) mb
+		from product) mb
 		where expert_id=#{id} and
 		rNum between #{displayPost} and #{postNum} order by product_num desc
 	</select>

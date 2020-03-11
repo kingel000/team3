@@ -50,7 +50,9 @@ public class UploadController {
         logger.info("originalName : "+file.getOriginalFilename());
         logger.info("size : "+file.getSize());
         logger.info("contentType : "+file.getContentType());
-        return new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.OK);
+        System.out.println(file.getOriginalFilename());
+        ResponseEntity<String> re = new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.OK);
+        return re;
     }
 
     // 6. 이미지 표시 매핑

@@ -47,11 +47,9 @@
 		</table>			
 
 		</div>
-		<!-- 왼쪽1 오른쪽2 하고싶음. 목록버튼 실행안됨. -->
+		
 		<div >
-		<button align="left"><a href="/web/admin/notice.mdo">목록1</a></button>		
-		<button onclick="location.href='/web/admin/notice.mdo'" >목록2</button>
-			
+		<button align="left"><a href="/web/board/notice.do">목록</a></button>					
 		</div>
 
 </body>

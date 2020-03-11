@@ -126,7 +126,10 @@
 				</div>
 			  </div>
 		  </c:forEach>
+<<<<<<< HEAD
 		  		  
+=======
+>>>>>>> branch 'master' of https://github.com/kingel000/team3
 	  </div>
 	</div>
   </div>

@@ -75,7 +75,14 @@ public class PurchaseService implements IPurchaseService{
 	public Integer totalCountPurchase() {
 		return purchaseDAO.totalCountPurchase();
 	}
-
+	@Override
+	public int countPurchase() {
+		return purchaseDAO.countPurchase();
+	}
+	@Override
+	public List<PurchaseVO> purchasePage(int displayPost, int postNum)throws Exception{
+		return purchaseDAO.purchasePage(displayPost, postNum);
+	}
 	@Override
 	public Integer Id_totalCountPurchase(String id) {
 		return purchaseDAO.Id_totalCountPurchase(id);

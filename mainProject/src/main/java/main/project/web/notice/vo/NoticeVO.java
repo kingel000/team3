@@ -4,11 +4,12 @@ import java.util.Date;
 
 public class NoticeVO {
 	private Integer board_notice_num;
-
 	private String board_notice_title;
 	private String board_notice_info;
 	private String board_notice_file;
 	private Date board_notice_date;
+	
+	public NoticeVO() {}
 	
 	public Integer getBoard_notice_num() {
 		return board_notice_num;

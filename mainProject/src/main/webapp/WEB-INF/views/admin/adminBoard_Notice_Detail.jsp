@@ -41,7 +41,7 @@
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td colspan="2" style="min-height: 200px; text-align: left;">${board_notice.board_notice_info}</td>
+				<td colspan="2" style="color:#000000; text-align: left;" >${board_notice.board_notice_info}</td>
 			</tr>
 		</tbody>
 		</table>			
@@ -50,7 +50,9 @@
 		<!-- 왼쪽1 오른쪽2 하고싶음. 목록버튼 실행안됨. -->
 		<div >
 		<button align="left"><a href="/web/admin/adminBoardNotice.mdo">목록</a></button>		
+		<!-- 
 		<button type="button" onclick="location.href='/web/admin/adminBoardNotice.mdo'" >글목록</button>		
+		 -->
 		<button align="right"><a href="adminBoard_Notice_Update.mdo?num=${board_notice.board_notice_num}">수정</a></button>	
 		<button align="right"><a href="adminBoard_Notice_Delete.mdo?num=${board_notice.board_notice_num}">삭제</a></button>		
 		</div>

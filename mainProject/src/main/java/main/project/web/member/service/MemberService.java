@@ -53,18 +53,13 @@ public class MemberService implements IMemberService{
 	@Override
 	public void admindeleteMember(MemberVO member) {
 		memberDAO.admindeleteMember(member);
-
-		
 	}
 /**
 	@Override
 	public List<MemberVO> selectOneMember(MemberFindVO find) {
 		return memberDAO.selectOneMember(find);
-
 	}
-
 **/
-
 	@Override
 	public List<MemberVO> selectFindList(findVO find) {
 		return memberDAO.selectFindList(find);
@@ -73,6 +68,10 @@ public class MemberService implements IMemberService{
 	@Override
 	public Integer totalMember() {
 		return memberDAO.totalMember();
+	}
+	@Override
+	public List<MemberVO> memberPage(int displayPost, int postNum) throws Exception {
+		return memberDAO.memberPage(displayPost, postNum);
 	}
 
 
