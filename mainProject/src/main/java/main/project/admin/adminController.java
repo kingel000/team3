@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import main.project.admin.board.service.adminIBoardNoticeService;
 import main.project.admin.board.vo.AdminBoardNoticeVO;
+import main.project.web.banner.service.IBannerService;
+import main.project.web.banner.vo.BannerVO;
 import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
 
@@ -48,6 +50,8 @@ public class adminController {
 	private IExpertService expertService;
 	@Autowired
 	private IPurchaseService purchaseService;
+	@Autowired
+	private IBannerService bannerService;
 
 	@Autowired
 	private adminIBoardNoticeService adminBoardNoticeService;
@@ -509,6 +513,9 @@ public class adminController {
 	//--------홈페이지 관리
 	@RequestMapping(value = "/homePageManagement.mdo", method = RequestMethod.GET)
 	public String homePageManagement(HttpSession session , Model model){
+		BannerVO bannerVO = bannerService.selectBanner();
+		System.out.println(bannerVO);
+		model.addAttribute("bannerVO", bannerVO);
 		
 		return "admin/homePageManagement.page2";
 	}

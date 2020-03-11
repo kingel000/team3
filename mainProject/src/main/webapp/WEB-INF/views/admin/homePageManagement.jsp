@@ -23,14 +23,18 @@
          </h4>
       </div>
       <div class="rankUp_Box2">
-         <form action="#" method="post">
+         <form action="#" method="post" enctype="multipart/form-data">
             <p>
                <label for="name">*이미지1* </label> <br>
-               <button>이미지 변경</button> 선택되어있는 이미지 경로 출력
+               	설정된 파일 : ${bannerVO.banner1_img}
+               <input type="file" name="filename">
             </p>
             <p>
                <label>*배너 내용1*</label><br>
-               <textarea name="career" rows="8" cols="51"></textarea>
+                <textarea name="b1_text1" rows="1" cols="51" >${bannerVO.banner1_text1}</textarea>
+            	<textarea name="b1_text2" rows="1" cols="51" >${bannerVO.banner1_text2}</textarea>
+            	<textarea name="b1_text3" rows="1" cols="51" >${bannerVO.banner1_text3}</textarea>
+            	<textarea name="b1_text4" rows="2" cols="51" >${bannerVO.banner1_text4}</textarea>
             </p>
             <p class="join">
                <input type="submit" value="변경 완료하기" />
@@ -50,11 +54,15 @@
          <form action="#" method="post">
             <p>
                <label for="name">*이미지2* </label> <br>
-               <button>이미지 변경</button> 선택되어있는 이미지 경로 출력
+               	설정된 파일 : ${bannerVO.banner2_img}
+               <input type="file" name="filename">
             </p>
             <p>
                <label>*배너 내용2*</label><br>
-               <textarea name="career" rows="8" cols="51" ></textarea>
+               <textarea name="b2_text1" rows="1" cols="51" >${bannerVO.banner2_text1}</textarea>
+            	<textarea name="b2_text2" rows="1" cols="51" >${bannerVO.banner2_text2}</textarea>
+            	<textarea name="b2_text3" rows="1" cols="51" >${bannerVO.banner2_text3}</textarea>
+            	<textarea name="b2_text4" rows="1" cols="51" >${bannerVO.banner2_text4}</textarea>
             </p>
             <p class="join">
                <input type="submit" value="변경 완료하기" />
