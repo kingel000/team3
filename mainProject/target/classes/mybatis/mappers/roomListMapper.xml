@@ -16,7 +16,7 @@
 	</select>
 	
 	<update id="updateRoom" parameterType="roomListVO">
-		UPDATE room_list SET room_date=sysdate WHERE room_id=#{room_id}
+		UPDATE room_list SET room_date=(SYSDATE + (INTERVAL '9' HOUR)) WHERE room_id=#{room_id}
 	</update>
 	
 	<select id="getRoomList" resultType="roomListVO">

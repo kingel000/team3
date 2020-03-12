@@ -17,7 +17,7 @@
 				#{board_question_num}, 
 				#{board_question_title},
 				#{board_question_info},
-				sysdate,
+				(SYSDATE + (INTERVAL '9' HOUR)),
 				#{board_question_writer},
 				#{state}
 			)
@@ -39,13 +39,20 @@
 		<select id="selectTotal" resultType="Integer">
 			 SELECT COUNT(*) FROM board_question
 		</select>
-		<select id="questionPage" parameterType="hashMap" resultType="questionVO">
-			select * from (
-			select board_question_num, board_question_title, board_question_info,
+		<select id="selectStateTotal" resultType="Integer">
+			 SELECT COUNT(*) FROM board_question where state='접수 중'
+		</select>
+		<select id="questionPageM" parameterType="hashMap" resultType="questionVO">
+			SELECT * FROM (select board_question_num, board_question_title, board_question_info,
             board_question_file, board_question_date, board_question_writer, state,
-			row_number() over(order by board_question_num desc) as rNum
-			from board_question) 
-			mb where rNum between #{displayPost} and #{postNum} order by board_question_num desc
+			row_number() over(ORDER BY state desc, board_question_date asc) as rNum from board_question)
+			mb where rNum between #{displayPost} and #{postNum} order by state desc
+		</select>
+		<select id="questionPage" parameterType="hashMap" resultType="questionVO">
+			SELECT * FROM (select board_question_num, board_question_title, board_question_info,
+            board_question_file, board_question_date, board_question_writer, state,
+			row_number() over(ORDER BY board_question_date DESC) as rNum from board_question)
+			mb where rNum between #{displayPost} and #{postNum} order by board_question_date desc
 		</select>
 		<update id="rejoinderQuestion" parameterType="questionVO" >
 			UPDATE board_question SET state = #{state},

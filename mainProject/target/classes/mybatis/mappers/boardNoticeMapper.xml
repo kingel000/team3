@@ -17,7 +17,7 @@
 			#{board_notice_num},
 			#{board_notice_title},
 			#{board_notice_info},
-			sysdate
+			(SYSDATE + (INTERVAL '9' HOUR))
 		)	
 	</insert>
 

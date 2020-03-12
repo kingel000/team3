@@ -56,10 +56,21 @@ public class QuestionDAOImpl implements IQuestionDAO {
 		data.put("postNum", postNum);
 		return sqlSessionTemplate.selectList("main.project.web.question.dao.IQuestionDAO.questionPage", data);
 	}
-
+	@Override
+	public List<QuestionVO> questionPageM(int displayPost, int postNum) throws Exception {
+		HashMap data = new HashMap();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		return sqlSessionTemplate.selectList("main.project.web.question.dao.IQuestionDAO.questionPageM", data);
+	}
 	@Override
 	public void rejoinderQuestion(QuestionVO question) {
 		sqlSessionTemplate.update("main.project.web.question.dao.IQuestionDAO.rejoinderQuestion", question);
+	}
+
+	@Override
+	public Integer selectStateTotal() {
+		return sqlSessionTemplate.selectOne("main.project.web.question.dao.IQuestionDAO.selectStateTotal");
 	}
 
 }

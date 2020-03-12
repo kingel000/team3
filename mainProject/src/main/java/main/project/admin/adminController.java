@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.Resource;
-import javax.mail.Multipart;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import main.project.admin.board.service.adminIBoardNoticeService;
 import main.project.admin.board.vo.AdminBoardNoticeVO;
@@ -76,11 +74,13 @@ public class adminController {
 		if(check != null) {
 			if(check.getPwd().equals(member.getPwd())) {
 				if(check.getRank().equals("M")) {
+					int stateCount = questionService.selectStateTotal();
 					session.setAttribute("member", check);
 					model.addAttribute("member", check);
+					model.addAttribute("stateCount", stateCount);
 					return "admin/adminDetail.page2";
 				}else {
-					String msg = "관리자 아이디가 입니다. 위의 링크를 눌러 메인페이지로 이동하세요";
+					String msg = "관리자 아이디가 아닙니다. 위의 링크를 눌러 메인페이지로 이동하세요";
 					model.addAttribute("msg", msg);
 				}
 			}else {

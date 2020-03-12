@@ -92,7 +92,7 @@ public class QuestionController {
 		question.setState("접수 중");
 
 		questionService.insertQuestion(question);
-		return "redirect:/board/question.do";
+		return "redirect:/board/question.do?num=1";
 	}
 
 	//글 자세히
@@ -112,7 +112,7 @@ public class QuestionController {
 		System.out.println("문의사항 글 삭제");
 		question.setBoard_question_num(num);
 		questionService.deleteQuestion(question);
-		return "redirect:/board/question.do";
+		return "redirect:/board/question.do?num=1";
 	}
 
 	

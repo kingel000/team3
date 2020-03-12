@@ -5,7 +5,7 @@
 <mapper namespace="main.project.web.purchase.dao.IPurchaseDAO">
 	<insert id="insertPurchase" parameterType="purchaseVO">
 		INSERT INTO purchase VALUES 
-		(#{purchase_num},#{product_num},sysdate,#{purchase_state},#{member_id},#{purchase_price},#{expert_id})
+		(#{purchase_num},#{product_num},(SYSDATE + (INTERVAL '9' HOUR)),#{purchase_state},#{member_id},#{purchase_price},#{expert_id})
 	</insert>
 	<update id="updatePurchase" parameterType="purchaseVO">
 		UPDATE purchase SET purchase_state=#{purchase_state}

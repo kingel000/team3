@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -175,7 +176,7 @@ function setUpdate(){
 						<th>작성자</th>
 						<td>${question.board_question_writer}</td>
 						<th>작성일</th>
-						<td>${question.board_question_date}</td>
+						<td><fmt:formatDate type="date" value="${question.board_question_date}" pattern="yyyy.MM.dd HH:mm"/></td>
 						<th>처리상태</th>
 						<td colspan="3">${question.state}</td>
 					</tr>

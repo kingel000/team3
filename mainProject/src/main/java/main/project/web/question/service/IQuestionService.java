@@ -13,5 +13,7 @@ public interface IQuestionService {
 	Integer selectNumQuestion();
 	Integer selectTotal();
 	List<QuestionVO> questionPage(int displayPost, int postNum) throws Exception;
+	List<QuestionVO> questionPageM(int displayPost, int postNum) throws Exception;
 	void rejoinderQuestion(QuestionVO question);
+	Integer selectStateTotal();
 }

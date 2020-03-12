@@ -5,7 +5,7 @@
 <mapper namespace="main.project.web.chat.dao.IChatContentDAO">
 	
 	<insert id="insertContent" parameterType="chatContentVO">
-		INSERT INTO chat_content VALUES(#{chat_seq},#{room_id},#{send},#{receive},#{content},sysdate)
+		INSERT INTO chat_content VALUES(#{chat_seq},#{room_id},#{send},#{receive},#{content},(SYSDATE + (INTERVAL '9' HOUR)))
 	</insert>
 	
 	<select id="selectContentList" resultType="chatContentVO">

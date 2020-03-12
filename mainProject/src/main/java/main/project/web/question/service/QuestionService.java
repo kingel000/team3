@@ -45,14 +45,24 @@ public class QuestionService implements IQuestionService {
 	public Integer selectTotal() {
 		return questionDAO.selectTotal();
 	}
-	
+
 	@Override
 	public List<QuestionVO> questionPage(int displayPost, int postNum) throws Exception {
 		return questionDAO.questionPage(displayPost, postNum);
 	}
 	
 	@Override
+	public List<QuestionVO> questionPageM(int displayPost, int postNum) throws Exception {
+		return questionDAO.questionPageM(displayPost, postNum);
+	}
+	
+	@Override
 	public void rejoinderQuestion(QuestionVO question) {
 		questionDAO.rejoinderQuestion(question);
+	}
+
+	@Override
+	public Integer selectStateTotal() {
+		return questionDAO.selectStateTotal();
 	}
 }

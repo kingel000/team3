@@ -28,12 +28,12 @@
 									<i class="fa fa-tasks fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<div class="huge">12</div>
+									<div class="huge">${stateCount}</div>
 									<div>Question!</div>
 								</div>
 							</div>
 						</div>
-						<div class="panel-footer" style=" cursor: pointer;" onclick="location.href='#';">
+						<div class="panel-footer" style=" cursor: pointer;" onclick="location.href='/web/admin/adminBoardQuestion.mdo?num=1';">
 							<span class="pull-left">answer</span> <span
 								class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 							<div class="clearfix"></div>

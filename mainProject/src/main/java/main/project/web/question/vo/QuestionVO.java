@@ -11,6 +11,7 @@ public class QuestionVO {
 	private Date board_question_date;
 	private String board_question_writer;
 	private String state;
+	private Integer rNum;
 	public Integer getBoard_question_num() {
 		return board_question_num;
 	}
@@ -59,12 +60,17 @@ public class QuestionVO {
 	public void setState(String state) {
 		this.state = state;
 	}
+	public Integer getrNum() {
+		return rNum;
+	}
+	public void setrNum(Integer rNum) {
+		this.rNum = rNum;
+	}
 	@Override
 	public String toString() {
 		return "QuestionVO [board_question_num=" + board_question_num + ", board_question_title=" + board_question_title
 				+ ", board_question_info=" + board_question_info + ", board_question_info_r=" + board_question_info_r
 				+ ", board_question_file=" + board_question_file + ", board_question_date=" + board_question_date
-				+ ", board_question_writer=" + board_question_writer + ", state=" + state + "]";
+				+ ", board_question_writer=" + board_question_writer + ", state=" + state + ", rNum=" + rNum + "]";
 	}
-	
 }

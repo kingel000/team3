@@ -13,5 +13,7 @@ public interface IQuestionDAO {
 	Integer selectNumQuestion(); //문의글 번호
 	Integer selectTotal(); // 전체 데이터 갯수
 	List<QuestionVO> questionPage(int displayPost, int postNum) throws Exception;
+	List<QuestionVO> questionPageM(int displayPost, int postNum) throws Exception;
 	void rejoinderQuestion(QuestionVO question);
+	Integer selectStateTotal();
 }

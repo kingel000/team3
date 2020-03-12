@@ -41,7 +41,7 @@ function openWin(num){
 					<c:set var="adminBoardQuestionList" value="${adminBoardQuestionList}" />
 					<c:forEach var="board_question" items="${adminBoardQuestionList}">
 						<tr>						
-							<td>${board_question.board_question_num}</td>
+							<td>${board_question.rNum}</td>
 							<td colspan="3"><a href="#" onclick="openWin(${board_question.board_question_num})">${board_question.board_question_title}</a></td>
 							<td>${board_question.board_question_writer}</td>
 							<!-- 희망 : 당일이면 시간 / 지난날이면 날짜로 출력 -->

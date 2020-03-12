@@ -84,7 +84,7 @@ thead>tr>th{background-color: #eee; text-align: center;}
 							<td><c:out value="${product.product_num}" /></td>
 							<td><c:out value="${product.product_title}" /></td>
 
-							<td><c:out value="${product.product_date}" /></td>
+							<td><fmt:formatDate type="date" value="${product.product_date}"/></td>
 							<td><a
 								href="/web/product/updateProduct.do?num=${product.product_num}">게시물
 									수정</a>&nbsp;&nbsp;&nbsp;&nbsp;<a
