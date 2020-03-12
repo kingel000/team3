@@ -12,29 +12,38 @@ import main.project.web.point.vo.PointVO;
 public class PointService implements IPointService {
 	
 	@Inject
-	private IPointDAO PointDAO;
+	private IPointDAO pointDAO;
 
 	@Override
 	public void insertPoint(PointVO pointVO) {
-		System.out.println("AAA insert Point " + pointVO);
-		PointDAO.insertPoint(pointVO);
+		pointDAO.insertPoint(pointVO);
 	}
 
 	@Override
-	public void updatePoint(String expertId) {
-		PointDAO.updatePoint(expertId);
+	public void updatePoint(PointVO pointVO) {
+		pointDAO.updatePoint(pointVO);
 	}
 
 	@Override
 	public List<PointVO> selectPoint() {
-		return PointDAO.selectPoint();
+		return pointDAO.selectPoint();
 
 	}
 
 	@Override
 	public List<PointVO> selectPointId(String expertId) {
-		return PointDAO.selectPointId(expertId);
+		return pointDAO.selectPointId(expertId);
 
+	}
+
+	@Override
+	public Integer selectCount() {
+		return pointDAO.selectCount();
+	}
+
+	@Override
+	public Integer selectState(String state) {
+		return pointDAO.selectState(state);
 	}
 
 }

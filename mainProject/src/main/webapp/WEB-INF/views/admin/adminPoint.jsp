@@ -7,12 +7,10 @@
 <script type="text/javascript">
 function checkCancel() {
 	
-	if(confirm("결제 취소를 진행하시겠습니까 ? ")){
-		alert("결제 취소 진행 되었습니다");
-	}else{
-		
+	if(confirm("입금 확인? ")){
+		alert("입금 성공");
+	}else{	
 		return false;
-		
 	}
 	
 }
@@ -31,37 +29,33 @@ function checkCancel() {
 
 <body>
 	<div>
-		<h3 class="title">거래 내역</h3>
+		<h3 class="title">금액 관리</h3>
 			
 			<table class="table table-striped" >
 			  <thead>
 			  	<tr>
-			      <th>주문번호</th>
-			      <th>상품번호</th>
-			      <th>상품명</th>
-			      <th>구매자</th>
-			      <th>판매자</th>
-			      <th>금액</th>
+			      <th>번호</th>
+			      <th>판매자 아이디</th>
+			      <th>출금 신청일</th>
+			      <th>출금금액</th>
 			      <th>상태</th>
 			      <th>관리</th>
 			   <tr>
 			  </thead>
 			  <tbody>
-				  <c:forEach var="adminPurchase" items="${purchaseList}" varStatus="status">
+				  <c:forEach var="adminPoint" items="${pointList}" varStatus="status">
 				 	<tr>
-				      <td>${adminPurchase.purchase_num}</td>
-				      <td>${adminPurchase.product_num}</td>
-				      <td>${producttileList.get(status.index)}</td>
-				      <td>${adminPurchase.member_id}</td> 
-				      <td>${adminPurchase.expert_id}</td>
-				      <td>${adminPurchase.purchase_price}</td>
-				      <td>${adminPurchase.purchase_state}</td>
+				      <td>${adminPoint.p_num}</td>
+				      <td>${adminPoint.expert_id}</td>
+				      <td><fmt:formatDate value="${adminPoint.p_date}" pattern="yyyy-MM-dd aa hh:mm:ss" /></td>
+				      <td>${adminPoint.p_point}</td> 
+				      <td>${adminPoint.p_state}</td>
 				      <td>
-				      	<form action="/web/admin/purchaseCancel.mdo" method="post" onsubmit='return checkCancel();'>
-				      		<input type="hidden" name="purchase_num" value="${adminPurchase.purchase_num}">
+				      	<form action="/web/admin/pointCheck.mdo" method="post" onsubmit='return checkCancel();'>
+				      		<input type="hidden" name="p_num" value="${adminPoint.p_num}">
 				      		<c:choose>
-				      			<c:when test="${adminPurchase.purchase_state ne 'Cancel'}">
-				      		<input type="submit" value="결제취소">
+				      			<c:when test="${adminPoint.p_state eq '대기중'}">
+				      		<input type="submit" value="입금">
 				      			</c:when>
 				      		</c:choose>
 				      	</form>
@@ -75,7 +69,7 @@ function checkCancel() {
 					<c:choose>
 						<c:when test="${prev}">
 							<li>
-								<a href="/web/admin/adminpurchase.mdo?num=${startPageNum - 1}">
+								<a href="/web/admin/adminpoint.mdo?num=${startPageNum - 1}">
 									<i class="fa fa-angle-left"></i>
 								</a>
 							</li>
@@ -88,10 +82,10 @@ function checkCancel() {
 						<li><c:choose>
 								<c:when test="${select == num}">
 									<li class="active">
-									<a href="/web/admin/adminpurchase.mdo?num=${num}">${num}</a></li>
+									<a href="/web/admin/adminpoint.mdo?num=${num}">${num}</a></li>
 								</c:when>
 								<c:otherwise>
-									<li><a href="/web/admin/adminpurchase.mdo?num=${num}">${num}</a>
+									<li><a href="/web/admin/adminpoint.mdo?num=${num}">${num}</a>
 									</li>
 								</c:otherwise>
 							</c:choose></li>
@@ -99,7 +93,7 @@ function checkCancel() {
 					<c:choose>
 						<c:when test="${next}">
 							<li>
-								<a href="/web/admin/adminpurchase.mdo?num=${endPageNum + 1}">
+								<a href="/web/admin/adminpoint.mdo?num=${endPageNum + 1}">
 									<i class="fa fa-angle-right"></i>
 								</a>
 							</li>
@@ -110,11 +104,11 @@ function checkCancel() {
 					</c:choose>
 				</ul>
 			</div>
-			<form action="/web/admin/purchase.mdo" method="post">
+			<form action="/web/admin/point.mdo" method="post">
               	 <select name="category">
               		 <option value="" selected disabled hidden>= 선택  =</option>
-                 	 <option value="상품번호">상품번호</option>
-                 	 <option value="구매자">구매자</option>
+                 	 <option value="date">날짜</option>
+                 	 <option value="expert">판매자</option>
               	 </select>
 		 		 <input type="text" name="findText" placeholder="검색어를 입력해주세요">
 		 		 <input type="submit" value="검색" />

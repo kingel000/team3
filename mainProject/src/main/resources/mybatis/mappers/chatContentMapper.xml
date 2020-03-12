@@ -5,7 +5,8 @@
 <mapper namespace="main.project.web.chat.dao.IChatContentDAO">
 	
 	<insert id="insertContent" parameterType="chatContentVO">
-		INSERT INTO chat_content VALUES(#{chat_seq},#{room_id},#{send},#{receive},#{content},(SYSDATE + (INTERVAL '9' HOUR)))
+		INSERT INTO chat_content 
+		VALUES(#{chat_seq},#{room_id},#{send},#{receive},#{content},(SYSDATE + (INTERVAL '9' HOUR)),#{read_state},#{s_id},#{r_id})
 	</insert>
 	
 	<select id="selectContentList" resultType="chatContentVO">
@@ -13,7 +14,19 @@
 	</select>
 	
 	<select id="selectNumCount" parameterType="String" resultType="Integer">
-			SELECT COUNT(1) FROM chat_content WHERE room_id = #{roomId}
+		SELECT COUNT(1) FROM chat_content WHERE room_id = #{roomId}
 	</select>
+	
+	<select id="selectReceiveCount" parameterType="String" resultType="Integer">
+		SELECT COUNT(1) FROM chat_content WHERE r_id=#{id} AND read_state='no'
+	</select>
+	
+	<select id="selectReceiveRoomCount" parameterType="chatContentVO" resultType="Integer">
+		SELECT COUNT(1) FROM chat_content WHERE room_id = #{room_id} AND read_state=#{read_state} AND r_id=#{r_id}
+	</select>
+	
+	<update id="updateRead" parameterType="chatContentVO">
+		UPDATE chat_content SET read_state=#{read_state}  WHERE room_id=#{room_id} AND r_id=#{r_id}
+	</update>
 	
 </mapper>

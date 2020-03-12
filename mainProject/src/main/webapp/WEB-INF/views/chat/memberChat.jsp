@@ -19,7 +19,7 @@
 	$(document).ready(function() {
 		// 웹소켓을 지정한 url로 연결한다.
 		console.log("===========================================")
-		var ws = new WebSocket("ws://192.168.59.211:8080/web/echo.do");
+		var ws = new WebSocket("ws://localhost:8080/web/echo.do");
 		socket = ws;
 
 		//서버로 메세지 보낼때
@@ -111,7 +111,7 @@
 									</div>
 									<div class="chat_ib">
 										<h5><c:out value="${ room.room_title}" /></h5>
-										<h5>[방생성 날짜]:<span class="chat_date"><fmt:formatDate value="${ room.room_date}" pattern="yyyy-MM-dd aa hh:mm:ss" /></span></h5>
+										<h5>[사용자 이름]:<span class="chat_date">${memberName}</span></h5>
 									</div>
 								</div><br>
 

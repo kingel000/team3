@@ -9,17 +9,30 @@ public class ChatContentVO {
 	private String receive;
 	private String content;
 	private Date chat_date;
+	private String read_state;
+	private String s_id;
+	private String r_id;
 	
 	public ChatContentVO(){}
-	
-	public ChatContentVO(Integer chat_seq,String room_id, String send, String receive, String content) {
+		
+	public ChatContentVO(String room_id, String r_id,String read_state) {
+		this.room_id = room_id;
+		this.r_id = r_id;
+		this.read_state = read_state;
+	}
+
+	public ChatContentVO(Integer chat_seq, String room_id, String send, String receive, String content,
+			String read_state, String s_id, String r_id) {
 		this.chat_seq = chat_seq;
 		this.room_id = room_id;
 		this.send = send;
 		this.receive = receive;
 		this.content = content;
+		this.read_state = read_state;
+		this.s_id = s_id;
+		this.r_id = r_id;
 	}
-	
+
 	public Integer getChat_seq() {
 		return chat_seq;
 	}
@@ -56,13 +69,34 @@ public class ChatContentVO {
 	public void setChat_date(Date chat_date) {
 		this.chat_date = chat_date;
 	}
+	public String getRead_state() {
+		return read_state;
+	}
+	public void setRead_state(String read_state) {
+		this.read_state = read_state;
+	}
+	public String getS_id() {
+		return s_id;
+	}
+
+	public void setS_id(String s_id) {
+		this.s_id = s_id;
+	}
+
+	public String getR_id() {
+		return r_id;
+	}
+
+	public void setR_id(String r_id) {
+		this.r_id = r_id;
+	}
 
 	@Override
 	public String toString() {
 		return "ChatContentVO [chat_seq=" + chat_seq + ", room_id=" + room_id + ", send=" + send + ", receive="
-				+ receive + ", content=" + content + ", chat_date=" + chat_date + "]";
+				+ receive + ", content=" + content + ", chat_date=" + chat_date + ", read_state=" + read_state
+				+ ", s_id=" + s_id + ", r_id=" + r_id + "]";
 	}
-	
-	
+
 	
 }

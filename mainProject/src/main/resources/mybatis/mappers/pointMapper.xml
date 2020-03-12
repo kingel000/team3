@@ -6,34 +6,27 @@
 	
 	<insert id="insertPoint" parameterType="pointVO">
 		INSERT INTO
-		point_manager VALUES (#{expert_id},#{p_point},sysdate,#{p_state})
+		point_manager VALUES (#{p_num},#{expert_id},#{p_point},sysdate,#{p_state})
 	</insert>
 	
-	<update id="udatePoint" parameterType="pointVO">
-		UPDATE point_manager
-		SET
-		p_state=#{p_state}
-		WHERE
-		expert_id=#{expert_id}
+	<update id="updatePoint" parameterType="pointVO">
+		UPDATE point_manager SET p_state=#{p_state} WHERE p_num=#{p_num}
 	</update>
 	
-	<select id="selectPoint" parameterType="String"
-		resultType="pointVO">
-		SELECT * FROM point_manager WHERE expert_id = #{expertId}
+	<select id="selectPoint" resultType="pointVO">
+		SELECT * FROM point_manager
 	</select>
 	
 	<select id="selectPointId" parameterType="String"
 		resultType="pointVO">
 		SELECT * FROM point_manager WHERE expert_id = #{expertId}
 	</select>
-	
-	
-	
-	<select id="selectState" resultType="Integer"  parameterType="String">
-	select count(*) from point_manager where p_state=#{p_state}
-	
+		
+	<select id="selectCount" resultType="Integer">
+		SELECT COUNT(*) FROM point_manager
 	</select>
-	
-	
-	
+	<select id="selectState" resultType="Integer"  parameterType="String">
+		SELECT COUNT(*) FROM point_manager WHERE p_state=#{state}	
+	</select>
+		
 </mapper>

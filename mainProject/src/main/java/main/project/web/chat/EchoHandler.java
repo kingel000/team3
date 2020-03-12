@@ -87,12 +87,12 @@ public class EchoHandler extends TextWebSocketHandler {
 			case "310":
 				Integer num1 = chatContentService.selectNumCount(words[3])+1;
 				MemberVO m1 = memberService.checkMemberId(room.getExpert_id());
-				chatContentService.insertContent(new ChatContentVO(num1,words[3], words[1], m1.getNick_name(), words[2]));
+				chatContentService.insertContent(new ChatContentVO(num1,words[3], words[1], m1.getNick_name(), words[2],"no",member.getId(),m1.getId()));
 				break;
 			case "320":
 				Integer num2 = chatContentService.selectNumCount(words[3])+1;
 				MemberVO m2 = memberService.checkMemberId(room.getMember_id());
-				chatContentService.insertContent(new ChatContentVO(num2,words[3], words[1], m2.getNick_name(), words[2]));
+				chatContentService.insertContent(new ChatContentVO(num2,words[3], words[1], m2.getNick_name(), words[2],"no",member.getId(),m2.getId()));
 				break;
 			}
 		}

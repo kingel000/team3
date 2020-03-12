@@ -9,8 +9,9 @@ import main.project.web.point.vo.PointVO;
 public interface IPointDAO {
 	
 	void insertPoint(PointVO pointVO);
-	void updatePoint(@Param("expertId")String expertId);
+	void updatePoint(PointVO pointVO);
 	List<PointVO> selectPoint();
 	List<PointVO> selectPointId(@Param("expertId")String expertId);
-	
+	Integer selectCount();
+	Integer selectState(@Param("state")String state);
 }

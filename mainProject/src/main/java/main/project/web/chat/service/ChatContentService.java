@@ -29,4 +29,19 @@ public class ChatContentService implements IChatContentService {
 		return chatContentDAO.selectNumCount(roomId);
 	}
 
+	@Override
+	public Integer selectReceiveCount(String id) {
+		return chatContentDAO.selectReceiveCount(id);
+	}
+
+	@Override
+	public Integer selectReceiveRoomCount(ChatContentVO chatContent) {
+		return chatContentDAO.selectReceiveRoomCount(chatContent);
+	}
+
+	@Override
+	public void updateRead(ChatContentVO chatContent) {
+		chatContentDAO.updateRead(chatContent);
+	}
+
 }

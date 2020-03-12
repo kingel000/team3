@@ -30,4 +30,19 @@ public class ChatContentDAO implements IChatContentDAO {
 		return sqlSessionTemplate.selectOne("main.project.web.chat.dao.IChatContentDAO.selectNumCount",roomId);
 	}
 
+	@Override
+	public Integer selectReceiveCount(String id) {
+		return sqlSessionTemplate.selectOne("main.project.web.chat.dao.IChatContentDAO.selectReceiveCount",id);
+	}
+
+	@Override
+	public Integer selectReceiveRoomCount(ChatContentVO chatContent) {
+		return sqlSessionTemplate.selectOne("main.project.web.chat.dao.IChatContentDAO.selectReceiveRoomCount",chatContent);
+	}
+
+	@Override
+	public void updateRead(ChatContentVO chatContent) {
+		sqlSessionTemplate.update("main.project.web.chat.dao.IChatContentDAO.updateRead", chatContent);
+	}
+
 }

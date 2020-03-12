@@ -22,10 +22,8 @@ public class PointDAOImpl implements IPointDAO {
 		
 	}
 
-	public void updatePoint(String expertId) {
-		 sqlSessionTemplate.update("main.project.web.point.dao.IPointDAO.updatePoint",expertId);
-
-		
+	public void updatePoint(PointVO pointVO) {
+		 sqlSessionTemplate.update("main.project.web.point.dao.IPointDAO.updatePoint",pointVO);		
 	}
 
 	@Override
@@ -37,6 +35,16 @@ public class PointDAOImpl implements IPointDAO {
 	@Override
 	public List<PointVO> selectPointId(String expertId) {
 		return sqlSessionTemplate.selectList("main.project.web.point.dao.IPointDAO.selectPointId",expertId);		
+	}
+
+	@Override
+	public Integer selectCount() {
+		return sqlSessionTemplate.selectOne("main.project.web.point.dao.IPointDAO.selectCount");
+	}
+
+	@Override
+	public Integer selectState(String state) {
+		return sqlSessionTemplate.selectOne("main.project.web.point.dao.IPointDAO.selectState",state);
 	}
 
 

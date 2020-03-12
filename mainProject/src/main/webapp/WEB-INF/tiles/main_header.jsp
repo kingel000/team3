@@ -59,6 +59,7 @@
 							</c:when>
 							<c:otherwise>
 								<a href="#">${member.nick_name }</a>
+								<div class="btn-group ps-dropdown" id ="ps-dropdown"></div>
 								<div class="btn-group ps-dropdown"><a href="/web/member/mypage.do">MyPage</a></div>
 								<div class="btn-group ps-dropdown"><a href="/web/member/logout.do">LogOut</a></div>
 							</c:otherwise>

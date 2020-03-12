@@ -176,7 +176,7 @@ public class MemberController {
 		System.out.println("업데이트 해야 할 포인트 : "  + Point);
 		expertVO.setPoint(Point);
 		expertService.updatePointExpert(expertVO);
-		PointVO p = new PointVO(expertVO.getId(),point,"대기중");
+		PointVO p = new PointVO(pointService.selectCount()+1,expertVO.getId(),point,"대기중");
 		System.out.println(p);
 		pointService.insertPoint(p);
 		return "redirect:/member/pointManager.do";

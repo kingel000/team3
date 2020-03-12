@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	headCart();
+	receiveCount();
 	
 	function headCart(){
 		var cartList = []
@@ -27,6 +28,27 @@ $(document).ready(function(){
 			},
 			error: function(){
 				$('#ps-cart').append("<a class='ps-cart__toggle' href='#'><i class='ps-icon-shopping-cart'></i></a>");
+	        }
+		});
+	}
+	
+	function receiveCount(){
+		var receive = []
+		$.ajax({
+			url: "/web/chat/receiveCount.do",
+			type: "POST",
+			data: JSON.stringify(receive),
+			contentType: "application/json; charset=utf-8;",
+			dataType: "json",
+			success: function(data){
+				if(data ==0){
+					$('#ps-dropdown').empty();
+					return;
+				}
+				$('#ps-dropdown').append("<a href='#'>Message:"+data+"</a>");
+			},
+			error: function(){
+				$('#ps-dropdown').empty();
 	        }
 		});
 	}

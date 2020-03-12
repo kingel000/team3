@@ -26,6 +26,8 @@ import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
 import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
+import main.project.web.point.service.IPointService;
+import main.project.web.point.vo.PointVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
 import main.project.web.product.vo.findVO;
@@ -52,7 +54,8 @@ public class adminController {
 	private IBannerService bannerService;
 	@Autowired
 	private IQuestionService questionService;
-
+	@Autowired
+	private IPointService pointService;
 	@Autowired
 	private adminIBoardNoticeService adminBoardNoticeService;
 
@@ -63,6 +66,20 @@ public class adminController {
 	}
 
 	//-----------로그인 검증
+	@RequestMapping(value="/adminDetail.mdo", method=RequestMethod.GET)
+	public String adminDetail(HttpSession session,Model model) {
+		MemberVO check = (MemberVO) session.getAttribute("member");
+		if(check != null && check.getRank().equals("M")) {
+			int stateCount = questionService.selectStateTotal();
+			model.addAttribute("member", check);
+			model.addAttribute("stateCount", stateCount);
+			model.addAttribute("pointCount", pointService.selectState("대기중"));
+			return "admin/adminDetail.page2";
+			
+		}
+		return "redirect:/admin/admin.mdo";
+	}
+	
 	@RequestMapping(value = "/adminDetail.mdo" , method = RequestMethod.POST )
 	public String adminDetail(MemberVO member,HttpSession session, Model model) {
 		System.out.println("ADMIN DETAIL MDO POST 호출");
@@ -78,6 +95,7 @@ public class adminController {
 					session.setAttribute("member", check);
 					model.addAttribute("member", check);
 					model.addAttribute("stateCount", stateCount);
+					model.addAttribute("pointCount", pointService.selectState("대기중"));
 					return "admin/adminDetail.page2";
 				}else {
 					String msg = "관리자 아이디가 아닙니다. 위의 링크를 눌러 메인페이지로 이동하세요";
@@ -448,7 +466,22 @@ public class adminController {
 		pay.cancelPayment(pay.getImportToken(),purchase.getPurchase_num(),"Master Cancel");
 		return "redirect:/admin/adminpurchase.mdo";
 	}
-
+	// 금액관리
+	@RequestMapping(value="/adminPoint.mdo",method=RequestMethod.GET)
+	public String adminPoint(Model model) {
+		model.addAttribute("pointList", pointService.selectPoint());
+		return "admin/adminPoint.page2";
+	}
+	
+	@RequestMapping(value="/pointCheck.mdo", method=RequestMethod.POST)
+	public String pointCheck(PointVO point) {
+		point.setP_state("완료");
+		System.out.println(point);
+		pointService.updatePoint(point);
+		
+		return "redirect:/admin/adminPoint.mdo";
+	}
+	
 	//<!-- *******BeakRyun_20200305 -->
 	//-----------AdminBoardNotice_Main_GET
 	@RequestMapping(value = "/adminBoardNotice.mdo", method= RequestMethod.GET)	//Site Address

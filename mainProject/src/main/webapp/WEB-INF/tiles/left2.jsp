@@ -64,7 +64,7 @@
          </li>
          <li class="group">
             <div class="box">
-               <a href="#">
+               <a href="/web/admin/adminPoint.mdo">
                   <h3>Point</h3>
                   <p>금액 관리</p>
                </a>
