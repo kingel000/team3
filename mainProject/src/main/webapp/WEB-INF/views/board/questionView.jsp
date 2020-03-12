@@ -171,7 +171,7 @@ textarea {
 								<dl class="qna_q">
 									<dt>질문</dt>
 									<dd>
-										<textarea id="qestnCn" name="qestnCn" rows="10" cols="" class="white_bgbg">${question.board_question_info}</textarea>
+										<textarea id="qestnCn" name="qestnCn" rows="10" cols="" class="white_bgbg" readonly>${question.board_question_info}</textarea>
 									</dd>
 								</dl>
 								<!-- 질문 //-->
@@ -181,7 +181,7 @@ textarea {
 										<dl class="qna_a mt30">
 											<dt>답변</dt>
 											<dd>
-												<textarea id="answerCn" name="answerCn" rows="10" cols="" class="white_bgbg" title="답변내용">${question.board_question_info_r}</textarea>									
+												<textarea id="answerCn" name="answerCn" rows="10" cols="" class="white_bgbg" title="답변내용" readonly>${question.board_question_info_r}</textarea>									
 											</dd>
 										</dl>
 									</c:when>
