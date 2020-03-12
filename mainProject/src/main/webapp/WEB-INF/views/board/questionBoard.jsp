@@ -11,12 +11,12 @@
 <meta charset="UTF-8">
 <title>문의 사항 목록</title>
 
-   <style>
-  		.question_Board>table {text-align: center; boarder: 1px solid #ddd}
-    	thead>tr>th{background-color: #eee; text-align: center;}
-    </style>
-    
- 
+<style>
+.question_Board>table {text-align: center;boarder: 1px solid #ddd}
+thead>tr>th {background-color: #eee;text-align: center;}
+</style>
+
+
 </head>
 <body>
 	<div>
@@ -44,26 +44,43 @@
 				   </c:forEach>
 			  </tbody>
 			</table>
-			
-			 <div style="display: block; text-align: center;">		
-				<c:if test="${paging.startPage != 1 }">
-					<a href="/boardList?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
-				</c:if>
-				<c:forEach begin="${paging.startPage }" end="${paging.endPage }" var="p">
+			<div class="ps-pagination">
+				<ul class="pagination">
 					<c:choose>
-						<c:when test="${p == paging.nowPage }">
-							<b>${p }</b>
-						</c:when>
-						<c:when test="${p != paging.nowPage }">
-							<a href="/boardList?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+						<c:when test="${prev}">
+							<li>
+								<a href="/web/board/question.do?num=${startPageNum - 1}">
+									<i class="fa fa-angle-left"></i>
+								</a>
+							</li>
 						</c:when>
 					</c:choose>
-				</c:forEach>
-				<c:if test="${paging.endPage != paging.lastPage}">
-					<a href="/boardList?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
-				</c:if>
+					<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
+						<li><c:choose>
+								<c:when test="${select == num}">
+									<li class="active">
+									<a href="/web/board/question.do?num=${num}">${num}</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="/web/board/question.do?num=${num}">${num}</a>
+									</li>
+								</c:otherwise>
+							</c:choose></li>
+					</c:forEach>
+					<c:choose>
+						<c:when test="${next}">
+							<li>
+								<a href="/web/board/question.do?num=${endPageNum + 1}">
+									<i class="fa fa-angle-right"></i>
+								</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li><div></div></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
 			</div>
-			 
 			<c:choose>
 	            <c:when test="${member.id == null}">
 					  <a href="/web/member/login.do" class="btn btn-primary pull-right">글쓰기</a>

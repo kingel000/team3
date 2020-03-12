@@ -16,6 +16,7 @@
   		.question_W1>form>h4{text-align: center; margin-bottom:15px;}
   		.question_W1>form>p>input{width: 595px;}
   		.question_W1>form>p>a{background-color: #dddddd; padding: 1px;}
+  		.question_W1>form>p>textarea{width: 595px;}
     </style>
     
     <script type="text/javascript">

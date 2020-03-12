@@ -49,6 +49,43 @@
 					<h2>공지사항 없음_메인버전</h2>
 				</c:otherwise>
 			</c:choose>
+			<div class="ps-pagination">
+				<ul class="pagination">
+					<c:choose>
+						<c:when test="${prev}">
+							<li>
+								<a href="/web/board/notice.do?num=${startPageNum - 1}">
+									<i class="fa fa-angle-left"></i>
+								</a>
+							</li>
+						</c:when>
+					</c:choose>
+					<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
+						<li><c:choose>
+								<c:when test="${select == num}">
+									<li class="active">
+									<a href="/web/board/notice.do?num=${num}">${num}</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="/web/board/notice.do?num=${num}">${num}</a>
+									</li>
+								</c:otherwise>
+							</c:choose></li>
+					</c:forEach>
+					<c:choose>
+						<c:when test="${next}">
+							<li>
+								<a href="/web/board/notice.do?num=${endPageNum + 1}">
+									<i class="fa fa-angle-right"></i>
+								</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li><div></div></li>
+						</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
 		</div>
 	</div>
 </body>
