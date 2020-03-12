@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,6 +39,16 @@ public class UploadController {
 
     // 업로드 흐름 : 업로드 버튼클릭 => 임시디렉토리에 업로드=> 지정된 디렉토리에 저장 => 파일정보가 file에 저장
 
+    @ResponseBody // view가 아닌 data리턴
+    @RequestMapping(value="/uploadFile.do", method=RequestMethod.POST, produces="text/plain;charset=utf-8")
+    public ResponseEntity<String> uploadFile(MultipartFile file) throws Exception {
+        logger.info("originalName : "+file.getOriginalFilename());
+        logger.info("size : "+file.getSize());
+        logger.info("contentType : "+file.getContentType());
+        
+        ResponseEntity<String> re = new ResponseEntity<String>(UploadFileUtils.upFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.OK);
+        return re;
+    }
     /****************************** # ajax 방식의 업로드 처리  *********************************/
 
     // 4. Ajax업로드 페이지 매핑

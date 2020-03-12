@@ -13,6 +13,17 @@ import org.springframework.util.FileCopyUtils;
 
 public class UploadFileUtils {
 
+	public static String upFile(String uploadPath, String originalName, byte[] fileData)throws Exception{
+		File dirPath = new File(uploadPath);
+        if(!dirPath.exists()){
+        	dirPath.mkdir();
+        }
+        File target = new File(uploadPath,originalName);
+        FileCopyUtils.copy(fileData, target);
+        
+        return makeIcon(uploadPath, "", originalName);
+	}
+	
     public static String uploadFile(String uploadPath, String originalName, byte[] fileData) throws Exception {
         // UUID ¹ß±Þ
         UUID uuid = UUID.randomUUID();

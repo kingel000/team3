@@ -583,24 +583,16 @@ public class adminController {
 	}
 	
 	@RequestMapping(value = "/homePageManagement1.mdo", method = RequestMethod.POST)
-	public String homePageManagement1(MultipartHttpServletRequest request,BannerVO bannerVO, HttpSession session , Model model){
-		bannerVO.setBanner1_text1(request.getParameter("b1_text1"));
-		bannerVO.setBanner1_text2(request.getParameter("b1_text2"));
-		bannerVO.setBanner1_text3(request.getParameter("b1_text3"));
-		bannerVO.setBanner1_text4(request.getParameter("b1_text4"));
+	public String homePageManagement1(@RequestParam("fileName")String fileName,BannerVO bannerVO,
+										@RequestParam("b1_text1")String b1_text1,@RequestParam("b1_text2")String b1_text2,@RequestParam("b1_text3")String b1_text3,@RequestParam("b1_text4")String b1_text4, 
+										HttpSession session , Model model){
+		bannerVO.setBanner1_text1(b1_text1);
+		bannerVO.setBanner1_text1(b1_text2);
+		bannerVO.setBanner1_text1(b1_text3);
+		bannerVO.setBanner1_text1(b1_text4);
 		
-		
-		 MultipartFile file = request.getFile("file");
-		 String path = request.getRealPath("/resources/images/slider/");
-		 String fileName = file.getOriginalFilename();
-		 File uploadFile = new File(path + fileName);
-//		 try {
-//			 file.transferTo(uploadFile);
-//		 }catch (IllegalStateException e) {
-//			e.printStackTrace();
-//		 }catch (IOException e) {
-//			e.printStackTrace();
-//		 }
+		System.out.println("파일명: "+ fileName);
+		 
 		 
 		 //db저장
 		 if(fileName.equals(null) || fileName.equals("")) {
@@ -608,7 +600,7 @@ public class adminController {
 			 bannerService.updateBannerText(bannerVO);
 		 }else {
 			System.out.println("이미지 있음");
-			String dbPath = "/resources/images/slider/" + fileName;
+			String dbPath = "C:\\myProject\\MainProject\\images" + fileName;
 			bannerVO.setBanner1_img(dbPath);
 			bannerService.updateBanner(bannerVO);
 		}

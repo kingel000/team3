@@ -7,9 +7,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>홈페이지 관리</title>
-	
+	<script src="<c:url value="/resources/js/jquery-3.4.1.min.js"/>"></script>
 	<!-- Custom-->
 	<link rel="stylesheet" href="<c:url value="/resources/css/style2.css"/>">
+	<script type="text/javascript"
+		src="<c:url value="/resources/js/homeManager.js" />"></script>
 	<style type="text/css">
 		.title{color:#fff; text-align:center; background-color: #2ac37d;}
 	</style>
@@ -27,7 +29,9 @@
             <p>
                <label for="name">*이미지1* </label> <br>
                	설정된 파일 : ${bannerVO.banner1_img}
-               <input type="file" name="file">
+               <input type="file" name="file" id="file"  style="display:none;">
+    		   <input type="button" id="upload" value="PC에서 이미지 찾기"/>
+    		   <input type="hidden" name="fileName" value="">
             </p>
             <p>
                <label>*배너 내용1*</label><br>
