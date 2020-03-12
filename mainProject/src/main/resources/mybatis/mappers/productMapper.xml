@@ -136,9 +136,9 @@
 	
 	<!-- 게시물 정렬 후 설정한 범위 select -->
 	<select id="categoryPage" resultType="productVO" parameterType="hashMap">
-		select product_num, category, product_title, expert_id, product_date
+		select product_num, category, product_title, expert_id, product_date, Thumbnail
 		from (
-		select product_num, category, product_title, expert_id, product_date,
+		select product_num, category, product_title, expert_id, product_date, Thumbnail,
 		row_number() over(order by product_num desc) as rNum
 		from product
 		) mb

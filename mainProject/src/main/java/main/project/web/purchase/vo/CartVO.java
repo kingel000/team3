@@ -7,7 +7,7 @@ public class CartVO {
 	private String product_title;
 	private Integer price;
 	private String expert_nick;
-	private String Thumbnail;
+	private String thumbnail;
 	public CartVO() {}
 	
 	
@@ -18,7 +18,7 @@ public class CartVO {
 		this.product_title = product_title;
 		this.price = price;
 		this.expert_nick = expert_nick;
-		this.Thumbnail = Thumbnail;
+		this.thumbnail = Thumbnail;
 	}
 
 
@@ -61,18 +61,18 @@ public class CartVO {
 	
 
 	public String getThumbnail() {
-		return Thumbnail;
+		return thumbnail;
 	}
 
 
 	public void setThumbnail(String thumbnail) {
-		this.Thumbnail = thumbnail;
+		this.thumbnail = thumbnail;
 	}	
 
 	@Override
 	public String toString() {
 		return "CartVO [num=" + num + ", member_id=" + member_id + ", product_num=" + product_num + ", product_title="
-				+ product_title + ", price=" + price + ", expert_nick=" + expert_nick + ", Thumbnail=" +  Thumbnail +"]";
+				+ product_title + ", price=" + price + ", expert_nick=" + expert_nick + ", thumbnail=" +  thumbnail +"]";
 	}
 
 

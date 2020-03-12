@@ -15,7 +15,6 @@
 
 </style>
 </head>
-
 <body>
 	<div class="Board">
 		<h3 class="title">공지사항 게시판</h3>
@@ -27,8 +26,6 @@
 					<th>작성자</th>
 					<th>작성일</th>
 					<th colspan=2>관리</th>
-					
-					
 				<tr>
 			</thead>
 			
@@ -42,13 +39,13 @@
 					<tr>						
 						<td>${board_notice.board_notice_num}</td>
 						<td></td>			
-						<td><a href="adminBoard_Notice_Detail.mdo?num=${board_notice.board_notice_num}">${board_notice.board_notice_title}</a></td>
+						<td><a href="/web/admin/adminBoard_Notice_Detail.mdo?num=${board_notice.board_notice_num}">${board_notice.board_notice_title}</a></td>
 						<td></td>			
 						<td>관리자</td>
 						<!-- 희망 : 당일이면 시간 / 지난날이면 날짜로 출력 -->
 						<td><fmt:formatDate type="date" value="${board_notice.board_notice_date}"/></td>						
-						<td><a href="adminBoard_Notice_Update.mdo?num=${board_notice.board_notice_num}">수정</a></td>															
-						<td><a href="adminBoard_Notice_Delete.mdo?num=${board_notice.board_notice_num}">삭제</a></td>															
+						<td><a href="/web/admin/adminBoard_Notice_Update.mdo?num=${board_notice.board_notice_num}">수정</a></td>															
+						<td><a href="/web/admin/adminBoard_Notice_Delete.mdo?num=${board_notice.board_notice_num}">삭제</a></td>															
 					<tr>			
 				</c:forEach>
 			</c:when>
@@ -64,7 +61,46 @@
 		
 		</tbody>
 		</table>
-		
+		<div class="ps-pagination">
+			<ul class="pagination">
+				<c:choose>
+					<c:when test="${prev}">
+						<li>
+							<a href="/web/admin/adminBoardNotice.mdo?num=${startPageNum - 1}">
+								<i class="fa fa-angle-left"></i>
+							</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li><div></div></li>
+					</c:otherwise>
+				</c:choose>
+				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
+					<li><c:choose>
+							<c:when test="${select == num}">
+								<li class="active">
+								<a href="/web/admin/adminBoardNotice.mdo?num=${num}">${num}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="/web/admin/adminBoardNotice.mdo?num=${num}">${num}</a>
+								</li>
+							</c:otherwise>
+						</c:choose></li>
+				</c:forEach>
+				<c:choose>
+					<c:when test="${next}">
+						<li>
+							<a href="/web/admin/adminBoardNotice.mdo?num=${endPageNum + 1}">
+								<i class="fa fa-angle-right"></i>
+							</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li><div></div></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>
 		<div align="right">
 		<button type="button" onclick="location.href='/web/admin/adminBoard_Notice_Insert.mdo'" >글쓰기</button>
 		</div>                  

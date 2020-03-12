@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import main.project.web.member.vo.MemberVO;
 import main.project.web.notice.service.INoticeService;
 import main.project.web.notice.vo.NoticeVO;
 
@@ -24,14 +25,44 @@ public class NoticeController {
 	//<!-- *******BeakRyun_20200310 -->
 	//-----------AdminBoardNotice_Main_GET
 	@RequestMapping(value = "/notice.do", method= RequestMethod.GET)	//Site Address
-	public String Notice_Main(HttpSession session, Model model) {
+	public String Notice_Main(@RequestParam("num") int num, HttpSession session, Model model) throws Exception {
 		System.out.println("NoticeMain GET Call");
+		int count = noticeService.totalNotice();
+		System.out.println(count);
+		// 한 페이지에 출력할 게시물 갯수
+		int postNum = 10;
+		// 출력할 게시물
+		int displayPost = (num - 1) * postNum;
+		// 한번에 표시할 페이징 번호의 갯수
+		int pageNum_cnt = 5;
 
-		List<NoticeVO> NoticeList = noticeService.selectListNotice();
-		if(NoticeList != null) {
-			model.addAttribute("NoticeList", NoticeList);
+		// 표시되는 페이지 번호 중 마지막 번호
+		int endPageNum = (int)(Math.ceil((double)num / (double)pageNum_cnt) * pageNum_cnt);
+
+		// 표시되는 페이지 번호 중 첫번째 번호
+		int startPageNum = endPageNum - (pageNum_cnt - 1);
+
+		// 마지막 번호 재계산
+		int endPageNum_tmp = (int)(Math.ceil((double)count / (double)postNum));
+
+		if(endPageNum > endPageNum_tmp) {
+			endPageNum = endPageNum_tmp;
 		}
+		boolean prev = startPageNum == 1 ? false : true;
+		boolean next = endPageNum * postNum >= count ? false : true;
+		int num1 = num==1 ? 0 : 1;
+		List<NoticeVO> NoticeList = noticeService.noticePage(displayPost+num1, postNum * num);
+		model.addAttribute("NoticeList", NoticeList);
+		// 시작 및 끝 번호
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
 
+		// 이전 및 다음 
+		model.addAttribute("prev", prev);
+		model.addAttribute("next", next);
+
+		// 현재 페이지
+		model.addAttribute("select", num);
 		return "board/noticeBoard.part2";								//jsp Address
 	}
 

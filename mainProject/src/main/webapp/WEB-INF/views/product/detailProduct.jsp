@@ -75,8 +75,18 @@ function addCart(){
 			  <div class="item"><img class="zoom" src="images/shoe-detail/3.jpg" alt="" data-zoom-image="images/shoe-detail/3.jpg"></div>
 			</div>
 		  </div>
-		  <div class="ps-product__thumbnail--mobile">
-			<div class="ps-product__main-img"><img src="images/shoe-detail/1.jpg" alt=""></div>
+		  <div >
+			<div >
+				<img src="images/shoe-detail/1.jpg" alt="">
+				<c:choose>
+					<c:when test="${numProduct.thumbnail == null}">
+							<img src="<c:url value="/resources/images/basic2.jpg" />"  alt="">
+					</c:when>
+					<c:otherwise>
+							<img src="/web/ajax/displayFile.do?fileName=${numProduct.thumbnail}" alt="#">
+					</c:otherwise>
+        		</c:choose>
+			</div>
 		  </div>
 		  <div class="ps-product__info">
 		

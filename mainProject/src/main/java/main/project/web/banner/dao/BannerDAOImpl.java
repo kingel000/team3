@@ -18,4 +18,31 @@ public class BannerDAOImpl implements IBannerDAO {
 		return sqlSessionTemplate.selectOne("main.project.web.banner.dao.IBannerDAO.selectBanner");
 	}
 
+	@Override
+	public void updateBanner(BannerVO bannerVO) {
+		sqlSessionTemplate.update("main.project.web.banner.dao.IBannerDAO.updateBanner", bannerVO);
+		
+	}
+
+	@Override
+	public void updateBannerText(BannerVO bannerVO) {
+		sqlSessionTemplate.update("main.project.web.banner.dao.IBannerDAO.updateBannerText", bannerVO);
+		
+	}
+
+	@Override
+	public void updateBanner2(BannerVO bannerVO) {
+		sqlSessionTemplate.update("main.project.web.banner.dao.IBannerDAO.updateBanner2", bannerVO);
+		
+	}
+
+	@Override
+	public void updateBannerText2(BannerVO bannerVO) {
+		sqlSessionTemplate.update("main.project.web.banner.dao.IBannerDAO.updateBannerText2", bannerVO);
+		
+	}
+
+	
+
+
 }

@@ -1,17 +1,24 @@
 package main.project.admin;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.Resource;
+import javax.mail.Multipart;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import main.project.admin.board.service.adminIBoardNoticeService;
 import main.project.admin.board.vo.AdminBoardNoticeVO;
@@ -27,6 +34,8 @@ import main.project.web.product.vo.findVO;
 import main.project.web.purchase.PaymentCheck;
 import main.project.web.purchase.Service.IPurchaseService;
 import main.project.web.purchase.vo.PurchaseVO;
+import main.project.web.question.service.IQuestionService;
+import main.project.web.question.vo.QuestionVO;
 
 @Controller("adminController")
 @RequestMapping(value="/admin")
@@ -43,6 +52,8 @@ public class adminController {
 	private IPurchaseService purchaseService;
 	@Autowired
 	private IBannerService bannerService;
+	@Autowired
+	private IQuestionService questionService;
 
 	@Autowired
 	private adminIBoardNoticeService adminBoardNoticeService;
@@ -128,7 +139,59 @@ public class adminController {
 
 		return "admin/adminMember.page2";
 	}
-
+	@RequestMapping(value = "/adminBoardQuestion.mdo", method = RequestMethod.GET)
+	public String adminBoardQuestion(@RequestParam("num") int num, HttpSession session, Model model) throws Exception {
+		System.out.println("adminBoardQuestion GET Call");
+		// 게시물 총 갯수
+		int count = questionService.selectTotal();
+		System.out.println(count);
+		// 한 페이지에 출력할 게시물 갯수
+		int postNum = 10;
+		// 출력할 게시물
+		int displayPost = (num - 1) * postNum;
+		// 한번에 표시할 페이징 번호의 갯수
+		int pageNum_cnt = 5;
+		// 표시되는 페이지 번호 중 마지막 번호
+		int endPageNum = (int)(Math.ceil((double)num / (double)pageNum_cnt) * pageNum_cnt);
+		// 표시되는 페이지 번호 중 첫번째 번호
+		int startPageNum = endPageNum - (pageNum_cnt - 1);
+		// 마지막 번호 재계산
+		int endPageNum_tmp = (int)(Math.ceil((double)count / (double)postNum));
+		if(endPageNum > endPageNum_tmp) {
+			endPageNum = endPageNum_tmp;
+		}
+		boolean prev = startPageNum == 1 ? false : true;
+		boolean next = endPageNum * postNum >= count ? false : true;
+		int num1 = num==1 ? 0 : 1;
+		List<QuestionVO> adminBoardQuestionList = questionService.questionPage(displayPost+num1, postNum * num);
+		model.addAttribute("adminBoardQuestionList",adminBoardQuestionList);
+		// 시작 및 끝 번호
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		// 이전 및 다음 
+		model.addAttribute("prev", prev);
+		model.addAttribute("next", next);
+		// 현재 페이지
+		model.addAttribute("select", num);
+		return "admin/adminBoard_Question.page2";
+	}
+	@RequestMapping(value = "/adminBoardQuestionRejoinder.mdo", method = RequestMethod.GET)
+	public String adminBoardQuestionRejoinder(@RequestParam("num") int num, QuestionVO questionVO, Model model) {
+		System.out.println("adminBoardQuestionDetail GET Call");
+		questionVO.setBoard_question_num(num);
+		QuestionVO adminBoardQuestion = questionService.selectQuestion(questionVO);
+		model.addAttribute("question",adminBoardQuestion);
+		return "admin/adminBoard_Question_Rejoinder";
+	}
+	@RequestMapping(value = "/adminBoardQuestionRejoinder.mdo", method = RequestMethod.POST)
+	public String adminBoardQuestionRejoinder(QuestionVO questionVO, Model model) {
+		System.out.println("답변처리");
+		QuestionVO quesionVO_r = questionService.selectQuestion(questionVO);
+		quesionVO_r.setBoard_question_info_r(questionVO.getBoard_question_info_r());
+		quesionVO_r.setState(questionVO.getState());
+		questionService.rejoinderQuestion(quesionVO_r);
+		return "redirect:/admin/adminBoardQuestion.mdo?num=1";
+	}
 	@RequestMapping(value = "/adminMemberDelete.mdo", method= RequestMethod.GET)
 	public String adminMemberDelete(@RequestParam String id,MemberVO member, HttpSession session , Model model) {
 		System.out.println("adminMemeberDelte.mdo GET 호출");
@@ -568,13 +631,67 @@ public class adminController {
    }
    
 	//--------홈페이지 관리
+    @Resource(name="uploadPath")
+    String uploadPath;
+    
 	@RequestMapping(value = "/homePageManagement.mdo", method = RequestMethod.GET)
-	public String homePageManagement(HttpSession session , Model model){
+	public String homePageManagement( HttpSession session , Model model){
 		BannerVO bannerVO = bannerService.selectBanner();
-		System.out.println(bannerVO);
 		model.addAttribute("bannerVO", bannerVO);
 		
 		return "admin/homePageManagement.page2";
+	}
+	
+	@RequestMapping(value = "/homePageManagement1.mdo", method = RequestMethod.POST)
+	public String homePageManagement1(@RequestParam("file1")MultipartFile file,BannerVO bannerVO,
+										HttpSession session , Model model)throws IOException{
+		bannerVO.setBanner1_text1(bannerVO.getBanner1_text1());
+		bannerVO.setBanner1_text1(bannerVO.getBanner1_text2());
+		bannerVO.setBanner1_text1(bannerVO.getBanner1_text3());
+		bannerVO.setBanner1_text1(bannerVO.getBanner1_text4());
+		
+		System.out.println("파일명: "+ file.getOriginalFilename());
+		 
+		 
+		 //db저장
+		 if(file.getOriginalFilename().equals(null) || file.getOriginalFilename().equals("")) {
+			 System.out.println("이미지 없음");
+			 bannerService.updateBannerText(bannerVO);
+		 }else {
+			System.out.println("이미지 있음");
+			File target = new File(uploadPath+"/home/", file.getOriginalFilename());
+	        FileCopyUtils.copy(file.getBytes(), target);
+			bannerVO.setBanner1_img("/home/"+file.getOriginalFilename());
+			bannerService.updateBanner(bannerVO);
+		}
+
+		 
+		 return "redirect:/admin//homePageManagement.mdo";
+	}
+	
+	@RequestMapping(value = "/homePageManagement2.mdo", method = RequestMethod.POST)
+	public String homePageManagement2(@RequestParam("file1")MultipartFile file,BannerVO bannerVO,
+										HttpSession session , Model model)throws IOException{
+		bannerVO.setBanner2_text1(bannerVO.getBanner2_text1());
+		bannerVO.setBanner2_text2(bannerVO.getBanner2_text2());
+		bannerVO.setBanner2_text3(bannerVO.getBanner2_text3());
+		bannerVO.setBanner2_text4(bannerVO.getBanner2_text4());
+		
+		System.out.println("파일명: "+ file.getOriginalFilename());
+		
+		//db 저장
+		if(file.getOriginalFilename().equals(null) || file.getOriginalFilename().equals("")) {
+			 System.out.println("이미지 없음");
+			 bannerService.updateBannerText2(bannerVO);
+		 }else {
+			System.out.println("이미지 있음");
+			File target = new File(uploadPath+"/home/", file.getOriginalFilename());
+	        FileCopyUtils.copy(file.getBytes(), target);
+			bannerVO.setBanner2_img("/home/"+file.getOriginalFilename());
+			bannerService.updateBanner2(bannerVO);
+		}
+
+		return "redirect:/admin//homePageManagement.mdo";
 	}
 
 	//--------통계

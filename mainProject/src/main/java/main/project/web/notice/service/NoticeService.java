@@ -34,6 +34,16 @@ public class NoticeService implements INoticeService{
 	public NoticeVO Notice_Detail(String noticeNum) {
 		return noticeDAO.Notice_Detail(noticeNum);
 	}
+
+	@Override
+	public int totalNotice() {
+		return noticeDAO.totalNotice();
+	}
+
+	@Override
+	public List<NoticeVO> noticePage(int displayPost, int postNum) throws Exception {
+		return noticeDAO.noticePage(displayPost, postNum);
+	}
 	
 	
 }

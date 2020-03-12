@@ -46,7 +46,6 @@
                </a>
             </div>
          </li>
-
          <li class="group">
    		      <div class="box">
                   <a href="/web/admin/adminProduct.mdo?num=1">
@@ -55,8 +54,6 @@
                   </a>
               </div>
           </li>
-
-    
          <li class="group">
             <div class="box">
                <a href="/web/admin/adminpurchase.mdo?num=1">
@@ -65,8 +62,6 @@
                </a>
             </div>
          </li>
-         
-     
          <li class="group">
             <div class="box">
                <a href="#">
@@ -79,19 +74,16 @@
         <!-- *******20200229 -->
          <li class="group">
             <div class="box">
-          	  <a href="/web/admin/adminBoardNotice.mdo">	<!-- 임의의 주소값 설정. -->
-            
+          	  <a href="/web/admin/adminBoardNotice.mdo?num=1">
                   <h3>Borad_Notice</h3>
                   <p>공지사항 관리</p>
                </a>
             </div>
          </li>
-         
                  <!-- *******20200229 -->
          <li class="group">
             <div class="box">
-          	  <a href="/web/admin/adminBoardNotice.mdo">
-            
+          	  <a href="/web/admin/adminBoardQuestion.mdo?num=1">
                   <h3>Borad_Question</h3>
                   <p>문의사항 관리</p>
                </a>

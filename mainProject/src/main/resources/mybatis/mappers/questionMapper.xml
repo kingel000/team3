@@ -36,16 +36,20 @@
 		<select id="selectNumQuestion" resultType="Integer">
 			SELECT MAX(BOARD_QUESTION_NUM)+1 FROM BOARD_QUESTION
 		</select>
-		<select id="selectPage" parameterType="pagingVO" resultType="questionVO">
-			SELECT * FROM (
-					SELECT ROWNUM RN, A.*  FROM (
-						select * from board_question ORDER by board_question_num DESC 
-						) A
-				)
-			WHERE RN BETWEEN #{start} AND #{end}
-		</select>
 		<select id="selectTotal" resultType="Integer">
 			 SELECT COUNT(*) FROM board_question
 		</select>
-	
+		<select id="questionPage" parameterType="hashMap" resultType="questionVO">
+			select * from (
+			select board_question_num, board_question_title, board_question_info,
+            board_question_file, board_question_date, board_question_writer, state,
+			row_number() over(order by board_question_num desc) as rNum
+			from board_question) 
+			mb where rNum between #{displayPost} and #{postNum} order by board_question_num desc
+		</select>
+		<update id="rejoinderQuestion" parameterType="questionVO" >
+			UPDATE board_question SET state = #{state},
+			board_question_info_r = #{board_question_info_r} 
+			WHERE board_question_num = #{board_question_num}
+		</update>
 </mapper>

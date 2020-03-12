@@ -6,4 +6,27 @@
 	<select id="selectBanner" resultType="bannerVO">
 		SELECT * FROM banner WHERE criteria = '기준'
 	</select>
+	<update id="updateBanner" parameterType="bannerVO">
+		UPDATE banner SET banner1_img = #{banner1_img}, banner1_text1=#{banner1_text1},
+										 banner1_text2=#{banner1_text2}, banner1_text3=#{banner1_text3},
+										 banner1_text4=#{banner1_text4} 
+										 WHERE criteria = '기준'
+	</update>
+	<update id="updateBannerText" parameterType="bannerVO">
+		UPDATE banner SET banner1_text1=#{banner1_text1},banner1_text2=#{banner1_text2}, 
+						   banner1_text3=#{banner1_text3},banner1_text4=#{banner1_text4} 
+						   WHERE criteria = '기준'
+	</update>
+	<update id="updateBanner2" parameterType="bannerVO">
+		UPDATE banner SET banner2_img = #{banner2_img}, banner2_text1=#{banner2_text1},
+										 banner2_text2=#{banner2_text2}, banner2_text3=#{banner2_text3},
+										 banner2_text4=#{banner2_text4} 
+										 WHERE criteria = '기준'
+	</update>
+	<update id="updateBannerText2" parameterType="bannerVO">
+		UPDATE banner SET banner2_text1=#{banner2_text1},banner2_text2=#{banner2_text2}, 
+						   banner2_text3=#{banner2_text3},banner2_text4=#{banner2_text4} 
+						   WHERE criteria = '기준'
+	</update>
+	
 </mapper>

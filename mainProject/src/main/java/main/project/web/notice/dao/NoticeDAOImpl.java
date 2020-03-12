@@ -1,5 +1,6 @@
 package main.project.web.notice.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -33,6 +34,19 @@ public class NoticeDAOImpl implements INoticeDAO{
 	@Override
 	public NoticeVO Notice_Detail(String noticeNum) {
 		return sqlSesstionTemplate.selectOne("main.project.web.notice.dao.INoticeDAO.Notice_Detail",noticeNum);
+	}
+
+	@Override
+	public int totalNotice() {
+		return sqlSesstionTemplate.selectOne("main.project.web.notice.dao.INoticeDAO.totalNotice");
+	}
+
+	@Override
+	public List<NoticeVO> noticePage(int displayPost, int postNum) throws Exception {
+		HashMap data = new HashMap();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		return sqlSesstionTemplate.selectList("main.project.web.notice.dao.INoticeDAO.noticePage",data);
 	}
 
 }

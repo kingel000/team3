@@ -15,5 +15,15 @@
 	<select id="Notice_Detail" parameterType="String" resultType="noticeVO" >
 		 select * from board_notice where board_notice_num = #{noticeNum}
 	</select>
-	
+	<select id="totalNotice" resultType="int">
+		 SELECT COUNT(*) FROM board_notice
+	</select>
+	<select id="noticePage" parameterType="hashMap" resultType="noticeVO">
+		select * from (
+			select board_notice_num, board_notice_title, board_notice_info,
+	        board_notice_file, board_notice_date,
+			row_number() over(order by board_notice_num desc) as rNum
+			from board_notice) 
+		mb where rNum between #{displayPost} and #{postNum} order by board_notice_num desc
+	</select>
 </mapper>
