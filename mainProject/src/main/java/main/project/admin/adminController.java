@@ -600,7 +600,7 @@ public class adminController {
 			 bannerService.updateBannerText(bannerVO);
 		 }else {
 			System.out.println("이미지 있음");
-			String dbPath = "C:\\myProject\\MainProject\\images" + fileName;
+			String dbPath = "C:\\myProject\\MainProject\\images" + fileName; //경로저장
 			bannerVO.setBanner1_img(dbPath);
 			bannerService.updateBanner(bannerVO);
 		}
