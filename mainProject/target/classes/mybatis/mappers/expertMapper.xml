@@ -5,16 +5,22 @@
 <mapper namespace="main.project.web.member.dao.IExpertDAO">
 
 	<insert id="insertExpert"
-		parameterType="main.project.web.member.vo.ExpertVO">
+		parameterType="expertVO">
 		INSERT INTO member_expert(id,name,tel,career,point)
 		VALUES(#{id},#{name},#{tel},#{career},#{point})
 	</insert>
 
 	<update id="updateExpert"
-		parameterType="main.project.web.member.vo.ExpertVO">
+		parameterType="expertVO">
 		UPDATE member_expert
 		SET tel=#{tel},career=#{career},point=#{point}
 		WHERE id=#{id}
+	</update>
+	
+	<update id="updatePointExpert" parameterType="expertVO">
+	UPDATE member_expert
+	SET point=#{point}
+	WHERE id=#{id}
 	</update>
 
 	<delete id="deleteExpert" parameterType="String">
@@ -22,7 +28,7 @@
 	</delete>
 
 	<select id="selectExpert" parameterType="String"
-		resultType="main.project.web.member.vo.ExpertVO">
+		resultType="expertVO">
 		SELECT * FROM member_expert
 		WHERE id=#{expert_id}
 	</select>

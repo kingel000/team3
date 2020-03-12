@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="main.project.web.point.dao.IPointDAO">
+	
+	<insert id="insertPoint" parameterType="pointVO">
+		INSERT INTO
+		point_manager VALUES (#{expert_id},#{p_point},sysdate,#{p_state})
+	</insert>
+	
+	<update id="udatePoint" parameterType="pointVO">
+		UPDATE point_manager
+		SET
+		p_state=#{p_state}
+		WHERE
+		expert_id=#{expert_id}
+	</update>
+	
+	<select id="selectPoint" parameterType="String"
+		resultType="pointVO">
+		SELECT * FROM point_manager WHERE expert_id = #{expertId}
+	</select>
+	
+	<select id="selectPointId" parameterType="String"
+		resultType="pointVO">
+		SELECT * FROM point_manager WHERE expert_id = #{expertId}
+	</select>
+	
+	
+	
+	<select id="selectState" resultType="Integer"  parameterType="String">
+	select count(*) from point_manager where p_state=#{p_state}
+	
+	</select>
+	
+	
+	
+</mapper>

@@ -48,6 +48,13 @@ public class ExpertDAOImpl implements IExpertDAO {
 
 		
 	}
+	
+	@Override
+	public void updatePointExpert(ExpertVO expert) {
+		 sqlSessiontemplate.update("main.project.web.member.dao.IExpertDAO.updatePointExpert",expert);
+
+		
+	}
 
 	@Override
 	public void insertRankExpert(String id) {
@@ -60,6 +67,8 @@ public class ExpertDAOImpl implements IExpertDAO {
 	public Integer totalMember_expert() {
 		return sqlSessiontemplate.selectOne("main.project.web.member.dao.IExpertDAO.totalMember_expert");
 	}
+
+	
 
 
 		

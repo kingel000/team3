@@ -118,6 +118,20 @@
             </div>
          </li>
          
+          <c:choose>
+            <c:when test="${member.rank == 'E'}">
+                <li class="group">
+               <div class="box">
+                    <a href="/web/member/pointManager.do">
+                     <h3>Point</h3>
+                     <p>출금 관리</p>
+                  </a>
+                </div>
+            </li>
+            
+            </c:when>
+         </c:choose> 
+         
          <c:choose>
             <c:when test="${member.rank == 'E'}">
                 <li class="group">

@@ -9,6 +9,7 @@ public interface IExpertService {
    void deleteExpert(String id);
    void updateExpert(ExpertVO expert);
    void updateRankExpert(String id);
+   void updatePointExpert(ExpertVO expert);
    ExpertVO selectExpert(String id);
    Integer totalMember_expert();
    

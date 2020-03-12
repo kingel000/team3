@@ -1,5 +1,6 @@
 package main.project.web.member.controller;
 
+import java.util.List;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -21,6 +22,9 @@ import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
 import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
+import main.project.web.point.dao.IPointDAO;
+import main.project.web.point.service.IPointService;
+import main.project.web.point.vo.PointVO;
 import main.project.web.product.service.IProductService;
 @Controller("memberController")
 @RequestMapping(value="/member")
@@ -33,6 +37,8 @@ public class MemberController {
 	private JavaMailSender mailSender;
 	@Autowired
 	private IProductService productService;
+	@Autowired
+	private IPointService pointService;
 
 	@RequestMapping(value="/login.do", method = RequestMethod.GET)
 	public String memberLogin(Model model) {
@@ -148,9 +154,46 @@ public class MemberController {
 	public String memberMyPage(HttpSession session,Model model) {
 		System.out.println("mypage GET 호출");
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		ExpertVO exeprtVO = expertService.selectExpert(memberVO.getId());
+		System.out.println("MYPAGE 진입 계정 expertVO : " + exeprtVO);
+		System.out.println("MYPAGE 진입 계정 memberVO : " + memberVO);
+		model.addAttribute("expert",exeprtVO);
 		model.addAttribute("member",memberVO);
 		return "member/mypage.page";
 	}
+	
+	@RequestMapping(value="/point.do", method = RequestMethod.POST)
+	public String point(ExpertVO expert,Integer point,HttpSession session,Model model) {
+		System.out.println("point.do POST 호출");
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		if(memberVO == null) {
+			return "redirect:/main/main.do";
+		}
+		ExpertVO expertVO = expertService.selectExpert(memberVO.getId());
+		System.out.println("출금 원하는 멤버의 원래 포인트 : " + expertVO.getPoint() );
+		System.out.println("출금 원하는 포인트 : " + point);
+		Integer Point = expertVO.getPoint() - point ;
+		System.out.println("업데이트 해야 할 포인트 : "  + Point);
+		expertVO.setPoint(Point);
+		expertService.updatePointExpert(expertVO);
+		PointVO p = new PointVO(expertVO.getId(),point,"대기중");
+		System.out.println(p);
+		pointService.insertPoint(p);
+		return "redirect:/member/pointManager.do";
+	}
+	
+	@RequestMapping(value="/pointManager.do", method = RequestMethod.GET)
+	public String pointManager(HttpSession session,Model model) {
+		System.out.println("pointManager GET 호출");
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		List<PointVO> pointList = pointService.selectPointId(memberVO.getId());
+		model.addAttribute("pointList",pointList);
+		for(PointVO list : pointList) {
+			System.out.println("해당 계정에 담긴 출금 내역 : "  + list);
+		}
+		return "member/pointManager.page";
+	}
+	
 
 	@RequestMapping(value="/editMember.do", method=RequestMethod.GET)
 	public String editMember(HttpSession session, Model model) {

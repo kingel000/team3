@@ -5,6 +5,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="main.project.web.member.vo.MemberVO" alias="memberVO"></typeAlias>
+		<typeAlias type="main.project.web.member.vo.ExpertVO" alias="expertVO"/>
 		<typeAlias type="main.project.web.question.vo.QuestionVO" alias="questionVO"></typeAlias>
 		<typeAlias type="main.project.web.question.vo.PagingVO" alias="pagingVO"></typeAlias>
 		<typeAlias type="main.project.web.product.vo.ProductVO" alias="productVO"></typeAlias>
@@ -15,7 +16,8 @@
 		<typeAlias type="main.project.admin.board.vo.AdminBoardNoticeVO" alias="abnVO"></typeAlias>
 		<typeAlias type="main.project.web.purchase.vo.CartVO" alias="cartVO"></typeAlias>
 		<typeAlias type="main.project.web.banner.vo.BannerVO" alias="bannerVO"></typeAlias>
-		<typeAlias type="main.project.web.notice.vo.NoticeVO" alias="noticeVO"></typeAlias>		
+		<typeAlias type="main.project.web.notice.vo.NoticeVO" alias="noticeVO"></typeAlias>
+		<typeAlias type="main.project.web.point.vo.PointVO" alias="pointVO"></typeAlias>		
 	</typeAliases>
 	
 	<mappers>
@@ -29,5 +31,6 @@
 		<mapper resource="mybatis/mappers/boardNoticeMapper.xml" />
 		<mapper resource="mybatis/mappers/bannerMapper.xml" />
 		<mapper resource="mybatis/mappers/noticeMapper.xml" />
+		<mapper resource="mybatis/mappers/pointMapper.xml" />
 	</mappers>
 </configuration>

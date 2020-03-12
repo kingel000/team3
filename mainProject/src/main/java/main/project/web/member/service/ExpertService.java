@@ -41,6 +41,13 @@ public class ExpertService implements IExpertService {
 
 		
 	}
+	
+	@Override
+	public void updatePointExpert(ExpertVO expert) {
+		expertDAO.updatePointExpert(expert);
+
+		
+	}
 
 	@Override
 	public void insertRankExpert(String id) {
@@ -53,5 +60,7 @@ public class ExpertService implements IExpertService {
 	public Integer totalMember_expert() {
 		return expertDAO.totalMember_expert();
 	}
+
+	
 
 }

@@ -12,7 +12,7 @@
    <style>
    .editBoard{
    width : 1000px;
-   
+   align-content : center;
    margin:0 auto
    }   
    table{
