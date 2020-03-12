@@ -26,24 +26,46 @@ public class QuestionController {
 	
 	//문의사항 이동
 	@RequestMapping(value="/question.do", method= RequestMethod.GET)
-	public String questionMain( Model model, HttpSession session, QuestionVO question, PagingVO vo,
-			@RequestParam(value="nowPage", required=false)String nowPage,
-			@RequestParam(value="cntPerPage", required=false)String cntPerPage) {
+	public String questionMain(@RequestParam(value="num")int num, Model model, 
+			HttpSession session, QuestionVO question) throws Exception {
 		System.out.println("문의사항게시판 이동");	
+		int count = questionService.selectTotal();
+		System.out.println(count);
+		// 한 페이지에 출력할 게시물 갯수
+		int postNum = 10;
+		// 출력할 게시물
+		int displayPost = (num - 1) * postNum;
+		// 한번에 표시할 페이징 번호의 갯수
+		int pageNum_cnt = 5;
 
-		int total = questionService.selectTotal();
-		if (nowPage == null && cntPerPage == null) {
-			nowPage = "1";
-			cntPerPage = "5";
-		} else if (nowPage == null) {
-			nowPage = "1";
-		} else if (cntPerPage == null) { 
-			cntPerPage = "5";
+		// 표시되는 페이지 번호 중 마지막 번호
+		int endPageNum = (int)(Math.ceil((double)num / (double)pageNum_cnt) * pageNum_cnt);
+
+		// 표시되는 페이지 번호 중 첫번째 번호
+		int startPageNum = endPageNum - (pageNum_cnt - 1);
+
+		// 마지막 번호 재계산
+		int endPageNum_tmp = (int)(Math.ceil((double)count / (double)postNum));
+
+		if(endPageNum > endPageNum_tmp) {
+			endPageNum = endPageNum_tmp;
 		}
-		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-		model.addAttribute("paging", vo);
-		List<QuestionVO> questionList = questionService.selectPage(vo);
-		model.addAttribute("questionList", questionList);
+		boolean prev = startPageNum == 1 ? false : true;
+		boolean next = endPageNum * postNum >= count ? false : true;
+		int num1 = num==1 ? 0 : 1;
+		List<QuestionVO> questionList = questionService.questionPage(displayPost+num1, postNum * num);
+		model.addAttribute("questionList",questionList);
+
+		// 시작 및 끝 번호
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+
+		// 이전 및 다음 
+		model.addAttribute("prev", prev);
+		model.addAttribute("next", next);
+
+		// 현재 페이지
+		model.addAttribute("select", num);
 
 		return "board/questionBoard.part2";
 	}

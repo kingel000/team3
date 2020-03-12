@@ -1,5 +1,6 @@
 package main.project.web.question.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -49,13 +50,16 @@ public class QuestionDAOImpl implements IQuestionDAO {
 	}
 
 	@Override
-	public List<QuestionVO> selectPage(PagingVO vo) {
-		return sqlSessionTemplate.selectList("main.project.web.question.dao.IQuestionDAO.selectPage", vo);
+	public List<QuestionVO> questionPage(int displayPost, int postNum) throws Exception {
+		HashMap data = new HashMap();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		return sqlSessionTemplate.selectList("main.project.web.question.dao.IQuestionDAO.questionPage", data);
 	}
 
-
-	
-
-	
+	@Override
+	public void rejoinderQuestion(QuestionVO question) {
+		sqlSessionTemplate.update("main.project.web.question.dao.IQuestionDAO.rejoinderQuestion", question);
+	}
 
 }

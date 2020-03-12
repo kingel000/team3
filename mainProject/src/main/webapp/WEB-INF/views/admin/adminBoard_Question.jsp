@@ -14,6 +14,11 @@
 	h2{text-align: center;}
 
 </style>
+<script language="javascript">  
+function openWin(num){  
+    window.open("/web/admin/adminBoardQuestionRejoinder.mdo?num="+num, "REJOINDER", "width=750, height=630, location=no, status=no, titlebar=no, toolbar=no, menubar=no, scrollbars=no" );  
+}
+</script> 
 </head>
 
 <body>
@@ -23,54 +28,76 @@
 			<thead>
 				<tr>							
 					<th>번호</th>
-					<th colspan=3>제목</th>
+					<th colspan="3">제목</th>
 					<th>작성자</th>
 					<th>작성일</th>
-					<th colspan=2>관리</th>
-					
-					
+					<th>상태</th>
 				<tr>
 			</thead>
-			
-		<tbody>
-		<!-- ****************현재 상품 판매 목록 출력 -->
-		<c:choose>
-			<c:when test="${adminBoardNoticeList != null }">
-			
-		
-				<c:set var="adminBoardNoticeList" value="${adminBoardNoticeList}" />
-				<c:forEach var="board_notice" items="${adminBoardNoticeList}">
-					<tr>						
-						<td>${board_notice.board_notice_num}</td>
-						<td></td>			
-						<td><a href="adminBoard_Notice_Detail.mdo?num=${board_notice.board_notice_num}">${board_notice.board_notice_title}</a></td>
-						<td></td>			
-						<td>관리자</td>
-						<!-- 희망 : 당일이면 시간 / 지난날이면 날짜로 출력 -->
-						<td><fmt:formatDate type="date" value="${board_notice.board_notice_date}"/></td>						
-						<td><a href="adminBoard_Notice_Update.mdo?num=${board_notice.board_notice_num}">수정</a></td>															
-						<td><a href="adminBoard_Notice_Delete.mdo?num=${board_notice.board_notice_num}">삭제</a></td>															
-					<tr>			
-				</c:forEach>
-			</c:when>
-			
-			<c:otherwise>
-			<tr>
-				<th colspan=7 >등록된 공지가 없습니다.</th>
-			</tr>
-			
-			</c:otherwise>	
-			
-		</c:choose>
-		
-		</tbody>
+			<tbody>
+			<!-- ****************현재 상품 판매 목록 출력 -->
+			<c:choose>
+				<c:when test="${adminBoardQuestionList != null }">
+					<c:set var="adminBoardQuestionList" value="${adminBoardQuestionList}" />
+					<c:forEach var="board_question" items="${adminBoardQuestionList}">
+						<tr>						
+							<td>${board_question.board_question_num}</td>
+							<td colspan="3"><a href="#" onclick="openWin(${board_question.board_question_num})">${board_question.board_question_title}</a></td>
+							<td>${board_question.board_question_writer}</td>
+							<!-- 희망 : 당일이면 시간 / 지난날이면 날짜로 출력 -->
+							<td><fmt:formatDate type="date" value="${board_question.board_question_date}"/></td>						
+							<td>${board_question.state}</td>															
+						<tr>			
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+				<tr>
+					<th colspan=7 >등록된 문의가 없습니다.</th>
+				</tr>
+				</c:otherwise>	
+			</c:choose>
+			</tbody>
 		</table>
-		
-		<div align="right">
-		<button type="button" onclick="location.href='/web/admin/adminBoard_Notice_Insert.mdo'" >글쓰기</button>
-		</div>                  
-
-
+		<div class="ps-pagination">
+			<ul class="pagination">
+				<c:choose>
+					<c:when test="${prev}">
+						<li>
+							<a href="/web/admin/adminBoardQuestion.mdo?num=${startPageNum - 1}">
+								<i class="fa fa-angle-left"></i>
+							</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li><div></div></li>
+					</c:otherwise>
+				</c:choose>
+				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
+					<li><c:choose>
+							<c:when test="${select == num}">
+								<li class="active">
+								<a href="/web/admin/adminBoardQuestion.mdo?num=${num}">${num}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="/web/admin/adminBoardQuestion.mdo?num=${num}">${num}</a>
+								</li>
+							</c:otherwise>
+						</c:choose></li>
+				</c:forEach>
+				<c:choose>
+					<c:when test="${next}">
+						<li>
+							<a href="/web/admin/adminBoardQuestion.mdo?num=${endPageNum + 1}">
+								<i class="fa fa-angle-right"></i>
+							</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li><div></div></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>
 	</div>
 
 </body>

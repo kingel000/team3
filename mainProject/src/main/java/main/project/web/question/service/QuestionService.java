@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import main.project.web.member.vo.MemberVO;
 import main.project.web.question.dao.IQuestionDAO;
 import main.project.web.question.vo.PagingVO;
 import main.project.web.question.vo.QuestionVO;
@@ -23,7 +24,6 @@ public class QuestionService implements IQuestionService {
 	@Override
 	public void deleteQuestion(QuestionVO question) {
 		questionDAO.deleteQuestion(question);
-
 	}
 
 	@Override
@@ -45,12 +45,14 @@ public class QuestionService implements IQuestionService {
 	public Integer selectTotal() {
 		return questionDAO.selectTotal();
 	}
-
+	
 	@Override
-	public List<QuestionVO> selectPage(PagingVO vo) {
-		return questionDAO.selectPage(vo);
+	public List<QuestionVO> questionPage(int displayPost, int postNum) throws Exception {
+		return questionDAO.questionPage(displayPost, postNum);
 	}
-
-
-
+	
+	@Override
+	public void rejoinderQuestion(QuestionVO question) {
+		questionDAO.rejoinderQuestion(question);
+	}
 }

@@ -11,7 +11,7 @@ public interface IQuestionService {
 	QuestionVO selectQuestion(QuestionVO question);
 	List<QuestionVO> selectListQuestion();
 	Integer selectNumQuestion();
-	List<QuestionVO> selectPage(PagingVO vo); 
 	Integer selectTotal();
-
+	List<QuestionVO> questionPage(int displayPost, int postNum) throws Exception;
+	void rejoinderQuestion(QuestionVO question);
 }
