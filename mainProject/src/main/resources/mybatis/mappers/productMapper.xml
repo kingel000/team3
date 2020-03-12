@@ -56,6 +56,10 @@
 		SELECT * FROM MEMBER WHERE ID = #{expert_id}
 	</select>
 	
+	<select id="selectThumbnail" parameterType="String" resultType="productVO" >
+		SELECT * FROM PRODUCT WHERE product_num = #{product_num}
+	</select>
+	
 	<select id="selectFindList" parameterType="findVO" resultType="productVO">
 		SELECT * FROM product WHERE 
 		<if test="category=='category'">

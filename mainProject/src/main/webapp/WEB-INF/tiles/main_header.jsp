@@ -37,7 +37,7 @@
 
 <!-- Custom-->
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
-
+<script type="text/javascript" src="<c:url value="/resources/js/home.js" />"></script>
 </head>
 
 <body>
@@ -93,23 +93,11 @@
 		  <input class="form-control" type="text" name="mainFindText" placeholder="상품명을 입력하세요">
 		  <button><i class="ps-icon-search"></i></button>
 		</form>
-		<div class="ps-cart"><a class="ps-cart__toggle" href="#"><c:if test="${count != null }"><span><i>${count}</i></span></c:if><i class="ps-icon-shopping-cart"></i></a>
+		<div class="ps-cart" id="ps-cart">
 		  <div class="ps-cart__listing">
-			<div class="ps-cart__content">
+			<div class="ps-cart__content" id="ps-cart__content">
 			<!-- 장바구니 목록 -->
-				<c:if test="${cartList != null }">
-					<c:forEach var="cart" items="${cartList}" varStatus="status">
-						<div class="ps-cart-item"><a class="ps-cart-item__close" href="/web/purchase/deleteCart.do?num=${cart.num}"></a>
-							<div class="ps-cart-item__thumbnail">
-								<a href="/web/product/detailProduct.do?num=${cart.product_num}"></a><img src="<c:url value="/resources/images/cart-preview/1.jpg" />" >
-							</div>
-							<div class="ps-cart-item__content">
-								<a class="ps-cart-item__title" href="/web/product/detailProduct.do?num=${cart.product_num}">${cart.product_title }</a>
-								<p><span>Price:<i>${cart.price } ￦</i></span></p>
-							</div>
-						</div>
-					</c:forEach>
-				</c:if>
+				
 			</div>
 			<c:choose>
 	           	 <c:when test="${member.id == null}">

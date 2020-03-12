@@ -13,6 +13,7 @@ public interface IProductService {
 	void updateProduct(ProductVO product);
 	ProductVO selectProduct(String product_num);
 	MemberVO select_NickName(String expert_id);
+	ProductVO selectThumbnail(String product_num);
 	MemberVO select_Id(String product_num);
 	List<ProductVO> selectFindList(findVO find);
 	List<ProductVO> mainFindList(String mainFindText);

@@ -59,14 +59,12 @@ public class ProductVO {
 		this.product_date = product_date;
 	}
 
-
-
 	public String getThumbnail() {
 		return Thumbnail;
 	}
 
 	public void setThumbnail(String thumbnail) {
-		Thumbnail = thumbnail;
+		this.Thumbnail = thumbnail;
 	}
 
 	@Override
