@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.Resource;
 import javax.mail.Multipart;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -573,7 +575,9 @@ public class adminController {
    }
    
 	//--------홈페이지 관리
-	
+    @Resource(name="uploadPath")
+    String uploadPath;
+    
 	@RequestMapping(value = "/homePageManagement.mdo", method = RequestMethod.GET)
 	public String homePageManagement( HttpSession session , Model model){
 		BannerVO bannerVO = bannerService.selectBanner();
@@ -583,25 +587,25 @@ public class adminController {
 	}
 	
 	@RequestMapping(value = "/homePageManagement1.mdo", method = RequestMethod.POST)
-	public String homePageManagement1(@RequestParam("fileName")String fileName,BannerVO bannerVO,
-										@RequestParam("b1_text1")String b1_text1,@RequestParam("b1_text2")String b1_text2,@RequestParam("b1_text3")String b1_text3,@RequestParam("b1_text4")String b1_text4, 
-										HttpSession session , Model model){
-		bannerVO.setBanner1_text1(b1_text1);
-		bannerVO.setBanner1_text1(b1_text2);
-		bannerVO.setBanner1_text1(b1_text3);
-		bannerVO.setBanner1_text1(b1_text4);
+	public String homePageManagement1(@RequestParam("file1")MultipartFile file,BannerVO bannerVO,
+										HttpSession session , Model model)throws IOException{
+		bannerVO.setBanner1_text1(bannerVO.getBanner1_text1());
+		bannerVO.setBanner1_text1(bannerVO.getBanner1_text2());
+		bannerVO.setBanner1_text1(bannerVO.getBanner1_text3());
+		bannerVO.setBanner1_text1(bannerVO.getBanner1_text4());
 		
-		System.out.println("파일명: "+ fileName);
+		System.out.println("파일명: "+ file.getOriginalFilename());
 		 
 		 
 		 //db저장
-		 if(fileName.equals(null) || fileName.equals("")) {
+		 if(file.getOriginalFilename().equals(null) || file.getOriginalFilename().equals("")) {
 			 System.out.println("이미지 없음");
 			 bannerService.updateBannerText(bannerVO);
 		 }else {
 			System.out.println("이미지 있음");
-			String dbPath = "C:\\myProject\\MainProject\\images" + fileName; //경로저장
-			bannerVO.setBanner1_img(dbPath);
+			File target = new File(uploadPath+"/home/", file.getOriginalFilename());
+	        FileCopyUtils.copy(file.getBytes(), target);
+			bannerVO.setBanner1_img("/home/"+file.getOriginalFilename());
 			bannerService.updateBanner(bannerVO);
 		}
 
@@ -610,31 +614,24 @@ public class adminController {
 	}
 	
 	@RequestMapping(value = "/homePageManagement2.mdo", method = RequestMethod.POST)
-	public String homePageManagement2(MultipartHttpServletRequest request,BannerVO bannerVO, HttpSession session , Model model){
-		bannerVO.setBanner2_text1(request.getParameter("b2_text1"));
-		bannerVO.setBanner2_text2(request.getParameter("b2_text2"));
-		bannerVO.setBanner2_text3(request.getParameter("b2_text3"));
-		bannerVO.setBanner2_text4(request.getParameter("b2_text4"));
+	public String homePageManagement2(@RequestParam("file1")MultipartFile file,BannerVO bannerVO,
+										HttpSession session , Model model)throws IOException{
+		bannerVO.setBanner2_text1(bannerVO.getBanner2_text1());
+		bannerVO.setBanner2_text2(bannerVO.getBanner2_text2());
+		bannerVO.setBanner2_text3(bannerVO.getBanner2_text3());
+		bannerVO.setBanner2_text4(bannerVO.getBanner2_text4());
 		
-		MultipartFile file = request.getFile("file");
-		String path = request.getRealPath("/resources/images/slider/");
-		String fileName = file.getOriginalFilename();
-		File uploadFile = new File(path + fileName);
-//		 try {
-//			 file.transferTo(uploadFile);
-//		 }catch (IllegalStateException e) {
-//			e.printStackTrace();
-//		 }catch (IOException e) {
-//			e.printStackTrace();
-//		 }
+		System.out.println("파일명: "+ file.getOriginalFilename());
 		
-		 if(fileName.equals(null) || fileName.equals("")) {
+		//db 저장
+		if(file.getOriginalFilename().equals(null) || file.getOriginalFilename().equals("")) {
 			 System.out.println("이미지 없음");
-//			 bannerService.updateBannerText2(bannerVO);
+			 bannerService.updateBannerText2(bannerVO);
 		 }else {
 			System.out.println("이미지 있음");
-			String dbPath = "/resources/images/slider/" + fileName;
-			bannerVO.setBanner1_img(dbPath);
+			File target = new File(uploadPath+"/home/", file.getOriginalFilename());
+	        FileCopyUtils.copy(file.getBytes(), target);
+			bannerVO.setBanner2_img("/home/"+file.getOriginalFilename());
 			bannerService.updateBanner2(bannerVO);
 		}
 

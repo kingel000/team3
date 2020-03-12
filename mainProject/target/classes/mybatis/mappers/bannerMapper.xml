@@ -23,5 +23,10 @@
 										 banner2_text4=#{banner2_text4} 
 										 WHERE criteria = '기준'
 	</update>
+	<update id="updateBannerText2" parameterType="bannerVO">
+		UPDATE banner SET banner2_text1=#{banner2_text1},banner2_text2=#{banner2_text2}, 
+						   banner2_text3=#{banner2_text3},banner2_text4=#{banner2_text4} 
+						   WHERE criteria = '기준'
+	</update>
 	
 </mapper>

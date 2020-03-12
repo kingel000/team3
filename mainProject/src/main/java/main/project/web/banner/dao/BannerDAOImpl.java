@@ -36,6 +36,12 @@ public class BannerDAOImpl implements IBannerDAO {
 		
 	}
 
+	@Override
+	public void updateBannerText2(BannerVO bannerVO) {
+		sqlSessionTemplate.update("main.project.web.banner.dao.IBannerDAO.updateBannerText2", bannerVO);
+		
+	}
+
 	
 
 

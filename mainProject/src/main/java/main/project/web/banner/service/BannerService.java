@@ -35,6 +35,12 @@ public class BannerService implements IBannerService {
 		
 	}
 
+	@Override
+	public void updateBannerText2(BannerVO bannerVO) {
+		bannerDAO.updateBannerText2(bannerVO);
+		
+	}
+
 	
 
 }

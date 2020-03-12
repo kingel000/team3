@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,6 +38,37 @@ public class UploadController {
     @Resource(name="uploadPath")
     String uploadPath;
 
+    
+    // 2. 일반적인 업로드 처리 매핑
+    @RequestMapping(value="/upload/uploadForm", method=RequestMethod.POST)
+    public String uplodaForm(MultipartFile file, Model model) throws Exception{
+        // 파일의 원본이름 저장
+        String savedName = file.getOriginalFilename();
+        // 파일의 정보 로그 출력
+        logger.info("파일이름 :"+file.getOriginalFilename());
+        logger.info("파일크기 : "+file.getSize());
+        logger.info("컨텐트 타입 : "+file.getContentType());
+        // 랜덤생성+파일이름 저장하기 위해  파일명 랜덤생성 메서드호출 
+        savedName = uploadFile(savedName, file.getBytes());
+        
+        model.addAttribute("savedName", savedName);
+
+        return null; // uploadResult.jsp(결과화면)로 포워딩
+    }
+
+    // 3. 파일명 랜덤생성 메서드
+    private String uploadFile(String originalName, byte[] fileData) throws Exception{
+        // UUID 발급
+        UUID uuid = UUID.randomUUID();
+        // 파일명 = UUID + 원본이름
+        String savedName = uuid.toString() + "_" + originalName;
+        // 파일 경로, 파일명을 받아 파일 객체 생성
+        File target = new File(uploadPath, savedName);
+        // 임시디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사
+        // FileCopyUtils.copy(바이트배열, 파일객체)
+        FileCopyUtils.copy(fileData, target);
+        return savedName;
+    }
     // 업로드 흐름 : 업로드 버튼클릭 => 임시디렉토리에 업로드=> 지정된 디렉토리에 저장 => 파일정보가 file에 저장
 
     @ResponseBody // view가 아닌 data리턴
@@ -76,18 +108,21 @@ public class UploadController {
         try {
             // 확장자를 추출하여 formatName에 저장
             String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+            System.out.println("formatName:"+formatName);
             // 추출한 확장자를 MediaUtils클래스에서  이미지파일여부를 검사하고 리턴받아 mType에 저장
             MediaType mType = MediaUtils.getMediaType(formatName);
             // 헤더 구성 객체(외부에서 데이터를 주고받을 때에는 header와 body를 구성해야하기 때문에)
             HttpHeaders headers = new HttpHeaders();
             // InputStream 생성
             in = new FileInputStream(uploadPath + fileName);
+            System.out.println("uploadPath:"+uploadPath+";fileName:"+fileName);
             // 이미지 파일이면
             if (mType != null) { 
                 headers.setContentType(mType);
             // 이미지가 아니면
             } else { 
                 fileName = fileName.substring(fileName.indexOf("_") + 1);
+                System.out.println("fileName:"+fileName);
                 // 다운로드용 컨텐트 타입
                 headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
                 // 
@@ -108,6 +143,38 @@ public class UploadController {
         return entity;
     }
 
+    @ResponseBody // view가 아닌 data리턴
+    @RequestMapping("/display.do")
+    public ResponseEntity<byte[]> display(String fileName) throws Exception {
+        // 서버의 파일을 다운로드하기 위한 스트림
+        InputStream in = null; //java.io
+        ResponseEntity<byte[]> entity = null;
+        try {
+            // 확장자를 추출하여 formatName에 저장
+            String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+            // 추출한 확장자를 MediaUtils클래스에서  이미지파일여부를 검사하고 리턴받아 mType에 저장
+            MediaType mType = MediaUtils.getMediaType(formatName);
+            // 헤더 구성 객체(외부에서 데이터를 주고받을 때에는 header와 body를 구성해야하기 때문에)
+            HttpHeaders headers = new HttpHeaders();
+            // InputStream 생성
+            in = new FileInputStream(uploadPath + fileName);
+            // 이미지 파일이면
+            if (mType != null) { 
+                headers.setContentType(mType);
+            // 이미지가 아니면
+            } 
+            // 바이트배열, 헤더, HTTP상태코드
+            entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // HTTP상태 코드()
+            entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+        } finally {
+            in.close(); //스트림 닫기
+        }
+        return entity;
+    }
+    
     // 7. 파일 삭제 매핑
     @ResponseBody // view가 아닌 데이터 리턴
     @RequestMapping(value = "/deleteFile.do", method = RequestMethod.POST)
