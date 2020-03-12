@@ -75,6 +75,7 @@ public class ProductController {
 		boolean next = endPageNum * postNum >= count ? false : true;
 		
 		List<ProductVO> productCategory = productService.categoryPage(displayPost+(num==1 ? 0:1), (postNum * num)+1, category);
+		
 		List<String> nick = new ArrayList<String>(); 
 		System.out.println("----");
 		if(productCategory.size() != 0) {
@@ -239,6 +240,8 @@ public class ProductController {
 		System.out.println("detailProduct GET 받음 ");
 
 		ProductVO numProduct = productService.selectProduct(num);
+		System.out.println("상세페이지 : " + numProduct);
+		
 		model.addAttribute("numProduct",numProduct);
 		MemberVO nick_name = new MemberVO();
 		nick_name = productService.select_NickName(numProduct.getExpert_id());

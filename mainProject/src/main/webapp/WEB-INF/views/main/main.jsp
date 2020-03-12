@@ -96,7 +96,21 @@
 			  <div class="ps-shoes--carousel">
 				<div class="ps-shoe">
 				  <div class="ps-shoe__thumbnail">
-					<div class="ps-badge"><span>New</span></div><a class="ps-shoe__favorite" href="#"><i class="ps-icon-heart"></i></a><img src="<c:url value="/resources/images/shoe/1.jpg" />"  alt=""><a class="ps-shoe__overlay" href="/web/product/detailProduct.do?num=${newProduct.product_num}"></a>
+					<div class="ps-badge"><span>New</span></div>
+						<a class="ps-shoe__favorite" href="#">
+							<i class="ps-icon-heart"></i>
+						</a>
+						
+							<c:choose>
+									<c:when test="${newProduct.thumbnail == null}">
+										 <img src="<c:url value="/resources/images/basic2.jpg" />"  alt="">
+									</c:when>
+									<c:otherwise>
+										<img src="/web/ajax/display.do?fileName=${newProduct.thumbnail}" alt="#">
+									</c:otherwise>
+        					</c:choose>
+							
+						<a class="ps-shoe__overlay" href="/web/product/detailProduct.do?num=${newProduct.product_num}"></a>
 				  </div>			  
 				  <div class="ps-shoe__content">
 					<div class="ps-shoe__variants">
@@ -126,10 +140,7 @@
 				</div>
 			  </div>
 		  </c:forEach>
-<<<<<<< HEAD
-		  		  
-=======
->>>>>>> branch 'master' of https://github.com/kingel000/team3
+
 	  </div>
 	</div>
   </div>
