@@ -13,8 +13,8 @@
 		SELECT * FROM chat_content WHERE room_id = #{roomId} ORDER BY chat_seq
 	</select>
 	
-	<select id="selectNumCount" parameterType="String" resultType="Integer">
-		SELECT COUNT(1) FROM chat_content WHERE room_id = #{roomId}
+	<select id="selectNumCount" resultType="Integer">
+		SELECT COUNT(1) FROM chat_content
 	</select>
 	
 	<select id="selectReceiveCount" parameterType="String" resultType="Integer">
