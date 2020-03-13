@@ -5336,11 +5336,18 @@ textarea.form-control {
     .ps-product--detail .ps-product__thumbnail--mobile .ps-product__preview .owl-next {
       float: right; }
 
-.ps-product--detail .ps-product__info {
+.ps-product--detail {
   min-width: 444px;
   width: 444px;
   float: left;
   padding-left: 30px; }
+  
+ .ps-product__info {
+  min-width: 444px;
+  width: 444px;
+  float: left;
+  }
+  
   .ps-product--detail .ps-product__info h1 {
     font-family: "Archivo Narrow", sans-serif;
     font-size: 30px;
