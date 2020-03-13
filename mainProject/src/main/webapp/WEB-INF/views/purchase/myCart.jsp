@@ -29,7 +29,14 @@
 			<c:forEach var="cart" items="${cartList}" varStatus="status">
 				<ul class="cart_item">
 					<li class="cart_img_col">
-						<img src="https://i.imgur.com/3P8WF5D.jpg">
+						<c:choose>
+							<c:when test="${cart.thumbnail == null}">
+								<img src="<c:url value="/resources/images/basic2.jpg" />"  alt="">
+							</c:when>
+							<c:otherwise>
+								<img src="/web/ajax/displayFile.do?fileName=${cart.thumbnail}" alt="#">
+							</c:otherwise>
+        				</c:choose>
 					</li>
 					<li class="cart_product_col">
 						<p><c:out value="${cart.product_title } " /></p>
