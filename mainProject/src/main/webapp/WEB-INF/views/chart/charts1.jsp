@@ -35,6 +35,7 @@
 	var category_totalSales2 = '${category_totalSales2}';
 	var category_totalSales3 = '${category_totalSales3}';
 	var category_totalSales4 = '${category_totalSales4}';
+	var category_totalSales5 = '${category_totalSales5}';
 	
 	var M1 = '${M1}'; var M2 = '${M2}'; var M3 = '${M3}'; var M4 = '${M4}'; var M5 = '${M5}';
 	var M6 = '${M6}'; var M7 = '${M7}'; var M8 = '${M8}'; var M9 = '${M9}'; var M10 = '${M10}';

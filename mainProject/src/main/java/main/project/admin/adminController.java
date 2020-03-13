@@ -885,8 +885,8 @@ public class adminController {
 
 		//카테고리별 판매통계
 		List<ProductVO> category_product_num;
-		Integer category_totalSales1=0, category_totalSales2=0, category_totalSales3=0, category_totalSales4=0;
-		String[] category = {"웹 개발", "모바일앱·웹", "게임", "응용프로그래밍"};
+		Integer category_totalSales1=0, category_totalSales2=0, category_totalSales3=0, category_totalSales4=0, category_totalSales5=0;
+		String[] category = {"웹 개발", "모바일앱·웹", "게임", "응용프로그래밍", "기타"};
 		for(String c : category) {
 			if(c == "웹 개발") {
 				category_product_num = productService.category_product_num(c);
@@ -908,12 +908,19 @@ public class adminController {
 				for(ProductVO p : category_product_num) {
 					category_totalSales4 += purchaseService.productNum_PurchaseCount(p.getProduct_num());
 				}
+			}else if (c == "기타") {
+				category_product_num = productService.category_product_num(c);
+				for(ProductVO p : category_product_num) {
+					category_totalSales5 += purchaseService.productNum_PurchaseCount(p.getProduct_num());
+				}
 			} 
 		}
+		System.out.println("####"+category_totalSales5);
 		model.addAttribute("category_totalSales1", category_totalSales1);
 		model.addAttribute("category_totalSales2", category_totalSales2);
 		model.addAttribute("category_totalSales3", category_totalSales3);
 		model.addAttribute("category_totalSales4", category_totalSales4);
+		model.addAttribute("category_totalSales5", category_totalSales5);
 		return "chart/charts1";
 	}
 
