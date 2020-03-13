@@ -63,16 +63,15 @@
 					<c:forEach var="product" items="${mainFindList}" varStatus="status">
 						<div class="ps-product__column">
 							<div class="ps-shoe__thumbnail">
-							<c:choose>
-								<c:when test="">
-								
-								</c:when>
-								
+							
+								<c:choose>
+									<c:when test="${product.thumbnail == null}">
+										 <img src="<c:url value="/resources/images/basic2.jpg" />"  alt="">
+									</c:when>
 									<c:otherwise>
-									
+										<img src="/web/ajax/display.do?fileName=${product.thumbnail}" alt="#" style="width: 247px; height: 180px;">
 									</c:otherwise>
-							</c:choose>
-								<img src="<c:url value="/web/img/e5e26848-35c4-486c-83c5-dd901c5f493a"/>" alt="#">
+        						</c:choose>
 							
 								<!--  <img src="<c:url value="/resources/images2/123.png"/>" alt="#">-->
 								<a class="ps-shoe__overlay" href="product-detail.html"></a>

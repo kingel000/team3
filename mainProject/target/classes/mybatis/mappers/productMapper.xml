@@ -8,23 +8,23 @@
 		<choose>
 			<when test = "category == '웹 개발'">
 				(('A'||LPAD(product_num_seq_A.nextval,3,0)),#{category},#{product_title},#{expert_id},
-				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{Thumbnail})
+				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{thumbnail})
 			</when>
 			 <when test = "category == '모바일앱·웹'">
 				(('B'||LPAD(product_num_seq_B.nextval,3,0)),#{category},#{product_title},#{expert_id},
-				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{Thumbnail})
+				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{thumbnail})
 			</when>
 			<when test = "category == '게임'">
 				(('C'||LPAD(product_num_seq_C.nextval,3,0)),#{category},#{product_title},#{expert_id},
-				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{Thumbnail})
+				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{thumbnail})
 			</when>
 			<when test = "category == '응용프로그래밍'">
 				(('D'||LPAD(product_num_seq_D.nextval,3,0)),#{category},#{product_title},#{expert_id},
-				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{Thumbnail})
+				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{thumbnail})
 			</when>
 			<when test = "category == '기타'">
 				(('E'||LPAD(product_num_seq_E.nextval,3,0)),#{category},#{product_title},#{expert_id},
-				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{Thumbnail})
+				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{thumbnail})
 			</when> 
 		</choose>
 	</insert>
@@ -135,9 +135,9 @@
 	
 	<!-- 게시물 정렬 후 설정한 범위 select -->
 	<select id="categoryPage" resultType="productVO" parameterType="hashMap">
-		select product_num, category, product_title, expert_id, product_date
+		select product_num, category, product_title, expert_id, product_date, thumbnail
 		from (
-		select product_num, category, product_title, expert_id, product_date,
+		select product_num, category, product_title, expert_id, product_date, thumbnail,
 		row_number() over(order by product_num desc) as rNum
 		from product where category=#{category}
 		) mb

@@ -17,9 +17,15 @@ $(document).ready(function(){
 					$('#ps-cart').append("<a class='ps-cart__toggle' href='#'><span><i>"+count+"</i></span><i class='ps-icon-shopping-cart'></i></a>");
 					for(var i=0;i<data.length;i++	){
 						$('#ps-cart__content').append("<div class='ps-cart-item'><a class='ps-cart-item__close' href='/web/purchase/deleteCart.do?num="+data[i].num+"'></a>"
-								+"<div class='ps-cart-item__thumbnail'><a href='/web/product/detailProduct.do?num="+data[i].product_num+"'></a>"
-								+"<img src=\"/web/ajax/display.do?fileName=/mail.png\">"
-								+"</div><div class='ps-cart-item__content'><a class='ps-cart-item__title' href='/web/product/detailProduct.do?num="+data[i].product_num
+								+"<div class='ps-cart-item__thumbnail'><a href='/web/product/detailProduct.do?num="+data[i].product_num+"'></a>");
+						if(data[i].thumbnail == null){
+							$('#ps-cart__content').append("<img src=\"/web/resources/images/basic2.jpg\">");
+						}else{
+							$('#ps-cart__content').append("<img src=\"/web/ajax/displayFile.do?fileName="+data[i].thumbnail+"\">");
+						}		
+						
+						
+						$('#ps-cart__content').append("</div><div class='ps-cart-item__content'><a class='ps-cart-item__title' href='/web/product/detailProduct.do?num="+data[i].product_num
 								+"'>"+data[i].product_title+"</a><p><span>Price:<i>"+data[i].price+" ￦</i></span></p></div></div>");
 					}
 				}else{
