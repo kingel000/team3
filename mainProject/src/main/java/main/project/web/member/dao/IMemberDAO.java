@@ -20,7 +20,7 @@ public interface IMemberDAO {
 	List<MemberVO> selectAllMember();
 	List<MemberVO> selectFindList(findVO find);
 	Integer totalMember();
-	public List<MemberVO> memberPage(int displayPost, int postNum) throws Exception;
+	List<MemberVO> memberPage(int displayPost, int postNum) throws Exception;
 
 }
 

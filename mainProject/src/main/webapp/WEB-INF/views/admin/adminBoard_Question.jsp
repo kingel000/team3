@@ -16,7 +16,7 @@
 </style>
 <script language="javascript">  
 function openWin(num){  
-    window.open("/web/admin/adminBoardQuestionRejoinder.mdo?num="+num, "REJOINDER", "width=750, height=630, location=no, status=no, titlebar=no, toolbar=no, menubar=no, scrollbars=no" );  
+    window.open("/web/admin/adminBoardQuestionRejoinder.mdo?num="+num, "REJOINDER", "width=835, height=650, location=no, status=no, titlebar=no, toolbar=no, menubar=no, scrollbars=no" );  
 }
 </script> 
 </head>

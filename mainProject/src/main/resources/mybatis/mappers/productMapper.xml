@@ -30,7 +30,7 @@
 	</insert>
 	<update id="updateProduct" parameterType="productVO">
 		UPDATE product SET
-		category=#{category},product_title=#{product_title},product_info=#{product_info}
+		category=#{category},product_title=#{product_title},product_info=#{product_info},thumbnail=#{thumbnail}
 		WHERE product_num=#{product_num}
 	</update>
 	<delete id="deleteProduct" parameterType="productVO">

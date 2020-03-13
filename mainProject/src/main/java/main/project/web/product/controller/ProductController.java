@@ -1,7 +1,6 @@
 package main.project.web.product.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
@@ -74,7 +71,7 @@ public class ProductController {
 		boolean prev = startPageNum == 1 ? false : true;
 		boolean next = endPageNum * postNum >= count ? false : true;
 		
-		List<ProductVO> productCategory = productService.categoryPage(displayPost+(num==1 ? 0:1), (postNum * num)+1, category);
+		List<ProductVO> productCategory = productService.categoryPage(displayPost, postNum * num, category);
 		
 		List<String> nick = new ArrayList<String>(); 
 		System.out.println("----");
@@ -104,18 +101,42 @@ public class ProductController {
 	
 	@RequestMapping(value = "/alignmentProduct.do", method = RequestMethod.POST)
 	   public String alignmentProduct(@RequestParam String alignment,ProductVO product, Model model, HttpSession session) {
+		
 	      String category = product.getCategory();
 	      if(alignment == "최신등록순" || alignment.equals("최신등록순")) {
 	    	  System.out.println("최신등록순");
 	         List<ProductVO> productList = productService.newAlignmentList(category);
+	         List<String> nick = new ArrayList<String>(); 
+	 		System.out.println("----");
+	 		if(productList.size() != 0) {
+	 			for(ProductVO productVO : productList) {
+	 				nick.add(memberService.checkMemberId(productVO.getExpert_id()).getNick_name());
+	 			}
+	 			if(productList.size() >=1) {
+	 				System.out.println(productList.get(0).getThumbnail());
+	 			}
+
+	 			model.addAttribute("nick",nick);
 	         model.addAttribute("productList",productList);
+	      }
 	      }else {
 	    	  System.out.println("이름");
 	         List<ProductVO> productList = productService.nameAlignmentList(category);
+	         List<String> nick = new ArrayList<String>(); 
+		 		System.out.println("----");
+		 		if(productList.size() != 0) {
+		 			for(ProductVO productVO : productList) {
+		 				nick.add(memberService.checkMemberId(productVO.getExpert_id()).getNick_name());
+		 			}
+		 			if(productList.size() >=1) {
+		 				System.out.println(productList.get(0).getThumbnail());
+		 			}
+
+		 			model.addAttribute("nick",nick);
 	         model.addAttribute("productList",productList);
 	      }
 
-	      
+	      }
 	      MemberVO member = (MemberVO) session.getAttribute("member");
 	      if(member != null) {
 	         List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
@@ -187,10 +208,9 @@ public class ProductController {
 		}
 		boolean prev = startPageNum == 1 ? false : true;
 		boolean next = endPageNum * postNum >= count ? false : true;
-		int num1 = num==1 ? 0 : 1;
 		expert.setId(sessionId.getId());
 		session.setAttribute("expert",expert);
-		productList = productService.listPage(displayPost+num1, (postNum * num)+1, sessionId.getId());
+		productList = productService.listPage(displayPost, postNum * num, sessionId.getId());
 		model.addAttribute("productList", productList);
 		model.addAttribute("pageNum", pageNum);
 
@@ -223,11 +243,12 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="/updateProduct.do", method = RequestMethod.POST)
-	public String updateProduct(ProductVO product, Model model , HttpSession session) {
+	public String updateProduct(ProductVO product, Model model , HttpSession session,@RequestParam("fileName")String fileName) {
 		System.out.println("updateProduct.do POST 받음 ");
+		product.setThumbnail(fileName);
 		System.out.println(product);
 		productService.updateProduct(product);
-		return "/product/boardManager.page";
+		return "redirect:/product/boardManager.do?num=1";
 	}
 	
 	@RequestMapping(value="/deleteProduct.do", method = RequestMethod.GET)

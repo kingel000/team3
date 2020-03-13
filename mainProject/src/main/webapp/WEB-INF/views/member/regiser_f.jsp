@@ -53,7 +53,7 @@
 	<div class="logoBox">
 		<div>
 			<a href="/web/main/main.do"><img
-				src="<c:url value="/resources/images/logo.png" />" alt="logo"></a>
+				src="<c:url value="/resources/images/logo.jpg" />" alt="logo"></a>
 		</div>
 	</div>
 <div id="email_form">

@@ -1,5 +1,6 @@
 package main.project.web.point.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,9 +28,11 @@ public class PointDAOImpl implements IPointDAO {
 	}
 
 	@Override
-	public List<PointVO> selectPoint() {
-		 return sqlSessionTemplate.selectList("main.project.web.point.dao.IPointDAO.selectPoint");
-
+	public List<PointVO> selectPoint(int displayPost, int postNum) throws Exception {
+		HashMap<String, Integer> data = new HashMap<String, Integer>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		return sqlSessionTemplate.selectList("main.project.web.point.dao.IPointDAO.selectPoint", data);
 	}
 
 	@Override
@@ -46,11 +49,4 @@ public class PointDAOImpl implements IPointDAO {
 	public Integer selectState(String state) {
 		return sqlSessionTemplate.selectOne("main.project.web.point.dao.IPointDAO.selectState",state);
 	}
-
-
-
-	
-	
-
-
 }

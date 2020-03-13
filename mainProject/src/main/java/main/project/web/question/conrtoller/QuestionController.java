@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.question.service.IQuestionService;
-import main.project.web.question.vo.PagingVO;
 import main.project.web.question.vo.QuestionVO;
 
 
@@ -84,11 +83,13 @@ public class QuestionController {
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		String id = member.getId();
 		question.setBoard_question_writer(id);	
-		int questionNum = questionService.selectNumQuestion();
-		int num = questionNum;
+		Integer questionNum = questionService.selectNumQuestion();
+		if(questionNum == null) {
+			questionNum = 1;
+		}
 
 		question.setBoard_question_writer(id);	
-		question.setBoard_question_num(num);
+		question.setBoard_question_num(questionNum);
 		question.setState("Á¢¼ö Áß");
 
 		questionService.insertQuestion(question);

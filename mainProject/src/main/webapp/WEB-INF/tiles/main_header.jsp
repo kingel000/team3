@@ -90,7 +90,7 @@
 			</ul>
 	  </div>
 	  <div class="navigation__column right">
-		<form class="ps-search--header" action="mainFind.do" method="post">
+		<form class="ps-search--header" action="/web/main/mainFind.do" method="post">
 		  <input class="form-control" type="text" name="mainFindText" placeholder="상품명을 입력하세요">
 		  <button><i class="ps-icon-search"></i></button>
 		</form>

@@ -9,6 +9,7 @@ import main.project.admin.board.vo.AdminBoardNoticeVO;
 public interface adminIBoardNoticeDAO {
 	
 	void insertAbnVO(AdminBoardNoticeVO abnVO);
+	List<AdminBoardNoticeVO> selectListAdminBoardNotice(int displayPost, int postNum) throws Exception;
 	List<AdminBoardNoticeVO> selectListAdminBoardNotice();
 	Integer selectBoardNoticeNumber();
 	AdminBoardNoticeVO adminBoardNotice_Detail(@Param("boardNum")String boardNum);

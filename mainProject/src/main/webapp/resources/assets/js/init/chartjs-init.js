@@ -380,11 +380,11 @@
     var myChart = new Chart( ctx, {
         type: 'bar',
         data: {
-            labels: [ "웹개발", "모바일앱웹", "게임", "응용프로그래밍" ],
+            labels: [ "웹개발", "모바일앱웹", "게임", "응용프로그래밍", "기타" ],
             datasets: [
                 {
                     label: "총 판매량",
-                    data: [ category_totalSales1, category_totalSales2, category_totalSales3, category_totalSales4 ],
+                    data: [ category_totalSales1, category_totalSales2, category_totalSales3, category_totalSales4, category_totalSales5 ],
                     borderColor: "rgba(0, 194, 146, 0.9)",
                     borderWidth: "0",
                     backgroundColor: "rgba(0, 194, 146, 0.5)"

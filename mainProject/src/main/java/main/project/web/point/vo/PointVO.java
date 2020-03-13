@@ -9,7 +9,7 @@ public class PointVO {
 	private Integer p_point;
 	private Date p_date;
 	private String p_state;
-	
+	private Integer rNum;
 	public PointVO() {}
 
 	
@@ -52,7 +52,12 @@ public class PointVO {
 	public void setP_state(String p_state) {
 		this.p_state = p_state;
 	}
-
+	public Integer getrNum() {
+		return rNum;
+	}
+	public void setrNum(Integer rNum) {
+		this.rNum = rNum;
+	}
 
 	@Override
 	public String toString() {

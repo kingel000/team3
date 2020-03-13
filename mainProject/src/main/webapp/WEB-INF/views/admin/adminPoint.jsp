@@ -105,14 +105,13 @@ function checkCancel() {
 				</ul>
 			</div>
 			<form action="/web/admin/point.mdo" method="post">
-              	 <select name="category">
+              	 <select name="category" style="width:80px;height:25px;">
               		 <option value="" selected disabled hidden>= 선택  =</option>
                  	 <option value="date">날짜</option>
                  	 <option value="expert">판매자</option>
               	 </select>
-		 		 <input type="text" name="findText" placeholder="검색어를 입력해주세요">
+		 		 <input type="text" name="findText" placeholder="검색어를 입력해주세요" >
 		 		 <input type="submit" value="검색" />
-		 		
 			</form>
 	</div>
 </body>

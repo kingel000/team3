@@ -217,7 +217,7 @@ public class adminController {
 		member.setId(id);
 		System.out.println(member);
 		memberService.admindeleteMember(member);
-		return "redirect:/admin/memberManager.mdo";
+		return "redirect:/admin/memberManager.mdo?num=1";
 	}
 
 	@RequestMapping(value = "/adminmemberEdit.mdo", method= RequestMethod.GET)
@@ -256,7 +256,7 @@ public class adminController {
 			System.out.println("변경한 RANK = N 진입");
 			expertService.deleteExpert(member.getId());
 		}
-		return "redirect:/admin/memberManager.mdo";
+		return "redirect:/admin/memberManager.mdo?num=1";
 	}
 
 	@RequestMapping(value = "/memberfind.mdo", method= RequestMethod.POST)
@@ -326,7 +326,7 @@ public class adminController {
 	public String adminProductDelete(@RequestParam String num,ProductVO product, HttpSession session , Model model) {
 		product.setProduct_num(num);
 		productService.deleteProduct(product);
-		return "redirect:/admin/adminProduct.mdo";
+		return "redirect:/admin/adminProduct.mdo?num=1";
 	}
 
 	@RequestMapping(value = "/adminDetailProduct.mdo", method= RequestMethod.GET)
@@ -401,7 +401,7 @@ public class adminController {
 		int count = purchaseService.countPurchase();
 		System.out.println(count);
 		// 한 페이지에 출력할 게시물 갯수
-		int postNum = 5;
+		int postNum = 10;
 		// 출력할 게시물
 		int displayPost = (num - 1) * postNum;
 		// 한번에 표시할 페이징 번호의 갯수
@@ -464,12 +464,50 @@ public class adminController {
 		purchase.setPurchase_state("Cancel");
 		purchaseService.updatePurchase(purchase);
 		pay.cancelPayment(pay.getImportToken(),purchase.getPurchase_num(),"Master Cancel");
-		return "redirect:/admin/adminpurchase.mdo";
+		return "redirect:/admin/adminpurchase.mdo?num=1";
 	}
 	// 금액관리
 	@RequestMapping(value="/adminPoint.mdo",method=RequestMethod.GET)
-	public String adminPoint(Model model) {
-		model.addAttribute("pointList", pointService.selectPoint());
+	public String adminPoint(@RequestParam("num") int num, Model model) throws Exception {
+		// 게시물 총 갯수
+		int count = pointService.selectCount();
+		System.out.println(count);
+		// 한 페이지에 출력할 게시물 갯수
+		int postNum = 10;
+		// 출력할 게시물
+		int displayPost = (num - 1) * postNum;
+		// 한번에 표시할 페이징 번호의 갯수
+		int pageNum_cnt = 5;
+
+		// 표시되는 페이지 번호 중 마지막 번호
+		int endPageNum = (int)(Math.ceil((double)num / (double)pageNum_cnt) * pageNum_cnt);
+
+		// 표시되는 페이지 번호 중 첫번째 번호
+		int startPageNum = endPageNum - (pageNum_cnt - 1);
+
+		// 마지막 번호 재계산
+		int endPageNum_tmp = (int)(Math.ceil((double)count / (double)postNum));
+
+		if(endPageNum > endPageNum_tmp) {
+			endPageNum = endPageNum_tmp;
+		}
+		boolean prev = startPageNum == 1 ? false : true;
+		boolean next = endPageNum * postNum >= count ? false : true;
+		int num1 = num==1 ? 0 : 1;
+		List<PointVO> pointList = pointService.selectPoint(displayPost+num1, postNum * num);
+		model.addAttribute("pointList", pointList);
+
+		// 시작 및 끝 번호
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+
+		// 이전 및 다음 
+		model.addAttribute("prev", prev);
+		model.addAttribute("next", next);
+
+		// 현재 페이지
+		model.addAttribute("select", num);
+
 		return "admin/adminPoint.page2";
 	}
 	
@@ -479,25 +517,45 @@ public class adminController {
 		System.out.println(point);
 		pointService.updatePoint(point);
 		
-		return "redirect:/admin/adminPoint.mdo";
+		return "redirect:/admin/adminPoint.mdo?num=1";
 	}
 	
 	//<!-- *******BeakRyun_20200305 -->
 	//-----------AdminBoardNotice_Main_GET
 	@RequestMapping(value = "/adminBoardNotice.mdo", method= RequestMethod.GET)	//Site Address
-	public String adminBoardNotice(HttpSession session, Model model) {
+	public String adminBoardNotice(@RequestParam("num") int num, HttpSession session, Model model) throws Exception {
 		System.out.println("adminBoardNotice GET Call");
-
-		List<AdminBoardNoticeVO> adminBoardNoticeList = adminBoardNoticeService.selectListAdminBoardNotice();
-		if(adminBoardNoticeList != null) {
-//			for(AdminBoardNoticeVO adminBoardNotice : adminBoardNoticeList) {
-//				System.out.println(adminBoardNotice);
-//			}
-			//System.out.println("NoticeNum : " +adminBoardNoticeService.selectListAdminBoardNotice().get(0).getBoard_notice_num());
-
-			model.addAttribute("adminBoardNoticeList", adminBoardNoticeList);
+		// 게시물 총 갯수
+		int count = questionService.selectTotal();
+		System.out.println(count);
+		// 한 페이지에 출력할 게시물 갯수
+		int postNum = 10;
+		// 출력할 게시물
+		int displayPost = (num - 1) * postNum;
+		// 한번에 표시할 페이징 번호의 갯수
+		int pageNum_cnt = 5;
+		// 표시되는 페이지 번호 중 마지막 번호
+		int endPageNum = (int)(Math.ceil((double)num / (double)pageNum_cnt) * pageNum_cnt);
+		// 표시되는 페이지 번호 중 첫번째 번호
+		int startPageNum = endPageNum - (pageNum_cnt - 1);
+		// 마지막 번호 재계산
+		int endPageNum_tmp = (int)(Math.ceil((double)count / (double)postNum));
+		if(endPageNum > endPageNum_tmp) {
+			endPageNum = endPageNum_tmp;
 		}
-
+		boolean prev = startPageNum == 1 ? false : true;
+		boolean next = endPageNum * postNum >= count ? false : true;
+		int num1 = num==1 ? 0 : 1;
+		List<AdminBoardNoticeVO> adminBoardNoticeList = adminBoardNoticeService.selectListAdminBoardNotice(displayPost+num1, postNum * num);
+		model.addAttribute("adminBoardNoticeList", adminBoardNoticeList);
+		// 시작 및 끝 번호
+		model.addAttribute("startPageNum", startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		// 이전 및 다음 
+		model.addAttribute("prev", prev);
+		model.addAttribute("next", next);
+		// 현재 페이지
+		model.addAttribute("select", num);
 		return "admin/adminBoard_Notice.page2";	//jsp Address
 	}
 
@@ -517,15 +575,14 @@ public class adminController {
 		System.out.println("adminBoardNotice_Insert POST Call");
 
 		// +Notice_Next_Number
-		Integer noticeNum = Integer.valueOf(adminBoardNoticeService.selectListAdminBoardNotice().get(0).getBoard_notice_num());
-		noticeNum +=1;
+		Integer noticeNum = adminBoardNoticeService.selectBoardNoticeNumber()+1;
 
 		//System.out.println("InsertNotice_Num : " +noticeNum);
 		abnVO.setBoard_notice_num(String.valueOf(noticeNum));
 
 		adminBoardNoticeService.insertAbnVO(abnVO);
 
-		return "redirect:/admin/adminBoardNotice.mdo";								
+		return "redirect:/admin/adminBoardNotice.mdo?num=1";								
 	}
 
 	//<!-- *******BeakRyun_20200306 -->
@@ -580,7 +637,7 @@ public class adminController {
 		//System.out.println("abnVO : "+abnVO);
 		adminBoardNoticeService.updateBoardNotice(abnVO);
 
-		return "redirect:/admin/adminBoardNotice.mdo";								
+		return "redirect:/admin/adminBoardNotice.mdo?num=1";								
 	}
 
 	//<!-- *******BeakRyun_20200306 -->
@@ -592,7 +649,7 @@ public class adminController {
 		//System.out.println("DeleteNotice_Num : " + num);		
 		adminBoardNoticeService.deleteBoardNotice(num);
 
-		return "redirect:/admin/adminBoardNotice.mdo";	
+		return "redirect:/admin/adminBoardNotice.mdo?num=1";	
 	}
 
 	//	//<!-- *******BeakRyun_20200308 -->
@@ -699,7 +756,7 @@ public class adminController {
 		}
 
 		 
-		 return "redirect:/admin//homePageManagement.mdo";
+		 return "redirect:/admin/homePageManagement.mdo";
 	}
 	
 	@RequestMapping(value = "/homePageManagement2.mdo", method = RequestMethod.POST)
@@ -724,7 +781,7 @@ public class adminController {
 			bannerService.updateBanner2(bannerVO);
 		}
 
-		return "redirect:/admin//homePageManagement.mdo";
+		return "redirect:/admin/homePageManagement.mdo";
 	}
 
 	//--------통계
@@ -828,8 +885,8 @@ public class adminController {
 
 		//카테고리별 판매통계
 		List<ProductVO> category_product_num;
-		Integer category_totalSales1=0, category_totalSales2=0, category_totalSales3=0, category_totalSales4=0;
-		String[] category = {"웹 개발", "모바일앱·웹", "게임", "응용프로그래밍"};
+		Integer category_totalSales1=0, category_totalSales2=0, category_totalSales3=0, category_totalSales4=0, category_totalSales5=0;
+		String[] category = {"웹 개발", "모바일앱·웹", "게임", "응용프로그래밍", "기타"};
 		for(String c : category) {
 			if(c == "웹 개발") {
 				category_product_num = productService.category_product_num(c);
@@ -851,12 +908,19 @@ public class adminController {
 				for(ProductVO p : category_product_num) {
 					category_totalSales4 += purchaseService.productNum_PurchaseCount(p.getProduct_num());
 				}
+			}else if (c == "기타") {
+				category_product_num = productService.category_product_num(c);
+				for(ProductVO p : category_product_num) {
+					category_totalSales5 += purchaseService.productNum_PurchaseCount(p.getProduct_num());
+				}
 			} 
 		}
+		System.out.println("####"+category_totalSales5);
 		model.addAttribute("category_totalSales1", category_totalSales1);
 		model.addAttribute("category_totalSales2", category_totalSales2);
 		model.addAttribute("category_totalSales3", category_totalSales3);
 		model.addAttribute("category_totalSales4", category_totalSales4);
+		model.addAttribute("category_totalSales5", category_totalSales5);
 		return "chart/charts1";
 	}
 

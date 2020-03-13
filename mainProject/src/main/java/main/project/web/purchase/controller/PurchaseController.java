@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import main.project.web.chat.service.IRoomListService;
 import main.project.web.chat.vo.RoomListVO;
+import main.project.web.member.service.ExpertService;
+import main.project.web.member.service.IExpertService;
+import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.service.IProductService;
 import main.project.web.product.vo.ProductVO;
@@ -34,6 +37,8 @@ public class PurchaseController {
 	private IProductService productService;
 	@Autowired
 	private IRoomListService roomListService;
+	@Autowired
+	private IExpertService expertService;
 
 	@RequestMapping(value="/addCart.do", method=RequestMethod.POST)
 	public String addCart(String price,ProductVO product,HttpSession session, Model model) {	
@@ -167,7 +172,16 @@ public class PurchaseController {
 
 	@RequestMapping(value="/successOrder.do", method = RequestMethod.POST)
 	public String successOrder(PurchaseVO purchase) {
+		System.out.println("+++ 최종 구매 확정 버튼 클릭 +++");
 		purchase.setPurchase_state("Success");
+		PurchaseVO purchaseVO = purchaseService.selectPurchase(purchase.getPurchase_num());
+		ExpertVO expertVO = expertService.selectExpert(purchaseVO.getExpert_id());
+		Integer point = expertVO.getPoint();
+		Integer UpPoint = point + purchaseVO.getPurchase_price();
+		ExpertVO expert = new ExpertVO();
+		expert.setId(purchaseVO.getExpert_id());
+		expert.setPoint(UpPoint);
+		expertService.updatePointExpert(expert);
 		purchaseService.updatePurchase(purchase);
 		return "redirect:/purchase/orderList.do";
 	}

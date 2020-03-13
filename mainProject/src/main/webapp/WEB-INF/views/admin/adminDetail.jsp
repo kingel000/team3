@@ -55,7 +55,7 @@
 							</div>
 						</div>
 
-						<div class="panel-footer" style=" cursor: pointer;" onclick="location.href='/web/admin/adminPoint.mdo';">
+						<div class="panel-footer" style=" cursor: pointer;" onclick="location.href='/web/admin/adminPoint.mdo?num=1';">
 							<span class="pull-left">validation</span> <span
 								class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
 							<div class="clearfix"></div>

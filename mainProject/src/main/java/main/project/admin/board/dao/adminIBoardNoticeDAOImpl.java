@@ -1,5 +1,6 @@
 package main.project.admin.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -20,10 +21,16 @@ public class adminIBoardNoticeDAOImpl implements adminIBoardNoticeDAO {
 		sqlSessionTemplate.insert("main.project.admin.board.dao.adminIBoardNoticeDAO.insertAbnVO",abnVO);
 	}
 	@Override
-	public List<AdminBoardNoticeVO> selectListAdminBoardNotice() {
-		return sqlSessionTemplate.selectList("main.project.admin.board.dao.adminIBoardNoticeDAO.selectListAdminBoardNotice");
+	public List<AdminBoardNoticeVO> selectListAdminBoardNotice(int displayPost, int postNum) throws Exception {
+		HashMap<String, Integer> data = new HashMap<String, Integer>();
+		data.put("displayPost", displayPost);
+		data.put("postNum", postNum);
+		return sqlSessionTemplate.selectList("main.project.admin.board.dao.adminIBoardNoticeDAO.selectListAdminBoardNotice", data);
 	}
-
+	@Override
+	public List<AdminBoardNoticeVO> selectListAdminBoardNotice() {
+		return sqlSessionTemplate.selectList("main.project.web.notice.dao.INoticeDAO.noticePage");
+	}
 	@Override
 	public Integer selectBoardNoticeNumber() {
 		return sqlSessionTemplate.selectOne("main.project.admin.board.dao.adminIBoardNoticeDAO.selectBoardNoticeNumber");
