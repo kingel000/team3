@@ -78,7 +78,7 @@
 										 <img src="<c:url value="/resources/images/basic2.jpg" />"  alt="">
 									</c:when>
 									<c:otherwise>
-										<img src="/web/ajax/displayFile.do?fileName=${product.thumbnail}" alt="#">
+										<img src="/web/ajax/displayFile.do?fileName=${product.thumbnail}" alt="#" style="width: 280px; height: 180px;">
 									</c:otherwise>
         						 </c:choose>	
 									

@@ -106,7 +106,7 @@
 										 <img src="<c:url value="/resources/images/basic2.jpg" />"  alt="">
 									</c:when>
 									<c:otherwise>
-										<img src="/web/ajax/display.do?fileName=${newProduct.thumbnail}" alt="#">
+										<img src="/web/ajax/display.do?fileName=${newProduct.thumbnail}" alt="#" style="width: 300px; height: 205px;">
 									</c:otherwise>
         					</c:choose>
 							
