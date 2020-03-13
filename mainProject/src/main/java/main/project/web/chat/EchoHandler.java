@@ -76,7 +76,7 @@ public class EchoHandler extends TextWebSocketHandler {
 			Iterator<WebSocketSession> sessions = roomList.keySet().iterator();
 			while(sessions.hasNext()) {
 				WebSocketSession sess = sessions.next();
-				System.out.println(roomList.get(sess));
+				sess.sendMessage(new TextMessage(JsonData()));
 				if(words[3].equals(roomList.get(sess).getRoom_id())) {
 					if(!sess.equals(session)) {
 						sess.sendMessage(new TextMessage(JsonData(words[1],words[2])));
@@ -122,6 +122,8 @@ public class EchoHandler extends TextWebSocketHandler {
 		}
 	}
 	
+	
+	
 	public String JsonDataOpen(String name) {
 		JsonObjectBuilder job = Json.createObjectBuilder();
 		job.add("protocol", "100");
@@ -141,6 +143,19 @@ public class EchoHandler extends TextWebSocketHandler {
 		job.add("protocol", "300");
 		job.add("message", "<p>" + 
 				msg + "</p><span class='time_date'>"+  name +"</span></div></div></div>");
+		JsonObject jsonObject = job.build();
+		StringWriter write = new StringWriter();
+		
+		try(JsonWriter jsonWriter = Json.createWriter(write)) {
+			jsonWriter.write(jsonObject);
+		};
+		return write.toString();
+	}
+	
+	public String JsonData() {
+		JsonObjectBuilder job = Json.createObjectBuilder();
+		job.add("protocol", "400");
+		job.add("message", "ok");
 		JsonObject jsonObject = job.build();
 		StringWriter write = new StringWriter();
 		
