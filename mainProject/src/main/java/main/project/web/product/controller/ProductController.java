@@ -82,6 +82,9 @@ public class ProductController {
 			for(ProductVO productVO : productCategory) {
 				nick.add(memberService.checkMemberId(productVO.getExpert_id()).getNick_name());
 			}
+			if(productCategory.size() >=1) {
+				System.out.println(productCategory.get(0).getThumbnail());
+			}
 			model.addAttribute("productList",productCategory);
 			model.addAttribute("nick",nick);
 			model.addAttribute("category",category);
