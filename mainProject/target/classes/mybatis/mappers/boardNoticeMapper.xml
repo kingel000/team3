@@ -34,7 +34,7 @@
 	</select>
 	
 	<update id="updateBoardNotice" parameterType="abnVO">
-		UPDATE board_notice  SET board_notice_title=#{board_notice_title},board_notice_info=#{board_notice_info} WHERE board_notice_num=#{board_notice_num}
+		UPDATE board_notice SET board_notice_title=#{board_notice_title},board_notice_info=#{board_notice_info} WHERE board_notice_num=#{board_notice_num}
 	</update>
 
 	<delete id="deleteBoardNotice" parameterType="String">

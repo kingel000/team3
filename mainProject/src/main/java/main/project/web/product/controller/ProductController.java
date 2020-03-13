@@ -1,7 +1,6 @@
 package main.project.web.product.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
@@ -74,7 +71,7 @@ public class ProductController {
 		boolean prev = startPageNum == 1 ? false : true;
 		boolean next = endPageNum * postNum >= count ? false : true;
 		
-		List<ProductVO> productCategory = productService.categoryPage(displayPost+(num==1 ? 0:1), (postNum * num)+1, category);
+		List<ProductVO> productCategory = productService.categoryPage(displayPost, postNum * num, category);
 		
 		List<String> nick = new ArrayList<String>(); 
 		System.out.println("----");
@@ -187,10 +184,9 @@ public class ProductController {
 		}
 		boolean prev = startPageNum == 1 ? false : true;
 		boolean next = endPageNum * postNum >= count ? false : true;
-		int num1 = num==1 ? 0 : 1;
 		expert.setId(sessionId.getId());
 		session.setAttribute("expert",expert);
-		productList = productService.listPage(displayPost+num1, (postNum * num)+1, sessionId.getId());
+		productList = productService.listPage(displayPost, postNum * num, sessionId.getId());
 		model.addAttribute("productList", productList);
 		model.addAttribute("pageNum", pageNum);
 

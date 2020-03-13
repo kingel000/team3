@@ -9,9 +9,6 @@
 
 <title>회원가입</title>
 
-<!-- Custom-->
-<link rel="stylesheet" href="<c:url value="/resources/css/style2.css"/>">
-
 <script type="text/javascript">
    // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
    function checkValue() {

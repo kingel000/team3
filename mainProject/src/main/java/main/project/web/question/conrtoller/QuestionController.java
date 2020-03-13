@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import main.project.web.member.vo.MemberVO;
 import main.project.web.question.service.IQuestionService;
-import main.project.web.question.vo.PagingVO;
 import main.project.web.question.vo.QuestionVO;
 
 

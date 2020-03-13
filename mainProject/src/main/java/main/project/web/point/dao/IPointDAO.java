@@ -10,7 +10,7 @@ public interface IPointDAO {
 	
 	void insertPoint(PointVO pointVO);
 	void updatePoint(PointVO pointVO);
-	List<PointVO> selectPoint();
+	List<PointVO> selectPoint(int displayPost, int postNum) throws Exception;
 	List<PointVO> selectPointId(@Param("expertId")String expertId);
 	Integer selectCount();
 	Integer selectState(@Param("state")String state);

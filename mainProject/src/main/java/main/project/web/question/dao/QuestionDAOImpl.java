@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import main.project.web.question.vo.PagingVO;
 import main.project.web.question.vo.QuestionVO;
 
 

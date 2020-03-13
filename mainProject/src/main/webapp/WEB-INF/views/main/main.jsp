@@ -120,19 +120,19 @@
 					</div>
 					<div class="ps-shoe__detail"><a class="ps-shoe__name" href="/web/product/detailProduct.do?num=${newProduct.product_num}">${newProduct.product_title}</a>
 					  <c:if test="${newProduct.category == '웹 개발'}">
-					  		<p class="ps-shoe__categories"><a href="/web/product/mainProduct.do?category='C1'">카테고리 : ${newProduct.category}</a></p><span class="ps-shoe__price"></span>
+					  		<p class="ps-shoe__categories"><a href="/web/product/mainProduct.do?category='C1'&num=1">카테고리 : ${newProduct.category}</a></p><span class="ps-shoe__price"></span>
 					  </c:if>
 					  <c:if test="${newProduct.category == '모바일앱·웹'}">
-					  		<p class="ps-shoe__categories"><a href="/web/product/mainProduct.do?category='C2'">카테고리 : ${newProduct.category}</a></p><span class="ps-shoe__price"></span>
+					  		<p class="ps-shoe__categories"><a href="/web/product/mainProduct.do?category='C2'&num=1">카테고리 : ${newProduct.category}</a></p><span class="ps-shoe__price"></span>
 					  </c:if>
 					  <c:if test="${newProduct.category == '게임'}">
-					  		<p class="ps-shoe__categories"><a href="/web/product/mainProduct.do?category='C3'">카테고리 : ${newProduct.category}</a></p><span class="ps-shoe__price"></span>
+					  		<p class="ps-shoe__categories"><a href="/web/product/mainProduct.do?category='C3'&num=1">카테고리 : ${newProduct.category}</a></p><span class="ps-shoe__price"></span>
 					  </c:if>
 					  <c:if test="${newProduct.category == '응용프로그래밍'}">
-					  		<p class="ps-shoe__categories"><a href="/web/product/mainProduct.do?category='C4'">카테고리 : ${newProduct.category}</a></p><span class="ps-shoe__price"></span>
+					  		<p class="ps-shoe__categories"><a href="/web/product/mainProduct.do?category='C4'&num=1">카테고리 : ${newProduct.category}</a></p><span class="ps-shoe__price"></span>
 					  </c:if>
 					  <c:if test="${newProduct.category == '기타'}">
-					  		<p class="ps-shoe__categories"><a href="/web/product/mainProduct.do?category='C5'">카테고리 : ${newProduct.category}</a></p><span class="ps-shoe__price"></span>
+					  		<p class="ps-shoe__categories"><a href="/web/product/mainProduct.do?category='C5'&num=1">카테고리 : ${newProduct.category}</a></p><span class="ps-shoe__price"></span>
 					  </c:if>
 					  	
 					</div>

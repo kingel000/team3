@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import main.project.web.member.vo.MemberVO;
 import main.project.web.question.dao.IQuestionDAO;
-import main.project.web.question.vo.PagingVO;
 import main.project.web.question.vo.QuestionVO;
 
 @Service("questionService")

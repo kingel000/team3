@@ -25,9 +25,8 @@ public class PointService implements IPointService {
 	}
 
 	@Override
-	public List<PointVO> selectPoint() {
-		return pointDAO.selectPoint();
-
+	public List<PointVO> selectPoint(int displayPost, int postNum) throws Exception {
+		return pointDAO.selectPoint(displayPost, postNum);
 	}
 
 	@Override
@@ -45,5 +44,4 @@ public class PointService implements IPointService {
 	public Integer selectState(String state) {
 		return pointDAO.selectState(state);
 	}
-
 }

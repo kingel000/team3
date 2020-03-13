@@ -13,8 +13,12 @@
 		UPDATE point_manager SET p_state=#{p_state} WHERE p_num=#{p_num}
 	</update>
 	
-	<select id="selectPoint" resultType="pointVO">
-		SELECT * FROM point_manager
+	<select id="selectPoint" resultType="pointVO" parameterType="hashMap">
+		SELECT * FROM (
+		select p_num, expert_id, p_point, p_date, p_state,
+		row_number() over(order by p_num asc) as rNum
+		from point_manager) 
+		mb where rNum between #{displayPost} and #{postNum} order by p_num asc
 	</select>
 	
 	<select id="selectPointId" parameterType="String"
