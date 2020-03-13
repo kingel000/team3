@@ -9,7 +9,7 @@ import main.project.web.chat.vo.ChatContentVO;
 public interface IChatContentDAO {
 	void insertContent(ChatContentVO chatContent); //한줄 채팅 내용 저장
 	List<ChatContentVO> selectContentList(@Param("roomId") String roomId);//채팅내용 가져오기
-	Integer selectNumCount(@Param("roomId")String roomId);
+	Integer selectNumCount();
 	Integer selectReceiveCount(@Param("id")String id);
 	Integer selectReceiveRoomCount(ChatContentVO chatContent);
 	void updateRead(ChatContentVO chatContent);
