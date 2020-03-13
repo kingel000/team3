@@ -101,18 +101,42 @@ public class ProductController {
 	
 	@RequestMapping(value = "/alignmentProduct.do", method = RequestMethod.POST)
 	   public String alignmentProduct(@RequestParam String alignment,ProductVO product, Model model, HttpSession session) {
+		
 	      String category = product.getCategory();
 	      if(alignment == "최신등록순" || alignment.equals("최신등록순")) {
 	    	  System.out.println("최신등록순");
 	         List<ProductVO> productList = productService.newAlignmentList(category);
+	         List<String> nick = new ArrayList<String>(); 
+	 		System.out.println("----");
+	 		if(productList.size() != 0) {
+	 			for(ProductVO productVO : productList) {
+	 				nick.add(memberService.checkMemberId(productVO.getExpert_id()).getNick_name());
+	 			}
+	 			if(productList.size() >=1) {
+	 				System.out.println(productList.get(0).getThumbnail());
+	 			}
+
+	 			model.addAttribute("nick",nick);
 	         model.addAttribute("productList",productList);
+	      }
 	      }else {
 	    	  System.out.println("이름");
 	         List<ProductVO> productList = productService.nameAlignmentList(category);
+	         List<String> nick = new ArrayList<String>(); 
+		 		System.out.println("----");
+		 		if(productList.size() != 0) {
+		 			for(ProductVO productVO : productList) {
+		 				nick.add(memberService.checkMemberId(productVO.getExpert_id()).getNick_name());
+		 			}
+		 			if(productList.size() >=1) {
+		 				System.out.println(productList.get(0).getThumbnail());
+		 			}
+
+		 			model.addAttribute("nick",nick);
 	         model.addAttribute("productList",productList);
 	      }
 
-	      
+	      }
 	      MemberVO member = (MemberVO) session.getAttribute("member");
 	      if(member != null) {
 	         List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
@@ -219,11 +243,12 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="/updateProduct.do", method = RequestMethod.POST)
-	public String updateProduct(ProductVO product, Model model , HttpSession session) {
+	public String updateProduct(ProductVO product, Model model , HttpSession session,@RequestParam("fileName")String fileName) {
 		System.out.println("updateProduct.do POST 받음 ");
+		product.setThumbnail(fileName);
 		System.out.println(product);
 		productService.updateProduct(product);
-		return "/product/boardManager.page";
+		return "redirect:/product/boardManager.do?num=1";
 	}
 	
 	@RequestMapping(value="/deleteProduct.do", method = RequestMethod.GET)

@@ -83,11 +83,13 @@ public class QuestionController {
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		String id = member.getId();
 		question.setBoard_question_writer(id);	
-		int questionNum = questionService.selectNumQuestion();
-		int num = questionNum;
+		Integer questionNum = questionService.selectNumQuestion();
+		if(questionNum == null) {
+			questionNum = 1;
+		}
 
 		question.setBoard_question_writer(id);	
-		question.setBoard_question_num(num);
+		question.setBoard_question_num(questionNum);
 		question.setState("Á¢¼ö Áß");
 
 		questionService.insertQuestion(question);

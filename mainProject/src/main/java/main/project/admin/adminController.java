@@ -217,7 +217,7 @@ public class adminController {
 		member.setId(id);
 		System.out.println(member);
 		memberService.admindeleteMember(member);
-		return "redirect:/admin/memberManager.mdo";
+		return "redirect:/admin/memberManager.mdo?num=1";
 	}
 
 	@RequestMapping(value = "/adminmemberEdit.mdo", method= RequestMethod.GET)
@@ -256,7 +256,7 @@ public class adminController {
 			System.out.println("변경한 RANK = N 진입");
 			expertService.deleteExpert(member.getId());
 		}
-		return "redirect:/admin/memberManager.mdo";
+		return "redirect:/admin/memberManager.mdo?num=1";
 	}
 
 	@RequestMapping(value = "/memberfind.mdo", method= RequestMethod.POST)
@@ -326,7 +326,7 @@ public class adminController {
 	public String adminProductDelete(@RequestParam String num,ProductVO product, HttpSession session , Model model) {
 		product.setProduct_num(num);
 		productService.deleteProduct(product);
-		return "redirect:/admin/adminProduct.mdo";
+		return "redirect:/admin/adminProduct.mdo?num=1";
 	}
 
 	@RequestMapping(value = "/adminDetailProduct.mdo", method= RequestMethod.GET)
@@ -464,7 +464,7 @@ public class adminController {
 		purchase.setPurchase_state("Cancel");
 		purchaseService.updatePurchase(purchase);
 		pay.cancelPayment(pay.getImportToken(),purchase.getPurchase_num(),"Master Cancel");
-		return "redirect:/admin/adminpurchase.mdo";
+		return "redirect:/admin/adminpurchase.mdo?num=1";
 	}
 	// 금액관리
 	@RequestMapping(value="/adminPoint.mdo",method=RequestMethod.GET)
@@ -517,7 +517,7 @@ public class adminController {
 		System.out.println(point);
 		pointService.updatePoint(point);
 		
-		return "redirect:/admin/adminPoint.mdo";
+		return "redirect:/admin/adminPoint.mdo?num=1";
 	}
 	
 	//<!-- *******BeakRyun_20200305 -->
@@ -575,15 +575,14 @@ public class adminController {
 		System.out.println("adminBoardNotice_Insert POST Call");
 
 		// +Notice_Next_Number
-		Integer noticeNum = Integer.valueOf(adminBoardNoticeService.selectListAdminBoardNotice().get(0).getBoard_notice_num());
-		noticeNum +=1;
+		Integer noticeNum = adminBoardNoticeService.selectBoardNoticeNumber()+1;
 
 		//System.out.println("InsertNotice_Num : " +noticeNum);
 		abnVO.setBoard_notice_num(String.valueOf(noticeNum));
 
 		adminBoardNoticeService.insertAbnVO(abnVO);
 
-		return "redirect:/admin/adminBoardNotice.mdo";								
+		return "redirect:/admin/adminBoardNotice.mdo?num=1";								
 	}
 
 	//<!-- *******BeakRyun_20200306 -->
@@ -638,7 +637,7 @@ public class adminController {
 		//System.out.println("abnVO : "+abnVO);
 		adminBoardNoticeService.updateBoardNotice(abnVO);
 
-		return "redirect:/admin/adminBoardNotice.mdo";								
+		return "redirect:/admin/adminBoardNotice.mdo?num=1";								
 	}
 
 	//<!-- *******BeakRyun_20200306 -->
@@ -650,7 +649,7 @@ public class adminController {
 		//System.out.println("DeleteNotice_Num : " + num);		
 		adminBoardNoticeService.deleteBoardNotice(num);
 
-		return "redirect:/admin/adminBoardNotice.mdo";	
+		return "redirect:/admin/adminBoardNotice.mdo?num=1";	
 	}
 
 	//	//<!-- *******BeakRyun_20200308 -->
@@ -757,7 +756,7 @@ public class adminController {
 		}
 
 		 
-		 return "redirect:/admin//homePageManagement.mdo";
+		 return "redirect:/admin/homePageManagement.mdo";
 	}
 	
 	@RequestMapping(value = "/homePageManagement2.mdo", method = RequestMethod.POST)
@@ -782,7 +781,7 @@ public class adminController {
 			bannerService.updateBanner2(bannerVO);
 		}
 
-		return "redirect:/admin//homePageManagement.mdo";
+		return "redirect:/admin/homePageManagement.mdo";
 	}
 
 	//--------통계

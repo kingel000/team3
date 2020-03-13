@@ -6,6 +6,7 @@
 <html>
 <head>
 <script src="http://cdn.ckeditor.com/4.13.1/standard-all/ckeditor.js"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/thumbnail.js" />"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/ckeditor/ckeditor.js"></script>
    <style>
         .update_Product{width:690px; margin: 0 auto; border: solid 2px #2AC37D; padding: 35px;}
@@ -67,10 +68,19 @@ function checkValue() {
             <p>
                <textarea name="product_info" rows="10" cols="80" >${product.product_info}</textarea>
                </p>
-               <p>
-                <input type="file" name = "product_info">
-               </p>
-            <p >
+               
+                <!-- 파일을 업로드할 영역 -->
+				<div class="content">
+				</div>
+				<br>
+	         	<input type="file" name="ajaxFile" id="ajaxFile"  style="display:none;"/>
+	    		<input type="button" id="upload" value="PC에서 이미지 찾기"/><br>
+				<!-- 업로드된 파일 목록 -->
+				<div class="uploadedList"></div>
+	          	<br><br>
+	            <p >
+               <input type="hidden" name="fileName" value="">
+            
                <input type="hidden" name="product_num" value="${product.product_num }">
                <input type="hidden" name="expert_id" value="${product.expert_id}">
                <input type="submit" value="수정하기" />
