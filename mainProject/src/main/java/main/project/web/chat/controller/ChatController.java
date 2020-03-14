@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,8 @@ public class ChatController {
 	private IChatContentService chatContentService;
 	@Autowired
 	private IRoomListService roomListService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
 	
 	@RequestMapping(value="/expertChat.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String expertChat (RoomListVO room,Model model,HttpSession session) throws Exception{
@@ -83,7 +87,7 @@ public class ChatController {
 		String roomId = null;
 		if(roomCheck == null) {
 			Integer num = roomListService.selectNumCount()+1;
-			System.out.println("room"+num);
+			logger.info("room"+num);
 			RoomListVO room = new RoomListVO("room"+num,product.getProduct_title(),product.getExpert_id(),member.getId(),product.getProduct_num());
 			roomListService.createChatRoom(room);
 			roomId = room.getRoom_id();

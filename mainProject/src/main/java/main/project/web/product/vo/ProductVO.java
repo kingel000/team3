@@ -10,6 +10,7 @@ public class ProductVO {
 	private String product_info;
 	private Date product_date;
 	private String thumbnail;
+	private String user_yn;
 
 	public String getProduct_num() {
 		return product_num;
@@ -66,12 +67,18 @@ public class ProductVO {
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
+	public String getUser_yn() {
+		return user_yn;
+	}
+	public void setUser_yn(String user_yn) {
+		this.user_yn = user_yn;
+	}
 
 	@Override
 	public String toString() {
 		return "ProductVO [product_num=" + product_num + ", category=" + category + ", product_title=" + product_title
-				+ ", expert_id=" + expert_id + ", product_info=" + product_info + ", product_date=" + product_date + ", thumbnail =" + thumbnail + "]";
-	
+				+ ", expert_id=" + expert_id + ", product_info=" + product_info + ", product_date=" + product_date
+				+ ", thumbnail=" + thumbnail + ", user_yn=" + user_yn + "]";
 	}
 	
 

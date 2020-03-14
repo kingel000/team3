@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,14 +24,15 @@ public class QuestionController {
 
 	@Autowired
 	private IQuestionService questionService;
+	private static final Logger logger = LoggerFactory.getLogger(QuestionController.class);
 	
 	//문의사항 이동
 	@RequestMapping(value="/question.do", method= RequestMethod.GET)
 	public String questionMain(@RequestParam(value="num")int num, Model model, 
 			HttpSession session, QuestionVO question) throws Exception {
-		System.out.println("문의사항게시판 이동");	
+		logger.info("문의사항게시판 이동");	
 		int count = questionService.selectTotal();
-		System.out.println(count);
+		logger.info("총:"+count);
 		// 한 페이지에 출력할 게시물 갯수
 		int postNum = 10;
 		// 출력할 게시물
@@ -79,7 +82,7 @@ public class QuestionController {
 	//문의사항 등록 버튼 클릭
 	@RequestMapping(value = "/question.do", method = RequestMethod.POST)
 	public String questionMain1(Model model, HttpSession session, QuestionVO question) {
-		System.out.println("문의 글 등록");
+		logger.info("문의 글 등록");
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		String id = member.getId();
 		question.setBoard_question_writer(id);	
@@ -110,7 +113,7 @@ public class QuestionController {
 	//글 삭제
 	@RequestMapping(value = "/deleteQuestion.do", method=RequestMethod.GET)
 	public String deleteQuestion(@RequestParam Integer num,QuestionVO question, Model model) {
-		System.out.println("문의사항 글 삭제");
+		logger.info("문의사항 글 삭제");
 		question.setBoard_question_num(num);
 		questionService.deleteQuestion(question);
 		return "redirect:/board/question.do?num=1";

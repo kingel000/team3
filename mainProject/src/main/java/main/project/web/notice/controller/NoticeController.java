@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,13 +24,15 @@ public class NoticeController {
 	@Autowired
 	private INoticeService noticeService;
 
+	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
+	
 	//<!-- *******BeakRyun_20200310 -->
 	//-----------AdminBoardNotice_Main_GET
 	@RequestMapping(value = "/notice.do", method= RequestMethod.GET)	//Site Address
 	public String Notice_Main(@RequestParam("num") int num, HttpSession session, Model model) throws Exception {
-		System.out.println("NoticeMain GET Call");
+		logger.info("NoticeMain GET Call");
 		int count = noticeService.totalNotice();
-		System.out.println(count);
+		logger.info("계시판 계숫"+count);
 		// 한 페이지에 출력할 게시물 갯수
 		int postNum = 10;
 		// 출력할 게시물
@@ -71,10 +75,10 @@ public class NoticeController {
 	//-----------AdminBoardNotice_Detail_GET	//게시글 보기 GET
 	@RequestMapping(value = "/notice_Detail.do", method= RequestMethod.GET)	
 	public String Notice_Detail(@RequestParam String num, Model model) {
-		System.out.println("Notice_Detail GET Call");
+		logger.info("Notice_Detail GET Call");
 
 		NoticeVO noticeList = noticeService.Notice_Detail(num);
-		System.out.println("NoticeDetail_Num GET : "+ noticeList.getBoard_notice_num());
+		logger.info("NoticeDetail_Num GET : "+ noticeList.getBoard_notice_num());
 		
 		model.addAttribute("board_notice",noticeList);
 		return "board/notice_Detail.part2";
@@ -86,10 +90,10 @@ public class NoticeController {
 	public String Notice_Detail(NoticeVO noticeVO) {
 
 		Integer noticeNum = noticeService.selectNoticeNumber();
-		System.out.println("NoticeDetail_Num1 POST : " + noticeVO.getBoard_notice_num());
+		logger.info("NoticeDetail_Num1 POST : " + noticeVO.getBoard_notice_num());
 		
 		noticeVO.setBoard_notice_num(noticeNum);
-		System.out.println("NoticeDetail_Num POST : " + noticeVO.getBoard_notice_num());
+		logger.info("NoticeDetail_Num POST : " + noticeVO.getBoard_notice_num());
 
 		noticeService.insertNoticeVO(noticeVO);
 		return "board/notice_Detail.part2";

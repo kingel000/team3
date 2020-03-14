@@ -64,7 +64,7 @@
                   type="password" name="pwd2" placeholder="비밀번호 확인">
             </p>
             <p class="join">
-               <input type="hidden" name="id" value="${member.id }">
+               <input type="hidden" name="email" value="${member.email}">
                <input type="hidden" name="rank" value="N">
                <input type="submit" value="가입완료" />
             </p>

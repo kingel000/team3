@@ -5,22 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-
    <meta charset="UTF-8">
    <title>전문가 정보 수정</title>
-
-
-
-
 <!-- Custom-->
 <link rel="stylesheet" href="<c:url value="/resources/css/style2.css"/>">
 
 </head>
 <body>
-
-
-
-
 	<div id="myPage_form">
 		<div class="myPage_title">
 			<h4>
@@ -30,10 +21,10 @@
 		<div class="myPage">
 			<form action="/web/member/editExpert.do" method="post">
 				<p>
-					<label for="email">이메일</label>&nbsp;&nbsp;&nbsp; <label>${expert.id}</label>
+					<label for="email">전문가 아이디</label>&nbsp;&nbsp;&nbsp; <label>: ${expert.id}</label>
 				</p>
 				<p>
-					<label for="email">이름</label>&nbsp;&nbsp;&nbsp; <label>${expert.name}</label>
+					<label for="email">이름</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>: ${expert.name}</label>
 				</p>
 				<p>
 					<label for="tel">전화번호</label><br> <input id="tel"

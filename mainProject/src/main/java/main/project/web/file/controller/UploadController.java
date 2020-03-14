@@ -93,7 +93,6 @@ public class UploadController {
         logger.info("originalName : "+file.getOriginalFilename());
         logger.info("size : "+file.getSize());
         logger.info("contentType : "+file.getContentType());
-        System.out.println(file.getOriginalFilename());
         ResponseEntity<String> re = new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.OK);
         return re;
     }
@@ -108,21 +107,18 @@ public class UploadController {
         try {
             // 확장자를 추출하여 formatName에 저장
             String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
-            System.out.println("formatName:"+formatName);
             // 추출한 확장자를 MediaUtils클래스에서  이미지파일여부를 검사하고 리턴받아 mType에 저장
             MediaType mType = MediaUtils.getMediaType(formatName);
             // 헤더 구성 객체(외부에서 데이터를 주고받을 때에는 header와 body를 구성해야하기 때문에)
             HttpHeaders headers = new HttpHeaders();
             // InputStream 생성
             in = new FileInputStream(uploadPath + fileName);
-            System.out.println("uploadPath:"+uploadPath+";fileName:"+fileName);
             // 이미지 파일이면
             if (mType != null) { 
                 headers.setContentType(mType);
             // 이미지가 아니면
             } else { 
                 fileName = fileName.substring(fileName.indexOf("_") + 1);
-                System.out.println("fileName:"+fileName);
                 // 다운로드용 컨텐트 타입
                 headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
                 // 

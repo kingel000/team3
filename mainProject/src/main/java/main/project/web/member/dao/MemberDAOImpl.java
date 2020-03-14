@@ -47,7 +47,7 @@ public class MemberDAOImpl implements IMemberDAO {
 
 	@Override
 	public void deleteMember(MemberVO member) {
-		sqlSessionTemplate.delete("main.project.web.member.dao.IMemberDAO.deleteMember", member);
+		sqlSessionTemplate.update("main.project.web.member.dao.IMemberDAO.deleteMember", member);
 	}
 
 	@Override

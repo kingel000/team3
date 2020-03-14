@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +42,8 @@ public class PurchaseController {
 	@Autowired
 	private IExpertService expertService;
 
+	private static final Logger logger = LoggerFactory.getLogger(PurchaseController.class);
+	
 	@RequestMapping(value="/addCart.do", method=RequestMethod.POST)
 	public String addCart(String price,ProductVO product,HttpSession session, Model model) {	
 		MemberVO member = (MemberVO)session.getAttribute("member");
@@ -53,10 +57,10 @@ public class PurchaseController {
 		String expertNick = productService.select_NickName(product.getExpert_id()).getNick_name();
 		ProductVO productVO = productService.selectThumbnail(product.getProduct_num());
 		String Thumbnail = productVO.getThumbnail();
-		System.out.println(product.getProduct_num() + "번호에 대한 썸네일 링크 : " + Thumbnail);
-		System.out.println("select 한 상품 정보 " + productVO);
+		logger.info(product.getProduct_num() + "번호에 대한 썸네일 링크 : " + Thumbnail);
+		logger.info("select 한 상품 정보 " + productVO);
 		CartVO cart = new CartVO(date,member.getId(),product.getProduct_num(),product.getProduct_title(),Integer.parseInt(price),expertNick,Thumbnail);
-		System.out.println("장바구니에 추가하는 상품의 정보 : " + cart);
+		logger.info("장바구니에 추가하는 상품의 정보 : " + cart);
 		purchaseService.addCart(cart);
 		return "redirect:/purchase/myCart.do";
 	}
@@ -172,7 +176,7 @@ public class PurchaseController {
 
 	@RequestMapping(value="/successOrder.do", method = RequestMethod.POST)
 	public String successOrder(PurchaseVO purchase) {
-		System.out.println("+++ 최종 구매 확정 버튼 클릭 +++");
+		logger.info("+++ 최종 구매 확정 버튼 클릭 +++");
 		purchase.setPurchase_state("Success");
 		PurchaseVO purchaseVO = purchaseService.selectPurchase(purchase.getPurchase_num());
 		ExpertVO expertVO = expertService.selectExpert(purchaseVO.getExpert_id());

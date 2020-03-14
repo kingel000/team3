@@ -64,8 +64,8 @@ function checkValue() {
 		<div class="myPage">
 			<form action="/web/member/editMember.do" method="post" name="userInfo" onsubmit="return checkValue()">
 				<p>
-					<label for="id">이메일</label>&nbsp;&nbsp;&nbsp; <label>${member.id}</label>
-					<input type="hidden" name="id" value="${member.id }">
+					<label for="id">이메일</label>&nbsp;&nbsp;&nbsp; <label>${member.email}</label>
+					<input type="hidden" name="email" value="${member.email }">
 				</p>
 				<p>
 					<label for="nick_name">닉네임</label><br> <input id="nick_name"
@@ -84,6 +84,7 @@ function checkValue() {
 					<input id="pwd2" type="password" name="pwd2" placeholder="비밀번호 확인">
 				</p>
 				<p class="join_c">
+					<input type="hidden" name="id" value="${member.id }">
 					<input type="hidden" name="rank" value="${member.rank }" >
 					<input type="submit" value="정보변경완료" />
 				</p>
