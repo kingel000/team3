@@ -65,7 +65,7 @@
 			
 			<p><p><p><p>
 
-				<a href="adminProductDelete.mdo?num=${product.product_num}">* 현재 글 삭제하기 *</a>
+				<a href="adminProductDelete.mdo?num=${product.product_num}">* 현재 글 삭제하기  *</a>
 
 			<div class="ps-product__block ps-product__size">	
 			  <div class="form-group">
