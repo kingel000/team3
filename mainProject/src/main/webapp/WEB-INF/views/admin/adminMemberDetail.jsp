@@ -20,6 +20,7 @@
 		</div>
 		<div class="myPage">
 			<form action="/web/admin/adminmemberEdit.mdo" method="post">
+				<input type="hidden" name="id" value="${member.id }">
 				<p>
 					<label for="id">이메일</label>&nbsp;&nbsp;&nbsp; <label>${member.email}</label>
 					<input type="hidden" name="email" value="${member.email }">
