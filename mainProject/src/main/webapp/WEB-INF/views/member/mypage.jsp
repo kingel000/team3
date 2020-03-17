@@ -3,40 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
-
-
 <html id="wrap">
 <head>
-
 <meta charset="utf-8">
-
+<link href="<c:url value="/resources/css/myPage.css"/>" rel="stylesheet">
 <title>My Page</title>
-<style>
-   .editBoard{
-   width : 1000px;
-   
-   margin:50px 0 0 250px;
-   
-   }   
-   table{
-   width: 70%;
-    border-top: 1px solid #444444;
-    border-collapse: collapse;}
-        th, td {
-    border-bottom: 1px solid #444444;
-    padding: 10px;   
-  }
-  
-#email_form{width:550px;height:auto;padding:20px 10px;margin:0 0 20px 50px;text-align:center; border: solid 1px #e4e5ed;}
-#email_form>p{margin:0 auto}
-#email_num{margin: 0 atuo}
-.email_Box1{width: 90%;margin: 0 auto; }
-.email_Box1>p{align-items: center; text-align: center; width: auto;}
-.email_Box1>form>p>input {width:382px;height:40px;border-radius: 4px; padding: 5px; margin-bottom:10px;border: solid 1px #e4e5ed;}
-.email_Box2>form>input{width:382px;height:40px;border-radius: 4px; padding: 5px; margin-bottom:10px;border: solid 1px #e4e5ed;}
-  
-</style>
-
 <script type="text/javascript">
 
 function checkPoint() {
@@ -57,22 +28,86 @@ function checkPoint() {
 		return false;
 	}
 	
-	alert("정상 출금 신청되었습니다 !")
-	
+	alert("정상 출금 신청되었습니다 !");
+	return true;	
 }
 
 </script>
-   
-
 <!-- Custom-->
 <link rel="stylesheet" href="<c:url value="/resources/css/style2.css"/>">
-
 </head>
 <body>
+<div id="page-wrapper">
+<!-- /.row -->
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-3">
+                <i class="fa fa-comments fa-5x"></i>
+              </div>
+              <div class="col-xs-9 text-right">
+                <div class="huge">${mrCount}</div>
+                <div>New Member Message!</div>
+              </div>
+            </div>
+          </div>
+            <div class="panel-footer" style=" cursor: pointer;" onclick="location.href='/web/chat/memberRoomList.do';">
+              <span class="pull-left">MemberRoomList</span>
+              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+              <div class="clearfix"></div>
+            </div>
+        </div>
+      </div>
+      <c:if test="${member.rank eq 'E' }">
+	      <div class="col-lg-3 col-md-6">
+	        <div class="panel panel-green">
+	          <div class="panel-heading">
+	            <div class="row">
+	              <div class="col-xs-3">
+	                <i class="fa fa-tasks fa-5x"></i>
+	              </div>
+	              <div class="col-xs-9 text-right">
+	                <div class="huge">${erCount }</div>
+	                <div>New Expert Message!</div>
+	              </div>
+	            </div>
+	          </div>
+	            <div class="panel-footer" style=" cursor: pointer;" onclick="location.href='/web/chat/expertRoomList.do';">
+	              <span class="pull-left">Expert Chat</span>
+	              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	              <div class="clearfix"></div>
+	            </div>
+	        </div>
+	      </div>
+	      <div class="col-lg-3 col-md-6">
+	        <div class="panel panel-yellow">
+	          <div class="panel-heading">
+	            <div class="row">
+	              <div class="col-xs-3">
+	                <i class="fa fa-shopping-cart fa-5x"></i>
+	              </div>
+	              <div class="col-xs-9 text-right">
+	                <div class="huge">${wCount}</div>
+	                <div>New Orders!</div>
+	              </div>
+	            </div>
+	          </div>
+	            <div class="panel-footer" style=" cursor: pointer;" onclick="location.href='/web/purchase/salesList.do';">
+	              <span class="pull-left">Order Status</span>
+	              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	              <div class="clearfix"></div>
+	            </div>
+	        </div>
+	      </div>
+      </c:if>
+      
+    </div>
+    <!-- /.row -->
+</div>
 <div class="editBoard">
-
 <div id="email_form">
-
 <div class="email_Box1">
 			<form action="/web/member/point.do" method="post" name="pointInfo" onsubmit="return checkPoint()">
 				<p class="email_Bt">

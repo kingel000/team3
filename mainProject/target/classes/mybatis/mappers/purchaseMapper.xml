@@ -96,4 +96,5 @@
 		from purchase) 
 		mb where rNum between #{displayPost} and #{postNum} order by purchase_num desc
 	</select>
+	
 </mapper>

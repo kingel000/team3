@@ -1,0 +1,75 @@
+ .editBoard{
+   width : 1000px;
+   
+   margin:0 0 0 250px;
+   
+   }   
+   table{
+   width: 70%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;}
+        th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;   
+  }
+  
+#email_form{width:550px;height:auto;padding:20px 10px;margin:0 0 20px 50px;text-align:center; border: solid 1px #e4e5ed;}
+#email_form>p{margin:0 auto}
+#email_num{margin: 0 atuo}
+.email_Box1{width: 90%;margin: 0 auto; }
+.email_Box1>p{align-items: center; text-align: center; width: auto;}
+.email_Box1>form>p>input {width:382px;height:40px;border-radius: 4px; padding: 5px; margin-bottom:10px;border: solid 1px #e4e5ed;}
+.email_Box2>form>input{width:382px;height:40px;border-radius: 4px; padding: 5px; margin-bottom:10px;border: solid 1px #e4e5ed;}
+
+
+#page-wrapper {
+	width : 100%;
+    padding: 0 15px;
+    margin:0 100px 0 150px;
+    background-color: #fff;
+}
+
+.p-header {
+    padding-bottom: 9px;
+    margin: 10px;
+}
+
+.huge {
+    font-size: 40px;
+}
+
+.panel-green {
+    border-color: #5cb85c;
+}
+
+.panel-green .panel-heading {
+    border-color: #5cb85c;
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.panel-green a {
+    color: #5cb85c;
+}
+
+.panel-green a:hover {
+    color: #3d8b3d;
+}
+
+.panel-yellow {
+    border-color: #f0ad4e;
+}
+
+.panel-yellow .panel-heading {
+    border-color: #f0ad4e;
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.panel-yellow a {
+    color: #f0ad4e;
+}
+
+.panel-yellow a:hover {
+    color: #df8a13;
+}
