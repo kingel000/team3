@@ -103,7 +103,7 @@ public class MemberController {
 
 	@RequestMapping(value="/auth.do", method=RequestMethod.POST)
 	public String memberAuth(MemberVO member, Model model,HttpServletResponse response) {
-		MemberVO check = memberService.checkMemberId(member.getEmail());
+		MemberVO check = memberService.selectMember(member.getEmail());
 		System.out.println(check);
 		if(check == null) {
 			String authKey = new TempKey().getKey(8, false);
