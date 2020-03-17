@@ -253,7 +253,7 @@ public class adminController {
 		memberService.updateMember(member);
 		expertService.updateExpert(expert);
 
-		if( member.getRank() == "N" || member.getRank().equals("N")) {
+		if(member.getRank() == "N" || member.getRank().equals("N")) {
 			logger.info("변경한 RANK = N 진입");
 			expertService.deleteExpert(member.getId());
 		}
