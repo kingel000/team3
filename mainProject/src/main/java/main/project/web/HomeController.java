@@ -38,7 +38,7 @@ public class HomeController {
 		
 		//banner
 		BannerVO bannerVO = bannerService.selectBanner();
-		System.out.println(bannerVO);
+		logger.info("bannerVO"+bannerVO);
 		model.addAttribute("bannerVO", bannerVO);
 		
 		return "main/main.part2";
@@ -48,7 +48,7 @@ public class HomeController {
 	@ResponseBody
 	public Object headCart(HttpSession session) {
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		System.out.println("+++");
+		logger.info("+++");
 		if(member != null) {
 			List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
 			return cartList;
@@ -58,10 +58,9 @@ public class HomeController {
 
 	@RequestMapping(value = "/main/mainFind.do", method = RequestMethod.POST)
 	public String mainFindList(@RequestParam String mainFindText, ProductVO product, HttpSession session, Model model) {
-		System.out.println("메인 상품검색창 검색이동");
-		System.out.println("검색어: " + mainFindText);
+		logger.info("메인 상품검색창 검색이동");
+		logger.info("검색어: " + mainFindText);
 		List<ProductVO> mainFindList = productService.mainFindList(mainFindText);
-		System.out.println(mainFindList);
 
 		model.addAttribute("mainFindList", mainFindList);
 		return "main/mainFind.part2";

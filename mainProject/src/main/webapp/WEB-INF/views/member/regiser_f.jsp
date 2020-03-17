@@ -28,9 +28,9 @@
 <script type="text/javascript">
    // 필수 입력정보인 아이디, 비밀번호가 입력되었는지 확인하는 함수
    function checkValue() {
-      if (!document.userInfo.id.value) {
+      if (!document.userInfo.email.value) {
          alert("이메일 ID를 입력해주세요.");
-         document.userInfo.id.focus();
+         document.userInfo.email.focus();
          return false;
       }
 
@@ -53,7 +53,7 @@
 	<div class="logoBox">
 		<div>
 			<a href="/web/main/main.do"><img
-				src="<c:url value="/resources/images/logo.png" />" alt="logo"></a>
+				src="<c:url value="/resources/images/logo.jpg" />" alt="logo"></a>
 		</div>
 	</div>
 <div id="email_form">
@@ -63,7 +63,7 @@
 			<form action="/web/member/auth.do" method="post" name="userInfo" onsubmit="return checkValue()" >
 				<p class="email_Bt">
 	      			<label for="email">이메일</label><br><br>
-	      			<input id="email" type="email" name="id" placeholder="이메일을 입력해주세요" ><br><br>	
+	      			<input id="email" type="email" name="email" placeholder="이메일을 입력해주세요" ><br><br>	
 	      				<input type="submit" value="인증번호 전송">
 	      				<input type="hidden" name="idCheckResult" value="emailUnCheck" />
    
@@ -75,7 +75,7 @@
 			<form action="/web/member/authKey.do" method="post" name="userKey" onsubmit="return checkKey()">
 				<label>인증번호</label><br><br>
 				<input type="text" name="key" placeholder="인증번호를 입력해주세요" ><br><br>
-				<input type="hidden" name="id" value="${member.id }">
+				<input type="hidden" name="email" value="${member.email }">
 				<input type="hidden" name="authKey" value="${authKey }">
 				<input type="submit" value="인증하기">
 			</form>

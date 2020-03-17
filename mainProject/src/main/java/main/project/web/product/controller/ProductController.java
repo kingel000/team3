@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,9 +35,11 @@ public class ProductController {
 	@Autowired
 	private IExpertService expertService;
 	
+	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
+	
 	@RequestMapping(value="/mainProduct.do", method=RequestMethod.GET)
 	public String mainProduct(@RequestParam("category") String category, @RequestParam("num") int num, ProductVO product, Model model, HttpSession session) throws Exception {
-		System.out.println("produdct GET 호출 ");
+		logger.info("produdct GET 호출 ");
 		if(category.equals("'C1'")) {
 			category ="웹 개발";
 		}else if(category.equals("'C2'")) {
@@ -74,13 +78,9 @@ public class ProductController {
 		List<ProductVO> productCategory = productService.categoryPage(displayPost, postNum * num, category);
 		
 		List<String> nick = new ArrayList<String>(); 
-		System.out.println("----");
 		if(productCategory.size() != 0) {
 			for(ProductVO productVO : productCategory) {
 				nick.add(memberService.checkMemberId(productVO.getExpert_id()).getNick_name());
-			}
-			if(productCategory.size() >=1) {
-				System.out.println(productCategory.get(0).getThumbnail());
 			}
 			model.addAttribute("productList",productCategory);
 			model.addAttribute("nick",nick);
@@ -104,80 +104,54 @@ public class ProductController {
 		
 	      String category = product.getCategory();
 	      if(alignment == "최신등록순" || alignment.equals("최신등록순")) {
-	    	  System.out.println("최신등록순");
+	    	 logger.info("최신등록순");
 	         List<ProductVO> productList = productService.newAlignmentList(category);
 	         List<String> nick = new ArrayList<String>(); 
-	 		System.out.println("----");
+
 	 		if(productList.size() != 0) {
 	 			for(ProductVO productVO : productList) {
 	 				nick.add(memberService.checkMemberId(productVO.getExpert_id()).getNick_name());
 	 			}
-	 			if(productList.size() >=1) {
-	 				System.out.println(productList.get(0).getThumbnail());
-	 			}
-
-	 			model.addAttribute("nick",nick);
-	         model.addAttribute("productList",productList);
+	 		model.addAttribute("nick",nick);
+	 		model.addAttribute("productList",productList);
 	      }
 	      }else {
-	    	  System.out.println("이름");
+	    	 logger.info("이름");
 	         List<ProductVO> productList = productService.nameAlignmentList(category);
 	         List<String> nick = new ArrayList<String>(); 
-		 		System.out.println("----");
+
 		 		if(productList.size() != 0) {
 		 			for(ProductVO productVO : productList) {
 		 				nick.add(memberService.checkMemberId(productVO.getExpert_id()).getNick_name());
 		 			}
-		 			if(productList.size() >=1) {
-		 				System.out.println(productList.get(0).getThumbnail());
-		 			}
-
 		 			model.addAttribute("nick",nick);
-	         model.addAttribute("productList",productList);
+		 			model.addAttribute("productList",productList);
+		 		}
 	      }
-
-	      }
-	      MemberVO member = (MemberVO) session.getAttribute("member");
-	      if(member != null) {
-	         List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
-	         if(cartList != null) {
-	            model.addAttribute("cartList",cartList);
-	            if(cartList.size() != 0) {
-	               model.addAttribute("count",cartList.size());
-	            }
-	         }
-	      }
-
 	      return "product/mainProduct.part2";
-	   }
+	 }
+	
 	@RequestMapping(value="/insertProduct.do", method=RequestMethod.GET)
 	public String insertProduct(Model model) {
-		System.out.println("produdct insert GET 호출 ");
+		logger.info("produdct insert GET 호출 ");
 		return "product/insertProduct.page";
 	}
 	@RequestMapping(value="/insertProduct.do", method=RequestMethod.POST)
 	public String insertProduct(ProductVO product,HttpSession session ,Model model,@RequestParam("fileName")String fileName) {
-		System.out.println("produdct insert POST 호출 ");
-		System.out.println("file 실제 경로 :"+fileName);
+		logger.info("produdct insert POST 호출 ");
+		logger.info("file 실제 경로 :"+fileName);
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		System.out.println(member.getId());
+		logger.info(member.getId());
 		
 		String sessionId = member.getId();
 		product.setExpert_id(sessionId);
 		product.setThumbnail(fileName);
-		System.out.println("등록하는 상품의 정보 : " + product);
+		logger.info("등록하는 상품의 정보 : " + product);
 		productService.insertProduct(product);
-		
-		
+				
 		return "redirect:/member/mypage.do";
 	}
 	
-	// 섬네일 등록 페이지
-	@RequestMapping(value="/insertThumbnail.do", method=RequestMethod.GET)
-	public String insertThumnail(Model model) {
-		System.out.println("Thumnail insert GET 호출 ");
-		return "product/insertThumbnail.page";
-	}	
 	// 게시물 목록 + 페이징 추가
 	@RequestMapping(value="/boardManager.do", method = RequestMethod.GET)
 	public String editBoard(@RequestParam("num") int num, ExpertVO expert, HttpSession session , Model model) throws Exception {
@@ -236,7 +210,7 @@ public class ProductController {
 	@RequestMapping(value="/updateProduct.do", method = RequestMethod.GET)
 	public String updateProduct(@RequestParam String num, HttpSession session , Model model) {
 		ProductVO product = productService.selectProduct(num);
-		System.out.println("수정하는 게시물의 정보 : "+ product);
+		logger.info("수정하는 게시물의 정보 : "+ product);
 	
 		model.addAttribute("product", product);
 		return "product/updateProduct.page";
@@ -244,27 +218,26 @@ public class ProductController {
 
 	@RequestMapping(value="/updateProduct.do", method = RequestMethod.POST)
 	public String updateProduct(ProductVO product, Model model , HttpSession session,@RequestParam("fileName")String fileName) {
-		System.out.println("updateProduct.do POST 받음 ");
+		logger.info("updateProduct.do POST 받음 ");
 		product.setThumbnail(fileName);
-		System.out.println(product);
 		productService.updateProduct(product);
 		return "redirect:/product/boardManager.do?num=1";
 	}
 	
 	@RequestMapping(value="/deleteProduct.do", method = RequestMethod.GET)
 	public String deleteProduct(@RequestParam String num, HttpSession session , Model model) {
+		logger.info("deleteProduct.do GET 받음");
 		ProductVO product = productService.selectProduct(num);
-		System.out.println("product : "+ product);
 		productService.deleteProduct(product);
-		return "redirect:/product/boardManager.do";
+		return "redirect:/product/boardManager.do?num=1";
 	}
 
 	@RequestMapping(value="/detailProduct.do", method = RequestMethod.GET)
 	public String detailProduct(@RequestParam String num,ProductVO product,ExpertVO expert, Model model , HttpSession session) {
-		System.out.println("detailProduct GET 받음 ");
+		logger.info("detailProduct GET 받음 ");
 
 		ProductVO numProduct = productService.selectProduct(num);
-		System.out.println("상세페이지 : " + numProduct);
+		logger.info("상세페이지 : " + numProduct);
 		
 		model.addAttribute("numProduct",numProduct);
 		MemberVO nick_name = new MemberVO();
@@ -279,7 +252,7 @@ public class ProductController {
 	
 	@RequestMapping(value="/detailP.do", method = RequestMethod.GET)
 	public String detailP(@RequestParam String num,@RequestParam String msg,ProductVO product,ExpertVO expert, Model model , HttpSession session) {
-		System.out.println("detailProduct GET 받음 ");
+		logger.info("detailProduct GET 받음 ");
 
 		ProductVO numProduct = productService.selectProduct(num);
 		model.addAttribute("numProduct",numProduct);
@@ -290,15 +263,13 @@ public class ProductController {
 		model.addAttribute("nick_name",nick_name);
 		model.addAttribute("expert",expert);
 		
-		System.out.println(msg);
+		logger.info(msg);
 		model.addAttribute("msg", msg);
 		return "/product/detailProduct.part2";
 	}
 	
-	
 	@RequestMapping(value="/detailProduct.do", method = RequestMethod.POST)
 	public String detailProduct(ProductVO product, Model model , HttpSession session) {
-
 		return "/product/boardManager.page";
 	}
 	

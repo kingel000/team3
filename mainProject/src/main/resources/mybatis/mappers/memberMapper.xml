@@ -5,17 +5,17 @@
 <mapper namespace="main.project.web.member.dao.IMemberDAO">
 	<select id="checkMemberId" parameterType="String"
 		resultType="memberVO">
-		SELECT * FROM member WHERE id = #{member_id}
+		SELECT * FROM member WHERE id = #{email} AND user_yn='yes'
 	</select>
 
 	<select id="selectMember" parameterType="memberVO"
 		resultType="memberVO">
-		SELECT * FROM member WHERE id = #{id}
+		SELECT * FROM member WHERE email = #{email} AND user_yn='yes'
 	</select>
 
 	<insert id="insertMember" parameterType="memberVO">
 		INSERT INTO
-		member VALUES (#{id},#{pwd},#{nick_name}, #{rank})
+		member VALUES (#{id},#{email},#{pwd},#{nick_name},'yes',#{rank})
 	</insert>
 
 	<update id="updateMember" parameterType="memberVO">
@@ -33,22 +33,21 @@
 		WHERE id = #{member_id}
 	</update>
 
-	<delete id="deleteMember" parameterType="memberVO">
-		DELETE FROM
-		member
+	<update id="deleteMember" parameterType="memberVO">
+		UPDATE member SET user_yn='no'
 		WHERE id=#{id} AND pwd=#{pwd}
-	</delete>
+	</update>
 	
 	<select id="selectAllMember" resultType="memberVO">
-		SELECT * FROM member ORDER BY ID asc
+		SELECT * FROM member AND user_yn='yes' ORDER BY ID asc
 	</select>
 	
-	<delete id="admindeleteMember" parameterType="memberVO">
-		DELETE FROM
-		member
+	<update id="admindeleteMember" parameterType="memberVO">
+		UPDATE
+		member SET user_yn='no'
 		WHERE id=#{id}
 		
-	</delete>
+	</update>
 
 	<!--  
 	<select id="selectMemberEmail" parameterType="MemberFindVO"
@@ -63,7 +62,7 @@
 	-->
 	
 	<select id="selectFindList" parameterType="findVO" resultType="memberVO">
-		SELECT * FROM member WHERE 
+		SELECT * FROM member WHERE user_yn='yes'
 		<if test="category=='id'">
 			id like '%'||#{findText}||'%'
 		</if>
@@ -82,7 +81,7 @@
 		select * from (
 		select id, pwd, nick_name, rank,
 		row_number() over(order by id desc) as rNum
-		from member) 
+		from member where user_yn='yes') 
 		mb where rNum between #{displayPost} and #{postNum} order by id desc
 	</select>
 </mapper>

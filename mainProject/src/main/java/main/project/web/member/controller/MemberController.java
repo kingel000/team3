@@ -1,31 +1,34 @@
 package main.project.web.member.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import main.project.web.mail.MailUtils;
 import main.project.web.mail.TempKey;
 import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
 import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
-import main.project.web.point.dao.IPointDAO;
 import main.project.web.point.service.IPointService;
 import main.project.web.point.vo.PointVO;
 import main.project.web.product.service.IProductService;
+
 @Controller("memberController")
 @RequestMapping(value="/member")
 public class MemberController {
@@ -40,6 +43,8 @@ public class MemberController {
 	@Autowired
 	private IPointService pointService;
 
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	
 	@RequestMapping(value="/login.do", method = RequestMethod.GET)
 	public String memberLogin(Model model) {
 		return "member/login";
@@ -47,29 +52,23 @@ public class MemberController {
 
 	@RequestMapping(value="/login.do", method = RequestMethod.POST)
 	public String memberLogin(MemberVO member,HttpSession session, Model model) {
-		System.out.println("로그인 시도 계정 정보 " + member);
-		System.out.println(member.getId());
-		System.out.println(member.getPwd());
+		logger.info("로그인 시도 계정 정보:" + member);
 		MemberVO check = memberService.selectMember(member);
-		System.out.println(check);
-
+		logger.info("로그인 사용자 정보:"+check);
 
 		if(check != null) {
 			if(check.getPwd().equals(member.getPwd())) {
 				session.setAttribute("member", check);
 				model.addAttribute("member", check);
 				String msg = check.getNick_name()+" 님 환영합니다";
-				System.out.println(msg);
 				model.addAttribute("msg",msg);
 				return "redirect:/main/main.do";
 			}else {
 				String msg = "비밀번호 오류";
-				System.out.println(msg);
 				model.addAttribute("msg", msg);
 			}
 		}else {
 			String msg = "아이디 없음";
-			System.out.println("아이디 없음");
 			model.addAttribute("msg", msg);
 		}
 		return "member/login";
@@ -82,13 +81,14 @@ public class MemberController {
 
 	@RequestMapping(value="/regiser.do",method=RequestMethod.POST)
 	public String memberRegiser(MemberVO member, Model model, HttpSession session) {
+		member.setId("ID"+(new SimpleDateFormat("yyyyMMdd")).format(new Date())+"_"+memberService.totalMember());
 		memberService.insertMember(member);
 		return "member/login";
 	}
 
 	@RequestMapping(value="/auth.do", method=RequestMethod.POST)
 	public String memberAuth(MemberVO member, Model model,HttpServletResponse response) {
-		MemberVO check = memberService.checkMemberId(member.getId());
+		MemberVO check = memberService.checkMemberId(member.getEmail());
 		if(check == null) {
 			String authKey = new TempKey().getKey(8, false);
 			try {
@@ -104,7 +104,7 @@ public class MemberController {
 				sendMail.setSubject("회원가입 이메일 인증");
 				sendMail.setText(stb.toString());
 				sendMail.setFrom("item2881@gmail.com ", "Item");
-				sendMail.setTo(member.getId());
+				sendMail.setTo(member.getEmail());
 				sendMail.send();
 			} catch (MessagingException e1) {
 				e1.printStackTrace();
@@ -152,11 +152,11 @@ public class MemberController {
 
 	@RequestMapping(value="/mypage.do", method = RequestMethod.GET)
 	public String memberMyPage(HttpSession session,Model model) {
-		System.out.println("mypage GET 호출");
+		logger.info("mypage GET 호출");
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		ExpertVO exeprtVO = expertService.selectExpert(memberVO.getId());
-		System.out.println("MYPAGE 진입 계정 expertVO : " + exeprtVO);
-		System.out.println("MYPAGE 진입 계정 memberVO : " + memberVO);
+		logger.info("MYPAGE 진입 계정 expertVO : " + exeprtVO);
+		logger.info("MYPAGE 진입 계정 memberVO : " + memberVO);
 		model.addAttribute("expert",exeprtVO);
 		model.addAttribute("member",memberVO);
 		return "member/mypage.page";
@@ -164,16 +164,16 @@ public class MemberController {
 	
 	@RequestMapping(value="/point.do", method = RequestMethod.POST)
 	public String point(ExpertVO expert,Integer point,HttpSession session,Model model) {
-		System.out.println("point.do POST 호출");
+		logger.info("point.do POST 호출");
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		if(memberVO == null) {
 			return "redirect:/main/main.do";
 		}
 		ExpertVO expertVO = expertService.selectExpert(memberVO.getId());
-		System.out.println("출금 원하는 멤버의 원래 포인트 : " + expertVO.getPoint() );
-		System.out.println("출금 원하는 포인트 : " + point);
+		logger.info("출금 원하는 멤버의 원래 포인트 : " + expertVO.getPoint() );
+		logger.info("출금 원하는 포인트 : " + point);
 		Integer Point = expertVO.getPoint() - point ;
-		System.out.println("업데이트 해야 할 포인트 : "  + Point);
+		logger.info("업데이트 해야 할 포인트 : "  + Point);
 		expertVO.setPoint(Point);
 		expertService.updatePointExpert(expertVO);
 		PointVO p = new PointVO(pointService.selectCount()+1,expertVO.getId(),point,"대기중");
@@ -184,13 +184,10 @@ public class MemberController {
 	
 	@RequestMapping(value="/pointManager.do", method = RequestMethod.GET)
 	public String pointManager(HttpSession session,Model model) {
-		System.out.println("pointManager GET 호출");
+		logger.info("pointManager GET 호출");
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
 		List<PointVO> pointList = pointService.selectPointId(memberVO.getId());
 		model.addAttribute("pointList",pointList);
-		for(PointVO list : pointList) {
-			System.out.println("해당 계정에 담긴 출금 내역 : "  + list);
-		}
 		return "member/pointManager.page";
 	}
 	
@@ -227,7 +224,7 @@ public class MemberController {
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		String sessionId =member.getId();
 		expert.setId(sessionId);
-		System.out.println(expert);
+		logger.info("입력한 판매자 정보:"+expert);
 		expertService.insertExpert(expert);
 		memberService.rankupdate(sessionId);
 		member.setRank("E");
@@ -238,23 +235,21 @@ public class MemberController {
 	@RequestMapping(value="/editExpert.do",method=RequestMethod.GET)
 	public String editExpert(HttpSession session,Model model) {
 		ExpertVO expert = expertService.selectExpert(((MemberVO)session.getAttribute("member")).getId());
-		System.out.println("수정하는 전문가 정보 : "  + expert);
+		logger.info("수정하는 전문가 정보 : "  + expert);
 		model.addAttribute("expert", expert) ;
 		return "member/editExpert.page";
 	}
 
 	@RequestMapping(value="/editExpert.do", method=RequestMethod.POST)
 	public String editExpert(ExpertVO expert, Model model) {
-		System.out.println(expert);
+		logger.info("editExpert.do POST expert:"+expert);
 		expertService.updateExpert(expert);
 		return "member/mypage.page";
 	}
 
 	@RequestMapping(value="/withdrawal.do", method= RequestMethod.GET)
 	public String Withdrawal(MemberVO member, Model model) {
-		System.out.println("회원 탈퇴 GET 호출");
-		
-		
+		logger.info("회원 탈퇴 GET 호출");	
 		return "member/withdrawal.page";
 	}
 
@@ -262,14 +257,14 @@ public class MemberController {
 	public String Withdrawal(String password ,Model model, HttpSession session) {
 		MemberVO  check = (MemberVO) session.getAttribute("member");
 
-		System.out.println("check : " + check);
-		System.out.println("password : " + password);
+		logger.info("check : " + check);
+		logger.info("password : " + password);
 		if(password != null) {
 			if(check.getPwd().equals(password)) {
 				session.invalidate();
 				memberService.deleteMember(check);
 				if(check.getRank().equals("E")) {
-					expertService.deleteExpert(check.getId());
+					//expertService.deleteExpert(check.getId());
 					productService.deleteProductId(check.getId());
 				}
 				String msg = "회원탈퇴 되었습니다.";
@@ -287,29 +282,26 @@ public class MemberController {
 	public String editBoard(ExpertVO expert, HttpSession session , Model model) {
 		String sessionId = ((MemberVO)session.getAttribute("member")).getId();
 		expert.setId(sessionId);
-		System.out.println(expert);
 		session.setAttribute("expert",expert);
 		return "member/boardManager.page";
 	}
 
 	@RequestMapping(value="/boardManager.do", method = RequestMethod.POST)
 	public String editBoard(ExpertVO expert , Model model , HttpSession session) {
-
 		return "redirect:main/main.do";
 	}
 
 	@RequestMapping(value="/masterPage.do", method = RequestMethod.GET)
 	public String masterPage(Model model , HttpSession session) {
-		System.out.println("masterPage GET 호출");
+		logger.info("masterPage GET 호출");
 		return "member/masterPage";
 	}
 
 	@RequestMapping(value="/masterPage.do", method = RequestMethod.POST)
 	public String masterPage(MemberVO member, Model model , HttpSession session) {
-		System.out.println("masterPage POST 호출");
+		logger.info("masterPage POST 호출");
 		return "member/masterDetail.page2";
-
-
-
 	}
+	
+	
 }

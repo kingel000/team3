@@ -8,23 +8,23 @@
 		<choose>
 			<when test = "category == '웹 개발'">
 				(('A'||LPAD(product_num_seq_A.nextval,3,0)),#{category},#{product_title},#{expert_id},
-				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{thumbnail})
+				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{thumbnail},'yes')
 			</when>
 			 <when test = "category == '모바일앱·웹'">
 				(('B'||LPAD(product_num_seq_B.nextval,3,0)),#{category},#{product_title},#{expert_id},
-				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{thumbnail})
+				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{thumbnail},'yes')
 			</when>
 			<when test = "category == '게임'">
 				(('C'||LPAD(product_num_seq_C.nextval,3,0)),#{category},#{product_title},#{expert_id},
-				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{thumbnail})
+				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{thumbnail},'yes')
 			</when>
 			<when test = "category == '응용프로그래밍'">
 				(('D'||LPAD(product_num_seq_D.nextval,3,0)),#{category},#{product_title},#{expert_id},
-				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{thumbnail})
+				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{thumbnail},'yes')
 			</when>
 			<when test = "category == '기타'">
 				(('E'||LPAD(product_num_seq_E.nextval,3,0)),#{category},#{product_title},#{expert_id},
-				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{thumbnail})
+				#{product_info},(SYSDATE + (INTERVAL '9' HOUR)),#{thumbnail},'yes')
 			</when> 
 		</choose>
 	</insert>
@@ -33,35 +33,35 @@
 		category=#{category},product_title=#{product_title},product_info=#{product_info},thumbnail=#{thumbnail}
 		WHERE product_num=#{product_num}
 	</update>
-	<delete id="deleteProduct" parameterType="productVO">
-		DELETE FROM product
+	<update id="deleteProduct" parameterType="productVO">
+		UPDATE product SET user_yn='no'
 		WHERE product_num=#{product_num}
-	</delete>
+	</update>
 	<select id="selectProduct" parameterType="String" resultType="productVO">
 		SELECT * FROM product
-		WHERE product_num=#{product_num}
+		WHERE product_num=#{product_num} AND user_yn='yes'
 	</select>
 	<!-- <select id="selectListProduct" resultType="productVO">
 		SELECT * FROM product
 		WHERE expert_id=#{id}
 	</select> -->
 	<select id="selectAllListProduct" resultType="productVO">
-		SELECT * FROM product
+		SELECT * FROM product WHERE user_yn='yes'
 	</select>
 	<!-- <select id="selectCategory" resultType="productVO">
 		SELECT * FROM product
 		WHERE category=#{category}
 	</select> -->
 	<select id="select_NickName" parameterType="String" resultType="memberVO" >
-		SELECT * FROM MEMBER WHERE ID = #{expert_id}
+		SELECT * FROM MEMBER WHERE ID = #{expert_id} AND user_yn='yes'
 	</select>
 	
 	<select id="selectThumbnail" parameterType="String" resultType="productVO" >
-		SELECT * FROM PRODUCT WHERE product_num = #{product_num}
+		SELECT * FROM PRODUCT WHERE product_num = #{product_num} AND user_yn='yes'
 	</select>
 	
 	<select id="selectFindList" parameterType="findVO" resultType="productVO">
-		SELECT * FROM product WHERE 
+		SELECT * FROM product WHERE user_yn='yes' AND
 		<if test="category=='category'">
 			category like '%'||#{findText}||'%'
 		</if>
@@ -71,38 +71,38 @@
 	</select>
 
 		<select id="select_Id" parameterType="String" resultType="memberVO" >
-		SELECT * FROM PRODUCT WHERE product_num = #{product_num}
+		SELECT * FROM PRODUCT WHERE product_num = #{product_num} AND user_yn='yes'
 	</select>
 
 	
 	<select id="mainFindList" parameterType="String" resultType="productVO">
-		SELECT * FROM product WHERE product_title like '%'||#{mainFindText}||'%'
+		SELECT * FROM product WHERE user_yn='yes' AND product_title like '%'||#{mainFindText}||'%'
 	</select>
 	
 	<select id="newProductList" resultType="productVO">
 		SELECT * FROM 
-		(SELECT * FROM product ORDER BY product_date DESC) 
+		(SELECT * FROM product WHERE user_yn='yes' ORDER BY product_date DESC) 
 		WHERE <![CDATA[ ROWNUM >= 1 AND ROWNUM <= 10 ]]>
 	</select>
 	
 
 	<select id="newAlignmentList" parameterType="String" resultType="productVO">
-      SELECT * FROM (SELECT * FROM product WHERE category=#{category}) ORDER BY product_date DESC
+      SELECT * FROM (SELECT * FROM product WHERE category=#{category} AND user_yn='yes') ORDER BY product_date DESC
    </select>
    <select id="nameAlignmentList" parameterType="String" resultType="productVO">
-      SELECT * FROM (SELECT * FROM product WHERE category=#{category}) ORDER BY product_title
+      SELECT * FROM (SELECT * FROM product WHERE category=#{category} AND user_yn='yes') ORDER BY product_title
    </select>
 
-	<delete id="deleteProductId" parameterType="String">
-		DELETE FROM product
+	<update id="deleteProductId" parameterType="String">
+		UPDATE product SET user_yn='no'
 		WHERE expert_id=#{id}
-	</delete>
+	</update>
 	
 	<select id="expertProductList" parameterType="String" resultType="productVO">
-		SELECT * FROM product WHERE expert_id = #{member_id}
+		SELECT * FROM product WHERE expert_id = #{member_id} AND user_yn='yes'
 	</select>
 	<select id="category_product_num" parameterType="String" resultType="productVO">
-		SELECT product_num FROM (SELECT * FROM product WHERE category =#{category})
+		SELECT product_num FROM (SELECT * FROM product WHERE category =#{category} AND user_yn='yes')
 	</select>
 	
 	<!-- 통계 -->
@@ -114,7 +114,7 @@
 		select * from (
 		select product_num, category, product_title, expert_id, product_date,
 		row_number() over(order by product_num asc) as rNum
-		from product) 
+		from product where user_yn='yes') 
 		mb where rNum between #{displayPost} and #{postNum} order by product_num asc
 	</select>
 
@@ -124,13 +124,13 @@
 		from (
 		select product_num, category, product_title, expert_id, product_date,
 		row_number() over(order by product_num desc) as rNum
-		from product where expert_id=#{id}) mb
+		from product where expert_id=#{id} and user_yn='yes' ) mb
 		where rNum between #{displayPost} and #{postNum} order by product_num desc
 	</select>
 	
 	<!-- 게시물 총 갯수 -->
 	<select id="countProduct" resultType="int" parameterType="String">
-		select count(product_num) from product where expert_id=#{id}
+		select count(product_num) from product where expert_id=#{id} AND user_yn='yes'
 	</select>
 	
 	<!-- 게시물 정렬 후 설정한 범위 select -->
@@ -139,14 +139,14 @@
 		from (
 		select product_num, category, product_title, expert_id, product_date, thumbnail,
 		row_number() over(order by product_num desc) as rNum
-		from product where category=#{category}
+		from product where category=#{category} AND user_yn='yes'
 		) mb
 		where rNum between #{displayPost} and #{postNum} order by product_num desc
 	</select>
 	
 	<!-- 게시물 총 갯수 -->
 	<select id="countCategory" resultType="int" parameterType="String">
-		select count(product_num) from product where category=#{category}
+		select count(product_num) from product where category=#{category} AND user_yn='yes'
 	</select>
 	
 </mapper>

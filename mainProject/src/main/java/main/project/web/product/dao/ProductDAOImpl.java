@@ -26,7 +26,7 @@ public class ProductDAOImpl implements IProductDAO {
 	}
 	@Override
 	public void deleteProduct(ProductVO product_num) {
-		sqlSessiontemplate.delete("main.project.web.product.dao.IProductDAO.deleteProduct",product_num);
+		sqlSessiontemplate.update("main.project.web.product.dao.IProductDAO.deleteProduct",product_num);
 	}
 	@Override
 	public void updateProduct(ProductVO product) {
@@ -84,7 +84,7 @@ public class ProductDAOImpl implements IProductDAO {
 		return sqlSessiontemplate.selectList("main.project.web.product.dao.IProductDAO.nameAlignmentList",category);
 	}
 	public void deleteProductId(String Id) {
-		sqlSessiontemplate.delete("main.project.web.product.dao.IProductDAO.deleteProductId",Id);
+		sqlSessiontemplate.update("main.project.web.product.dao.IProductDAO.deleteProductId",Id);
 	}
 	@Override
 	public Integer totalProduct() {

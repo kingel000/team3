@@ -60,10 +60,26 @@
 						"<img src='<c:url value='/resources/images2/user-profile.png' />' ></div>" + 
 						"<div class='received_msg'><div class='received_withd_msg'>"+jsonData.message+"<br>");
 				break;
+			case "400":
+				$.ajax({
+					url: "/web/chat/receiveCount.do",
+					type: "POST",
+					data: JSON.stringify(receive),
+					contentType: "application/json; charset=utf-8;",
+					dataType: "json",
+					success: function(data){
+						if(data ==0){
+							$('#ps-dropdown').empty();
+							return;
+						}
+						$('#ps-dropdown').append("<a href='#'>Message:"+data+"</a>");
+					},
+					error: function(){
+						$('#ps-dropdown').empty();
+			        }
+				});
+				break;
 			}
-			
-			
-			
 		};
 
 		//닫힐때

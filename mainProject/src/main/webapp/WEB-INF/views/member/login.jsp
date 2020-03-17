@@ -32,7 +32,7 @@
 			<form action="/web/member/login.do" method="post">
 				<p class="email_Bt">
 					<label for="email">이메일</label><br> <input id="password"
-						type="email" name="id" placeholder="이메일을 입력해주세요">
+						type="email" name="email" placeholder="이메일을 입력해주세요">
 				</p>
 				<p>
 					<label for="password">비밀번호</label><br> <input id="password"

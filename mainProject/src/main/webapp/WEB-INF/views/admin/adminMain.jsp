@@ -29,7 +29,7 @@
 
 				<tr>
 					<td>관리자 아이디 :</td>
-					<td><input type="text" name="id"></td>
+					<td><input type="text" name="email"></td>
 				</tr>
 				<tr>
 					<td>관리자 비밀번호 :</td>
