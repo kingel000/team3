@@ -78,6 +78,7 @@ public class ProductController {
 		List<ProductVO> productCategory = productService.categoryPage(displayPost, postNum * num, category);
 		
 		List<String> nick = new ArrayList<String>(); 
+		
 		if(productCategory.size() != 0) {
 			for(ProductVO productVO : productCategory) {
 				nick.add(memberService.checkMemberId(productVO.getExpert_id()).getNick_name());
