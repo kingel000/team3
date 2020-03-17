@@ -5,7 +5,7 @@
 <mapper namespace="main.project.web.member.dao.IMemberDAO">
 	<select id="checkMemberId" parameterType="String"
 		resultType="memberVO">
-		SELECT * FROM member WHERE id = #{email} AND user_yn='yes'
+		SELECT * FROM member WHERE email = #{email} AND user_yn='yes'
 	</select>
 
 	<select id="selectMember" parameterType="memberVO"

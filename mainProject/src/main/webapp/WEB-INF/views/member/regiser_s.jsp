@@ -7,6 +7,11 @@
 <head>
 <meta charset="utf-8">
 
+
+<!-- Custom-->
+<link rel="stylesheet" href="<c:url value="/resources/css/style2.css"/>">
+
+
 <title>회원가입</title>
 
 <script type="text/javascript">

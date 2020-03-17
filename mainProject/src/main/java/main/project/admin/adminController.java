@@ -222,7 +222,8 @@ public class adminController {
 
 	@RequestMapping(value = "/adminmemberEdit.mdo", method= RequestMethod.GET)
 	public String adminmemberEdit(@RequestParam String id,MemberVO member, HttpSession session , Model model) {
-
+		System.out.println("id : " + id);
+		System.out.println("가져온 member :"  + member);
 		MemberVO memberVO = (MemberVO)memberService.selectMember(member);
 		ExpertVO expertVO = (ExpertVO)expertService.selectExpert(id);
 		logger.info("수정하고자 하는 판매자 정보:" + expertVO);
