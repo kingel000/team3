@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import main.project.web.point.vo.PointVO;
+import main.project.web.product.vo.findVO;
 
 
 @Repository("pointDAO")
@@ -48,5 +49,10 @@ public class PointDAOImpl implements IPointDAO {
 	@Override
 	public Integer selectState(String state) {
 		return sqlSessionTemplate.selectOne("main.project.web.point.dao.IPointDAO.selectState",state);
+	}
+
+	@Override
+	public List<PointVO> pointFindList(findVO find) {
+		return sqlSessionTemplate.selectList("main.project.web.point.dao.IPointDAO.pointFindList",find);	
 	}
 }

@@ -32,5 +32,15 @@
 	<select id="selectState" resultType="Integer"  parameterType="String">
 		SELECT COUNT(*) FROM point_manager WHERE p_state=#{state}	
 	</select>
+	
+	<select id="pointFindList" parameterType="findVO" resultType="pointVO">
+		SELECT * FROM point_manager WHERE 
+		<if test="category=='p_date'">
+			p_date like '%'||#{findText}||'%'
+		</if>
+		<if test="category=='expert_id'">
+			expert_id like '%'||#{findText}||'%'
+		</if>
+	</select>
 		
 </mapper>

@@ -39,7 +39,7 @@
 	</update>
 	
 	<select id="selectAllMember" resultType="memberVO">
-		SELECT * FROM member AND user_yn='yes' ORDER BY ID asc
+		SELECT * FROM member WHERE user_yn='yes' ORDER BY ID asc
 	</select>
 	
 	<update id="admindeleteMember" parameterType="memberVO">
@@ -62,13 +62,15 @@
 	-->
 	
 	<select id="selectFindList" parameterType="findVO" resultType="memberVO">
-		SELECT * FROM member WHERE user_yn='yes'
-		<if test="category=='id'">
-			id like '%'||#{findText}||'%'
+		SELECT * FROM 
+		
+		<if test="category=='email'">
+		(SELECT * FROM member WHERE email like '%'||#{findText}||'%') 
 		</if>
 		<if test="category=='nick_name'">
-			nick_name like '%'||#{findText}||'%'
+		(SELECT * FROM member WHERE nick_name like '%'||#{findText}||'%') 
 		</if>
+		WHERE user_yn='yes'
 	</select>
 	
 	<!-- 통계 -->

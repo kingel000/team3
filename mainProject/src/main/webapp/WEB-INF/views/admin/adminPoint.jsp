@@ -104,7 +104,7 @@ function checkCancel() {
 					</c:choose>
 				</ul>
 			</div>
-			<form action="/web/admin/point.mdo" method="post">
+			<form action="/web/admin/adminPoint.mdo" method="post">
               	 <select name="category" style="width:80px;height:25px;">
               		 <option value="" selected disabled hidden>= 선택  =</option>
                  	 <option value="date">날짜</option>

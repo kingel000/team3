@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import main.project.web.point.dao.IPointDAO;
 import main.project.web.point.vo.PointVO;
+import main.project.web.product.vo.findVO;
 
 @Service("pointService")
 public class PointService implements IPointService {
@@ -43,5 +44,10 @@ public class PointService implements IPointService {
 	@Override
 	public Integer selectState(String state) {
 		return pointDAO.selectState(state);
+	}
+
+	@Override
+	public List<PointVO> pointFindList(findVO find) {
+		return pointDAO.pointFindList(find);
 	}
 }
