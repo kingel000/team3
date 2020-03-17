@@ -5,10 +5,10 @@
 <mapper namespace="main.project.web.member.dao.IMemberDAO">
 	<select id="checkMemberId" parameterType="String"
 		resultType="memberVO">
-		SELECT * FROM member WHERE email = #{email} AND user_yn='yes'
+		SELECT * FROM member WHERE id = #{memberId} AND user_yn='yes'
 	</select>
 
-	<select id="selectMember" parameterType="memberVO"
+	<select id="selectMember" parameterType="String"
 		resultType="memberVO">
 		SELECT * FROM member WHERE email = #{email} AND user_yn='yes'
 	</select>
@@ -79,7 +79,7 @@
 	<!-- member page -->
 	<select id="memberPage" resultType="memberVO" parameterType="hashMap">
 		select * from (
-		select id, pwd, nick_name, rank,
+		select id, email,pwd, nick_name, rank,
 		row_number() over(order by id desc) as rNum
 		from member where user_yn='yes') 
 		mb where rNum between #{displayPost} and #{postNum} order by id desc

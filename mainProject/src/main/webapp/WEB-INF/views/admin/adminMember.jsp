@@ -35,10 +35,10 @@ td{text-align: center}
 			<tbody>
 				<c:forEach var="adminmember" items="${adminmemberList}">
 					<tr>
-						<td><c:out value="${adminmember.id }" /></td>
+						<td><c:out value="${adminmember.email }" /></td>
 						<td><c:out value="${adminmember.nick_name }" /></td>
 						<td><c:out value="${adminmember.rank }" /></td>
-						<td><a href="adminmemberEdit.mdo?id=${adminmember.id}">
+						<td><a href="adminmemberEdit.mdo?id=${adminmember.id}&&email=${adminmember.email}">
 							회원 수정</a>&nbsp;&nbsp;&nbsp;&nbsp;
 							<a href="adminMemberDelete.mdo?id=${adminmember.id}">회원 탈퇴</a>
 						</td>

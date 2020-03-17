@@ -10,7 +10,7 @@ import main.project.web.product.vo.findVO;
 
 public interface IMemberService {
 	MemberVO checkMemberId(String id);
-	MemberVO selectMember(MemberVO member);
+	MemberVO selectMember(String email);
 	void insertMember(MemberVO member);
 	void updateMember(MemberVO member);
 	void deleteMember(MemberVO member);

@@ -100,23 +100,24 @@
          <c:choose>
             <c:when test="${member.rank == 'E'}">
                 <li class="group">
-               <div class="box">
-                    <a href="/web/product/insertProduct.do">
-                     <h3>Product</h3>
-                     <p>상품등록</p>
-                  </a>
-                </div>
-            </li>
+               		<div class="box">
+                    	<a href="/web/product/insertProduct.do">
+                     	<h3>Product</h3>
+                     	<p>상품등록</p>
+                  		</a>
+                	</div>
+	           </li>
+	           <li class="group">
+	           		<div class="box">
+	               		<a href="/web/product/boardManager.do?num=1">
+	                  	<h3>Board</h3>
+	                  	<p>게시물 관리</p>
+	               		</a>
+	            	</div>
+	         </li>
             </c:when>
          </c:choose>    
-         <li class="group">
-            <div class="box">
-               <a href="/web/product/boardManager.do?num=1">
-                  <h3>Board</h3>
-                  <p>게시물 관리</p>
-               </a>
-            </div>
-         </li>
+         
          
           <c:choose>
             <c:when test="${member.rank == 'E'}">

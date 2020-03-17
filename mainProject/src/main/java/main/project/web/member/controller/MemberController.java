@@ -68,7 +68,7 @@ public class MemberController {
 	@RequestMapping(value="/login.do", method = RequestMethod.POST)
 	public String memberLogin(MemberVO member,HttpSession session, Model model) {
 		logger.info("로그인 시도 계정 정보:" + member);
-		MemberVO check = memberService.selectMember(member);
+		MemberVO check = memberService.selectMember(member.getEmail());
 		logger.info("로그인 사용자 정보:"+check);
 
 		if(check != null) {
@@ -103,7 +103,7 @@ public class MemberController {
 
 	@RequestMapping(value="/auth.do", method=RequestMethod.POST)
 	public String memberAuth(MemberVO member, Model model,HttpServletResponse response) {
-		MemberVO check = memberService.checkMemberId(member.getEmail());
+		MemberVO check = memberService.selectMember(member.getEmail());
 		System.out.println(check);
 		if(check == null) {
 			String authKey = new TempKey().getKey(8, false);
