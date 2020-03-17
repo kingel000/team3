@@ -51,7 +51,7 @@ $(document).ready(function(){
 					$('#ps-dropdown').empty();
 					return;
 				}
-				$('#ps-dropdown').append("<a href='#'>Message:"+data+"</a>");
+				$('#ps-dropdown').append("<a href='/web/member/mypage.do'>Message:"+data+"</a>");
 			},
 			error: function(){
 				$('#ps-dropdown').empty();

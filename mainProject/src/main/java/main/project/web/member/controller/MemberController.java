@@ -1,5 +1,6 @@
 package main.project.web.member.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.io.IOException;
@@ -19,6 +20,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import main.project.web.chat.service.IChatContentService;
+import main.project.web.chat.service.IRoomListService;
+import main.project.web.chat.vo.ChatContentVO;
+import main.project.web.chat.vo.RoomListVO;
 import main.project.web.mail.MailUtils;
 import main.project.web.mail.TempKey;
 import main.project.web.member.service.IExpertService;
@@ -28,6 +34,9 @@ import main.project.web.member.vo.MemberVO;
 import main.project.web.point.service.IPointService;
 import main.project.web.point.vo.PointVO;
 import main.project.web.product.service.IProductService;
+import main.project.web.product.vo.ProductVO;
+import main.project.web.purchase.Service.IPurchaseService;
+import main.project.web.purchase.vo.PurchaseVO;
 
 @Controller("memberController")
 @RequestMapping(value="/member")
@@ -41,8 +50,14 @@ public class MemberController {
 	@Autowired
 	private IProductService productService;
 	@Autowired
+	private IPurchaseService purchaseService;
+	@Autowired
 	private IPointService pointService;
-
+	@Autowired
+	private IChatContentService chatContentService;
+	@Autowired
+	private IRoomListService roomListService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@RequestMapping(value="/login.do", method = RequestMethod.GET)
@@ -160,6 +175,57 @@ public class MemberController {
 		logger.info("MYPAGE 진입 계정 memberVO : " + memberVO);
 		model.addAttribute("expert",exeprtVO);
 		model.addAttribute("member",memberVO);
+				
+		
+		List<RoomListVO> rl = roomListService.getRoomList(memberVO.getId());
+		List<Integer> rc = new ArrayList<Integer>();
+		if(rl.size() != 0) {
+			for(RoomListVO r : rl) {
+				Integer n = chatContentService.selectReceiveRoomCount(new ChatContentVO(r.getRoom_id(),r.getMember_id(),"no"));
+				if(rc != null) {
+					rc.add(n);
+				}
+			}
+			if(rc.size() == 0) {
+				model.addAttribute("mrCount", 0);
+			}else {
+				model.addAttribute("mrCount", rc.size());
+			}
+		}else {
+			model.addAttribute("mrCount", 0);
+		}
+		
+		if(memberVO.getRank().equals("E")) {			
+			List<RoomListVO> roomList = roomListService.getMemberList(memberVO.getId());
+			List<Integer> receiveCountList = new ArrayList<Integer>();
+			if(roomList.size() != 0) {
+				for(RoomListVO r : roomList) {
+					Integer n = chatContentService.selectReceiveRoomCount(new ChatContentVO(r.getRoom_id(),r.getExpert_id(),"no"));
+					if(n != null) {
+						receiveCountList.add(n);	
+					}
+							
+				}
+				if(receiveCountList.size() == 0) {
+					model.addAttribute("erCount", 0);
+				}else {
+					model.addAttribute("erCount", receiveCountList.size());
+				}
+			}else {
+				model.addAttribute("erCount", 0);
+			}
+			
+			List<PurchaseVO> purchaseList = purchaseService.selectExpertPurchase(memberVO.getId());
+			int count = 0;
+			if(purchaseList.size()>0) {
+				for(PurchaseVO purchase:purchaseList) {
+					if(purchase.getPurchase_state().equals("Waiting")) {
+						count++;
+					}
+				}
+				model.addAttribute("wCount", count);
+			}
+		}
 		return "member/mypage.page";
 	}
 	

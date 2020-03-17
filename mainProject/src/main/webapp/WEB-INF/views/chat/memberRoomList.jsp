@@ -18,6 +18,7 @@
       <th>방생성 날짜</th>
       <th>상품명</th>
       <th>판매자</th>
+      <th>안 읽은 메세지 숫</th>
       <th>방이동</th>
     </tr>
   </thead>
@@ -29,6 +30,7 @@
 		     <td data-column="Last Name"><fmt:formatDate value="${ room.room_date}" pattern="yyyy-MM-dd aa hh:mm:ss" /></td>
 		     <td data-column="Job Title">${room.room_title }</td>
 		     <td data-column="Twitter">${room.expert_id}</td>
+		     <td data-column="Twitter">${receiveCountList.get(status.index)} 개</td>
 		     <td data-column="Twitter">
 		     	<form action="/web/chat/memberChat.do" method="post">
 					<input type="hidden" name ="product_id" value="${room.product_id}">
