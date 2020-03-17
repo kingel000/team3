@@ -26,8 +26,8 @@ public class MemberDAOImpl implements IMemberDAO {
 	}
 
 	@Override
-	public MemberVO selectMember(MemberVO member) {
-		return sqlSessionTemplate.selectOne("main.project.web.member.dao.IMemberDAO.selectMember", member);
+	public MemberVO selectMember(String email) {
+		return sqlSessionTemplate.selectOne("main.project.web.member.dao.IMemberDAO.selectMember", email);
 	}
 
 	@Override

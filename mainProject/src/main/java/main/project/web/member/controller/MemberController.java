@@ -68,7 +68,7 @@ public class MemberController {
 	@RequestMapping(value="/login.do", method = RequestMethod.POST)
 	public String memberLogin(MemberVO member,HttpSession session, Model model) {
 		logger.info("로그인 시도 계정 정보:" + member);
-		MemberVO check = memberService.selectMember(member);
+		MemberVO check = memberService.selectMember(member.getEmail());
 		logger.info("로그인 사용자 정보:"+check);
 
 		if(check != null) {

@@ -89,7 +89,7 @@ public class adminController {
 		logger.info("ADMIN DETAIL MDO POST 호출");
 		logger.info(member.getId());
 		logger.info(member.getPwd());
-		MemberVO check = memberService.selectMember(member);
+		MemberVO check = memberService.selectMember(member.getEmail());
 
 		if(check != null) {
 			if(check.getPwd().equals(member.getPwd())) {
@@ -221,10 +221,10 @@ public class adminController {
 	}
 
 	@RequestMapping(value = "/adminmemberEdit.mdo", method= RequestMethod.GET)
-	public String adminmemberEdit(@RequestParam String id,MemberVO member, HttpSession session , Model model) {
-
-		MemberVO memberVO = (MemberVO)memberService.selectMember(member);
-		ExpertVO expertVO = (ExpertVO)expertService.selectExpert(id);
+	public String adminmemberEdit(@RequestParam String id,String email, HttpSession session , Model model) {
+		System.out.println(email);
+		MemberVO memberVO = memberService.selectMember(email);
+		ExpertVO expertVO = expertService.selectExpert(id);
 		logger.info("수정하고자 하는 판매자 정보:" + expertVO);
 		logger.info("수정하고자 하는 계정 정보 "  + memberVO);
 		model.addAttribute("expert",expertVO);
@@ -237,13 +237,13 @@ public class adminController {
 		logger.info("수정된 판매자 정보 : " + expert);
 		if(member.getRank() == null || member.getRank() == "") {
 			logger.info("if 문 들어왔음");
-			String rank = memberService.selectMember(member).getRank();
+			String rank = memberService.selectMember(member.getEmail()).getRank();
 			logger.info(rank);
 			member.setRank(rank);
 		}
 		if(member.getPwd() == null || member.getPwd() == "") {
 			logger.info("pwd if 문 들어옴");
-			String pwd = memberService.selectMember(member).getPwd();
+			String pwd = memberService.selectMember(member.getEmail()).getPwd();
 			logger.info(pwd);
 
 			member.setPwd(pwd);

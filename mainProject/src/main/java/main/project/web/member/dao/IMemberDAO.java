@@ -11,7 +11,7 @@ import main.project.web.product.vo.findVO;
 
 public interface IMemberDAO {
 	MemberVO checkMemberId(@Param("member_id") String id);
-	MemberVO selectMember(MemberVO member);
+	MemberVO selectMember(@Param("email")String email);
 	void insertMember(MemberVO member);
 	void updateMember(MemberVO member);
 	void deleteMember(MemberVO member);

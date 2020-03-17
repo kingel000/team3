@@ -21,8 +21,8 @@ public class MemberService implements IMemberService{
 	}
 
 	@Override
-	public MemberVO selectMember(MemberVO member) {
-		return memberDAO.selectMember(member);
+	public MemberVO selectMember(String email) {
+		return memberDAO.selectMember(email);
 	}
 
 	@Override
