@@ -225,6 +225,7 @@ public class adminController {
 		System.out.println(email);
 		MemberVO memberVO = memberService.selectMember(email);
 		ExpertVO expertVO = expertService.selectExpert(id);
+
 		logger.info("수정하고자 하는 판매자 정보:" + expertVO);
 		logger.info("수정하고자 하는 계정 정보 "  + memberVO);
 		model.addAttribute("expert",expertVO);
