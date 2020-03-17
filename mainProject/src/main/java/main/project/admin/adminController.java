@@ -62,6 +62,7 @@ public class adminController {
 	private adminIBoardNoticeService adminBoardNoticeService;
 
 	private static final Logger logger = LoggerFactory.getLogger(adminController.class);
+	private HttpSession sess = null;
 	
 	@RequestMapping({"/","/admin.mdo"})
 	public String home(Locale locale, Model model) {
@@ -78,6 +79,7 @@ public class adminController {
 			model.addAttribute("member", check);
 			model.addAttribute("stateCount", stateCount);
 			model.addAttribute("pointCount", pointService.selectState("대기중"));
+			sess = session;
 			return "admin/adminDetail.page2";
 			
 		}
@@ -99,6 +101,7 @@ public class adminController {
 					model.addAttribute("member", check);
 					model.addAttribute("stateCount", stateCount);
 					model.addAttribute("pointCount", pointService.selectState("대기중"));
+					sess = session;
 					return "admin/adminDetail.page2";
 				}else {
 					String msg = "관리자 아이디가 아닙니다. 위의 링크를 눌러 메인페이지로 이동하세요";
@@ -119,6 +122,9 @@ public class adminController {
 	@RequestMapping(value="/memberManager.mdo",method = RequestMethod.GET)
 	public String memberManager(@RequestParam("num") int num, HttpSession session,Model model) throws Exception {
 		logger.info("memberManager mdo GET 호출 ");
+		if(sess == null || !sess.equals(session)) {
+			return "redirect:/admin/admin.mdo";
+		}
 		// 게시물 총 갯수
 		int count = memberService.totalMember();
 		// 한 페이지에 출력할 게시물 갯수
@@ -162,6 +168,9 @@ public class adminController {
 	@RequestMapping(value = "/adminBoardQuestion.mdo", method = RequestMethod.GET)
 	public String adminBoardQuestion(@RequestParam("num") int num, HttpSession session, Model model) throws Exception {
 		logger.info("adminBoardQuestion GET Call");
+		if(sess == null || !sess.equals(session)) {
+			return "redirect:/admin/admin.mdo";
+		}
 		// 게시물 총 갯수
 		int count = questionService.selectTotal();
 		// 한 페이지에 출력할 게시물 갯수
@@ -282,6 +291,9 @@ public class adminController {
 	//-----------상품관리
 	@RequestMapping(value = "/adminProduct.mdo", method= RequestMethod.GET )
 	public String ProductManager(@RequestParam("num") int num, HttpSession session , Model model) throws Exception {
+		if(sess == null || !sess.equals(session)) {
+			return "redirect:/admin/admin.mdo";
+		}
 		// 게시물 총 갯수
 		int count = productService.totalProduct();
 		// 한 페이지에 출력할 게시물 갯수
@@ -359,31 +371,6 @@ public class adminController {
 		return "admin/adminProduct.page2";
 	}
 
-	/*
-	@RequestMapping(value = "/adminProductDelete.mdo", method= RequestMethod.GET)
-	public String adminProductDelete(@RequestParam String num,ProductVO product, HttpSession session , Model model) {
-		product.setProduct_num(num);
-		productService.deleteProduct(product);
-		return "redirect:/admin/adminProduct.mdo";
-	}
-
-	@RequestMapping(value = "/adminDetailProduct.mdo", method= RequestMethod.GET)
-	public String adminDetailProduct(@RequestParam String num,ProductVO product, HttpSession session , Model model) {
-		logger.info("������ ��ǰ ��ȣ : " + num);
-		product = productService.selectProduct(num);
-		model.addAttribute("product", product);
-
-		MemberVO nick_name = new MemberVO();
-		nick_name = productService.select_NickName(product.getExpert_id());
-		model.addAttribute("nick_name",nick_name);
-
-		logger.info(nick_name);
-		logger.info(product);
-
-		return "admin/adminDetailProduct.page2";
-	}
-	 */
-
 	//-----------홈페이지 관리
 	@RequestMapping(value = "/adminHomePage.mdo", method= RequestMethod.GET)
 	public String adminHomePageManager() {
@@ -395,6 +382,9 @@ public class adminController {
 	@RequestMapping(value = "/adminpurchase.mdo", method= RequestMethod.GET)
 	public String adminpurchase(@RequestParam("num") int num, Model model , HttpSession session) throws Exception {
 		logger.info("admin Purchase GET 호출 ");
+		if(sess == null || !sess.equals(session)) {
+			return "redirect:/admin/admin.mdo";
+		}
 		// 게시물 총 갯수
 		int count = purchaseService.countPurchase();
 		// 한 페이지에 출력할 게시물 갯수
@@ -430,10 +420,8 @@ public class adminController {
 			//String Expert_id =  productService.selectProduct(purchaseVO.getProduct_num()).getExpert_id();
 			ProductVO p = productService.selectProduct(purchaseVO.getProduct_num());
 			if(p != null) {
-				logger.info(p.getProduct_title());
 				ProducttitleList.add(p.getProduct_title());
 			}else {
-				logger.info("null!!!");
 				String Product_title = "상품이 삭제되었습니다!";
 				ProducttitleList.add(Product_title);
 			}
@@ -465,7 +453,10 @@ public class adminController {
 	}
 	// 금액관리
 	@RequestMapping(value="/adminPoint.mdo",method=RequestMethod.GET)
-	public String adminPoint(@RequestParam("num") int num, Model model) throws Exception {
+	public String adminPoint(@RequestParam("num") int num, Model model,HttpSession session) throws Exception {
+		if(sess == null || !sess.equals(session)) {
+			return "redirect:/admin/admin.mdo";
+		}
 		// 게시물 총 갯수
 		int count = pointService.selectCount();
 		// 한 페이지에 출력할 게시물 갯수
@@ -507,6 +498,17 @@ public class adminController {
 		return "admin/adminPoint.page2";
 	}
 	
+	@RequestMapping(value="/point.mdo",method=RequestMethod.POST)
+	public String pointFind(@RequestParam String category, @RequestParam String findText,
+			findVO find,HttpSession session , Model model) {
+		find.setCategory(category);		
+  		find.setFindText(findText);
+  		
+  		List<PointVO> pointList = pointService.pointFindList(find);
+		model.addAttribute("pointList", pointList);
+		return null;
+	}
+	
 	@RequestMapping(value="/pointCheck.mdo", method=RequestMethod.POST)
 	public String pointCheck(PointVO point) {
 		point.setP_state("완료");
@@ -520,6 +522,9 @@ public class adminController {
 	@RequestMapping(value = "/adminBoardNotice.mdo", method= RequestMethod.GET)	//Site Address
 	public String adminBoardNotice(@RequestParam("num") int num, HttpSession session, Model model) throws Exception {
 		logger.info("adminBoardNotice GET Call");
+		if(sess == null || !sess.equals(session)) {
+			return "redirect:/admin/admin.mdo";
+		}
 		// 게시물 총 갯수
 		int count = questionService.selectTotal();
 		// 한 페이지에 출력할 게시물 갯수
@@ -646,55 +651,6 @@ public class adminController {
 		return "redirect:/admin/adminBoardNotice.mdo?num=1";	
 	}
 
-	//	//<!-- *******BeakRyun_20200308 -->
-	//	//-----------Member_Notice_Main_GET		//공지사항 리스트 보기
-	//	@RequestMapping(value="/notice.mdo", method=RequestMethod.GET)
-	//	public String noticeMain(Model model, HttpSession session) {
-	//		logger.info("MemberNotice_Main GET Call");
-	//	
-	//		List<AdminBoardNoticeVO> adminBoardNoticeList = adminBoardNoticeService.selectListAdminBoardNotice();
-	//		if(adminBoardNoticeList.size() != 0) {
-	//			//logger.info("MemberNotice_Main (size != 0) Call");
-	//			model.addAttribute("adminBoardNoticeList", adminBoardNoticeList);
-	//		}
-	//
-	//		//장바구니
-	//		MemberVO member = (MemberVO) session.getAttribute("member");
-	//		if(member != null) {
-	//			List<CartVO> cartList = purchaseService.selectMyCart(member.getId());
-	//			if(cartList != null) {
-	//				model.addAttribute("cartList",cartList);
-	//				if(cartList.size() != 0) {
-	//					model.addAttribute("count",cartList.size());
-	//				}
-	//			}
-	//		}
-	//		return "board/noticeBoard.part2";
-	//	}
-	//
-	//	//<!-- *******BeakRyun_20200308 -->
-	//	//-----------Member_Notice_Detail_GET	//공지사항 자세히 보기
-	//	@RequestMapping(value = "/notice_Detail.mdo", method= RequestMethod.GET)	
-	//	public String boardNotice_Detail(@RequestParam String num, Model model) {
-	//		logger.info("MemberNotice_Detail GET Call");
-	//		
-	//		//logger.info("DetailNotice_Num GET: " + num);
-	//		AdminBoardNoticeVO board = adminBoardNoticeService.adminBoardNotice_Detail(num);
-	//		
-	//		model.addAttribute("board_notice",board);	
-	//		
-	//		return "board/notice_Detail.part2";
-	//	}
-
-	//	//<!-- *******BeakRyun_20200306 -->
-	//	//-----------AdminBoardNotice_Delete_POST	
-	//	@RequestMapping(value = "/adminBoard_Notice_Delete.mdo", method=RequestMethod.POST)
-	//	public String adminBoardNotice_Delete(AdminBoardNoticeVO abnVO) {
-	//		logger.info("adminBoardNotice_Delete POST  Call");
-	//		
-	//		return "admin/adminBoard_Notice_Detail.page2";
-	//	}
-
 	@RequestMapping(value = "/purchase.mdo", method= RequestMethod.POST)
 	public String purchasefind(@RequestParam String category, @RequestParam String findText,
 			PurchaseVO purchase, findVO find,HttpSession session , Model model) {
@@ -708,8 +664,21 @@ public class adminController {
   		logger.info("검색어====="+find);
   		
   		List<PurchaseVO> purchaseList = purchaseService.purchaseFindList(find);
+  		List<String> ProducttitleList = new ArrayList<String>();
+  		for(PurchaseVO purchaseVO : purchaseList) {
+			logger.info("DB 저장된 거래 내역 리스트 !!! : " + purchaseVO);
+			//String Expert_id =  productService.selectProduct(purchaseVO.getProduct_num()).getExpert_id();
+			ProductVO p = productService.selectProduct(purchaseVO.getProduct_num());
+			if(p != null) {
+				ProducttitleList.add(p.getProduct_title());
+			}else {
+				String Product_title = "상품이 삭제되었습니다!";
+				ProducttitleList.add(Product_title);
+			}
+		}
   		
   		model.addAttribute("purchaseList",purchaseList);
+  		model.addAttribute("producttileList", ProducttitleList);
   		return "admin/adminPurchase.page2";
    }
    
@@ -719,6 +688,9 @@ public class adminController {
     
 	@RequestMapping(value = "/homePageManagement.mdo", method = RequestMethod.GET)
 	public String homePageManagement( HttpSession session , Model model){
+		if(sess == null || !sess.equals(session)) {
+			return "redirect:/admin/admin.mdo";
+		}
 		BannerVO bannerVO = bannerService.selectBanner();
 		model.addAttribute("bannerVO", bannerVO);
 		
@@ -780,6 +752,9 @@ public class adminController {
 	//--------통계
 	@RequestMapping(value = "/chartMain.mdo", method = RequestMethod.GET)
 	public String adminChart(HttpSession session , Model model) {
+		if(sess == null || !sess.equals(session)) {
+			return "redirect:/admin/admin.mdo";
+		}
 		Integer totalPoint = purchaseService.totalPoint(); //총금액
 		Integer totalCountPurchase = purchaseService.totalCountPurchase();
 		Integer totalProduct = productService.totalProduct();
@@ -794,6 +769,9 @@ public class adminController {
 
 	@RequestMapping(value = "/tables1.mdo", method = RequestMethod.GET)
 	public String admintables1(HttpSession session , Model model) {
+		if(sess == null || !sess.equals(session)) {
+			return "redirect:/admin/admin.mdo";
+		}
 		ArrayList<String> expertIdList = new ArrayList<>();
 		ArrayList<String> productTitleList = new ArrayList<>();
 		try {
@@ -819,6 +797,9 @@ public class adminController {
 
 	@RequestMapping(value = "/tables2.mdo", method = RequestMethod.GET)
 	public String admintables2(HttpSession session , Model model) {
+		if(sess == null || !sess.equals(session)) {
+			return "redirect:/admin/admin.mdo";
+		}
 		ArrayList<Integer> Id_totalCountPurchaseList = new ArrayList<>();
 		ArrayList<Integer> Id_totalPurchasePriceList = new ArrayList<>();
 		ArrayList<Integer> Id_totalCountSalesList = new ArrayList<>();
@@ -851,6 +832,9 @@ public class adminController {
 
 	@RequestMapping(value = "/charts1.mdo", method = RequestMethod.GET)
 	public String admincharts1(HttpSession session , Model model) {
+		if(sess == null || !sess.equals(session)) {
+			return "redirect:/admin/admin.mdo";
+		}
 		//회원통계
 		Integer expertMemberCount = expertService.totalMember_expert();
 		Integer nomalMemberCount = memberService.totalMember() - expertMemberCount -1;

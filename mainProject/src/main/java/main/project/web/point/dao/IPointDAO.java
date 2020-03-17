@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import main.project.web.point.vo.PointVO;
+import main.project.web.product.vo.findVO;
 
 public interface IPointDAO {
 	
@@ -14,4 +15,5 @@ public interface IPointDAO {
 	List<PointVO> selectPointId(@Param("expertId")String expertId);
 	Integer selectCount();
 	Integer selectState(@Param("state")String state);
+	List<PointVO> pointFindList(findVO find);
 }

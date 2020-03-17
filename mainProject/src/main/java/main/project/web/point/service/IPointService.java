@@ -2,6 +2,7 @@ package main.project.web.point.service;
 
 import java.util.List;
 import main.project.web.point.vo.PointVO;
+import main.project.web.product.vo.findVO;
 
 public interface IPointService {
 	
@@ -11,4 +12,5 @@ public interface IPointService {
 	List<PointVO> selectPointId(String expertId);
 	Integer selectCount();
 	Integer selectState(String state);
+	List<PointVO> pointFindList(findVO find);
 }
