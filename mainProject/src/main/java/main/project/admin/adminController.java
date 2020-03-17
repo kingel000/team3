@@ -257,18 +257,8 @@ public class adminController {
 
 			member.setPwd(pwd);
 		}
-		System.out.println(expert);
 		memberService.updateMember(member);
-<<<<<<< HEAD
-		expertService.updateExpert(expert);
 
-		if(member.getRank() == "N" || member.getRank().equals("N")) {
-			logger.info("변경한 RANK = N 진입");
-			expertService.deleteExpert(member.getId());
-		}
-=======
-		
->>>>>>> branch 'master' of https://github.com/kingel000/team3
 		return "redirect:/admin/memberManager.mdo?num=1";
 	}
 
