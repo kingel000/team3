@@ -454,9 +454,6 @@ public class adminController {
 	// 금액관리
 	@RequestMapping(value="/adminPoint.mdo",method=RequestMethod.GET)
 	public String adminPoint(@RequestParam("num") int num, Model model,HttpSession session) throws Exception {
-		if(sess == null || !sess.equals(session)) {
-			return "redirect:/admin/admin.mdo";
-		}
 		// 게시물 총 갯수
 		int count = pointService.selectCount();
 		// 한 페이지에 출력할 게시물 갯수
@@ -501,12 +498,15 @@ public class adminController {
 	@RequestMapping(value="/point.mdo",method=RequestMethod.POST)
 	public String pointFind(@RequestParam String category, @RequestParam String findText,
 			findVO find,HttpSession session , Model model) {
+		if(category == null) {
+			return "redirect:/admin/adminPoint.mdo?num=1";
+		}
 		find.setCategory(category);		
   		find.setFindText(findText);
   		
   		List<PointVO> pointList = pointService.pointFindList(find);
 		model.addAttribute("pointList", pointList);
-		return null;
+		return "admin/adminPoint.page2";
 	}
 	
 	@RequestMapping(value="/pointCheck.mdo", method=RequestMethod.POST)

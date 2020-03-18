@@ -51,6 +51,7 @@ $(document).ready(function(){
 					$('#ps-dropdown').empty();
 					return;
 				}
+				$('#ps-dropdown').empty();
 				$('#ps-dropdown').append("<a href='/web/member/mypage.do'>Message:"+data+"</a>");
 			},
 			error: function(){

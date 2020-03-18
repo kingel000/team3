@@ -178,39 +178,34 @@ public class MemberController {
 				
 		
 		List<RoomListVO> rl = roomListService.getRoomList(memberVO.getId());
-		List<Integer> rc = new ArrayList<Integer>();
+		Integer rc = 0;
 		if(rl.size() != 0) {
 			for(RoomListVO r : rl) {
 				Integer n = chatContentService.selectReceiveRoomCount(new ChatContentVO(r.getRoom_id(),r.getMember_id(),"no"));
 				if(rc != null) {
-					rc.add(n);
+					rc += n;
 				}
 			}
-			if(rc.size() == 0) {
-				model.addAttribute("mrCount", 0);
-			}else {
-				model.addAttribute("mrCount", rc.size());
-			}
+			
+			model.addAttribute("mrCount", rc);
+			
 		}else {
 			model.addAttribute("mrCount", 0);
 		}
 		
 		if(memberVO.getRank().equals("E")) {			
 			List<RoomListVO> roomList = roomListService.getMemberList(memberVO.getId());
-			List<Integer> receiveCountList = new ArrayList<Integer>();
+			Integer receiveCountList = 0;
 			if(roomList.size() != 0) {
 				for(RoomListVO r : roomList) {
 					Integer n = chatContentService.selectReceiveRoomCount(new ChatContentVO(r.getRoom_id(),r.getExpert_id(),"no"));
 					if(n != null) {
-						receiveCountList.add(n);	
+						receiveCountList += n;	
 					}
 							
 				}
-				if(receiveCountList.size() == 0) {
-					model.addAttribute("erCount", 0);
-				}else {
-					model.addAttribute("erCount", receiveCountList.size());
-				}
+				model.addAttribute("erCount", receiveCountList);
+				
 			}else {
 				model.addAttribute("erCount", 0);
 			}
