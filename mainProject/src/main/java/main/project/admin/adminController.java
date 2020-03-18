@@ -274,14 +274,16 @@ public class adminController {
 	@RequestMapping(value = "/memberfind.mdo", method= RequestMethod.POST)
 	public String memberfind(@RequestParam String category, @RequestParam String findText,
 			MemberVO member, findVO find,HttpSession session , Model model) {
+		
 		if(category.equals("이메일") || category == "이메일") {
-
-			find.setCategory("id");
+			find.setCategory("email");
 		}else {
 			find.setCategory("nick_name");
 		}
 		find.setFindText(findText);
 
+		System.out.println("++++"+find);
+		
 		List<MemberVO> adminmemberList = memberService.selectFindList(find);
 
 		model.addAttribute("adminmemberList",adminmemberList);
@@ -410,7 +412,7 @@ public class adminController {
 		boolean next = endPageNum * postNum >= count ? false : true;
 		int num1 = num==1 ? 0 : 1;
 
-		ArrayList<String>ProducttitleList = new ArrayList<>();
+		ArrayList<String>ProductitleList = new ArrayList<>();
 
 		List<PurchaseVO> purchaseList = purchaseService.purchasePage(displayPost+num1, postNum * num);
 		logger.info("거래내역 사이즈 : " + purchaseList.size());
@@ -420,15 +422,17 @@ public class adminController {
 			//String Expert_id =  productService.selectProduct(purchaseVO.getProduct_num()).getExpert_id();
 			ProductVO p = productService.selectProduct(purchaseVO.getProduct_num());
 			if(p != null) {
-				ProducttitleList.add(p.getProduct_title());
+
+				ProductitleList.add(p.getProduct_title());
+
 			}else {
 				String Product_title = "상품이 삭제되었습니다!";
-				ProducttitleList.add(Product_title);
+				ProductitleList.add(Product_title);
 			}
 			//ExpertidList.add(Expert_id);
 		}
 		model.addAttribute("purchaseList",purchaseList);
-		model.addAttribute("producttileList",ProducttitleList);
+		model.addAttribute("ProductitleList",ProductitleList);
 		// 시작 및 끝 번호
 		model.addAttribute("startPageNum", startPageNum);
 		model.addAttribute("endPageNum", endPageNum);
@@ -451,6 +455,7 @@ public class adminController {
 		pay.cancelPayment(pay.getImportToken(),purchase.getPurchase_num(),"Master Cancel");
 		return "redirect:/admin/adminpurchase.mdo?num=1";
 	}
+	
 	// 금액관리
 	@RequestMapping(value="/adminPoint.mdo",method=RequestMethod.GET)
 	public String adminPoint(@RequestParam("num") int num, Model model,HttpSession session) throws Exception {
@@ -508,8 +513,8 @@ public class adminController {
 		model.addAttribute("pointList", pointList);
 		return "admin/adminPoint.page2";
 	}
-	
-	@RequestMapping(value="/pointCheck.mdo", method=RequestMethod.POST)
+
+@RequestMapping(value="/pointCheck.mdo", method=RequestMethod.POST)
 	public String pointCheck(PointVO point) {
 		point.setP_state("완료");
 		pointService.updatePoint(point);
@@ -654,6 +659,7 @@ public class adminController {
 	@RequestMapping(value = "/purchase.mdo", method= RequestMethod.POST)
 	public String purchasefind(@RequestParam String category, @RequestParam String findText,
 			PurchaseVO purchase, findVO find,HttpSession session , Model model) {
+		
 		if(category.equals("상품번호") || category == "상품번호") {
 			find.setCategory("product_num");
 		}else {
@@ -664,6 +670,7 @@ public class adminController {
   		logger.info("검색어====="+find);
   		
   		List<PurchaseVO> purchaseList = purchaseService.purchaseFindList(find);
+
   		List<String> ProducttitleList = new ArrayList<String>();
   		for(PurchaseVO purchaseVO : purchaseList) {
 			logger.info("DB 저장된 거래 내역 리스트 !!! : " + purchaseVO);
@@ -676,9 +683,9 @@ public class adminController {
 				ProducttitleList.add(Product_title);
 			}
 		}
-  		
+
   		model.addAttribute("purchaseList",purchaseList);
-  		model.addAttribute("producttileList", ProducttitleList);
+  		model.addAttribute("ProductitleList", ProducttitleList);
   		return "admin/adminPurchase.page2";
    }
    

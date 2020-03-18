@@ -70,7 +70,7 @@
 		</if>
 	</select>
 
-		<select id="select_Id" parameterType="String" resultType="memberVO" >
+	<select id="select_Id" parameterType="String" resultType="memberVO" >
 		SELECT * FROM PRODUCT WHERE product_num = #{product_num} AND user_yn='yes'
 	</select>
 

@@ -53,6 +53,7 @@ public class PointDAOImpl implements IPointDAO {
 
 	@Override
 	public List<PointVO> pointFindList(findVO find) {
-		return sqlSessionTemplate.selectList("main.project.web.point.dao.IPointDAO.pointFindList", find);
+		return sqlSessionTemplate.selectList("main.project.web.point.dao.IPointDAO.pointFindList",find);	
+
 	}
 }

@@ -51,7 +51,7 @@ function checkCancel() {
 				 	<tr>
 				      <td>${adminPurchase.purchase_num}</td>
 				      <td>${adminPurchase.product_num}</td>
-				      <td>${producttileList.get(status.index)}</td>
+				      <td>${ProductitleList.get(status.index)}</td>
 				      <td>${adminPurchase.member_id}</td> 
 				      <td>${adminPurchase.expert_id}</td>
 				      <td>${adminPurchase.purchase_price}</td>
