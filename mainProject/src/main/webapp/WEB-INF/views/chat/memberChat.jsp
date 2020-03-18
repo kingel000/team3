@@ -19,7 +19,7 @@
 	$(document).ready(function() {
 		// 웹소켓을 지정한 url로 연결한다.
 		console.log("===========================================")
-		var ws = new WebSocket("ws://localhost:8080/web/echo.do");
+		var ws = new WebSocket("ws://15.165.159.167:8080/web/echo.do");
 		socket = ws;
 
 		//서버로 메세지 보낼때
