@@ -18,7 +18,6 @@ public interface IQuestionService {
 	Integer selectTotal();
 	List<QuestionVO> questionPage(int displayPost, int postNum) throws Exception;
 	List<QuestionVO> questionPageM(int displayPost, int postNum) throws Exception;
-	@Transactional 
 	void rejoinderQuestion(QuestionVO question);
 	Integer selectStateTotal();
 }

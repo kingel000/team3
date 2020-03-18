@@ -10,7 +10,6 @@ import main.project.web.product.vo.findVO;
 public interface IPointService {
 	@Transactional 
 	void insertPoint(PointVO pointVO);
-	@Transactional 
 	void updatePoint(PointVO pointVO);
 	List<PointVO> selectPoint(int displayPost, int postNum) throws Exception;
 	List<PointVO> selectPointId(String expertId);

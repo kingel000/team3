@@ -217,6 +217,7 @@ public class adminController {
 		QuestionVO quesionVO_r = questionService.selectQuestion(questionVO);
 		quesionVO_r.setBoard_question_info_r(questionVO.getBoard_question_info_r());
 		quesionVO_r.setState(questionVO.getState());
+		System.out.println(quesionVO_r);
 		questionService.rejoinderQuestion(quesionVO_r);
 		return "redirect:/admin/adminBoardQuestion.mdo?num=1";
 	}
@@ -245,6 +246,7 @@ public class adminController {
 		logger.info("수정된 멤버 정보 : " + member);
 		if(member.getRank() != null || member.getRank() == "") {
 			if(member.getRank() == "E" || member.getRank().equals("E")) {
+				memberService.rankupdate(member.getId());
 				expertService.insertRankExpert(expert.getId());
 			}
 			else if( member.getRank() == "N" || member.getRank().equals("N")) {
@@ -322,6 +324,7 @@ public class adminController {
 		int num1 = num==1 ? 0 : 1;
 
 		List<ProductVO> adminproductList = productService.productPage(displayPost+num1, (postNum * num));
+		System.out.println("리스트  : " + adminproductList);
 		model.addAttribute("adminproductList", adminproductList);
 		// 시작 및 끝 번호
 		model.addAttribute("startPageNum", startPageNum);

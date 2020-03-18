@@ -11,7 +11,7 @@ import main.project.web.product.vo.findVO;
 public interface IProductService {
 	@Transactional 
 	void insertProduct(ProductVO product);
-	@Transactional 
+
 	void deleteProduct(ProductVO product_num);
 	@Transactional 
 	void deleteProductId(String Id);

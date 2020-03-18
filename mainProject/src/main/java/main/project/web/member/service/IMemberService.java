@@ -13,13 +13,10 @@ public interface IMemberService {
 	MemberVO selectMember(String email);
 	@Transactional 
 	void insertMember(MemberVO member);
-	@Transactional 
 	void updateMember(MemberVO member);
-	@Transactional 
+	@Transactional
 	void deleteMember(MemberVO member);
-	@Transactional 
 	void admindeleteMember(MemberVO member);
-	@Transactional 
 	void rankupdate(String id);
 	List<MemberVO> selectAllMember();
 	//List<MemberVO> selectOneMember(MemberFindVO find);

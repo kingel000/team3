@@ -11,7 +11,6 @@ import main.project.web.purchase.vo.PurchaseVO;
 public interface IPurchaseService {
 	@Transactional 
 	void insertPurchase(PurchaseVO purchase);
-	@Transactional 
 	void updatePurchase(PurchaseVO purchase);
 	@Transactional 
 	void deletePurchase(String purchaseNum);

@@ -111,7 +111,7 @@ function checkPoint() {
 <div class="email_Box1">
 			<form action="/web/member/point.do" method="post" name="pointInfo" onsubmit="return checkPoint()">
 				<p class="email_Bt">
-					<label>이메일 : ${member.id }</label><br><br>
+					<label>이메일 : ${member.email }</label><br><br>
 					<label>닉네임 : ${member.nick_name }</label><br><br>
 					<label>등급    :
 					<c:choose>
