@@ -2,19 +2,24 @@ package main.project.web.member.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
 
 import main.project.web.member.vo.MemberFindVO;
 import main.project.web.member.vo.MemberVO;
-import main.project.web.product.vo.ProductVO;
 import main.project.web.product.vo.findVO;
 
 public interface IMemberService {
 	MemberVO checkMemberId(String id);
 	MemberVO selectMember(String email);
+	@Transactional 
 	void insertMember(MemberVO member);
+	@Transactional 
 	void updateMember(MemberVO member);
+	@Transactional 
 	void deleteMember(MemberVO member);
+	@Transactional 
 	void admindeleteMember(MemberVO member);
+	@Transactional 
 	void rankupdate(String id);
 	List<MemberVO> selectAllMember();
 	//List<MemberVO> selectOneMember(MemberFindVO find);

@@ -1,14 +1,21 @@
 package main.project.web.purchase.Service;
 
 import java.util.List;
+
+import org.springframework.transaction.annotation.Transactional;
+
 import main.project.web.product.vo.findVO;
 import main.project.web.purchase.vo.CartVO;
 import main.project.web.purchase.vo.PurchaseVO;
 
 public interface IPurchaseService {
+	@Transactional 
 	void insertPurchase(PurchaseVO purchase);
+	@Transactional 
 	void updatePurchase(PurchaseVO purchase);
+	@Transactional 
 	void deletePurchase(String purchaseNum);
+	
 	PurchaseVO selectPurchase(String purchaseNum);
 	List<PurchaseVO> selectListPurchase();
 	List<PurchaseVO> selectPurchaseList(String memberId);
@@ -16,10 +23,14 @@ public interface IPurchaseService {
 	List<PurchaseVO> selectExpertOrder(PurchaseVO purchase);
 	List<PurchaseVO> selectExpertPurchase(String expertId);
 	
+	@Transactional 
 	void addCart(CartVO cart);
+	
 	List<CartVO> selectMyCart(String memberId);
 	CartVO getCart(String cartNum);
+	@Transactional 
 	void deleteCart(String cartNum);
+	@Transactional 
 	void checkOut(String memberId);
 	List<PurchaseVO> purchaseFindList(findVO find);
 	Integer totalPoint();

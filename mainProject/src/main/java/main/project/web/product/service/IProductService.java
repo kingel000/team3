@@ -2,14 +2,20 @@ package main.project.web.product.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import main.project.web.member.vo.MemberVO;
 import main.project.web.product.vo.ProductVO;
 import main.project.web.product.vo.findVO;
 
 public interface IProductService {
+	@Transactional 
 	void insertProduct(ProductVO product);
+	@Transactional 
 	void deleteProduct(ProductVO product_num);
+	@Transactional 
 	void deleteProductId(String Id);
+	@Transactional 
 	void updateProduct(ProductVO product);
 	ProductVO selectProduct(String product_num);
 	MemberVO select_NickName(String expert_id);

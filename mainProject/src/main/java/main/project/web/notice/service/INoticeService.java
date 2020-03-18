@@ -3,10 +3,12 @@ package main.project.web.notice.service;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import main.project.web.notice.vo.NoticeVO;
 
 public interface INoticeService {
+	@Transactional 
 	void insertNoticeVO(NoticeVO noticeVO);
 	List<NoticeVO> selectListNotice();
 	Integer selectNoticeNumber();
