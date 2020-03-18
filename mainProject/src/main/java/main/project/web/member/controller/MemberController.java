@@ -170,6 +170,9 @@ public class MemberController {
 	public String memberMyPage(HttpSession session,Model model) {
 		logger.info("mypage GET 호출");
 		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		if(memberVO == null) {
+			return "redirect:/main/main.do";
+		}
 		ExpertVO exeprtVO = expertService.selectExpert(memberVO.getId());
 		logger.info("MYPAGE 진입 계정 expertVO : " + exeprtVO);
 		logger.info("MYPAGE 진입 계정 memberVO : " + memberVO);
@@ -239,7 +242,6 @@ public class MemberController {
 		expertVO.setPoint(Point);
 		expertService.updatePointExpert(expertVO);
 		PointVO p = new PointVO(pointService.selectCount()+1,expertVO.getId(),point,"대기중");
-		System.out.println(p);
 		pointService.insertPoint(p);
 		return "redirect:/member/pointManager.do";
 	}
