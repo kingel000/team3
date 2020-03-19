@@ -32,8 +32,8 @@
 							</header>
 							<footer>
 								<ul class="ps-list--line">
-									<li><a href="/web/board/notice.do">공지사항</a></li>
-									<li><a href="/web/board/question.do">문의사항</a></li>
+									<li><a href="/web/board/notice.do?num=1">공지사항</a></li>
+									<li><a href="/web/board/question.do?num=1">문의사항</a></li>
 									<li><a href="/web/admin/admin.mdo">관리자페이지</a></li>
 								</ul>
 							</footer>
