@@ -79,8 +79,7 @@
 		SELECT SUM(purchase_price) FROM (SELECT * FROM(SELECT * FROM purchase WHERE purchase.expert_id=#{id})WHERE purchase_state !='Cancel')
 	</select>
 	<select id="date_totalSales" parameterType="String" resultType="Integer">
-		SELECT COUNT(*) FROM (SELECT * FROM (SELECT * FROM purchase WHERE purchase_state !='Cancel') WHERE purchase_date like '%'||#{findYear}||'%')
-	</select>
+		SELECT COUNT(*) FROM (SELECT * FROM (SELECT * FROM purchase WHERE purchase_state !='Cancel') WHERE TO_CHAR(purchase_date,'yyyymmdd') like '%'||#{findDate}||'%')	</select>
 	<select id="productNum_PurchaseCount" parameterType="String" resultType="Integer">
 		SELECT COUNT(*) FROM (SELECT * FROM purchase WHERE product_num=#{product_num}) WHERE purchase_state !='Cancel'
 	</select>
