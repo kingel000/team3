@@ -853,7 +853,7 @@ public class adminController {
 		model.addAttribute("expertMemberCount",expertMemberCount);
 
 		//월별 매출통계
-		String[] year = {"20/01","20/02","20/03","20/04","20/05","20/06","20/07","20/08","20/09","20/10","20/11","20/12"};
+		String[] year = {"202001","202002","202003","202004","202005","202006","202007","202008","202009","202010","202011","202012"};
 		int[] year_totalSalesList = {1,2,3,4,5,6,7,8,9,10,11,12};
 		for(int i=0;i<year.length;i++) {
 			year_totalSalesList[i] = purchaseService.date_totalSales(year[i]);
