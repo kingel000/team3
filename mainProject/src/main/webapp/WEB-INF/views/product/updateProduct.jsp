@@ -80,7 +80,7 @@ function checkValue() {
 	          	<br><br>
 	            <p >
                <input type="hidden" name="fileName" value="">
-            
+            	<input type="hidden" name="thumbnail" value="${product.thumbnail }">
                <input type="hidden" name="product_num" value="${product.product_num }">
                <input type="hidden" name="expert_id" value="${product.expert_id}">
                <input type="submit" value="수정하기" />

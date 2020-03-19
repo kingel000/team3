@@ -220,7 +220,12 @@ public class ProductController {
 	@RequestMapping(value="/updateProduct.do", method = RequestMethod.POST)
 	public String updateProduct(ProductVO product, Model model , HttpSession session,@RequestParam("fileName")String fileName) {
 		logger.info("updateProduct.do POST 받음 ");
-		product.setThumbnail(fileName);
+		
+		if(fileName != null ) {
+			if(!fileName.equals("")) {
+				product.setThumbnail(fileName);
+			}
+		}
 		productService.updateProduct(product);
 		return "redirect:/product/boardManager.do?num=1";
 	}
