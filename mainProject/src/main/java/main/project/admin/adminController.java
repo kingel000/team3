@@ -30,6 +30,8 @@ import main.project.web.member.service.IExpertService;
 import main.project.web.member.service.IMemberService;
 import main.project.web.member.vo.ExpertVO;
 import main.project.web.member.vo.MemberVO;
+import main.project.web.notice.service.INoticeService;
+import main.project.web.notice.vo.NoticeVO;
 import main.project.web.point.service.IPointService;
 import main.project.web.point.vo.PointVO;
 import main.project.web.product.service.IProductService;
@@ -62,6 +64,8 @@ public class adminController {
 	private IPointService pointService;
 	@Autowired
 	private adminIBoardNoticeService adminBoardNoticeService;
+	@Autowired
+	private INoticeService noticeService;
 
 	private static final Logger logger = LoggerFactory.getLogger(adminController.class);
 	private HttpSession sess = null;
@@ -555,7 +559,8 @@ public class adminController {
 		boolean prev = startPageNum == 1 ? false : true;
 		boolean next = endPageNum * postNum >= count ? false : true;
 		int num1 = num==1 ? 0 : 1;
-		List<AdminBoardNoticeVO> adminBoardNoticeList = adminBoardNoticeService.selectListAdminBoardNotice(displayPost+num1, postNum * num);
+		//List<AdminBoardNoticeVO> adminBoardNoticeList = adminBoardNoticeService.selectListAdminBoardNotice(displayPost+num1, postNum * num);
+		List<NoticeVO> adminBoardNoticeList = noticeService.noticePage(displayPost+1, postNum * num);
 		model.addAttribute("adminBoardNoticeList", adminBoardNoticeList);
 		// 시작 및 끝 번호
 		model.addAttribute("startPageNum", startPageNum);
