@@ -44,10 +44,12 @@
 
 /* ·Î±×ÀÎ */
 .join>div{background-color:#f1f1f1;width:370px;height:30px;border-radius: 4px; padding: 5px; margin-bottom:10px;border: solid 1px #e4e5ed;}
+.join{width: 382px;}
 .join>div>a{font-size: 13px;}
 .join:hover>div{background-color:#2ac37d;}
 .login:hover>input{background-color:#2ac37d;}
 .footer_text>p{text-align:center;margin-top: 20px;}
+.regider_Box2>form>p{width:382px;}
 .regider_Box2>form>p>input{width:382px;height:40px;border-radius: 4px; padding: 5px; margin-bottom:10px;border: solid 1px #e4e5ed;}
 .email_Bt>a>img{width: 21px; margin : 0 0 2px 2px;}
 
