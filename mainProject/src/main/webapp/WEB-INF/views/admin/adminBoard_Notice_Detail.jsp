@@ -49,7 +49,7 @@
 		</div>
 		<!-- 왼쪽1 오른쪽2 하고싶음. 목록버튼 실행안됨. -->
 		<div >
-		<button align="left"><a href="/web/admin/adminBoardNotice.mdo">목록</a></button>		
+		<button align="left"><a href="/web/admin/adminBoardNotice.mdo?num=1">목록</a></button>		
 		<!-- 
 		<button type="button" onclick="location.href='/web/admin/adminBoardNotice.mdo'" >글목록</button>		
 		 -->

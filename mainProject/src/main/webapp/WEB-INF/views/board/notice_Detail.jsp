@@ -49,7 +49,7 @@
 		</div>
 		
 		<div >
-		<button align="left"><a href="/web/board/notice.do">목록</a></button>					
+		<button align="left"><a href="/web/board/notice.do?num=1">목록</a></button>					
 		</div>
 
 </body>
