@@ -13,7 +13,6 @@ public interface IProductService {
 	void insertProduct(ProductVO product);
 
 	void deleteProduct(ProductVO product_num);
-	@Transactional 
 	void deleteProductId(String Id);
 	@Transactional 
 	void updateProduct(ProductVO product);

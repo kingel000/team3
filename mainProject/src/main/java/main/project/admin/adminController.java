@@ -253,6 +253,7 @@ public class adminController {
 			}
 			else if( member.getRank() == "N" || member.getRank().equals("N")) {
 				logger.info("변경한 RANK = N 진입");
+				productService.deleteProductId(member.getId());
 				expertService.deleteExpert(member.getId());
 			}
 		}

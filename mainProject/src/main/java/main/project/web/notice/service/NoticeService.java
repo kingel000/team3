@@ -16,11 +16,6 @@ public class NoticeService implements INoticeService{
 	private INoticeDAO noticeDAO;
 	
 	@Override
-	public void insertNoticeVO(NoticeVO noticeVO) {
-		noticeDAO.insertNoticeVO(noticeVO);
-	}
-	
-	@Override
 	public List<NoticeVO> selectListNotice() {
 		return noticeDAO.selectListNotice();
 	}

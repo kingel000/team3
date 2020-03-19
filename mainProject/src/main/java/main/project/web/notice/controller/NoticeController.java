@@ -54,8 +54,9 @@ public class NoticeController {
 		}
 		boolean prev = startPageNum == 1 ? false : true;
 		boolean next = endPageNum * postNum >= count ? false : true;
-		int num1 = num==1 ? 0 : 1;
-		List<NoticeVO> NoticeList = noticeService.noticePage(displayPost+num1, postNum * num);
+		
+		List<NoticeVO> NoticeList = noticeService.noticePage(displayPost+1, postNum * num);
+
 		model.addAttribute("NoticeList", NoticeList);
 		// 시작 및 끝 번호
 		model.addAttribute("startPageNum", startPageNum);
@@ -83,21 +84,5 @@ public class NoticeController {
 		model.addAttribute("board_notice",noticeList);
 		return "board/notice_Detail.part2";
 	}
-	
-	//<!-- *******BeakRyun_20200310 -->
-	//-----------AdminBoardNotice_Detail_POST	//게시글 보기 POST
-	@RequestMapping(value = "/notice_Detail.do", method= RequestMethod.POST)	
-	public String Notice_Detail(NoticeVO noticeVO) {
-
-		Integer noticeNum = noticeService.selectNoticeNumber();
-		logger.info("NoticeDetail_Num1 POST : " + noticeVO.getBoard_notice_num());
-		
-		noticeVO.setBoard_notice_num(noticeNum);
-		logger.info("NoticeDetail_Num POST : " + noticeVO.getBoard_notice_num());
-
-		noticeService.insertNoticeVO(noticeVO);
-		return "board/notice_Detail.part2";
-	}
-
 
 }

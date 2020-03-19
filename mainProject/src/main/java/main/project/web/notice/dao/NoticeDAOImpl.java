@@ -17,11 +17,6 @@ public class NoticeDAOImpl implements INoticeDAO{
 	private SqlSessionTemplate sqlSesstionTemplate;
 	
 	@Override
-	public void insertNoticeVO(NoticeVO noticeVO) {
-		sqlSesstionTemplate.insert("main.project.web.notice.dao.INoticeDAO.insertNoticeVO",noticeVO);
-	}
-	
-	@Override
 	public List<NoticeVO> selectListNotice() {
 		return sqlSesstionTemplate.selectList("main.project.web.notice.dao.INoticeDAO.selectListNotice");
 	}
@@ -43,7 +38,7 @@ public class NoticeDAOImpl implements INoticeDAO{
 
 	@Override
 	public List<NoticeVO> noticePage(int displayPost, int postNum) throws Exception {
-		HashMap data = new HashMap();
+		HashMap<String,Integer> data = new HashMap<String,Integer>();
 		data.put("displayPost", displayPost);
 		data.put("postNum", postNum);
 		return sqlSesstionTemplate.selectList("main.project.web.notice.dao.INoticeDAO.noticePage",data);

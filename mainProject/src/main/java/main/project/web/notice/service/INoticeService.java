@@ -8,8 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import main.project.web.notice.vo.NoticeVO;
 
 public interface INoticeService {
-	@Transactional 
-	void insertNoticeVO(NoticeVO noticeVO);
+
 	List<NoticeVO> selectListNotice();
 	Integer selectNoticeNumber();
 	NoticeVO Notice_Detail(String noticeNum);

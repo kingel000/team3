@@ -8,7 +8,6 @@ import main.project.web.member.vo.MemberVO;
 import main.project.web.notice.vo.NoticeVO;
 
 public interface INoticeDAO {
-	void insertNoticeVO(NoticeVO noticeVO);
 	List<NoticeVO> selectListNotice();
 	Integer selectNoticeNumber();
 	NoticeVO Notice_Detail(@Param("NoticeNum")String noticeNum);

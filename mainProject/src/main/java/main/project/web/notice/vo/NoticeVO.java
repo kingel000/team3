@@ -3,7 +3,7 @@ package main.project.web.notice.vo;
 import java.util.Date;
 
 public class NoticeVO {
-	private Integer board_notice_num;
+	private String board_notice_num;
 	private String board_notice_title;
 	private String board_notice_info;
 	private String board_notice_file;
@@ -11,10 +11,10 @@ public class NoticeVO {
 	
 	public NoticeVO() {}
 	
-	public Integer getBoard_notice_num() {
+	public String getBoard_notice_num() {
 		return board_notice_num;
 	}
-	public void setBoard_notice_num(Integer board_notice_num) {
+	public void setBoard_notice_num(String board_notice_num) {
 		this.board_notice_num = board_notice_num;
 	}
 
