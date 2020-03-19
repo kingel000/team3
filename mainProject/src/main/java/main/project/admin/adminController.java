@@ -2,7 +2,9 @@ package main.project.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -583,9 +585,8 @@ public class adminController {
 
 		// +Notice_Next_Number
 		Integer noticeNum = adminBoardNoticeService.selectBoardNoticeNumber()+1;
-
-		//logger.info("InsertNotice_Num : " +noticeNum);
-		abnVO.setBoard_notice_num(String.valueOf(noticeNum));
+		
+		abnVO.setBoard_notice_num("Number"+(new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date())+"_"+noticeNum);
 
 		adminBoardNoticeService.insertAbnVO(abnVO);
 
