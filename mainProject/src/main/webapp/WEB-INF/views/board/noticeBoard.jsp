@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +36,8 @@
 					  <c:forEach var="board_notice" items="${NoticeList}" varStatus="status">
 					  <tbody>					  
 							<tr>
-								<td>${board_notice.board_notice_num}</td>
+								<td>${fn:split(board_notice.board_notice_num,'_')[1]}</td>
+								<%-- <td>${board_notice.board_notice_num}</td> --%>
 								<td><a href="/web/board/notice_Detail.do?num=${board_notice.board_notice_num}">${board_notice.board_notice_title}</a></td>
 								<td>관리자</td>
 								<!-- 희망 : 당일이면 시간 / 지난날이면 날짜로 출력 -->

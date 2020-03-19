@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <!--[if IE 7]><html class="ie ie7"><![endif]-->
 <!--[if IE 8]><html class="ie ie8"><![endif]-->
@@ -87,7 +88,17 @@
 								<div class="ps-shoe__content">
 									<div class="ps-shoe__variants"></div>
 									<div class="ps-shoe__detail">
-										<a class="ps-shoe__name" href="/web/product/detailProduct.do?num=${product.product_num}"><c:out value="${product.product_title }"/></a>
+										<a class="ps-shoe__name" href="/web/product/detailProduct.do?num=${product.product_num}">
+										<c:out value="${product.product_title }"/>
+										<%-- <c:choose>
+									        <c:when test="${fn:length(product.product_title) gt 17}">
+									        <c:out value="${fn:substring(product.product_title, 0, 16)}..."></c:out>
+									        </c:when>
+									        <c:otherwise>
+									        <c:out value="${product.product_title}">
+									        </c:out></c:otherwise>
+										</c:choose> --%>
+										</a>
 										<p class="ps-shoe__categories">
 											<a href="#"><c:out value="${nick.get(status.count-1)}"/></a>
 										</p>

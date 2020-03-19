@@ -193,7 +193,7 @@ public class adminController {
 		boolean prev = startPageNum == 1 ? false : true;
 		boolean next = endPageNum * postNum >= count ? false : true;
 		int num1 = num==1 ? 0 : 1;
-		List<QuestionVO> adminBoardQuestionList = questionService.questionPage(displayPost+num1, postNum * num);
+		List<QuestionVO> adminBoardQuestionList = questionService.questionPageM(displayPost+num1, postNum * num);
 		model.addAttribute("adminBoardQuestionList",adminBoardQuestionList);
 		// 시작 및 끝 번호
 		model.addAttribute("startPageNum", startPageNum);
