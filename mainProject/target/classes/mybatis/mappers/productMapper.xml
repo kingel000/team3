@@ -107,7 +107,7 @@
 	
 	<!-- 통계 -->
 	<select id="totalProduct" resultType="Integer">
-		SELECT COUNT(*) FROM product
+		SELECT COUNT(*) FROM product where user_yn='yes'
 	</select>
 	<!-- total product page -->
 	<select id="productPage" resultType="productVO" parameterType="hashMap">
