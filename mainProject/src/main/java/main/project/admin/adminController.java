@@ -253,7 +253,6 @@ public class adminController {
 			}
 			else if( member.getRank() == "N" || member.getRank().equals("N")) {
 				logger.info("변경한 RANK = N 진입");
-				productService.deleteProductId(member.getId());
 				expertService.deleteExpert(member.getId());
 			}
 		}
@@ -858,6 +857,7 @@ public class adminController {
 		int[] year_totalSalesList = {1,2,3,4,5,6,7,8,9,10,11,12};
 		for(int i=0;i<year.length;i++) {
 			year_totalSalesList[i] = purchaseService.date_totalSales(year[i]);
+			System.out.println(i+"월: "+year_totalSalesList[i]);
 		}
 		model.addAttribute("M1",year_totalSalesList[0]);
 		model.addAttribute("M2",year_totalSalesList[1]);
