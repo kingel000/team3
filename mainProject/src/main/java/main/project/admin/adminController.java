@@ -540,7 +540,7 @@ public class adminController {
 			return "redirect:/admin/admin.mdo";
 		}
 		// 게시물 총 갯수
-		int count = questionService.selectTotal();
+		int count = noticeService.totalNotice();
 		// 한 페이지에 출력할 게시물 갯수
 		int postNum = 10;
 		// 출력할 게시물
@@ -558,7 +558,7 @@ public class adminController {
 		}
 		boolean prev = startPageNum == 1 ? false : true;
 		boolean next = endPageNum * postNum >= count ? false : true;
-		int num1 = num==1 ? 0 : 1;
+		//int num1 = num==1 ? 0 : 1;
 		//List<AdminBoardNoticeVO> adminBoardNoticeList = adminBoardNoticeService.selectListAdminBoardNotice(displayPost+num1, postNum * num);
 		List<NoticeVO> adminBoardNoticeList = noticeService.noticePage(displayPost+1, postNum * num);
 		model.addAttribute("adminBoardNoticeList", adminBoardNoticeList);
