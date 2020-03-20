@@ -112,7 +112,7 @@
                                 	월별 매출 통계 
                                 <select name="year">
 					               <option value="" selected disabled hidden>=연도 선택=</option>
-					               <option value="2020" selected="selected">2020</option>
+					               <option value="2020" selected="selected">${year }</option>
 					            </select>
                                 <canvas id="sales-chart"></canvas>
                             </div>
